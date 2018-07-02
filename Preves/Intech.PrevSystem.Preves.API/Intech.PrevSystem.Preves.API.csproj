@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <Version>0.0.1</Version>
+    <Authors>Intech</Authors>
+    <Company>Intech</Company>
+    <Product>PrevSystem</Product>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Api.xml</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
+    <NoWarn>1701;1702;1705;1591;</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Temp\**" />
+    <Content Remove="Temp\**" />
+    <EmbeddedResource Remove="Temp\**" />
+    <None Remove="Temp\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.50.4" />
+    <PackageReference Include="Dapper.Contrib" Version="1.50.4" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Oracle.ManagedDataAccess" Version="12.2.1100" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v17.2">
+      <HintPath>..\..\..\BrPrev\IntechNet\Lib\DevExpress\DevExpress17.2\DevExpress.Data.v17.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v17.2.Core">
+      <HintPath>..\..\..\BrPrev\IntechNet\Lib\DevExpress\DevExpress17.2\DevExpress.Printing.v17.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v17.2">
+      <HintPath>..\..\..\BrPrev\IntechNet\Lib\DevExpress\DevExpress17.2\DevExpress.XtraReports.v17.2.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\..\..\Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems" Label="Shared" />
+  <Import Project="..\..\..\Lib\Intech.Lib.Negocio\Intech.Lib.Negocio.projitems" Label="Shared" />
+  <Import Project="..\..\..\Lib\Intech.Lib.Util\Intech.Lib.Util.projitems" Label="Shared" />
+  <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
+  <Import Project="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems" Label="Shared" />
+  <Import Project="..\Intech.PrevSystem.Preves.Negocio\Intech.PrevSystem.Preves.Negocio.projitems" Label="Shared" />
+  <Import Project="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems" Label="Shared" />
+  <Import Project="..\..\..\Lib\Intech.Lib.Web\Intech.Lib.Web.projitems" Label="Shared" />
+  <Import Project="..\..\..\Mobile\Lib\Intech.Lib.Mobile.Servico\Intech.Lib.Mobile.Servico.projitems" Label="Shared" />
+  <Import Project="..\..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
+</Project>

@@ -1,0 +1,35 @@
+﻿{
+    "nomeTabela": "GB_PROCESSOS_BENEFICIO",
+    "colunasExtras": [
+        {
+            "nome": "DS_ESPECIE",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_SITUACAO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DT_REQUERIMENTO",
+            "tipo": "DateTime",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DT_AFASTAMENTO",
+            "tipo": "DateTime",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DT_INICIO_PREV",
+            "tipo": "DateTime",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DT_INICIO_FUND",
+            "tipo": "DateTime",
+            "aceitaNulo": true
+        }
+    ]
+}

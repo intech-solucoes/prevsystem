@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "TB_EMPRESA",
+    "colunasExtras": [
+        {
+            "nome": "NOME_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

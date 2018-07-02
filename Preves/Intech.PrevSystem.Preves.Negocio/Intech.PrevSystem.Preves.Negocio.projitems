@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{7d0f8b01-923d-42f7-b3b0-246ed98ea03c}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>fc341c41-d378-4eeb-a277-9ee4f0ae229b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Intech.PrevSystem.Preves.Negocio</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SimNaoParticipante.cs" />
+  </ItemGroup>
+</Project>

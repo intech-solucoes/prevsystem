@@ -1,0 +1,45 @@
+﻿{
+    "nomeTabela": "TB_FUNDACAO",
+    "colunasExtras": [
+        {
+            "nome": "NOME_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "END_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "BAIRRO_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "CEP_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "UF_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "FONE_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "FAX_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "CPF_CGC",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

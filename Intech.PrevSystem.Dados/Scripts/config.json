@@ -1,0 +1,9 @@
+﻿{
+    "connectionString": "data source=10.10.170.13;Initial Catalog=PREVES_26032018;user id=sysdba;password=masterkey",
+    "provider": "sqlserver",
+    "namespaceBase": "Intech.PrevSystem",
+    "namespaceNegocio": "Intech.PrevSystem.Negocio",
+    "namespaceDados": "Intech.PrevSystem.Dados",
+    "namespaceEntidades": "Intech.PrevSystem.Entidades",
+    "namespaceApi": "Intech.Mobile.Sabesprev.Api"
+}

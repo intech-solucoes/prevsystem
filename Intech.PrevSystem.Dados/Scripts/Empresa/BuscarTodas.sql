@@ -1,0 +1,10 @@
+﻿/*Config
+    RetornaLista
+    Retorno
+        -EmpresaEntidade
+*/
+
+SELECT TB_EMPRESA.*,
+    EE_ENTIDADE.NOME_ENTID
+FROM TB_EMPRESA
+INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID

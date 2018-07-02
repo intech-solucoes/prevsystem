@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "CE_PRESTACOES",
+    "colunasExtras": [
+        {
+            "nome": "DES_VL_RECEBIDO",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

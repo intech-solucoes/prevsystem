@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{9aa7a09e-cac7-4133-9ec3-ad4e2c03d123}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>a88cf162-e0ec-4213-9964-543eca2bee87</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Intech.PrevSystem.Negocio</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ArquivoUploadProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ComposicaoSRCProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContratoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContribuicaoIndividualProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DadosPessoaisProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoPastaProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpresaPlanosProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpresaProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EntidadeProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EstadoCivilProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FatorRiscoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FeriadoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFechamentoPrevesProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraAssistidoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundacaoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundoContribProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceValoresProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\HeaderInfRendProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\InfoRendProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\MensagemProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ModalidadeProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoVinculadoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoParcialProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ProcessoBeneficioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecebedorBeneficioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\SegUsuarioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaConcessaoPlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaEncargoPlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\UsuarioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesExtensoes.cs" />
+  </ItemGroup>
+</Project>

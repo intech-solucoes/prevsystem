@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "CS_FUNCIONARIO",
+    "colunasExtras": [
+        {
+            "nome": "NOME_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

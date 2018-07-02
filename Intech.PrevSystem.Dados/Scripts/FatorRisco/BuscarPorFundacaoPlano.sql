@@ -1,0 +1,14 @@
+﻿/*Config
+	Retorno
+		-FatorRiscoEntidade
+	Parametros
+		-CD_FUNDACAO:string
+		-CD_PLANO:string
+		-IDADE:int
+*/
+
+SELECT TOP 1 *
+FROM WEB_FATOR_RISCO
+WHERE CD_FUNDACAO = @CD_FUNDACAO
+	AND CD_PLANO = @CD_PLANO
+	AND @IDADE BETWEEN NUM_FAIXA_INI AND NUM_FAIXA_FIM 

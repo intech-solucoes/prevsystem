@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "TB_INDICE",
+    "colunasExtras": [
+        {
+            "nome": "VALORES",
+            "tipo": "List<IndiceValoresEntidade>",
+            "aceitaNulo": false
+        }
+    ]
+}

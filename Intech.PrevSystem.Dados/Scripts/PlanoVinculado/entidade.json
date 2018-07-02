@@ -1,0 +1,40 @@
+﻿{
+    "nomeTabela": "CS_PLANOS_VINC",
+    "colunasExtras": [
+        {
+            "nome": "DS_PERFIL_INVEST",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_CATEGORIA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "COD_CNPB",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "SalarioContribuicao",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "PercentualContribuicao",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "ProcessoBeneficio",
+            "tipo": "ProcessoBeneficioEntidade",
+            "aceitaNulo": false
+        }
+    ]
+}

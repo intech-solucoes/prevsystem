@@ -1,0 +1,20 @@
+﻿{
+    "nomeTabela": "TB_INFO_REND",
+    "colunasExtras": [
+        {
+            "nome": "DES_INFO_REND",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "COD_GRUPO",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "DES_GRUPO",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

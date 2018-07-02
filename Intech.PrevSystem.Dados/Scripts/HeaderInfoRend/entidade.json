@@ -1,0 +1,20 @@
+﻿{
+    "nomeTabela": "TB_HEADER_INFO_REND",
+    "colunasExtras": [
+        {
+            "nome": "NOM_EMPRESA",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "CNPJ_EMPRESA",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "Grupos",
+            "tipo": "List<InfoRendEntidade>",
+            "aceitaNulo":  false
+        }
+    ]
+}

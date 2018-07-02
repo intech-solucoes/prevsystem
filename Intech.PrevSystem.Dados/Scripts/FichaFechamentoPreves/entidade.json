@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "CC_FICHA_FECHAMENTO_PREVES",
+    "colunasExtras": [
+        {
+            "nome": "DS_LOTACAO",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

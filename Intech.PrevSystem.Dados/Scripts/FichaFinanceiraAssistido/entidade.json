@@ -1,0 +1,25 @@
+﻿{
+    "nomeTabela": "GB_FICHA_FINANC_ASSISTIDO",
+    "colunasExtras": [
+        {
+            "nome": "DS_RUBRICA",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "RUBRICA_PROV_DESC",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "ID_RUB_SUPLEMENTACAO",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "IsAbonoAnual",
+            "tipo": "bool",
+            "aceitaNulo": false
+        }
+    ]
+}

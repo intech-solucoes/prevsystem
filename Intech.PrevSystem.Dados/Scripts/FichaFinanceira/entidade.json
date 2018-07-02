@@ -1,0 +1,25 @@
+﻿{
+    "nomeTabela": "CC_FICHA_FINANCEIRA",
+    "colunasExtras": [
+        {
+            "nome": "DS_TIPO_CONTRIBUICAO",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "TOTAL_CONTRIB",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "QTD_COTA",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DES_MES_REF",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

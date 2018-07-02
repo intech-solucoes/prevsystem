@@ -1,0 +1,35 @@
+﻿{
+    "nomeTabela": "CE_CONTRATOS",
+    "colunasExtras": [
+        {
+            "nome": "DES_NUM_CONTRATO",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "DES_PARCELAS",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "NUM_SALDO_DEVEDOR",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "Prestacoes",
+            "tipo": "List<PrestacaoEntidade>",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "Modalidade",
+            "tipo": "ModalidadeEntidade",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "SaldoDevedor",
+            "tipo": "SaldoDevedorEntidade",
+            "aceitaNulo": false
+        }
+    ]
+}

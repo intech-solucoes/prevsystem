@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "CS_DADOS_PESSOAIS",
+    "colunasExtras": [
+        {
+            "nome": "CPF_CGC",
+            "tipo": "string",
+            "aceitaNulo": false
+        }
+    ]
+}

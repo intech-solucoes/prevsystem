@@ -1,0 +1,30 @@
+﻿{
+    "nomeTabela": "WEB_MENSAGEM",
+    "colunasExtras": [
+        {
+            "nome": "NOM_FUNDACAO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "NOM_EMPRESA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_SIT_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "NUM_MATRICULA",
+            "tipo": "string",
+            "aceitaNulo": true
+        }
+    ]
+}

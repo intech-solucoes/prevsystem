@@ -16,7 +16,7 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                var quantidadeMesesContraCheque = 18;
+                var quantidadeMesesContraCheque = 500;
                 var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
 
                 var funcionario = new FuncionarioProxy().BuscarPorMatricula(Matricula);
@@ -38,7 +38,7 @@ namespace Intech.PrevSystem.API
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
                 var funcionario = new FuncionarioProxy().BuscarPorMatricula(Matricula);
 
-                return Json(new FichaFinanceiraAssistidoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, Matricula, cdPlano, dataReferencia, cdTipoFolha));
+                return Json(new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, Matricula, cdPlano, dataReferencia, cdTipoFolha));
             }
             catch (Exception ex)
             {

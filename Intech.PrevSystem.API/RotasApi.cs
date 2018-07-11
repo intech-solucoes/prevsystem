@@ -13,5 +13,7 @@
         public const string Email = "api/email";
         public const string Mensagem = "api/mensagem";
         public const string Empresa = "api/empresa";
+        public const string InfoRend = "api/infoRend";
+        public const string Depentende = "api/dependente";
     }
 }

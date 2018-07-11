@@ -17,6 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ArquivoUploadEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BancoAgEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComposicaoSRCEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_PERIODICIDADE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SIM_NAO.cs" />
@@ -24,8 +25,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)ContratoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContribuicaoIndividualEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosPessoaisEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependenteEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DocumentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DocumentoPastaEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EmpregadorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EmpresaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EmpresaPlanosEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EntidadeEntidade.cs" />
@@ -52,24 +55,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)PrestacaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrestacaoParcialEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProcessoBeneficioEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoCampoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoGrupoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoPassoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoSolicitacaoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoSolicitacaoValorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RecebedorBeneficioEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelacionamentoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SalarioBaseEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoDevedorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SegUsuarioEntidade.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\ContratoServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\DadosPessoaisServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\EntidadeServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\FichaFinanceiraAssistidoServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\FichaFinanceiraServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\FuncionarioServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\InfoRendServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\PlanoVinculadoServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\ProcessoBeneficioServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\RecebedorBeneficioServico.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Servicos\RelacionamentoServico.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaConcessaoPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaEncargoPlanoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TempoServicoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UsuarioEntidade.cs" />
   </ItemGroup>
 </Project>

@@ -31,6 +31,9 @@ namespace Intech.PrevSystem.Entidades
 		public string RUBRICA_PROV_DESC { get; set; }
 		public string ID_RUB_SUPLEMENTACAO { get; set; }
 		public bool IsAbonoAnual { get; set; }
+		public decimal? VAL_BRUTO { get; set; }
+		public decimal? VAL_DESCONTOS { get; set; }
+		public decimal? VAL_LIQUIDO { get; set; }
         
     }
 }

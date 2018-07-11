@@ -9,9 +9,10 @@ using System.Collections.Generic;
 #endregion
 
 namespace Intech.PrevSystem.Dados.DAO
-{
+{   
     public abstract class FichaFinanceiraAssistidoDAO : BaseDAO<FichaFinanceiraAssistidoEntidade>
     {
+        
 		public virtual IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA)
 		{
 			if(AppSettings.IS_SQL_SERVER_PROVIDER)

@@ -2,6 +2,11 @@
     "nomeTabela": "TB_HEADER_INFO_REND",
     "colunasExtras": [
         {
+            "nome": "NOME",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
             "nome": "NOM_EMPRESA",
             "tipo": "string",
             "aceitaNulo": false
@@ -14,7 +19,7 @@
         {
             "nome": "Grupos",
             "tipo": "List<InfoRendEntidade>",
-            "aceitaNulo":  false
+            "aceitaNulo": false
         }
     ]
 }

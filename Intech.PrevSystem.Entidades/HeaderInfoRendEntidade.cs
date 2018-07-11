@@ -18,6 +18,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime DATA_GERACAO { get; set; }
 		public string ORIGEM { get; set; }
 		public string IND_RETENCAO { get; set; }
+		public string NOME { get; set; }
 		public string NOM_EMPRESA { get; set; }
 		public string CNPJ_EMPRESA { get; set; }
 		public List<InfoRendEntidade> Grupos { get; set; }

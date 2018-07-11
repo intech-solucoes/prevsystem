@@ -142,6 +142,10 @@ namespace Intech.PrevSystem.Preves.Negocio
             var montanteAposentadoria = CalculaMontanteAposentadoria();
             var montanteSobrevivencia = CalculaMontanteSobrevivencia();
 
+            // Valores Aba Outras Informações (apenas ativo normal)
+            var salarioLiquido = CalculaSalarioLiquido();
+            var rendaLiquida = CalculaRendaLiquida();
+
             // Valores Benefício Mensal Simulado
             var beneficioMensalAposentadoria = CalculaBeneficioMensalAposentadoria();
             var beneficioMensalInvalidez = CalculaBeneficioMensalInvalidez();
@@ -178,7 +182,9 @@ namespace Intech.PrevSystem.Preves.Negocio
                 beneficioMensalInvalidez,
                 beneficioMensalPensaoMorte,
                 beneficioMensalSobrevivencia,
-                remuneracaoFinalCrescimentoBianual
+                remuneracaoFinalCrescimentoBianual,
+                salarioLiquido,
+                rendaLiquida
             };
         }
 
@@ -534,6 +540,91 @@ namespace Intech.PrevSystem.Preves.Negocio
             }
 
             return montantePensaoMorte;
+        }
+
+        #endregion
+
+        #region Métodos Cálculos Aba Outras Informações (apenas ativo normal)
+
+        /// <summary>
+        /// Método que retorna os valores da porcentagem do imposto de renda (aliquota) e da parcela a deduzir (parcela) a partir da base do imposto de renda.
+        /// </summary>
+        /// <param name="baseImpostoRenda"> Base de cálculo mensal, em R$ </param>
+        /// <returns>
+        /// Objeto dinâmico com os valores da porcentagem do imposto de renda e da parcela a deduzir.
+        /// </returns>
+        private dynamic BuscaAliquotaParcela(decimal baseImpostoRenda)
+        {
+            decimal aliquota = 0;
+            decimal parcela = 0;
+
+            if(baseImpostoRenda >= 0 && baseImpostoRenda <= Convert.ToDecimal(1787.77))
+            {
+                aliquota = 0;
+                parcela = 0;
+            } else if (baseImpostoRenda >= Convert.ToDecimal(1787.78) && baseImpostoRenda <= Convert.ToDecimal(2679.29))
+            {
+                aliquota = (decimal) 0.075;
+                parcela = (decimal) 134.08;
+            } else if (baseImpostoRenda >= Convert.ToDecimal(2679.30) && baseImpostoRenda <= Convert.ToDecimal(3572.43))
+            {
+                aliquota = (decimal) 0.15;
+                parcela = (decimal) 335.03;
+            } else if (baseImpostoRenda >= Convert.ToDecimal(3572.44) && baseImpostoRenda <= Convert.ToDecimal(4463.81))
+            {
+                aliquota = (decimal) 0.225;
+                parcela = (decimal) 602.96;
+            } else if (baseImpostoRenda >= Convert.ToDecimal(4463.82))
+            {
+                aliquota = (decimal) 0.275;
+                parcela = (decimal) 826.15;
+            }
+
+            return new
+            {
+                aliquota,
+                parcela
+            };
+        }
+
+        /// <summary>
+        /// Método que calcula o salário líquido final estipulada pelo crescimento bianual, para ativos normais.
+        /// </summary>
+        /// <returns> Valor do salário líquido </returns>
+        private decimal CalculaSalarioLiquido()
+        {
+            decimal remuneracaoFinal = CalculaRemuneracaoFinalCrescimentoBianual();
+            decimal contribuicaoPrevidenciariaPREVES = (CalculaRemuneracaoFinalCrescimentoBianual() - GetIndiceRgps()) * Convert.ToDecimal(0.085);
+            decimal contribuicaoPrevidenciariaIPAJM = GetIndiceRgps() * Convert.ToDecimal(0.11);
+
+            decimal baseImpostoRenda = remuneracaoFinal - contribuicaoPrevidenciariaPREVES - contribuicaoPrevidenciariaIPAJM;
+
+            dynamic valores = BuscaAliquotaParcela(baseImpostoRenda);
+            decimal salarioLiquido = baseImpostoRenda - (baseImpostoRenda * valores.aliquota - valores.parcela);
+
+            return salarioLiquido;
+        }
+
+        /// <summary>
+        /// Método que calcula o salário líquido final máximo pago pelo RPPGS/RGPS + RPC (renda líquida).
+        /// </summary>
+        /// <returns> Renda líquida </returns>
+        private decimal CalculaRendaLiquida()
+        {
+            decimal rgps = GetIndiceRgps();
+            decimal rendaTotal = rgps + CalculaBeneficioMensalAposentadoria();
+
+            dynamic valoresRgps = BuscaAliquotaParcela(rgps);
+            decimal impostoRendaIPAJM = rgps * valoresRgps.aliquota - valoresRgps.parcela;
+
+            dynamic valoresPreves = BuscaAliquotaParcela(CalculaBeneficioMensalAposentadoria());
+            decimal impostoRendaPREVES = CalculaBeneficioMensalAposentadoria() * valoresPreves.aliquota - valoresPreves.parcela;
+
+            decimal impostoRendaTotal = impostoRendaIPAJM + impostoRendaPREVES;
+
+            decimal rendaLiquida = rendaTotal - impostoRendaTotal;
+
+            return rendaLiquida;
         }
 
         #endregion

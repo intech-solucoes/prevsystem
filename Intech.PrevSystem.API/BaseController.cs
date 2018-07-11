@@ -1,5 +1,4 @@
 ﻿#region Usings
-using Intech.Lib.Web.JWT;
 using Microsoft.AspNetCore.Mvc;
 using System;
 #endregion

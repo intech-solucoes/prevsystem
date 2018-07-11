@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems" Label="Shared" />
+
+  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems" Label="Shared" />
+
+  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems" Label="Shared" />
+
+  <Import Project="..\..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
+
+  <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
+
+  <Import Project="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems" Label="Shared" />
+
+  <Import Project="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems" Label="Shared" />
+
+</Project>

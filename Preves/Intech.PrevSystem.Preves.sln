@@ -5,15 +5,9 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{21687429-A304-4972-B896-2351ADEE62A0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Negocio", "Negocio", "{172194DB-A8AA-487C-A235-3FBD9B8396D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plataforma", "Plataforma", "{172194DB-A8AA-487C-A235-3FBD9B8396D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4A1FA9C7-D49C-4306-82E0-7A38E307915D}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Dapper", "..\..\Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.shproj", "{21944D5C-2AF2-467A-B973-172529BF229D}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Negocio", "..\..\Lib\Intech.Lib.Negocio\Intech.Lib.Negocio.shproj", "{52DA15B0-3063-48EF-A56E-D62BD6504466}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Util", "..\..\Lib\Intech.Lib.Util\Intech.Lib.Util.shproj", "{73968E62-3181-49AC-8C2D-81331534BC6E}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Dados", "..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.shproj", "{549415E4-D6A6-42B0-92B2-B30F6B2700F3}"
 EndProject
@@ -25,23 +19,26 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Preves.Ne
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Preves.API", "Intech.PrevSystem.Preves.API\Intech.PrevSystem.Preves.API.csproj", "{55315370-262A-433C-BE4F-F48EECE3F648}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Web", "..\..\Lib\Intech.Lib.Web\Intech.Lib.Web.shproj", "{17FB1551-D800-46E6-8B2F-3A19BBB43EBA}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Mobile.Servico", "..\..\Mobile\Lib\Intech.Lib.Mobile.Servico\Intech.Lib.Mobile.Servico.shproj", "{DCE7A9AA-1405-4AAE-BFCB-D6CB93201C87}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.API", "..\Intech.PrevSystem.API\Intech.PrevSystem.API.shproj", "{11D947CE-05E2-41DB-8687-640404E96EF0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Dapper", "..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.shproj", "{21944D5C-2AF2-467A-B973-172529BF229D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Data", "..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.shproj", "{1B8BF169-24E1-48F0-B3BD-EC9FC413B578}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Util", "..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.shproj", "{73968E62-3181-49AC-8C2D-81331534BC6E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Web", "..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.shproj", "{17FB1551-D800-46E6-8B2F-3A19BBB43EBA}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{11d947ce-05e2-41db-8687-640404e96ef0}*SharedItemsImports = 13
-		..\..\Lib\Intech.Lib.Web\Intech.Lib.Web.projitems*{17fb1551-d800-46e6-8b2f-3a19bbb43eba}*SharedItemsImports = 13
-		..\..\Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems*{21944d5c-2af2-467a-b973-172529bf229d}*SharedItemsImports = 13
-		..\..\Lib\Intech.Lib.Negocio\Intech.Lib.Negocio.projitems*{52da15b0-3063-48ef-a56e-d62bd6504466}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems*{17fb1551-d800-46e6-8b2f-3a19bbb43eba}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.projitems*{1b8bf169-24e1-48f0-b3bd-ec9fc413b578}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems*{21944d5c-2af2-467a-b973-172529bf229d}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems*{549415e4-d6a6-42b0-92b2-b30f6b2700f3}*SharedItemsImports = 13
-		..\..\Lib\Intech.Lib.Util\Intech.Lib.Util.projitems*{73968e62-3181-49ac-8c2d-81331534bc6e}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems*{73968e62-3181-49ac-8c2d-81331534bc6e}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems*{a88cf162-e0ec-4213-9964-543eca2bee87}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems*{ce1ab52d-fda8-41f8-975b-0d7ba605bd2e}*SharedItemsImports = 13
-		..\..\Mobile\Lib\Intech.Lib.Mobile.Servico\Intech.Lib.Mobile.Servico.projitems*{dce7a9aa-1405-4aae-bfcb-d6cb93201c87}*SharedItemsImports = 13
 		Intech.PrevSystem.Preves.Negocio\Intech.PrevSystem.Preves.Negocio.projitems*{fc341c41-d378-4eeb-a277-9ee4f0ae229b}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,187 +55,18 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{21944D5C-2AF2-467A-B973-172529BF229D} = {21687429-A304-4972-B896-2351ADEE62A0}
-		{52DA15B0-3063-48EF-A56E-D62BD6504466} = {21687429-A304-4972-B896-2351ADEE62A0}
-		{73968E62-3181-49AC-8C2D-81331534BC6E} = {21687429-A304-4972-B896-2351ADEE62A0}
 		{549415E4-D6A6-42B0-92B2-B30F6B2700F3} = {172194DB-A8AA-487C-A235-3FBD9B8396D1}
 		{CE1AB52D-FDA8-41F8-975B-0D7BA605BD2E} = {172194DB-A8AA-487C-A235-3FBD9B8396D1}
 		{A88CF162-E0EC-4213-9964-543ECA2BEE87} = {172194DB-A8AA-487C-A235-3FBD9B8396D1}
 		{FC341C41-D378-4EEB-A277-9EE4F0AE229B} = {172194DB-A8AA-487C-A235-3FBD9B8396D1}
 		{55315370-262A-433C-BE4F-F48EECE3F648} = {4A1FA9C7-D49C-4306-82E0-7A38E307915D}
-		{17FB1551-D800-46E6-8B2F-3A19BBB43EBA} = {21687429-A304-4972-B896-2351ADEE62A0}
-		{DCE7A9AA-1405-4AAE-BFCB-D6CB93201C87} = {21687429-A304-4972-B896-2351ADEE62A0}
 		{11D947CE-05E2-41DB-8687-640404E96EF0} = {172194DB-A8AA-487C-A235-3FBD9B8396D1}
+		{21944D5C-2AF2-467A-B973-172529BF229D} = {21687429-A304-4972-B896-2351ADEE62A0}
+		{1B8BF169-24E1-48F0-B3BD-EC9FC413B578} = {21687429-A304-4972-B896-2351ADEE62A0}
+		{73968E62-3181-49AC-8C2D-81331534BC6E} = {21687429-A304-4972-B896-2351ADEE62A0}
+		{17FB1551-D800-46E6-8B2F-3A19BBB43EBA} = {21687429-A304-4972-B896-2351ADEE62A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6A3DA39-0AE8-41D5-A569-0B608B62BFF4}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 22
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://intechprev.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Lib\\Intech.Lib.Dapper\\Intech.Lib.Dapper.shproj
-		SccProjectTopLevelParentUniqueName1 = Intech.PrevSystem.Preves.sln
-		SccProjectName1 = ../../Lib/Intech.Lib.Dapper
-		SccLocalPath1 = ..\\..\\Lib\\Intech.Lib.Dapper
-		SccProjectUniqueName2 = ..\\..\\Lib\\Intech.Lib.Negocio\\Intech.Lib.Negocio.shproj
-		SccProjectTopLevelParentUniqueName2 = Intech.PrevSystem.Preves.sln
-		SccProjectName2 = ../../Lib/Intech.Lib.Negocio
-		SccLocalPath2 = ..\\..\\Lib\\Intech.Lib.Negocio
-		SccProjectUniqueName3 = ..\\..\\Lib\\Intech.Lib.Util\\Intech.Lib.Util.shproj
-		SccProjectTopLevelParentUniqueName3 = Intech.PrevSystem.Preves.sln
-		SccProjectName3 = ../../Lib/Intech.Lib.Util
-		SccLocalPath3 = ..\\..\\Lib\\Intech.Lib.Util
-		SccProjectUniqueName4 = ..\\Intech.PrevSystem.Dados\\Intech.PrevSystem.Dados.shproj
-		SccProjectTopLevelParentUniqueName4 = Intech.PrevSystem.Preves.sln
-		SccProjectName4 = ../Intech.PrevSystem.Dados
-		SccLocalPath4 = ..\\Intech.PrevSystem.Dados
-		SccProjectUniqueName5 = ..\\Intech.PrevSystem.Entidades\\Intech.PrevSystem.Entidades.shproj
-		SccProjectTopLevelParentUniqueName5 = Intech.PrevSystem.Preves.sln
-		SccProjectName5 = ../Intech.PrevSystem.Entidades
-		SccLocalPath5 = ..\\Intech.PrevSystem.Entidades
-		SccProjectUniqueName6 = ..\\Intech.PrevSystem.Negocio\\Intech.PrevSystem.Negocio.shproj
-		SccProjectTopLevelParentUniqueName6 = Intech.PrevSystem.Preves.sln
-		SccProjectName6 = ../Intech.PrevSystem.Negocio
-		SccLocalPath6 = ..\\Intech.PrevSystem.Negocio
-		SccProjectUniqueName7 = Intech.PrevSystem.Preves.Negocio\\Intech.PrevSystem.Preves.Negocio.shproj
-		SccProjectTopLevelParentUniqueName7 = Intech.PrevSystem.Preves.sln
-		SccProjectName7 = Intech.PrevSystem.Preves.Negocio
-		SccLocalPath7 = Intech.PrevSystem.Preves.Negocio
-		SccProjectUniqueName8 = Intech.PrevSystem.Preves.API\\Intech.PrevSystem.Preves.API.csproj
-		SccProjectTopLevelParentUniqueName8 = Intech.PrevSystem.Preves.sln
-		SccProjectName8 = Intech.PrevSystem.Preves.API
-		SccLocalPath8 = Intech.PrevSystem.Preves.API
-		SccProjectUniqueName9 = ..\\..\\Lib\\Intech.Lib.Web\\Intech.Lib.Web.shproj
-		SccProjectTopLevelParentUniqueName9 = Intech.PrevSystem.Preves.sln
-		SccProjectName9 = ../../Lib/Intech.Lib.Web
-		SccLocalPath9 = ..\\..\\Lib\\Intech.Lib.Web
-		SccProjectUniqueName10 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico\\Intech.Lib.Mobile.Servico.shproj
-		SccProjectTopLevelParentUniqueName10 = Intech.PrevSystem.Preves.sln
-		SccProjectName10 = ../../Mobile/Lib/Intech.Lib.Mobile.Servico
-		SccLocalPath10 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico
-		SccProjectUniqueName11 = ..\\Intech.PrevSystem.API\\Intech.PrevSystem.API.shproj
-		SccProjectTopLevelParentUniqueName11 = Intech.PrevSystem.Preves.sln
-		SccProjectName11 = ../Intech.PrevSystem.API
-		SccLocalPath11 = ..\\Intech.PrevSystem.API
-		SccProjectUniqueName12 = ..\\..\\Lib\\Intech.Lib.Negocio\\Intech.Lib.Negocio.projitems
-		SccProjectTopLevelParentUniqueName12 = Intech.PrevSystem.Preves.sln
-		SccProjectName12 = ../../Lib/Intech.Lib.Negocio
-		SccLocalPath12 = ..\\..\\Lib\\Intech.Lib.Negocio
-		SccProjectUniqueName13 = ..\\Intech.PrevSystem.Negocio\\Intech.PrevSystem.Negocio.projitems
-		SccProjectTopLevelParentUniqueName13 = Intech.PrevSystem.Preves.sln
-		SccProjectName13 = ../Intech.PrevSystem.Negocio
-		SccLocalPath13 = ..\\Intech.PrevSystem.Negocio
-		SccProjectUniqueName14 = ..\\Intech.PrevSystem.API\\Intech.PrevSystem.API.projitems
-		SccProjectTopLevelParentUniqueName14 = Intech.PrevSystem.Preves.sln
-		SccProjectName14 = ../Intech.PrevSystem.API
-		SccLocalPath14 = ..\\Intech.PrevSystem.API
-		SccProjectUniqueName15 = ..\\..\\Lib\\Intech.Lib.Util\\Intech.Lib.Util.projitems
-		SccProjectTopLevelParentUniqueName15 = Intech.PrevSystem.Preves.sln
-		SccProjectName15 = ../../Lib/Intech.Lib.Util
-		SccLocalPath15 = ..\\..\\Lib\\Intech.Lib.Util
-		SccProjectUniqueName16 = ..\\Intech.PrevSystem.Dados\\Intech.PrevSystem.Dados.projitems
-		SccProjectTopLevelParentUniqueName16 = Intech.PrevSystem.Preves.sln
-		SccProjectName16 = ../Intech.PrevSystem.Dados
-		SccLocalPath16 = ..\\Intech.PrevSystem.Dados
-		SccProjectUniqueName17 = ..\\..\\Lib\\Intech.Lib.Web\\Intech.Lib.Web.projitems
-		SccProjectTopLevelParentUniqueName17 = Intech.PrevSystem.Preves.sln
-		SccProjectName17 = ../../Lib/Intech.Lib.Web
-		SccLocalPath17 = ..\\..\\Lib\\Intech.Lib.Web
-		SccProjectUniqueName18 = ..\\Intech.PrevSystem.Entidades\\Intech.PrevSystem.Entidades.projitems
-		SccProjectTopLevelParentUniqueName18 = Intech.PrevSystem.Preves.sln
-		SccProjectName18 = ../Intech.PrevSystem.Entidades
-		SccLocalPath18 = ..\\Intech.PrevSystem.Entidades
-		SccProjectUniqueName19 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico\\Intech.Lib.Mobile.Servico.projitems
-		SccProjectTopLevelParentUniqueName19 = Intech.PrevSystem.Preves.sln
-		SccProjectName19 = ../../Mobile/Lib/Intech.Lib.Mobile.Servico
-		SccLocalPath19 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico
-		SccProjectUniqueName20 = ..\\..\\Lib\\Intech.Lib.Dapper\\Intech.Lib.Dapper.projitems
-		SccProjectTopLevelParentUniqueName20 = Intech.PrevSystem.Preves.sln
-		SccProjectName20 = ../../Lib/Intech.Lib.Dapper
-		SccLocalPath20 = ..\\..\\Lib\\Intech.Lib.Dapper
-		SccProjectUniqueName21 = Intech.PrevSystem.Preves.Negocio\\Intech.PrevSystem.Preves.Negocio.projitems
-		SccProjectTopLevelParentUniqueName21 = Intech.PrevSystem.Preves.sln
-		SccProjectName21 = Intech.PrevSystem.Preves.Negocio
-		SccLocalPath21 = Intech.PrevSystem.Preves.Negocio
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 22
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://intechprev.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ..\\..\\Lib\\Intech.Lib.Dapper\\Intech.Lib.Dapper.shproj
-		SccProjectTopLevelParentUniqueName1 = Intech.PrevSystem.Preves.sln
-		SccProjectName1 = ../../Lib/Intech.Lib.Dapper
-		SccLocalPath1 = ..\\..\\Lib\\Intech.Lib.Dapper
-		SccProjectUniqueName2 = ..\\..\\Lib\\Intech.Lib.Negocio\\Intech.Lib.Negocio.shproj
-		SccProjectTopLevelParentUniqueName2 = Intech.PrevSystem.Preves.sln
-		SccProjectName2 = ../../Lib/Intech.Lib.Negocio
-		SccLocalPath2 = ..\\..\\Lib\\Intech.Lib.Negocio
-		SccProjectUniqueName3 = ..\\..\\Lib\\Intech.Lib.Util\\Intech.Lib.Util.shproj
-		SccProjectTopLevelParentUniqueName3 = Intech.PrevSystem.Preves.sln
-		SccProjectName3 = ../../Lib/Intech.Lib.Util
-		SccLocalPath3 = ..\\..\\Lib\\Intech.Lib.Util
-		SccProjectUniqueName4 = ..\\..\\Lib\\Intech.Lib.Util\\Intech.Lib.Util.projitems
-		SccProjectTopLevelParentUniqueName4 = Intech.PrevSystem.Preves.sln
-		SccProjectName4 = ../../Lib/Intech.Lib.Util
-		SccLocalPath4 = ..\\..\\Lib\\Intech.Lib.Util
-		SccProjectUniqueName5 = ..\\Intech.PrevSystem.Dados\\Intech.PrevSystem.Dados.shproj
-		SccProjectTopLevelParentUniqueName5 = Intech.PrevSystem.Preves.sln
-		SccProjectName5 = ../Intech.PrevSystem.Dados
-		SccLocalPath5 = ..\\Intech.PrevSystem.Dados
-		SccProjectUniqueName6 = ..\\Intech.PrevSystem.Dados\\Intech.PrevSystem.Dados.projitems
-		SccProjectTopLevelParentUniqueName6 = Intech.PrevSystem.Preves.sln
-		SccProjectName6 = ../Intech.PrevSystem.Dados
-		SccLocalPath6 = ..\\Intech.PrevSystem.Dados
-		SccProjectUniqueName7 = ..\\Intech.PrevSystem.Entidades\\Intech.PrevSystem.Entidades.shproj
-		SccProjectTopLevelParentUniqueName7 = Intech.PrevSystem.Preves.sln
-		SccProjectName7 = ../Intech.PrevSystem.Entidades
-		SccLocalPath7 = ..\\Intech.PrevSystem.Entidades
-		SccProjectUniqueName8 = ..\\Intech.PrevSystem.Entidades\\Intech.PrevSystem.Entidades.projitems
-		SccProjectTopLevelParentUniqueName8 = Intech.PrevSystem.Preves.sln
-		SccProjectName8 = ../Intech.PrevSystem.Entidades
-		SccLocalPath8 = ..\\Intech.PrevSystem.Entidades
-		SccProjectUniqueName9 = ..\\Intech.PrevSystem.Negocio\\Intech.PrevSystem.Negocio.shproj
-		SccProjectTopLevelParentUniqueName9 = Intech.PrevSystem.Preves.sln
-		SccProjectName9 = ../Intech.PrevSystem.Negocio
-		SccLocalPath9 = ..\\Intech.PrevSystem.Negocio
-		SccProjectUniqueName10 = ..\\Intech.PrevSystem.Negocio\\Intech.PrevSystem.Negocio.projitems
-		SccProjectTopLevelParentUniqueName10 = Intech.PrevSystem.Preves.sln
-		SccProjectName10 = ../Intech.PrevSystem.Negocio
-		SccLocalPath10 = ..\\Intech.PrevSystem.Negocio
-		SccProjectUniqueName11 = Intech.PrevSystem.Preves.Negocio\\Intech.PrevSystem.Preves.Negocio.shproj
-		SccProjectTopLevelParentUniqueName11 = Intech.PrevSystem.Preves.sln
-		SccProjectName11 = Intech.PrevSystem.Preves.Negocio
-		SccLocalPath11 = Intech.PrevSystem.Preves.Negocio
-		SccProjectUniqueName12 = Intech.PrevSystem.Preves.Negocio\\Intech.PrevSystem.Preves.Negocio.projitems
-		SccProjectTopLevelParentUniqueName12 = Intech.PrevSystem.Preves.sln
-		SccProjectName12 = Intech.PrevSystem.Preves.Negocio
-		SccLocalPath12 = Intech.PrevSystem.Preves.Negocio
-		SccProjectUniqueName13 = ..\\..\\Lib\\Intech.Lib.Dapper\\Intech.Lib.Dapper.projitems
-		SccProjectTopLevelParentUniqueName13 = Intech.PrevSystem.Preves.sln
-		SccProjectName13 = ../../Lib/Intech.Lib.Dapper
-		SccLocalPath13 = ..\\..\\Lib\\Intech.Lib.Dapper
-		SccProjectUniqueName14 = Intech.PrevSystem.Preves.API\\Intech.PrevSystem.Preves.API.csproj
-		SccProjectTopLevelParentUniqueName14 = Intech.PrevSystem.Preves.sln
-		SccProjectName14 = Intech.PrevSystem.Preves.API
-		SccLocalPath14 = Intech.PrevSystem.Preves.API
-		SccProjectUniqueName15 = ..\\..\\Lib\\Intech.Lib.Web\\Intech.Lib.Web.shproj
-		SccProjectTopLevelParentUniqueName15 = Intech.PrevSystem.Preves.sln
-		SccProjectName15 = ../../Lib/Intech.Lib.Web
-		SccLocalPath15 = ..\\..\\Lib\\Intech.Lib.Web
-		SccProjectUniqueName16 = ..\\..\\Lib\\Intech.Lib.Web\\Intech.Lib.Web.projitems
-		SccProjectTopLevelParentUniqueName16 = Intech.PrevSystem.Preves.sln
-		SccProjectName16 = ../../Lib/Intech.Lib.Web
-		SccLocalPath16 = ..\\..\\Lib\\Intech.Lib.Web
-		SccProjectUniqueName17 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico\\Intech.Lib.Mobile.Servico.shproj
-		SccProjectTopLevelParentUniqueName17 = Intech.PrevSystem.Preves.sln
-		SccProjectName17 = ../../Mobile/Lib/Intech.Lib.Mobile.Servico
-		SccLocalPath17 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico
-		SccProjectUniqueName18 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico\\Intech.Lib.Mobile.Servico.projitems
-		SccProjectTopLevelParentUniqueName18 = Intech.PrevSystem.Preves.sln
-		SccProjectName18 = ../../Mobile/Lib/Intech.Lib.Mobile.Servico
-		SccLocalPath18 = ..\\..\\Mobile\\Lib\\Intech.Lib.Mobile.Servico
 	EndGlobalSection
 EndGlobal

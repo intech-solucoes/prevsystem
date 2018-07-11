@@ -17,13 +17,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ArquivoUpload\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ComposicaoSRC\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\config.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Contrato\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ContribuicaoIndividual\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\DadosPessoais\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Dependente\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Documento\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Empregador\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Empresa\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Entidade\entidade.json" />
@@ -48,22 +51,29 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\PrestacaoParcial\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Prestacao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ProcessoBeneficio\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacaoValor\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaConcessaoPlano\BuscarPorFundacaoEmpresaModalidadeNatureza.sql" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaConcessaoPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaEncargoPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\SegUsuario\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\TempoServico\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Usuario\BuscarPorLogin.sql" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Usuario\entidade.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\BuscarPorCodBancoCodAgencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ComposicaoSRC\BuscarePorFundacaoEmpresaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Contrato\BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Contrato\BuscarPorFundacaoPlanoInscricaoSituacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ContribuicaoIndividual\BuscarPorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\DadosPessoais\BuscarPorCodEntid.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Dependente\BuscarPorFundacaoInscricaoPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\BuscarPorPasta.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Documento\BuscarPorPasta.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Empregador\BuscarPorCdEmpregador.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\BuscarPorFundacaoEmpresaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarTodas.sql" />
@@ -103,19 +113,28 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\PrestacaoParcial\BuscarPorFundacaoAnoNumeroParcela.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Prestacao\BuscarPorFundacaoContrato.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ProcessoBeneficio\BuscarPorFundacaoEmpresaMatriculaPlano.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacaoValor\DeletePorOidSolicitacao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\BuscarFechada.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\BuscarPorCodIdentificador.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\DeletePorOidSolicitacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\BuscarPensionistaPorCpf.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\BuscarUltimoPorFundacaoEmpresaMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxaEncargoPlano\BuscarPorFundacaoEmpresaModalidadeNaturezaPlanoDtInicioVigencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\SegUsuario\BuscarPorLogin.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\TempoServico\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Usuario\BuscarPorCpf.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ArquivoUploadDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\BancoAgDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ComposicaoSRCDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ContratoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ContribuicaoIndividualDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DadosPessoaisDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\DependenteDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DocumentoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DocumentoPastaDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpregadorDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpresaDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpresaPlanosDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EntidadeDAO.cs" />
@@ -139,10 +158,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\PrestacaoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\PrestacaoParcialDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ProcessoBeneficioDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\RecadastramentoSolicitacaoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\RecadastramentoSolicitacaoValorDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\RecebedorBeneficioDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\SalarioBaseDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SegUsuarioDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxaConcessaoPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxaEncargoPlanoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\TempoServicoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\UsuarioDAO.cs" />
   </ItemGroup>
 </Project>

@@ -47,7 +47,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 if (usuario == null)
                     usuario = new SegUsuarioProxy().Migrar(login.Cpf.Value, senha);
 
-                if(usuario.PWD_USUARIO.ToUpper() != Criptografia.Encriptar(senha).ToUpper())
+                if(usuario == null || usuario.PWD_USUARIO.ToUpper() != Criptografia.Encriptar(senha).ToUpper())
                     throw new Exception("Matrícula ou senha incorretos!");
 
                 if (usuario != null)

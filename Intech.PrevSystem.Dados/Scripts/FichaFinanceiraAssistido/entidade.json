@@ -20,6 +20,21 @@
             "nome": "IsAbonoAnual",
             "tipo": "bool",
             "aceitaNulo": false
+        },
+        {
+            "nome": "VAL_BRUTO",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "VAL_DESCONTOS",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "VAL_LIQUIDO",
+            "tipo": "decimal",
+            "aceitaNulo": true
         }
     ]
 }

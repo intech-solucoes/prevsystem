@@ -17,12 +17,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ArquivoUploadProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\BancoAgProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ComposicaoSRCProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContratoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContribuicaoIndividualProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DadosPessoaisProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DependenteProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoPastaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpregadorProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpresaPlanosProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpresaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\EntidadeProxy.cs" />
@@ -46,10 +49,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoParcialProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ProcessoBeneficioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecadastramentoSolicitacaoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecadastramentoSolicitacaoValorProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecebedorBeneficioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\SalarioBaseProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SegUsuarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaConcessaoPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaEncargoPlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\TempoServicoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\UsuarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesExtensoes.cs" />
   </ItemGroup>

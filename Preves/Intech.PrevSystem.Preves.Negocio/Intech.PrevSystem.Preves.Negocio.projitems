@@ -16,6 +16,7 @@
     <Import_RootNamespace>Intech.PrevSystem.Preves.Negocio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Recadastramento.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimNaoParticipante.cs" />
   </ItemGroup>
 </Project>

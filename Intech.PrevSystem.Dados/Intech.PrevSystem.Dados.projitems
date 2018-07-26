@@ -55,6 +55,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\SitPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaConcessaoPlano\BuscarPorFundacaoEmpresaModalidadeNatureza.sql" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaConcessaoPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaEncargoPlano\entidade.json" />
@@ -119,6 +120,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\DeletePorOidSolicitacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\BuscarPensionistaPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\BuscarUltimoPorFundacaoEmpresaMatricula.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\SitPlano\BuscarTodos.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxaEncargoPlano\BuscarPorFundacaoEmpresaModalidadeNaturezaPlanoDtInicioVigencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\SegUsuario\BuscarPorLogin.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TempoServico\BuscarPorCodEntid.sql" />
@@ -163,6 +165,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\RecebedorBeneficioDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SalarioBaseDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SegUsuarioDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\SitPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxaConcessaoPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxaEncargoPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TempoServicoDAO.cs" />

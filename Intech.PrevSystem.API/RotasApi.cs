@@ -15,5 +15,6 @@
         public const string Empresa = "api/empresa";
         public const string InfoRend = "api/infoRend";
         public const string Depentende = "api/dependente";
+        public const string SitPlano = "api/sitPlano";
     }
 }

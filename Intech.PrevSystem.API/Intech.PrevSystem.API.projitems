@@ -26,11 +26,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)BaseFichaFinanceiraAssistidoController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseFichaFinanceiraController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseFuncionarioController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseFundacaoController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseIndiceController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseInfoRendController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseMensagemController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BasePlanoController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseVersaoController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseSitPlanoController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RotasApi.cs" />
   </ItemGroup>
 </Project>

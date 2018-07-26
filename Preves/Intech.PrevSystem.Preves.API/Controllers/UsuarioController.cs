@@ -90,5 +90,22 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("alterarSenha")]
+        [Authorize("Bearer")]
+        public IActionResult AlterarSenha([FromBody] dynamic data)
+        {
+            try
+            {
+                string senhaAntiga = data.senhaAntiga.Value;
+                string senhaNova = data.senhaNova.Value;
+
+                return Json(new UsuarioProxy().AlterarSenha(Cpf, senhaAntiga, senhaNova));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

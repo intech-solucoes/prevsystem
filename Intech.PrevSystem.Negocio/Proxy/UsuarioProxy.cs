@@ -20,6 +20,20 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return base.BuscarPorLogin(NOM_LOGIN, senha);
         }
 
+        public string AlterarSenha(string cpf, string senhaAntiga, string senhaNova)
+        {
+            senhaAntiga = Criptografia.Encriptar(senhaAntiga);
+            var usuarioExistente = BuscarPorLogin(cpf, senhaAntiga);
+
+            if (usuarioExistente == null)
+                throw new Exception("Senha antiga incorreta!");
+
+            usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
+            Atualizar(usuarioExistente);
+
+            return "Senha alterada com sucesso!";
+        }
+
         public string CriarAcesso(string cpf, DateTime dataNascimento)
         {
             cpf = cpf.LimparMascara();

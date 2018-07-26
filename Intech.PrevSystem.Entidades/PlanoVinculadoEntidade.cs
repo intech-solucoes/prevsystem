@@ -44,6 +44,7 @@ namespace Intech.PrevSystem.Entidades
 		public string DS_PERFIL_INVEST { get; set; }
 		public string DS_CATEGORIA { get; set; }
 		public string DS_PLANO { get; set; }
+		public string DS_SIT_PLANO { get; set; }
 		public string COD_CNPB { get; set; }
 		public decimal SalarioContribuicao { get; set; }
 		public decimal PercentualContribuicao { get; set; }

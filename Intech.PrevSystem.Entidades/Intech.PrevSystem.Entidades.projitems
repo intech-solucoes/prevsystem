@@ -62,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoSolicitacaoValorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RecebedorBeneficioEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelacionamentoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RelIRRFEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SalarioBaseEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoDevedorEntidade.cs" />

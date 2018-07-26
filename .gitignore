@@ -64,3 +64,4 @@ bin
 obj
 lib
 .sass-cache
+.vs

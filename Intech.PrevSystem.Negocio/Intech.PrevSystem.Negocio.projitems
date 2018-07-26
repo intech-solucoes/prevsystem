@@ -52,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecadastramentoSolicitacaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecadastramentoSolicitacaoValorProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\RecebedorBeneficioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\RelIRRFProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SalarioBaseProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SegUsuarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SitPlanoProxy.cs" />

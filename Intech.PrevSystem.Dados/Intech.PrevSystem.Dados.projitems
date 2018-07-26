@@ -54,6 +54,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacaoValor\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\RelIRRF\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\SitPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaConcessaoPlano\BuscarPorFundacaoEmpresaModalidadeNatureza.sql" />
@@ -119,6 +120,8 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\BuscarPorCodIdentificador.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecadastramentoSolicitacao\DeletePorOidSolicitacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\RecebedorBeneficio\BuscarPensionistaPorCpf.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RelIRRF\BuscarAnosPorFundacaoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\RelIRRF\BuscarPorFundacaoInscricaoReferencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\SalarioBase\BuscarUltimoPorFundacaoEmpresaMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\SitPlano\BuscarTodos.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxaEncargoPlano\BuscarPorFundacaoEmpresaModalidadeNaturezaPlanoDtInicioVigencia.sql" />
@@ -163,6 +166,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\RecadastramentoSolicitacaoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\RecadastramentoSolicitacaoValorDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\RecebedorBeneficioDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\RelIRRFDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SalarioBaseDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SegUsuarioDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\SitPlanoDAO.cs" />

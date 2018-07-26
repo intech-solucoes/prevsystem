@@ -17,6 +17,11 @@
             "aceitaNulo": true
         },
         {
+            "nome": "DS_SIT_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
             "nome": "COD_CNPB",
             "tipo": "string",
             "aceitaNulo": true

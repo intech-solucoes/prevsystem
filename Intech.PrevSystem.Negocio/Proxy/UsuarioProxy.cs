@@ -22,7 +22,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string AlterarSenha(string cpf, string senhaAntiga, string senhaNova)
         {
-            senhaAntiga = Criptografia.Encriptar(senhaAntiga);
+            
             var usuarioExistente = BuscarPorLogin(cpf, senhaAntiga);
 
             if (usuarioExistente == null)

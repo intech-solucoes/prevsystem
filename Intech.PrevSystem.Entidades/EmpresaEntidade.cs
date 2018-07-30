@@ -33,6 +33,7 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_INSC_IGUAL_MATRIC { get; set; }
 		public string CK_SEQ_MATRICULA { get; set; }
 		public string NOME_ENTID { get; set; }
+		public List<PlanoEntidade> Planos { get; set; }
         
     }
 }

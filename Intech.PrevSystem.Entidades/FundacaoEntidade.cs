@@ -21,6 +21,7 @@ namespace Intech.PrevSystem.Entidades
 		public string FONE_ENTID { get; set; }
 		public string FAX_ENTID { get; set; }
 		public string CPF_CGC { get; set; }
+		public List<EmpresaEntidade> Empresas { get; set; }
         
     }
 }

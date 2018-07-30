@@ -5,6 +5,11 @@
             "nome": "NOME_ENTID",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "Planos",
+            "tipo": "List<PlanoEntidade>",
+            "aceitaNulo": false
         }
     ]
 }

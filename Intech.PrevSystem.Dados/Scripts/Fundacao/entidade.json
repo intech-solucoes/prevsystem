@@ -40,6 +40,11 @@
             "nome": "CPF_CGC",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "Empresas",
+            "tipo": "List<EmpresaEntidade>",
+            "aceitaNulo": false
         }
     ]
 }

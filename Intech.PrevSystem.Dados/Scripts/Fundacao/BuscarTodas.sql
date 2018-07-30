@@ -1,0 +1,11 @@
+﻿/*Config
+	RetornaLista
+	Retorno
+		-FundacaoEntidade
+*/
+
+SELECT 
+	ENT.NOME_ENTID,
+	TB_FUNDACAO.*
+FROM TB_FUNDACAO
+INNER JOIN EE_ENTIDADE ENT ON ENT.COD_ENTID = TB_FUNDACAO.COD_ENTID

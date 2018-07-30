@@ -51,5 +51,19 @@ namespace Intech.PrevSystem.API
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("porEmpresa/{cdEmpresa}")]
+        [Authorize("Bearer")]
+        public IActionResult GetPlano(string cdEmpresa)
+        {
+            try
+            {
+                return Json(new PlanoProxy().BuscarPorEmpresa(cdEmpresa));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

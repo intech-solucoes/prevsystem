@@ -78,6 +78,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empregador\BuscarPorCdEmpregador.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\BuscarPorFundacaoEmpresaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarPorCodigo.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarPorFundacao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarTodas.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Entidade\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\EstadoCivil\BuscarPorCodigo.sql" />
@@ -95,6 +96,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Fundacao\BuscarPorCodigo.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Fundacao\BuscarTodas.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FundoContrib\BuscarPorFundacaoPlanoFundo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\HeaderInfoRend\BuscarPorCPF.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\HeaderInfoRend\BuscarPorCPFAnoCalendario.sql" />
@@ -111,6 +113,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaCpfPensionista.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatriculaPlano.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Plano\BuscarPorEmpresa.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Plano\BuscarTodos.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PrestacaoParcial\BuscarPorFundacaoAnoNumeroParcela.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Prestacao\BuscarPorFundacaoContrato.sql" />

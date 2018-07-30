@@ -22,6 +22,15 @@ namespace Intech.PrevSystem.Dados.DAO
 			else
 				throw new Exception("Provider não suportado!");
 		}
+		public virtual IEnumerable<EmpresaEntidade> BuscarPorFundacao(string CD_FUNDACAO)
+		{
+			if(AppSettings.IS_SQL_SERVER_PROVIDER)
+				return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,     EE_ENTIDADE.NOME_ENTID FROM TB_EMPRESA INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_FUNDACAO = @CD_FUNDACAO", new { CD_FUNDACAO });
+			else if(AppSettings.IS_ORACLE_PROVIDER)
+				return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_FUNDACAO=:CD_FUNDACAO", new { CD_FUNDACAO });
+			else
+				throw new Exception("Provider não suportado!");
+		}
 		public virtual IEnumerable<EmpresaEntidade> BuscarTodas()
 		{
 			if(AppSettings.IS_SQL_SERVER_PROVIDER)

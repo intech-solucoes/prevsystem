@@ -49,7 +49,6 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DATA_ALTERACAO { get; set; }
 		public string OBS { get; set; }
 		public string CALC_RESERVA { get; set; }
-		public string TIPO_IRRF { get; set; }
 		public string CONTRIB_CANCELADA { get; set; }
 		public string DS_TIPO_CONTRIBUICAO { get; set; }
 		public decimal? TOTAL_CONTRIB { get; set; }

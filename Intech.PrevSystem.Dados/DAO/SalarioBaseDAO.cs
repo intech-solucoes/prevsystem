@@ -15,12 +15,20 @@ namespace Intech.PrevSystem.Dados.DAO
         
 		public virtual SalarioBaseEntidade BuscarUltimoPorFundacaoEmpresaMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
 		{
-			if(AppSettings.IS_SQL_SERVER_PROVIDER)
-				return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT TOP 1 *  FROM CS_SALARIO_BASE WHERE CD_FUNDACAO = @CD_FUNDACAO   AND CD_EMPRESA = @CD_EMPRESA   AND NUM_MATRICULA = @NUM_MATRICULA ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
-			else if(AppSettings.IS_ORACLE_PROVIDER)
-				return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT * FROM CS_SALARIO_BASE WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_EMPRESA=:CD_EMPRESA AND NUM_MATRICULA=:NUM_MATRICULA AND ROWNUM <= 1  ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
-			else
-				throw new Exception("Provider não suportado!");
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT TOP 1 *  FROM CS_SALARIO_BASE WHERE CD_FUNDACAO = @CD_FUNDACAO   AND CD_EMPRESA = @CD_EMPRESA   AND NUM_MATRICULA = @NUM_MATRICULA ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT * FROM CS_SALARIO_BASE WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_EMPRESA=:CD_EMPRESA AND NUM_MATRICULA=:NUM_MATRICULA AND ROWNUM <= 1  ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
 		}
+
     }
 }

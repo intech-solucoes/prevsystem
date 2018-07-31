@@ -21,6 +21,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 CD_EMPRESA = empresa.CD_EMPRESA,
                 DS_EMPRESA = empresa.NOME_ENTID,
                 DadosPessoais = dadosPessoais,
+                Funcionario = funcionario,
                 Planos = planos
             };
 

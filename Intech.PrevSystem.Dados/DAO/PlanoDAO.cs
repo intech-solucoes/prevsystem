@@ -15,12 +15,20 @@ namespace Intech.PrevSystem.Dados.DAO
         
 		public virtual IEnumerable<PlanoEntidade> BuscarTodos()
 		{
-			if(AppSettings.IS_SQL_SERVER_PROVIDER)
-				return Conexao.Query<PlanoEntidade>("SELECT * FROM TB_PLANOS", new {  });
-			else if(AppSettings.IS_ORACLE_PROVIDER)
-				return Conexao.Query<PlanoEntidade>("SELECT * FROM TB_PLANOS", new {  });
-			else
-				throw new Exception("Provider não suportado!");
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<PlanoEntidade>("SELECT * FROM TB_PLANOS", new {  });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<PlanoEntidade>("SELECT * FROM TB_PLANOS", new {  });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
 		}
+
     }
 }

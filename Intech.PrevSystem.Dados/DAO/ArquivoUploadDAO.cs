@@ -9,8 +9,9 @@ using System.Collections.Generic;
 #endregion
 
 namespace Intech.PrevSystem.Dados.DAO
-{
+{   
     public abstract class ArquivoUploadDAO : BaseDAO<ArquivoUploadEntidade>
     {
+        
     }
 }

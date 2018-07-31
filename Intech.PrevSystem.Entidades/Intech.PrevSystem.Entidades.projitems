@@ -67,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoDevedorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SegUsuarioEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SitContratoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SitPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaConcessaoPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaEncargoPlanoEntidade.cs" />

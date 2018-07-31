@@ -9,17 +9,26 @@ using System.Collections.Generic;
 #endregion
 
 namespace Intech.PrevSystem.Dados.DAO
-{
+{   
     public abstract class ContribuicaoIndividualDAO : BaseDAO<ContribuicaoIndividualEntidade>
     {
+        
 		public virtual IEnumerable<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
 		{
-			if(AppSettings.IS_SQL_SERVER_PROVIDER)
-				return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *  FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO = @CD_FUNDACAO   AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
-			else if(AppSettings.IS_ORACLE_PROVIDER)
-				return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
-			else
-				throw new Exception("Provider não suportado!");
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *  FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO = @CD_FUNDACAO   AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
 		}
+
     }
 }

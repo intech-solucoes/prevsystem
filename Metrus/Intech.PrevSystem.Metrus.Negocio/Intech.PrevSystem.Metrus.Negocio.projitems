@@ -9,6 +9,8 @@
     <Import_RootNamespace>Intech.PrevSystem.Metrus.Negocio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ContratoProxyMetrus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosMetrusProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContratoExtensoes.cs" />
   </ItemGroup>
 </Project>

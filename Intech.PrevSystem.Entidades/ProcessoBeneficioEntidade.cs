@@ -80,8 +80,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VAL_CUST_FUNDO { get; set; }
 		public decimal? SALDO_ANT_RISCO { get; set; }
 		public decimal? SALDO_ATUAL_RISCO { get; set; }
-		public decimal? SALDO_INIC_RISCO { get; set; }
 		public decimal? PERC_SALDO_RISCO { get; set; }
+		public decimal? SALDO_INIC_RISCO { get; set; }
 		public string DS_ESPECIE { get; set; }
 		public string DS_SITUACAO { get; set; }
 		public DateTime? DT_REQUERIMENTO { get; set; }

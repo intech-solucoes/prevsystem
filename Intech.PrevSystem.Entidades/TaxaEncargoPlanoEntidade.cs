@@ -67,6 +67,9 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? TARIFA_BANCARIA { get; set; }
 		public decimal? ADITIVO_CONCESSAO { get; set; }
 		public decimal? ADITIVO_PRESTACAO { get; set; }
+		public string IOF_IN1609 { get; set; }
+		public string ID_PROJECAO_IND { get; set; }
+		public string IND_PROJECAO { get; set; }
         
     }
 }

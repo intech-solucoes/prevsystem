@@ -13,7 +13,7 @@ namespace Intech.PrevSystem.Entidades
 		public string COD_USU { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public string CONTRATOS { get; set; }
-		public decimal? NUM_SEQ_GR_FAMIL { get; set; }
+		public decimal NUM_SEQ_GR_FAMIL { get; set; }
 		public decimal? VL_SALDO_ANO_ANT { get; set; }
 		public decimal? VL_SALDO_ANO_REF { get; set; }
 		public string CD_LOTACAO { get; set; }
@@ -27,6 +27,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_SOLICITADO { get; set; }
 		public decimal? VL_PRESTACAO { get; set; }
 		public decimal? CD_NATUREZA { get; set; }
+		public string NUM_MATRICULA { get; set; }
+		public string CONTRATOS_PAGOS { get; set; }
         
     }
 }

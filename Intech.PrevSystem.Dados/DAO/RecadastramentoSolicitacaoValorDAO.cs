@@ -15,12 +15,20 @@ namespace Intech.PrevSystem.Dados.DAO
         
 		public virtual RecadastramentoSolicitacaoValorEntidade DeletePorOidSolicitacao(decimal OID_SOLICITACAO)
 		{
-			if(AppSettings.IS_SQL_SERVER_PROVIDER)
-				return Conexao.QuerySingleOrDefault<RecadastramentoSolicitacaoValorEntidade>("DELETE FROM REC_SOLICITACAO_VALOR WHERE OID_SOLICITACAO = @OID_SOLICITACAO", new { OID_SOLICITACAO });
-			else if(AppSettings.IS_ORACLE_PROVIDER)
-				return Conexao.QuerySingleOrDefault<RecadastramentoSolicitacaoValorEntidade>("DELETE FROM REC_SOLICITACAO_VALOR WHERE OID_SOLICITACAO=:OID_SOLICITACAO", new { OID_SOLICITACAO });
-			else
-				throw new Exception("Provider não suportado!");
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<RecadastramentoSolicitacaoValorEntidade>("DELETE FROM REC_SOLICITACAO_VALOR WHERE OID_SOLICITACAO = @OID_SOLICITACAO", new { OID_SOLICITACAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<RecadastramentoSolicitacaoValorEntidade>("DELETE FROM REC_SOLICITACAO_VALOR WHERE OID_SOLICITACAO=:OID_SOLICITACAO", new { OID_SOLICITACAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
 		}
+
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\RelIRRFProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SalarioBaseProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SegUsuarioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\SitContratoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\SitPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaConcessaoPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaEncargoPlanoProxy.cs" />

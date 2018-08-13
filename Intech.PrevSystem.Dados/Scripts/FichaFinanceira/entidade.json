@@ -20,6 +20,11 @@
             "nome": "DES_MES_REF",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "CALC_MARGEM_CONSIG",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

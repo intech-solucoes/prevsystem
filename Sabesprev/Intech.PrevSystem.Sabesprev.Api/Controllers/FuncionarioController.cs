@@ -1,4 +1,5 @@
 ﻿#region Usings
+using Intech.PrevSystem.API;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -6,33 +7,8 @@ using System;
 
 namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class FuncionarioController : Controller
+    [Route(RotasApi.Funcionario)]
+    public class FuncionarioController : BaseFuncionarioController
     {
-        [HttpGet("porCpf/{cpf}")]
-        public IActionResult GetPorCpf(string cpf)
-        {
-            try
-            {
-                return Json(new FuncionarioProxy().BuscarPorCpf(cpf));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("porMatricula/{matricula}")]
-        public IActionResult GetPorMatricula(string matricula)
-        {
-            try
-            {
-                return Json(new FuncionarioProxy().BuscarPorMatricula(matricula));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

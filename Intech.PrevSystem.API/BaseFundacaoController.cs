@@ -9,7 +9,7 @@ namespace Intech.PrevSystem.API
 {
     public class BaseFundacaoController : BaseController
     {
-        [HttpGet]
+        [HttpGet("porCodigo/{cdFundacao}")]
         [Authorize("Bearer")]
         public IActionResult BuscarTodos(string cdFundacao)
         {
@@ -22,5 +22,19 @@ namespace Intech.PrevSystem.API
                 return BadRequest(ex.Message);
             }
         }
+
+        //[HttpGet("todas")]
+        //[Authorize("Bearer")]
+        //public IActionResult BuscarTodas()
+        //{
+        //    try
+        //    {
+        //        return Json(new FundacaoProxy().BuscarTodas());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

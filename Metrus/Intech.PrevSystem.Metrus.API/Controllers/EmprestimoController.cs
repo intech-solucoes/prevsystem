@@ -2,7 +2,9 @@
 using Intech.PrevSystem.Metrus.Negocio;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
-using System; 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Metrus.API.Controllers
@@ -102,6 +104,58 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
 
                 return Json(new PrestacaoProxy().BuscarPorFundacaoContrato(funcionario.CD_FUNDACAO, anoContrato, numContrato));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Parâmetros
+
+        [HttpGet("parametrosPorCodEntid/{codEntid}")]
+        public IActionResult BuscarParametros(string codEntid)
+        {
+            try
+            {
+                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                
+                var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA);
+
+                // Datas de crédito
+                var feriados = new FeriadoProxy().BuscarDatas().ToList();
+                var dataCredito = DateTime.Now;
+
+                while (dataCredito.DayOfWeek != DayOfWeek.Friday)
+                    dataCredito = dataCredito.AddDays(1);
+
+                var listaTemp = new List<DateTime>();
+                var listaDatasCredito = new List<DateTime>();
+
+                listaTemp.Add(dataCredito.AddDays(7));
+                listaTemp.Add(dataCredito.AddDays(14));
+                listaTemp.Add(dataCredito.AddDays(21));
+
+                foreach (DateTime item in listaTemp)
+                {
+                    dataCredito = item;
+
+                    if (feriados.Contains(dataCredito))
+                        dataCredito = item.AddDiaUtil(1, feriados);
+
+                    listaDatasCredito.Add(dataCredito);
+                }
+
+                var retorno = new
+                {
+                    DataSolicitacao = DateTime.Now,
+                    Planos = planos,
+                    DatasCredito = listaDatasCredito
+                };
+
+                return Json(retorno);
             }
             catch (Exception ex)
             {

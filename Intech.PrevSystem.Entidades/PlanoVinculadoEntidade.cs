@@ -42,6 +42,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_EMISSAO_CERTIFICADO { get; set; }
 		public string TIPO_IRRF_CANC { get; set; }
 		public string DS_PERFIL_INVEST { get; set; }
+		public string CD_CATEGORIA { get; set; }
 		public string DS_CATEGORIA { get; set; }
 		public string DS_PLANO { get; set; }
 		public string DS_SIT_PLANO { get; set; }
@@ -49,6 +50,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal SalarioContribuicao { get; set; }
 		public decimal PercentualContribuicao { get; set; }
 		public ProcessoBeneficioEntidade ProcessoBeneficio { get; set; }
+		public List<ModalidadeEntidade> Modalidades { get; set; }
         
     }
 }

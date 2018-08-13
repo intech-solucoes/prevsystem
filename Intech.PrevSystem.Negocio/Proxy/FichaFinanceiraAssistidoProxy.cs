@@ -26,9 +26,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
-        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA)
+        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
         {
-            var rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+            List<FichaFinanceiraAssistidoEntidade> rubricas;
+                
+            if(SeqRecebedor.HasValue)
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+            else
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
 
             var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
             var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
@@ -45,7 +50,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     Referencia = DT_REFERENCIA,
                     Bruto = bruto,
                     Descontos = valDescontos,
-                    Liquido = liquido
+                    Liquido = liquido,
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
                 }
             };
         }

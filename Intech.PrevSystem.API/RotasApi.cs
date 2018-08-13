@@ -16,5 +16,10 @@
         public const string InfoRend = "api/infoRend";
         public const string Depentende = "api/dependente";
         public const string SitPlano = "api/sitPlano";
+        public const string Entidade = "api/entidade";
+        public const string Usuario = "api/usuario";
+        public const string ProcessoBeneficio = "api/processoBeneficio";
+        public const string Contrato = "api/contrato";
+        public const string HistSaldo = "api/histSaldo";
     }
 }

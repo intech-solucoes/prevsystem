@@ -1,9 +1,12 @@
 ﻿#region Usings
+using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -16,12 +19,22 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                var quantidadeMesesContraCheque = 500;
+                var quantidadeMesesContraCheque = 18;
                 var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
 
-                var funcionario = new FuncionarioProxy().BuscarPorMatricula(Matricula);
+                List<FichaFinanceiraAssistidoEntidade> datas;
 
-                return Json(new FichaFinanceiraAssistidoProxy().BuscarDatas(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, Matricula, cdPlano, dtReferencia));
+                if (Pensionista)
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatasPorRecebedor(CdFundacao, CdEmpresa, Matricula, SeqRecebedor, cdPlano, dtReferencia).ToList();
+                else
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatas(CdFundacao, CdEmpresa, Matricula, cdPlano, dtReferencia).ToList();
+
+                datas.ForEach(x =>
+                {
+                    x.IsAbonoAnual = x.CD_TIPO_FOLHA == "3";
+                });
+
+                return Json(datas);
             }
             catch (Exception ex)
             {
@@ -36,9 +49,15 @@ namespace Intech.PrevSystem.API
             try
             {
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
-                var funcionario = new FuncionarioProxy().BuscarPorMatricula(Matricula);
 
-                return Json(new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, Matricula, cdPlano, dataReferencia, cdTipoFolha));
+                dynamic rubricas;
+
+                if (Pensionista)
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha, SeqRecebedor);
+                else
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha);
+
+                return Json(rubricas);
             }
             catch (Exception ex)
             {

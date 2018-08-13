@@ -30,14 +30,14 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual FuncionarioEntidade BuscarPorCpf(string CPF)
+		public virtual IEnumerable<FuncionarioEntidade> BuscarPorCpf(string CPF)
 		{
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT TOP 1  EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.*  FROM CS_FUNCIONARIO  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = CS_FUNCIONARIO.COD_ENTID  WHERE EE_ENTIDADE.CPF_CGC = @CPF", new { CPF });
+					return Conexao.Query<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID,     CS_FUNCIONARIO.*  FROM CS_FUNCIONARIO  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = CS_FUNCIONARIO.COD_ENTID  WHERE EE_ENTIDADE.CPF_CGC = @CPF  ORDER BY DT_ADMISSAO DESC", new { CPF });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.* FROM CS_FUNCIONARIO INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=CS_FUNCIONARIO.COD_ENTID WHERE EE_ENTIDADE.CPF_CGC=:CPF AND ROWNUM <= 1 ", new { CPF });
+					return Conexao.Query<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.* FROM CS_FUNCIONARIO INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=CS_FUNCIONARIO.COD_ENTID WHERE EE_ENTIDADE.CPF_CGC=:CPF ORDER BY DT_ADMISSAO DESC", new { CPF });
 				else
 					throw new Exception("Provider não suportado!");
 			}

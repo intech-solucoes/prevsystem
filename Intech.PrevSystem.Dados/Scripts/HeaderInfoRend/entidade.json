@@ -18,7 +18,7 @@
         },
         {
             "nome": "Grupos",
-            "tipo": "List<InfoRendEntidade>",
+            "tipo": "List<InfoRendGrupoEntidade>",
             "aceitaNulo": false
         }
     ]

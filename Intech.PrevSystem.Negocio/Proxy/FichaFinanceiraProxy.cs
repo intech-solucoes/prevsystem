@@ -12,6 +12,85 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class FichaFinanceiraProxy : FichaFinanceiraDAO
     {
+        public override IEnumerable<FichaFinanceiraEntidade> BuscarResumoAnosPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+        {
+            var fichaFinanceira = base.BuscarResumoAnosPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO).ToList();
+
+            // Agrupa todas as contribuições por ano
+            var grupoFicha = fichaFinanceira
+                .GroupBy(x => x.ANO_REF)
+                .Select(x => new {
+                    ANO_REF = x.Key,
+                    Items = x.ToList()
+                })
+                .ToList();
+
+            // Busca a lista de fundos para filtrar as contribuições
+            var listaFundos = new List<FundoContribEntidade>();
+            if (CD_PLANO == "0002") // Se for plano Reforço
+            {
+                var fundoContrib = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "1");
+                var fundoContrib2 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "2");
+                var fundoContrib3 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "3");
+
+                listaFundos = fundoContrib.Concat(fundoContrib2).Concat(fundoContrib3).ToList();
+            }
+            else
+            {
+                listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
+            }
+            
+            // Apura todas as contribuições
+            var resumo = new List<FichaFinanceiraEntidade>();
+            grupoFicha.ForEach(grupo =>
+            {
+                var apuracao = new FichaFinanceiraEntidade
+                {
+                    ANO_REF = grupo.ANO_REF,
+                    QTD_COTA_RP_PARTICIPANTE = 0M,
+                    QTD_COTA_RP_EMPRESA = 0M,
+                    CONTRIB_PARTICIPANTE = 0M,
+                    CONTRIB_EMPRESA = 0M
+                };
+                
+                grupo.Items.ForEach(contribuicao =>
+                {
+                    // Filtra as contribuições por fundo
+                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO))
+                    {
+                        // Cotas
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.QTD_COTA_RP_PARTICIPANTE += (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        else
+                            apuracao.QTD_COTA_RP_PARTICIPANTE -= (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.QTD_COTA_RP_EMPRESA += (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        else
+                            apuracao.QTD_COTA_RP_EMPRESA -= (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+
+                        // Valores
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.CONTRIB_PARTICIPANTE += (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+                        else
+                            apuracao.CONTRIB_PARTICIPANTE -= (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.CONTRIB_EMPRESA += (decimal)contribuicao.CONTRIB_EMPRESA;
+                        else
+                            apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
+                    }
+                });
+
+                apuracao.TOTAL_CONTRIB = apuracao.CONTRIB_PARTICIPANTE + apuracao.CONTRIB_EMPRESA;
+                apuracao.QTD_COTA = apuracao.QTD_COTA_RP_PARTICIPANTE + apuracao.QTD_COTA_RP_EMPRESA;
+
+                resumo.Add(apuracao);
+            });
+
+            return resumo;
+        }
+
         /// <summary>
         /// Busca o resumo das contribuições do ano, onde o mês é exibido por extenso
         /// </summary>
@@ -22,12 +101,114 @@ namespace Intech.PrevSystem.Negocio.Proxy
         /// <returns></returns>
         public override IEnumerable<FichaFinanceiraEntidade> BuscarResumoMesesPorFundacaoPlanoInscricaoAno(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF)
         {
-            var lista = base.BuscarResumoMesesPorFundacaoPlanoInscricaoAno(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF)
+            var fichaFinanceira = base.BuscarResumoMesesPorFundacaoPlanoInscricaoAno(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF).ToList();
+
+            // Agrupa todas as contribuições por ano
+            var grupoFicha = fichaFinanceira
+                .GroupBy(x => x.MES_REF)
+                .Select(x => new {
+                    MES_REF = x.Key,
+                    Items = x.ToList()
+                })
                 .ToList();
 
-            lista.ForEach(x => x.DES_MES_REF = DateTimeExtensoes.MesPorExtenso(x.MES_REF));
+            // Busca a lista de fundos para filtrar as contribuições
+            var listaFundos = new List<FundoContribEntidade>();
+            if (CD_PLANO == "0002") // Se for plano Reforço
+            {
+                var fundoContrib = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "1");
+                var fundoContrib2 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "2");
+                var fundoContrib3 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "3");
 
-            return lista;
+                listaFundos = fundoContrib.Concat(fundoContrib2).Concat(fundoContrib3).ToList();
+            }
+            else
+            {
+                listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
+            }
+
+            // Apura todas as contribuições
+            var resumo = new List<FichaFinanceiraEntidade>();
+            grupoFicha.ForEach(grupo =>
+            {
+                var apuracao = new FichaFinanceiraEntidade
+                {
+                    MES_REF = grupo.MES_REF,
+                    QTD_COTA_RP_PARTICIPANTE = 0M,
+                    QTD_COTA_RP_EMPRESA = 0M,
+                    CONTRIB_PARTICIPANTE = 0M,
+                    CONTRIB_EMPRESA = 0M,
+                    DES_MES_REF = DateTimeExtensoes.MesPorExtenso(grupo.MES_REF)
+                };
+
+                grupo.Items.ForEach(contribuicao =>
+                {
+                    // Filtra as contribuições por fundo
+                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO))
+                    {
+                        // Cotas
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.QTD_COTA_RP_PARTICIPANTE += (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        else
+                            apuracao.QTD_COTA_RP_PARTICIPANTE -= (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.QTD_COTA_RP_EMPRESA += (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        else
+                            apuracao.QTD_COTA_RP_EMPRESA -= (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+
+                        // Valores
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.CONTRIB_PARTICIPANTE += (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+                        else
+                            apuracao.CONTRIB_PARTICIPANTE -= (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+
+                        if (contribuicao.CD_OPERACAO == "C")
+                            apuracao.CONTRIB_EMPRESA += (decimal)contribuicao.CONTRIB_EMPRESA;
+                        else
+                            apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
+                    }
+                });
+
+                apuracao.TOTAL_CONTRIB = apuracao.CONTRIB_PARTICIPANTE + apuracao.CONTRIB_EMPRESA;
+                apuracao.QTD_COTA = apuracao.QTD_COTA_RP_PARTICIPANTE + apuracao.QTD_COTA_RP_EMPRESA;
+
+                resumo.Add(apuracao);
+            });
+
+            return resumo;
+        }
+
+        public override IEnumerable<FichaFinanceiraEntidade> BuscarTiposPorFundacaoPlanoInscricaoAnoMes(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF, string MES_REF)
+        {
+            var fichaFinanceira = base.BuscarTiposPorFundacaoPlanoInscricaoAnoMes(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF, MES_REF);
+
+            // Agrupa todas as contribuições por ano
+            var grupoFicha = fichaFinanceira
+                .GroupBy(x => new {
+                    x.DS_TIPO_CONTRIBUICAO,
+                    x.CD_TIPO_CONTRIBUICAO
+                })
+                .Select(x => new {
+                    x.Key.CD_TIPO_CONTRIBUICAO,
+                    x.Key.DS_TIPO_CONTRIBUICAO,
+                    Items = x.ToList()
+                })
+                .ToList();
+
+            // Apura todas as contribuições
+            var resumo = new List<FichaFinanceiraEntidade>();
+            grupoFicha.ForEach(grupo =>
+            {
+                grupo.Items.ForEach(contribuicao =>
+                {
+                    contribuicao.TOTAL_CONTRIB = contribuicao.CONTRIB_PARTICIPANTE + contribuicao.CONTRIB_EMPRESA;
+                    contribuicao.QTD_COTA = contribuicao.QTD_COTA_RP_PARTICIPANTE + contribuicao.QTD_COTA_RP_EMPRESA;
+                    resumo.Add(contribuicao);
+                });
+            });
+
+            return resumo;
         }
 
         /// <summary>

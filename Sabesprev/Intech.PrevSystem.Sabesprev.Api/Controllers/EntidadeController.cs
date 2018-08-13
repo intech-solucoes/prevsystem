@@ -1,4 +1,5 @@
 ﻿#region Usings
+using Intech.PrevSystem.API;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System; 
@@ -6,20 +7,8 @@ using System;
 
 namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class EntidadeController : Controller
+    [Route(RotasApi.Entidade)]
+    public class EntidadeController : BaseEntidadeController
     {
-        [HttpGet("porCodEntid/{codEntid}")]
-        public IActionResult GetPorCodEntid(string codEntid)
-        {
-            try
-            {
-                return Json(new EntidadeProxy().BuscarPorCodEntid(codEntid));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
     }
 }

@@ -318,7 +318,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             if (origem == "Q" && taxaEncargo.CORRIGE_SALDO_QUITACAO_MANUAL == "N")
                 return dCorrecaoSaldo;
 
-            if (taxaConcessao.COD_IND != "")
+            if (!string.IsNullOrEmpty(taxaConcessao.COD_IND))
             {
                 if (taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM && taxaConcessao.IND_MESES_DEFAZAGEM > 0)
                     dtIndice = dtFim.AddMonths(-1 * (int)taxaConcessao.IND_MESES_DEFAZAGEM);
@@ -364,7 +364,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 diasMes = DateTime.DaysInMonth(dtFim.Year, dtFim.Month);
             
             double difDias = (dtFim - dtIni).Days;
-            decimal calc = (decimal)Math.Pow((double)taxaCorrecao, 1 / diasMes);
+            decimal calc = (decimal)Math.Pow((double)taxaCorrecao, (double)1 / diasMes);
             decimal fator = (decimal)Math.Pow((double)calc, difDias);
 
             vlSaldo *= (fator - 1);
@@ -636,8 +636,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                     w_dias_mes = 30;
                     w_dif_dias = (w_dt_aux - w_dt_aux1).Days;
 
-                    if (w_dif_dias > 30 || (w_dt_aux.Month == 2 && w_dif_dias >= 28))
-                        w_dif_dias = 30;
+                    //if (w_dif_dias > 30 || (w_dt_aux.Month == 2 && w_dif_dias >= 28))
+                    //    w_dif_dias = 30;
 
                     w_calc = (decimal)Math.Pow((double)w_vl_ind, ((double)1 / (double)w_dias_mes));
                     w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
@@ -651,8 +651,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 if (w_vl_ind != 0)
                     w_tx_corr = w_vl_ind;
 
-                //w_vl_correcao = ((w_vl_prest + w_vl_multa + w_vl_mora) * (w_tx_corr - 1)).Arredonda(2);
-                w_vl_correcao = (w_vl_prest) * (w_tx_corr - 1);
+                w_vl_correcao = ((w_vl_prest + w_vl_multa + w_vl_mora) * (w_tx_corr - 1)).Arredonda(2);
+                //w_vl_correcao = (w_vl_prest) * (w_tx_corr - 1);
 
                 if (w_vl_correcao < 0)
                     w_vl_correcao = 0;

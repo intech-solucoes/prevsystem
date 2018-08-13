@@ -7,6 +7,11 @@
             "aceitaNulo": true
         },
         {
+            "nome": "CD_CATEGORIA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
             "nome": "DS_CATEGORIA",
             "tipo": "string",
             "aceitaNulo": true
@@ -39,6 +44,11 @@
         {
             "nome": "ProcessoBeneficio",
             "tipo": "ProcessoBeneficioEntidade",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "Modalidades",
+            "tipo": "List<ModalidadeEntidade>",
             "aceitaNulo": false
         }
     ]

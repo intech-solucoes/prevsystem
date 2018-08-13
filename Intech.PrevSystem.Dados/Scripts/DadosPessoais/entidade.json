@@ -5,6 +5,11 @@
             "nome": "CPF_CGC",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "NOME_ENTID",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

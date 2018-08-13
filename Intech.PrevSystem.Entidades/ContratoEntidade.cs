@@ -116,6 +116,12 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? TX_QQM_LIQUIDO { get; set; }
 		public string DS_TIPO_CONTA { get; set; }
 		public string CD_TIPO_CONTA { get; set; }
+		public decimal? VL_TX_INAD_MES_QUIT { get; set; }
+		public string ID_CF { get; set; }
+		public string STATUS_CF { get; set; }
+		public string OBSERVACAO2 { get; set; }
+		public string ID_IOF_CF { get; set; }
+		public string STATUS_IOF_CF { get; set; }
 		public string DES_NUM_CONTRATO { get; set; }
 		public string DES_PARCELAS { get; set; }
 		public decimal? NUM_SALDO_DEVEDOR { get; set; }

@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Sabesprev.Api", "Intech.PrevSystem.Sabesprev.Api\Intech.PrevSystem.Sabesprev.Api.csproj", "{EF5BFA0B-E752-4331-B265-E35F739C55AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{0C9FFC3F-F9E7-473F-8D66-4023D5D2F90F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plataforma", "Plataforma", "{AD45D555-9437-4244-8151-C538CBCEAE25}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Dapper", "..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.shproj", "{21944D5C-2AF2-467A-B973-172529BF229D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Data", "..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.shproj", "{1B8BF169-24E1-48F0-B3BD-EC9FC413B578}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Util", "..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.shproj", "{73968E62-3181-49AC-8C2D-81331534BC6E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.Lib.Web", "..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.shproj", "{17FB1551-D800-46E6-8B2F-3A19BBB43EBA}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.API", "..\Intech.PrevSystem.API\Intech.PrevSystem.API.shproj", "{11D947CE-05E2-41DB-8687-640404E96EF0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Dados", "..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.shproj", "{549415E4-D6A6-42B0-92B2-B30F6B2700F3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Entidades", "..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.shproj", "{CE1AB52D-FDA8-41F8-975B-0D7BA605BD2E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Negocio", "..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.shproj", "{A88CF162-E0EC-4213-9964-543ECA2BEE87}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{11d947ce-05e2-41db-8687-640404e96ef0}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems*{17fb1551-d800-46e6-8b2f-3a19bbb43eba}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.projitems*{1b8bf169-24e1-48f0-b3bd-ec9fc413b578}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems*{21944d5c-2af2-467a-b973-172529bf229d}*SharedItemsImports = 13
+		..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems*{549415e4-d6a6-42b0-92b2-b30f6b2700f3}*SharedItemsImports = 13
+		..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems*{73968e62-3181-49ac-8c2d-81331534bc6e}*SharedItemsImports = 13
+		..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems*{a88cf162-e0ec-4213-9964-543eca2bee87}*SharedItemsImports = 13
+		..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems*{ce1ab52d-fda8-41f8-975b-0d7ba605bd2e}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF5BFA0B-E752-4331-B265-E35F739C55AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5BFA0B-E752-4331-B265-E35F739C55AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5BFA0B-E752-4331-B265-E35F739C55AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5BFA0B-E752-4331-B265-E35F739C55AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21944D5C-2AF2-467A-B973-172529BF229D} = {0C9FFC3F-F9E7-473F-8D66-4023D5D2F90F}
+		{1B8BF169-24E1-48F0-B3BD-EC9FC413B578} = {0C9FFC3F-F9E7-473F-8D66-4023D5D2F90F}
+		{73968E62-3181-49AC-8C2D-81331534BC6E} = {0C9FFC3F-F9E7-473F-8D66-4023D5D2F90F}
+		{17FB1551-D800-46E6-8B2F-3A19BBB43EBA} = {0C9FFC3F-F9E7-473F-8D66-4023D5D2F90F}
+		{11D947CE-05E2-41DB-8687-640404E96EF0} = {AD45D555-9437-4244-8151-C538CBCEAE25}
+		{549415E4-D6A6-42B0-92B2-B30F6B2700F3} = {AD45D555-9437-4244-8151-C538CBCEAE25}
+		{CE1AB52D-FDA8-41F8-975B-0D7BA605BD2E} = {AD45D555-9437-4244-8151-C538CBCEAE25}
+		{A88CF162-E0EC-4213-9964-543ECA2BEE87} = {AD45D555-9437-4244-8151-C538CBCEAE25}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E873F527-C780-473E-AB5B-3853975355E9}
+	EndGlobalSection
+EndGlobal

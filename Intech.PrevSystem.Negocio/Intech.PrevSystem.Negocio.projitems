@@ -38,12 +38,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundacaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundoContribProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\HistSaldoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceValoresProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HeaderInfRendProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\InfoRendProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MensagemProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ModalidadeProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\NaturezaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoVinculadoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoParcialProxy.cs" />

@@ -54,6 +54,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? TOTAL_CONTRIB { get; set; }
 		public decimal? QTD_COTA { get; set; }
 		public string DES_MES_REF { get; set; }
+		public string CALC_MARGEM_CONSIG { get; set; }
         
     }
 }

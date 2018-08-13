@@ -1,3 +1,10 @@
 ﻿{
-    "nomeTabela": "CE_MODALIDADE"
+    "nomeTabela": "CE_MODALIDADE",
+    "colunasExtras": [
+        {
+            "nome": "Naturezas",
+            "tipo": "List<NaturezaEntidade>",
+            "aceitaNulo": false
+        }
+    ]
 }

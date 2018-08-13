@@ -13,16 +13,14 @@ namespace Intech.PrevSystem.Entidades
     {
         public static void PreencherSaldo(this SaldoContribuicoesEntidade saldo, List<FichaFinanceiraEntidade> contribuicoes, string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo)
         {
-            saldo.DataReferencia = DateTime.ParseExact($"01/{contribuicoes.First().MES_REF}/{contribuicoes.First().ANO_REF}", "dd/MM/yyyy", new CultureInfo("pt-BR"));
+            //saldo.DataReferencia = DateTime.ParseExact($"01/{contribuicoes.First().MES_REF}/{contribuicoes.First().ANO_REF}", "dd/MM/yyyy", new CultureInfo("pt-BR"));
+            saldo.DataReferencia = DateTime.Now;
 
             var fundoContrib = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(cdFundacao, cdPlano, cdFundo);
             var empresaPlano = new EmpresaPlanosProxy().BuscarPorFundacaoEmpresaPlano(cdFundacao, cdEmpresa, cdPlano);
-            var indice = new IndiceProxy().BuscarPorCodigo(empresaPlano.IND_RESERVA_POUP);
-
-            var dataCota = saldo.DataReferencia.UltimoDiaDoMes().AddDays(-1);
-
-            while (!dataCota.EhDiaUtil(new FeriadoProxy().BuscarDatas()))
-                dataCota = dataCota.AddDays(-1);
+            var indice = new IndiceProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP);
+            
+            var dataCota = indice.VALORES.First().DT_IND;
 
             var valorIndice = indice.BuscarValorEm(dataCota);
 

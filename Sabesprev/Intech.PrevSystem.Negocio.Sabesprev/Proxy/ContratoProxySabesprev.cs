@@ -33,5 +33,14 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
 
             return listaContratos;
         }
+
+        public ContratoEntidade BuscarPorAnoNumContrato(string CD_FUNDACAO, string CD_EMPRESA, string ANO_CONTRATO, string NUM_CONTRATO)
+        {
+            var contrato = base.BuscarPorFundacaoAnoNumContrato(CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO);
+
+            contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+            return contrato;
+        }
     }
 }

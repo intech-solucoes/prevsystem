@@ -1,6 +1,6 @@
+using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
-using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
@@ -21,7 +21,7 @@ namespace Intech.PrevSystem.Entidades
 		public string NOME { get; set; }
 		public string NOM_EMPRESA { get; set; }
 		public string CNPJ_EMPRESA { get; set; }
-		public List<InfoRendEntidade> Grupos { get; set; }
+		public List<InfoRendGrupoEntidade> Grupos { get; set; }
         
     }
 }

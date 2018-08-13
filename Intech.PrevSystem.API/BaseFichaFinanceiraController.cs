@@ -9,13 +9,13 @@ namespace Intech.PrevSystem.API
 {
     public abstract class BaseFichaFinanceiraController : BaseController
     {
-        [HttpGet("ultimaPorFundacaoPlano/{cdFundacao}/{cdPlano}")]
+        [HttpGet("ultimaPorPlano/{cdPlano}")]
         [Authorize("Bearer")]
-        public IActionResult GetUltimaPorFundacaoPlano(string cdFundacao, string cdPlano)
+        public IActionResult GetUltimaPorPlano(string cdPlano)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarUltimaPorFundacaoPlanoInscricao(cdFundacao, cdPlano, Inscricao));
+                return Json(new FichaFinanceiraProxy().BuscarUltimaPorFundacaoPlanoInscricao(CdFundacao, cdPlano, Inscricao));
             }
             catch (Exception ex)
             {
@@ -23,13 +23,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("salarioContribuicaoPorFundacaoPlano/{cdFundacao}/{cdPlano}")]
+        [HttpGet("salarioContribuicaoPorPlano/{cdPlano}")]
         [Authorize("Bearer")]
-        public IActionResult GetSalarioContribuicaoPorFundacaoPlano(string cdFundacao, string cdPlano)
+        public IActionResult GetSalarioContribuicaoPorFundacaoPlano(string cdPlano)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarSalarioContribuicaoPorFundacaoPlanoInscricao(cdFundacao, cdPlano, Inscricao));
+                return Json(new FichaFinanceiraProxy().BuscarSalarioContribuicaoPorFundacaoPlanoInscricao(CdFundacao, cdPlano, Inscricao));
             }
             catch (Exception ex)
             {
@@ -37,13 +37,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("resumoAnosPorFundacaoPlano/{cdFundacao}/{cdPlano}")]
+        [HttpGet("resumoAnosPorPlano/{cdPlano}")]
         [Authorize("Bearer")]
-        public IActionResult GetResumoAnosPorFundacaoPlano(string cdFundacao, string cdPlano)
+        public IActionResult GetResumoAnosPorPlano(string cdPlano)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarResumoAnosPorFundacaoPlanoInscricao(cdFundacao, cdPlano, Inscricao));
+                return Json(new FichaFinanceiraProxy().BuscarResumoAnosPorFundacaoPlanoInscricao(CdFundacao, cdPlano, Inscricao));
             }
             catch (Exception ex)
             {
@@ -51,13 +51,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("resumoMesesPorFundacaoPlanoAno/{cdFundacao}/{cdPlano}/{anoRef}")]
+        [HttpGet("resumoMesesPorPlanoAno/{cdPlano}/{anoRef}")]
         [Authorize("Bearer")]
-        public IActionResult GetResumoMesesPorFundacaoPlanoAno(string cdFundacao, string cdPlano, string anoRef)
+        public IActionResult GetResumoMesesPorPlanoAno(string cdPlano, string anoRef)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarResumoMesesPorFundacaoPlanoInscricaoAno(cdFundacao, cdPlano, Inscricao, anoRef));
+                return Json(new FichaFinanceiraProxy().BuscarResumoMesesPorFundacaoPlanoInscricaoAno(CdFundacao, cdPlano, Inscricao, anoRef));
             }
             catch (Exception ex)
             {
@@ -65,13 +65,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("tiposPorFundacaoPlanoAnoMes/{cdFundacao}/{cdPlano}/{anoRef}/{mesRef}")]
+        [HttpGet("tiposPorPlanoAnoMes/{cdPlano}/{anoRef}/{mesRef}")]
         [Authorize("Bearer")]
-        public IActionResult GetTiposPorFundacaoPlanoAnoMes(string cdFundacao, string cdPlano, string anoRef, string mesRef)
+        public IActionResult GetTiposPorFundacaoPlanoAnoMes(string cdPlano, string anoRef, string mesRef)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarTiposPorFundacaoPlanoInscricaoAnoMes(cdFundacao, cdPlano, Inscricao, anoRef, mesRef));
+                return Json(new FichaFinanceiraProxy().BuscarTiposPorFundacaoPlanoInscricaoAnoMes(CdFundacao, cdPlano, Inscricao, anoRef, mesRef));
             }
             catch (Exception ex)
             {
@@ -79,13 +79,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("saldoPorFundacaoEmpresaPlanoFundo/{cdFundacao}/{cdEmpresa}/{cdPlano}/{cdFundo}")]
+        [HttpGet("saldoPorPlanoFundo/{cdPlano}/{cdFundo}")]
         [Authorize("Bearer")]
-        public IActionResult GetSaldoPorFundacaoEmpresaPlanoFundo(string cdFundacao, string cdEmpresa, string cdPlano, string cdFundo)
+        public IActionResult BuscarSaldoPorFundacaoEmpresaPlanoFundo(string cdPlano, string cdFundo)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(cdFundacao, cdEmpresa, cdPlano, Inscricao, cdFundo));
+                return Json(new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(CdFundacao, CdEmpresa, cdPlano, Inscricao, cdFundo));
             }
             catch (Exception ex)
             {

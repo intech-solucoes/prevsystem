@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class ModalidadeDAO : BaseDAO<ModalidadeEntidade>
     {
         
+		public virtual IEnumerable<ModalidadeEntidade> BuscarAtivas()
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE SITUACAO = 'A'", new {  });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE SITUACAO='A'", new {  });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual ModalidadeEntidade BuscarPorCodigo(decimal CD_MODAL)
 		{
 			try

@@ -65,6 +65,7 @@ namespace Intech.PrevSystem.Entidades
 		public string AVALISTA { get; set; }
 		public decimal? TMP_VINC_AVALISTA { get; set; }
 		public string BLOQUEIO_COBRANCA { get; set; }
+		public List<NaturezaEntidade> Naturezas { get; set; }
         
     }
 }

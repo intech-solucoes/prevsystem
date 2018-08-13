@@ -1,72 +1,45 @@
 ﻿#region Usings
+using Intech.PrevSystem.API;
+using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 #endregion
 
 namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class FichaFinanceiraController : Controller
+    [Route(RotasApi.FichaFinanceira)]
+    public class FichaFinanceiraController : BaseFichaFinanceiraController
     {
-        [HttpGet("ultimaPorFundacaoPlanoInscricao/{cdFundacao}/{cdPlano}/{numInscricao}")]
-        public IActionResult GetUltimaPorFundacaoPlanoInscricao(string cdFundacao, string cdPlano, string numInscricao)
+        [HttpGet("sabesprevSaldoPorPlano/{cdPlano}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarSabesprevSaldoPorFundacaoEmpresaPlanoFundo(string cdPlano)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarUltimaPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+                if (cdPlano == "0002") // Se for plano Reforço
+                {
+                    var saldo1 = new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(CdFundacao, CdEmpresa, cdPlano, Inscricao, "1");
+                    var saldo2 = new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(CdFundacao, CdEmpresa, cdPlano, Inscricao, "2");
+                    var saldo3 = new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(CdFundacao, CdEmpresa, cdPlano, Inscricao, "3");
 
-        [HttpGet("resumoAnosPorFundacaoPlanoInscricao/{cdFundacao}/{cdPlano}/{numInscricao}")]
-        public IActionResult GetResumoAnosPorFundacaoPlanoInscricao(string cdFundacao, string cdPlano, string numInscricao)
-        {
-            try
-            {
-                return Json(new FichaFinanceiraProxy().BuscarResumoAnosPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("resumoMesesPorFundacaoPlanoInscricaoAno/{cdFundacao}/{cdPlano}/{numInscricao}/{anoRef}")]
-        public IActionResult GetResumoMesesPorFundacaoPlanoInscricaoAno(string cdFundacao, string cdPlano, string numInscricao, string anoRef)
-        {
-            try
-            {
-                return Json(new FichaFinanceiraProxy().BuscarResumoMesesPorFundacaoPlanoInscricaoAno(cdFundacao, cdPlano, numInscricao, anoRef));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("tiposPorFundacaoPlanoInscricaoAnoMes/{cdFundacao}/{cdPlano}/{numInscricao}/{anoRef}/{mesRef}")]
-        public IActionResult GetTiposPorFundacaoPlanoInscricaoAnoMes(string cdFundacao, string cdPlano, string numInscricao, string anoRef, string mesRef)
-        {
-            try
-            {
-                return Json(new FichaFinanceiraProxy().BuscarTiposPorFundacaoPlanoInscricaoAnoMes(cdFundacao, cdPlano, numInscricao, anoRef, mesRef));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("saldoPorFundacaoEmpresaPlanoInscricaoFundo/{cdFundacao}/{cdEmpresa}/{cdPlano}/{numInscricao}/{cdFundo}")]
-        public IActionResult GetSaldoPorFundacaoEmpresaPlanoInscricaoFundo(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo)
-        {
-            try
-            {
-                return Json(new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(cdFundacao, cdEmpresa, cdPlano, numInscricao, cdFundo));
+                    return Json(new SaldoContribuicoesEntidade
+                    {
+                        QuantidadeCotasParticipante = saldo1.QuantidadeCotasParticipante + saldo2.QuantidadeCotasParticipante + saldo3.QuantidadeCotasParticipante,
+                        QuantidadeCotasPatrocinadora = saldo1.QuantidadeCotasPatrocinadora + saldo2.QuantidadeCotasPatrocinadora + saldo3.QuantidadeCotasPatrocinadora,
+                        ValorParticipante = saldo1.ValorParticipante + saldo2.ValorParticipante + saldo3.ValorParticipante,
+                        ValorPatrocinadora = saldo1.ValorPatrocinadora + saldo2.ValorPatrocinadora + saldo3.ValorPatrocinadora,
+                        DataReferencia = saldo1.DataReferencia,
+                        DataCota = saldo1.DataCota,
+                        ValorCota = saldo1.ValorCota
+                    });
+                }
+                else
+                {
+                    var saldo = new FichaFinanceiraProxy().BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(CdFundacao, CdEmpresa, cdPlano, Inscricao, "6");
+                    return Json(saldo);
+                }
             }
             catch (Exception ex)
             {

@@ -18,6 +18,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             planos.ForEach(plano =>
             {
                 plano.ProcessoBeneficio = proxyBeneficio.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO);
+                plano.Modalidades = new ModalidadeProxy().BuscarAtivasComNaturezas(CD_FUNDACAO, plano.CD_PLANO, plano.CD_CATEGORIA, plano.NUM_INSCRICAO);
             });
 
             return planos;
@@ -29,11 +30,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
             
             plano.ProcessoBeneficio = new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO);
 
-            var salarioBase = new SalarioBaseProxy().BuscarUltimoPorFundacaoEmpresaMatricula(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA);
+            //var salarioBase = new SalarioBaseProxy().BuscarUltimoPorFundacaoEmpresaMatricula(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA);
 
-            var salarioContribuicao = new FichaFinanceiraProxy().BuscarSalarioContribuicaoPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, plano.NUM_INSCRICAO);
-            plano.SalarioContribuicao = salarioBase.VL_SALARIO.Value;
-            plano.PercentualContribuicao = salarioContribuicao.Percentual;
+            //var salarioContribuicao = new FichaFinanceiraProxy().BuscarSalarioContribuicaoPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, plano.NUM_INSCRICAO);
+            //plano.SalarioContribuicao = salarioBase.VL_SALARIO.Value;
+            //plano.PercentualContribuicao = salarioContribuicao.Percentual;
 
             return plano;
         }

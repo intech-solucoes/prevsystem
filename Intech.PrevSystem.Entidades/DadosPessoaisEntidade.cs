@@ -63,6 +63,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_CHEGADA { get; set; }
 		public string NOME_SOCIAL { get; set; }
 		public string CPF_CGC { get; set; }
+		public string NOME_ENTID { get; set; }
         
     }
 }

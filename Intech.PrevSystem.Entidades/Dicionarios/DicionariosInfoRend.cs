@@ -1,30 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Intech.PrevSystem.Entidades.Extensoes
+namespace Intech.PrevSystem.Entidades.Dicionarios
 {
-    public static class HeaderInfoRend
+    public static class DicionariosInfoRend
     {
-        public static HeaderInfoRendEntidade PreencherGrupos(this HeaderInfoRendEntidade header)
-        {
-            header.Grupos.ForEach(infoRend =>
-            {
-                infoRend.COD_GRUPO = infoRend.COD_LINHA.Substring(0, 1);
-                
-                infoRend.DES_GRUPO = DicionarioGrupos.Single(x => x.Key == infoRend.COD_GRUPO).Value;
-
-                if (!string.IsNullOrEmpty(infoRend.TXT_QUADRO))
-                    infoRend.DES_INFO_REND = infoRend.TXT_QUADRO;
-                else
-                    infoRend.DES_INFO_REND = DicionarioLinhas.SingleOrDefault(x => x.Key == infoRend.COD_LINHA).Value;
-            });
-
-            return header;
-        }
-
-        public static List<KeyValuePair<string, string>> DicionarioGrupos = new List<KeyValuePair<string, string>>
+        public static List<KeyValuePair<string, string>> Grupos = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("1", "FONTE PAGADORA PESSOA JURÍDICA"),
             new KeyValuePair<string, string>("2", "PESSOA FÍSICA BENEFICIÁRIA DOS RENDIMENTOS"),
@@ -35,7 +15,7 @@ namespace Intech.PrevSystem.Entidades.Extensoes
             new KeyValuePair<string, string>("7", "INFORMAÇÕES COMPLEMENTARES")
         };
 
-        public static List<KeyValuePair<string, string>> DicionarioLinhas = new List<KeyValuePair<string, string>>
+        public static List<KeyValuePair<string, string>> Linhas = new List<KeyValuePair<string, string>>
         {
             new KeyValuePair<string, string>("301", "Total dos Rendimentos (inclusive férias)"),
             new KeyValuePair<string, string>("302", "Contribuição Previdência Oficial"),

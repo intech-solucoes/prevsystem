@@ -38,7 +38,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             cpf = cpf.LimparMascara();
 
-            var funcionario = new FuncionarioProxy().BuscarPorCpf(cpf);
+            var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
 
             if (funcionario == null)
                 throw ExceptionDadosInvalidos;

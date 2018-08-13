@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "CE_NATUREZA",
+    "colunasExtras": [
+        {
+            "nome": "DatasCredito",
+            "tipo": "List<DateTime>",
+            "aceitaNulo": false
+        }
+    ]
+}

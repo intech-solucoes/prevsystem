@@ -1,18 +1,33 @@
-﻿using Intech.PrevSystem.Negocio.Sabesprev.Proxy;
+﻿#region Usings
+using Intech.PrevSystem.API;
+using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Constantes;
+using Intech.PrevSystem.Negocio.Sabesprev.Proxy;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic; 
+#endregion
 
 namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 {
-    [Route("api/[controller]")]
-    public class ContratoController : Controller
+    [Route(RotasApi.Contrato)]
+    public class ContratoController : BaseContratoController
     {
-        [HttpGet("porFundacaoEmpresaPlanoInscricaoSituacao/{cdFundacao}/{cdEmpresa}/{cdPlano}/{numInscricao}/{cdSituacao}")]
-        public IActionResult Index(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdSituacao)
+        [HttpGet("sabesprevAtivosPorPlano/{cdPlano}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarAtivos(string cdPlano)
         {
             try
             {
-                return Json(new ContratoProxySabesprev().BuscarPorFundacaoEmpresaPlanoInscricaoSituacao(cdFundacao, cdEmpresa, cdPlano, numInscricao, cdSituacao));
+                var contratos = new List<ContratoEntidade>();
+
+                if (Pensionista)
+                    contratos = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaPlanoInscricaoGrupoFamiliaSituacao(CdFundacao, CdEmpresa, cdPlano, Inscricao, GrupoFamilia, DMN_SITUACAO_CONTRATO.ATIVO);
+                else
+                    contratos = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaPlanoInscricaoSituacao(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_SITUACAO_CONTRATO.ATIVO);
+
+                return Json(contratos);
             }
             catch (Exception ex)
             {
@@ -20,12 +35,13 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
             }
         }
 
-        [HttpGet("porFundacaoEmpresaPlanoInscricaoGrupoFamiliaSituacao/{cdFundacao}/{cdEmpresa}/{cdPlano}/{numInscricao}/{grupoFamilia}/{cdSituacao}")]
-        public IActionResult Index(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string grupoFamilia, string cdSituacao)
+        [HttpGet("sabesprevPorAnoNum/{ano}/{num}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarDetalhe(string ano, string num)
         {
             try
             {
-                return Json(new ContratoProxySabesprev().BuscarPorFundacaoEmpresaPlanoInscricaoGrupoFamiliaSituacao(cdFundacao, cdEmpresa, cdPlano, numInscricao, grupoFamilia, cdSituacao));
+                return Json(new ContratoProxySabesprev().BuscarPorFundacaoAnoNumContrato(CdFundacao, ano, num));
             }
             catch (Exception ex)
             {

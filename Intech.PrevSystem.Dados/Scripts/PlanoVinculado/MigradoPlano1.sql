@@ -1,0 +1,12 @@
+﻿/*Config
+    Retorno
+        -int
+    Parametros
+        -NUM_INSCRICAO:string
+*/
+
+SELECT COUNT(CD_SIT_PLANO)
+FROM CS_PLANOS_VINC
+WHERE NUM_INSCRICAO = @NUM_INSCRICAO
+  AND CD_PLANO = '0001'
+  AND CD_SIT_PLANO = '09'

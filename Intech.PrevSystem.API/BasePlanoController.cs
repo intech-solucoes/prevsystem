@@ -10,7 +10,7 @@ namespace Intech.PrevSystem.API
 {
     public class BasePlanoController : BaseController
     {
-        [HttpGet]
+        [HttpGet("todos")]
         [Authorize("Bearer")]
         public IActionResult GetLista()
         {
@@ -24,13 +24,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("porFundacaoEmpresa/{cdFundacao}/{cdEmpresa}")]
+        [HttpGet]
         [Authorize("Bearer")]
-        public IActionResult GetPorFundacaoEmpresa(string cdFundacao, string cdEmpresa)
+        public IActionResult Get()
         {
             try
             {
-                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(cdFundacao, cdEmpresa, Matricula));
+                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(CdFundacao, CdEmpresa, Matricula));
             }
             catch (Exception ex)
             {
@@ -38,13 +38,13 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("porFundacaoEmpresaPlano/{cdFundacao}/{cdEmpresa}/{cdPlano}")]
+        [HttpGet("porCodigo/{cdPlano}")]
         [Authorize("Bearer")]
-        public IActionResult GetPorFundacaoEmpresaPlano(string cdFundacao, string cdEmpresa, string cdPlano)
+        public IActionResult GetPorCodigo(string cdPlano)
         {
             try
             {
-                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(cdFundacao, cdEmpresa, Matricula, cdPlano));
+                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano));
             }
             catch (Exception ex)
             {

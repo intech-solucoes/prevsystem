@@ -12,7 +12,6 @@ namespace Intech.PrevSystem.Entidades
 		public string NOM_LOGIN { get; set; }
 		public string PWD_USUARIO { get; set; }
 		public string IND_BLOQUEADO { get; set; }
-		public DateTime? DTA_EXPIRACAO { get; set; }
 		public decimal NUM_TENTATIVA { get; set; }
 		public string DES_LOTACAO { get; set; }
 		public string IND_ADMINISTRADOR { get; set; }

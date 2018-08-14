@@ -26,6 +26,22 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
+        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO, DateTime DT_REFERENCIA)
+        {
+            var datas = base.BuscarDatasPorRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, DT_REFERENCIA).ToList();
+
+            datas.ForEach(data =>
+            {
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data.DT_REFERENCIA, "1");
+
+                data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
+                data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);
+                data.VAL_LIQUIDO = data.VAL_BRUTO - Math.Abs(data.VAL_DESCONTOS.Value);
+            });
+
+            return datas;
+        }
+
         public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;

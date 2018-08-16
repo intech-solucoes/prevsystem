@@ -53,7 +53,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
 
                 if (usuario != null)
                 {
-                    var funcionario = new FuncionarioProxy().BuscarPorCpf((string)login.Cpf.Value);
+                    var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf((string)login.Cpf.Value);
 
                     var claims = new List<KeyValuePair<string, string>> {
                         new KeyValuePair<string, string>("CodEntid", funcionario.COD_ENTID.ToString()),

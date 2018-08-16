@@ -199,12 +199,17 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
             xrTableCell605.Text = BuscarValor("605");
             xrTableCell606.Text = BuscarValor("606");
 
-            xrLabel701Descricao.Text =
-                Informe.Grupos.FirstOrDefault(x => x.COD_LINHA == "701")?.TXT_QUADRO + "\r\n\r\n" +
-                Informe.Grupos.FirstOrDefault(x => x.COD_LINHA == "702")?.TXT_QUADRO + "\r\n\r\n" +
-                Informe.Grupos.FirstOrDefault(x => x.COD_LINHA == "703")?.TXT_QUADRO;
+            var grupo7 = Informe.Grupos.Where(x => x.COD_GRUPO == "7").SingleOrDefault();
 
-            xrLabel701Valor.Text = BuscarValor("701");
+            if (grupo7 != null)
+            {
+                xrLabel701Descricao.Text =
+                    grupo7.Itens.Where(x => x.COD_LINHA == "701").SingleOrDefault()?.TXT_QUADRO + "\r\n\r\n" +
+                    grupo7.Itens.Where(x => x.COD_LINHA == "702").SingleOrDefault()?.TXT_QUADRO + "\r\n\r\n" +
+                    grupo7.Itens.Where(x => x.COD_LINHA == "703").SingleOrDefault()?.TXT_QUADRO;
+
+                xrLabel701Valor.Text = BuscarValor("701");
+            }
 
             xrLabelResponsavelNome.Text = "[NOME RESPONSAVEL]";
             xrLabelData.Text = DateTime.Now.ToString("dd/MM/yyyy");
@@ -212,8 +217,10 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
 
         private string BuscarValor(string codigo)
         {
-            if (Informe.Grupos.Any(x => x.COD_LINHA == codigo))
-                return Informe.Grupos.Single(x => x.COD_LINHA == codigo).VAL_LINHA?.ToString("N2");
+            var codGrupo = codigo.Substring(0, 1);
+
+            if (Informe.Grupos.Any(x => x.COD_GRUPO == codGrupo))
+                return Informe.Grupos.Where(x => x.COD_GRUPO == codGrupo).Single().Itens.SingleOrDefault(x => x.COD_LINHA == codigo)?.VAL_LINHA?.ToString("N2");
 
             return "0,00";
         }

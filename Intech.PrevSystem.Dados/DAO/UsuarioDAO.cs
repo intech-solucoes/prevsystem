@@ -18,9 +18,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<UsuarioEntidade>("SELECT * FROM WEB_USUARIO WHERE NOM_LOGIN = @NOM_LOGIN", new { NOM_LOGIN });
+					return Conexao.QuerySingleOrDefault<UsuarioEntidade>("SELECT TOP 1 * FROM WEB_USUARIO WHERE NOM_LOGIN = @NOM_LOGIN", new { NOM_LOGIN });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.QuerySingleOrDefault<UsuarioEntidade>("SELECT * FROM WEB_USUARIO WHERE NOM_LOGIN=:NOM_LOGIN", new { NOM_LOGIN });
+					return Conexao.QuerySingleOrDefault<UsuarioEntidade>("SELECT * FROM WEB_USUARIO WHERE NOM_LOGIN=:NOM_LOGIN AND ROWNUM <= 1 ", new { NOM_LOGIN });
 				else
 					throw new Exception("Provider não suportado!");
 			}

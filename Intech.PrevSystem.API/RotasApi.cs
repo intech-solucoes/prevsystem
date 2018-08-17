@@ -21,5 +21,6 @@
         public const string ProcessoBeneficio = "api/processoBeneficio";
         public const string Contrato = "api/contrato";
         public const string HistSaldo = "api/histSaldo";
+        public const string Fundacao = "api/fundacao";
     }
 }

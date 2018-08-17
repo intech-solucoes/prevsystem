@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intech.PrevSystem.Preves.API.Controllers
 {
-    [Route("/api/fundacao/{cdFundacao}")]
+    [Route(RotasApi.Fundacao)]
     public class FundacaoController : BaseFundacaoController
     {
     }

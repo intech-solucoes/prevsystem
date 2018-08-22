@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Metrus/Intech.PrevSystem.Metrus.API/Intech.PrevSystem.Metrus.API.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

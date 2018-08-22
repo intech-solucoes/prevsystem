@@ -34,7 +34,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var func = new FuncionarioProxy().BuscarPorCpf(cpf);
+                var func = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
 
                 if (func == null)
                     throw new Exception("Participante não encontrado.");

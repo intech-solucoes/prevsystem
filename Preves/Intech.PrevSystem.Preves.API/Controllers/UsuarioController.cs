@@ -57,6 +57,8 @@ namespace Intech.PrevSystem.Preves.API.Controllers
 
                     var claims = new List<KeyValuePair<string, string>> {
                         new KeyValuePair<string, string>("CodEntid", funcionario.COD_ENTID.ToString()),
+                        new KeyValuePair<string, string>("CdFundacao", funcionario.CD_FUNDACAO),
+                        new KeyValuePair<string, string>("CdEmpresa", funcionario.CD_EMPRESA),
                         new KeyValuePair<string, string>("Cpf", usuario.NOM_LOGIN),
                         new KeyValuePair<string, string>("Matricula", funcionario.NUM_MATRICULA),
                         new KeyValuePair<string, string>("Inscricao", funcionario.NUM_INSCRICAO),

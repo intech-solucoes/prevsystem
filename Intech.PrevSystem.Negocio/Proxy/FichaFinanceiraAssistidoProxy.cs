@@ -32,7 +32,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             datas.ForEach(data =>
             {
-                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data.DT_REFERENCIA, "1");
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, data.DT_REFERENCIA, "1");
 
                 data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
                 data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);

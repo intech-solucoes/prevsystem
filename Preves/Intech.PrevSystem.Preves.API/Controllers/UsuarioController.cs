@@ -65,7 +65,11 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                         new KeyValuePair<string, string>("Admin", usuario.IND_ADMINISTRADOR)
                     };
 
-                    return Json(AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims));
+                    return Json(new
+                    {
+                        AccessToken = AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims).AccessToken,
+                        Admin = usuario.IND_ADMINISTRADOR
+                    });
                 }
 
                 return Unauthorized();

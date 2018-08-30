@@ -35,9 +35,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT TOP 1 *  FROM TB_IND_VALORES  WHERE COD_IND = @COD_IND ORDER BY DT_IND DESC", new { COD_IND });
+					return Conexao.Query<IndiceValoresEntidade>("SELECT *   FROM TB_IND_VALORES V  WHERE COD_IND = @COD_IND   AND V.DT_IND = (SELECT MAX(DT_IND)                      FROM TB_IND_VALORES                     WHERE COD_IND = V.COD_IND)", new { COD_IND });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES WHERE COD_IND=:COD_IND AND ROWNUM <= 1  ORDER BY DT_IND DESC", new { COD_IND });
+					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES  V  WHERE COD_IND=:COD_IND AND V.DT_IND=(SELECT MAX(DT_IND) FROM TB_IND_VALORES WHERE COD_IND=V.COD_IND)", new { COD_IND });
 				else
 					throw new Exception("Provider não suportado!");
 			}

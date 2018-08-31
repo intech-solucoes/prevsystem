@@ -46,8 +46,22 @@ namespace Intech.PrevSystem.API
         {
             try
             {
+                mensagem.CD_FUNDACAO = mensagem.CD_FUNDACAO == string.Empty ? null : mensagem.CD_FUNDACAO;
+                mensagem.CD_EMPRESA = mensagem.CD_EMPRESA == string.Empty ? null : mensagem.CD_EMPRESA;
+                mensagem.CD_PLANO = mensagem.CD_PLANO == string.Empty ? null : mensagem.CD_PLANO;
+                mensagem.CD_SIT_PLANO = mensagem.CD_SIT_PLANO == string.Empty ? null : mensagem.CD_SIT_PLANO;
+
+                if (!mensagem.DTA_EXPIRACAO.HasValue)
+                    mensagem.DTA_EXPIRACAO = null;
+                else
+                    mensagem.DTA_EXPIRACAO = mensagem.DTA_EXPIRACAO;
+
+                if (string.IsNullOrEmpty(mensagem.NUM_MATRICULA))
+                    mensagem.COD_ENTID = null;
+                else
+                    mensagem.COD_ENTID = new FuncionarioProxy().BuscarPorMatricula(mensagem.NUM_MATRICULA).COD_ENTID;
+
                 mensagem.DTA_MENSAGEM = DateTime.Now;
-                mensagem.COD_ENTID = new FuncionarioProxy().BuscarPorMatricula(mensagem.NUM_MATRICULA).COD_ENTID;
 
                 new MensagemProxy().Insert(mensagem);
 

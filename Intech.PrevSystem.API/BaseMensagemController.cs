@@ -46,7 +46,6 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                mensagem.CD_FUNDACAO = mensagem.CD_FUNDACAO == string.Empty ? null : mensagem.CD_FUNDACAO;
                 mensagem.CD_EMPRESA = mensagem.CD_EMPRESA == string.Empty ? null : mensagem.CD_EMPRESA;
                 mensagem.CD_PLANO = mensagem.CD_PLANO == string.Empty ? null : mensagem.CD_PLANO;
                 mensagem.CD_SIT_PLANO = mensagem.CD_SIT_PLANO == string.Empty ? null : mensagem.CD_SIT_PLANO;

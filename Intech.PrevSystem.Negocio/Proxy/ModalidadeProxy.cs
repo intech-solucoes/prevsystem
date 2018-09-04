@@ -14,6 +14,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             var proxyNaturezas = new NaturezaProxy();
             var proxyFichaFinanceira = new FichaFinanceiraProxy();
+            var proxyCarenciasDisponiveis = new CarenciasDisponiveisProxy();
+            var proxyFeriados = new FeriadoProxy();
+
+            var feriados = proxyFeriados.BuscarDatas();
 
             var ativo = cdCategoria == DMN_CATEGORIA.ATIVO ? "S" : null;
             var assistido = cdCategoria == DMN_CATEGORIA.ASSISTIDO ? "S" : null;
@@ -40,9 +44,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             var tempoContribuicao = ObtemTempoContribuicao(tempoContribuicaoParticipante);
 
-            modalidades.ForEach(x =>
+            modalidades.ForEach(modalidade =>
             {
-                x.Naturezas = proxyNaturezas.BuscarPorModalidadePlanoCategoriaTempoContrib(x.CD_MODAL, null, ativo, assistido, autopatrocinio, diferido, tempoContribuicao).ToList();
+                modalidade.Naturezas = proxyNaturezas.BuscarPorModalidadePlanoCategoriaTempoContrib(modalidade.CD_MODAL, null, ativo, assistido, autopatrocinio, diferido, tempoContribuicao).ToList();
+
+                modalidade.Naturezas.ForEach(natureza =>
+                {
+                    natureza.Carencias = proxyCarenciasDisponiveis.BuscarPorNatureza(natureza.CD_NATUR).ToList();
+                });
             });
 
             return modalidades;

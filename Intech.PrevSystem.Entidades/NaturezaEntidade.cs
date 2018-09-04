@@ -55,6 +55,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PERCENTUAL_DESCONTO { get; set; }
 		public string ID_TEMP_VINC { get; set; }
 		public List<DateTime> DatasCredito { get; set; }
+		public List<CarenciasDisponiveisEntidade> Carencias { get; set; }
         
     }
 }

@@ -18,6 +18,7 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ArquivoUpload\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\CarenciasDisponiveis\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ComposicaoSRC\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\config.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Contrato\entidade.json" />
@@ -72,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\BuscarPorCodBancoCodAgencia.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\CarenciasDisponiveis\BuscarPorNatureza.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ComposicaoSRC\BuscarePorFundacaoEmpresaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Contrato\BuscarPorFundacaoAnoNumContrato.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Contrato\BuscarPorFundacaoInscricao.sql" />
@@ -153,6 +155,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ArquivoUploadDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\BancoAgDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\CarenciasDisponiveisDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ComposicaoSRCDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ContratoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ContribuicaoIndividualDAO.cs" />

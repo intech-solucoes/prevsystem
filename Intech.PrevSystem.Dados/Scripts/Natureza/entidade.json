@@ -5,6 +5,11 @@
             "nome": "DatasCredito",
             "tipo": "List<DateTime>",
             "aceitaNulo": false
+        },
+        {
+            "nome": "Carencias",
+            "tipo": "List<CarenciasDisponiveisEntidade>",
+            "aceitaNulo": false
         }
     ]
 }

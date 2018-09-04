@@ -18,6 +18,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ArquivoUploadProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\BancoAgProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\CarenciasDisponiveisProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ComposicaoSRCProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContratoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContribuicaoIndividualProxy.cs" />

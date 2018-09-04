@@ -18,6 +18,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ArquivoUploadEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BancoAgEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CarenciasDisponiveisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComposicaoSRCEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_CATEGORIA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_PERIODICIDADE.cs" />

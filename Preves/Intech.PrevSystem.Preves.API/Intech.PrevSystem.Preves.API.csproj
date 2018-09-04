@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
-    <Version>0.0.1</Version>
+    <Version>1.6.0</Version>
     <Authors>Intech</Authors>
     <Company>Intech</Company>
     <Product>PrevSystem</Product>

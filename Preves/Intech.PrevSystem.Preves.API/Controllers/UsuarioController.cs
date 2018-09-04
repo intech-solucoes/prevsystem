@@ -41,35 +41,81 @@ namespace Intech.PrevSystem.Preves.API.Controllers
         {
             try
             {
-                var senha = login.Senha.Value;
+                var funcionarioProxy = new FuncionarioProxy();
 
-                var usuario = new UsuarioProxy().BuscarPorCpf(login.Cpf.Value);
+                string cpf = login.Cpf.Value;
+                string senha = login.Senha.Value;
+
+                var usuario = new UsuarioProxy().BuscarPorCpf(cpf);
 
                 if (usuario == null)
-                    usuario = new SegUsuarioProxy().Migrar(login.Cpf.Value, senha);
+                    usuario = new SegUsuarioProxy().Migrar(cpf, senha);
 
                 if(usuario == null || usuario.PWD_USUARIO.ToUpper() != Criptografia.Encriptar(senha).ToUpper())
                     throw new Exception("Matrícula ou senha incorretos!");
 
                 if (usuario != null)
                 {
-                    var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf((string)login.Cpf.Value);
+                    var pensionista = false;
+                    string codEntid;
+                    string seqRecebedor;
+                    string grupoFamilia;
+                    var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf);
 
-                    var claims = new List<KeyValuePair<string, string>> {
-                        new KeyValuePair<string, string>("CodEntid", funcionario.COD_ENTID.ToString()),
-                        new KeyValuePair<string, string>("CdFundacao", funcionario.CD_FUNDACAO),
-                        new KeyValuePair<string, string>("CdEmpresa", funcionario.CD_EMPRESA),
-                        new KeyValuePair<string, string>("Cpf", usuario.NOM_LOGIN),
-                        new KeyValuePair<string, string>("Matricula", funcionario.NUM_MATRICULA),
-                        new KeyValuePair<string, string>("Inscricao", funcionario.NUM_INSCRICAO),
-                        new KeyValuePair<string, string>("Admin", usuario.IND_ADMINISTRADOR)
-                    };
-
-                    return Json(new
+                    if (funcionario != null)
                     {
-                        AccessToken = AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims).AccessToken,
-                        Admin = usuario.IND_ADMINISTRADOR
-                    });
+                        codEntid = funcionario.COD_ENTID.ToString();
+                        seqRecebedor = "0";
+                        grupoFamilia = "0";
+                    }
+                    else
+                    {
+                        var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf);
+
+                        if (recebedorBeneficio == null)
+                            return BadRequest("CPF ou senha incorretos!");
+
+                        codEntid = recebedorBeneficio.COD_ENTID.ToString();
+                        funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
+                        pensionista = true;
+                        seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR.ToString();
+                        grupoFamilia = recebedorBeneficio.NUM_SEQ_GR_FAMIL.ToString();
+                    }
+
+                    if (codEntid != null)
+                    {
+                        var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
+
+                        var claims = new List<KeyValuePair<string, string>> {
+                            new KeyValuePair<string, string>("Cpf", dadosPessoais.CPF_CGC),
+                            new KeyValuePair<string, string>("CodEntid", codEntid),
+                            new KeyValuePair<string, string>("Matricula", funcionario.NUM_MATRICULA),
+                            new KeyValuePair<string, string>("Inscricao", funcionario.NUM_INSCRICAO),
+                            new KeyValuePair<string, string>("CdFundacao", funcionario.CD_FUNDACAO),
+                            new KeyValuePair<string, string>("CdEmpresa", funcionario.CD_EMPRESA),
+                            new KeyValuePair<string, string>("Pensionista", pensionista.ToString()),
+                            new KeyValuePair<string, string>("SeqRecebedor", seqRecebedor),
+                            new KeyValuePair<string, string>("GrupoFamilia", grupoFamilia),
+                            new KeyValuePair<string, string>("Admin", usuario.IND_ADMINISTRADOR)
+                        };
+
+                        var token = AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims);
+
+                        return Json(new
+                        {
+                            token.AccessToken,
+                            token.Authenticated,
+                            token.Created,
+                            token.Expiration,
+                            token.Message,
+                            Pensionista = pensionista,
+                            Admin = usuario.IND_ADMINISTRADOR
+                        });
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
                 }
 
                 return Unauthorized();

@@ -37,7 +37,21 @@ namespace Intech.PrevSystem.API
             try
             {
                 new DocumentoProxy().Inserir(documento);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpDelete]
+        [Authorize("Bearer")]
+        public IActionResult Deletar([FromBody] DocumentoEntidade documento)
+        {
+            try
+            {
+                new DocumentoProxy().Deletar(documento);
                 return Ok();
             }
             catch (Exception ex)
@@ -53,6 +67,36 @@ namespace Intech.PrevSystem.API
             try
             {
                 new DocumentoPastaProxy().Inserir(pasta);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("deletarPasta")]
+        [Authorize("Bearer")]
+        public IActionResult DeletarPasta([FromBody] DocumentoPastaEntidade pasta)
+        {
+            try
+            {
+                var documentoProxy = new DocumentoProxy();
+                var documentoPastaProxy = new DocumentoPastaProxy();
+
+                // Deleta documentos dentro da pasta
+                var documentos = documentoProxy.BuscarPorPasta(pasta.OID_DOCUMENTO_PASTA);
+
+                foreach(var documento in documentos)
+                    documentoProxy.Deletar(documento);
+
+                // Deleta pastas dentro da pasta
+                var pastas = documentoPastaProxy.BuscarPorPasta(pasta.OID_DOCUMENTO_PASTA);
+
+                foreach (var pastaItem in pastas)
+                    documentoPastaProxy.Deletar(pastaItem);
+
+                documentoPastaProxy.Deletar(pasta);
 
                 return Ok();
             }

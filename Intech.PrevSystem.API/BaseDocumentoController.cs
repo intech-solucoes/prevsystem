@@ -2,6 +2,7 @@
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System; 
 #endregion
@@ -10,6 +11,13 @@ namespace Intech.PrevSystem.API
 {
     public class BaseDocumentoController : BaseController
     {
+        private IHostingEnvironment HostingEnvironment;
+
+        public BaseDocumentoController(IHostingEnvironment hostingEnvironment)
+        {
+            HostingEnvironment = hostingEnvironment;
+        }
+
         [HttpGet("porPasta/{oidPasta}")]
         [Authorize("Bearer")]
         public IActionResult Buscar(decimal? oidPasta)
@@ -45,13 +53,26 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{OID_DOCUMENTO}")]
         [Authorize("Bearer")]
-        public IActionResult Deletar([FromBody] DocumentoEntidade documento)
+        public IActionResult Deletar(decimal OID_DOCUMENTO)
         {
             try
             {
-                new DocumentoProxy().Deletar(documento);
+                var arquivoUploadProxy = new ArquivoUploadProxy();
+                var documentoProxy = new DocumentoProxy();
+                var documento = documentoProxy.BuscarPorChave(OID_DOCUMENTO);
+
+                documentoProxy.Deletar(documento);
+
+                var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
+                arquivoUploadProxy.Deletar(arquivoUpload);
+
+                var webRootPath = HostingEnvironment.WebRootPath;
+                var arquivo = System.IO.Path.Combine(webRootPath, arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+
+                System.IO.File.Delete(arquivo);
+
                 return Ok();
             }
             catch (Exception ex)
@@ -75,26 +96,18 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpDelete("deletarPasta")]
+        [HttpDelete("deletarPasta/{OID_DOCUMENTO_PASTA}")]
         [Authorize("Bearer")]
-        public IActionResult DeletarPasta([FromBody] DocumentoPastaEntidade pasta)
+        public IActionResult DeletarPasta(decimal OID_DOCUMENTO_PASTA)
         {
             try
             {
+                DeletarPastaRecursivo(OID_DOCUMENTO_PASTA);
+
                 var documentoProxy = new DocumentoProxy();
                 var documentoPastaProxy = new DocumentoPastaProxy();
 
-                // Deleta documentos dentro da pasta
-                var documentos = documentoProxy.BuscarPorPasta(pasta.OID_DOCUMENTO_PASTA);
-
-                foreach(var documento in documentos)
-                    documentoProxy.Deletar(documento);
-
-                // Deleta pastas dentro da pasta
-                var pastas = documentoPastaProxy.BuscarPorPasta(pasta.OID_DOCUMENTO_PASTA);
-
-                foreach (var pastaItem in pastas)
-                    documentoPastaProxy.Deletar(pastaItem);
+                var pasta = documentoPastaProxy.BuscarPorChave(OID_DOCUMENTO_PASTA);
 
                 documentoPastaProxy.Deletar(pasta);
 
@@ -103,6 +116,38 @@ namespace Intech.PrevSystem.API
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
+        {
+            var documentoProxy = new DocumentoProxy();
+            var documentoPastaProxy = new DocumentoPastaProxy();
+            var arquivoUploadProxy = new ArquivoUploadProxy();
+
+            // Deleta documentos dentro da pasta
+            var documentos = documentoProxy.BuscarPorPasta(OID_DOCUMENTO_PASTA);
+
+            foreach (var documento in documentos)
+            {
+                documentoProxy.Deletar(documento);
+
+                var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
+                arquivoUploadProxy.Deletar(arquivoUpload);
+
+                var webRootPath = HostingEnvironment.WebRootPath;
+                var arquivo = System.IO.Path.Combine(webRootPath, arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+
+                System.IO.File.Delete(arquivo);
+            }
+
+            // Deleta pastas dentro da pasta
+            var pastas = documentoPastaProxy.BuscarPorPasta(OID_DOCUMENTO_PASTA);
+
+            foreach (var pastaItem in pastas)
+            {
+                DeletarPastaRecursivo(pastaItem.OID_DOCUMENTO_PASTA);
+                documentoPastaProxy.Deletar(pastaItem);
             }
         }
     }

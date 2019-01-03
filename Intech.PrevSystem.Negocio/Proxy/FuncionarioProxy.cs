@@ -22,14 +22,20 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(COD_ENTID);
             var empresa = new EmpresaProxy().BuscarPorCodigo(funcionario.CD_EMPRESA);
             var estadoCivil = new EstadoCivilProxy().BuscarPorCodigo(dadosPessoais.CD_ESTADO_CIVIL);
-            //var usuario = new UsuarioProxy().BuscarPorCpf(entidade.CPF_CGC);
+
+            UsuarioEntidade usuario = null;
+
+            try
+            {
+                usuario = new UsuarioProxy().BuscarPorCpf(entidade.CPF_CGC);
+            } catch { }
 
             return new
             {
                 funcionario,
                 dadosPessoais,
                 entidade,
-                //usuario,
+                usuario,
                 NOME_EMPRESA = empresa.NOME_ENTID,
                 CPF = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF),
                 SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO",

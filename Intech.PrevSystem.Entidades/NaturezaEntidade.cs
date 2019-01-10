@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
+using Intech.PrevSystem.Negocio;
 
 namespace Intech.PrevSystem.Entidades
 {
@@ -56,6 +57,10 @@ namespace Intech.PrevSystem.Entidades
 		public string ID_TEMP_VINC { get; set; }
 		public List<DateTime> DatasCredito { get; set; }
 		public List<CarenciasDisponiveisEntidade> Carencias { get; set; }
+		public decimal MargemConsignavel { get; set; }
+		public decimal TaxaMargemConsignavel { get; set; }
+		public decimal TaxaJuros { get; set; }
+		public Concessao Concessao { get; set; }
         
     }
 }

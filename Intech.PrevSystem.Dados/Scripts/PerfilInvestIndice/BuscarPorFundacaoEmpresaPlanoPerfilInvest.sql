@@ -1,0 +1,16 @@
+﻿/*Config
+	Retorno
+		-PerfilInvestIndiceEntidade
+	Parametros
+		-CD_FUNDACAO:string
+		-CD_EMPRESA:string
+		-CD_PLANO:string
+		-CD_PERFIL_INVEST:string
+*/
+
+SELECT *
+FROM TB_PERFIL_INVEST_INDICE
+WHERE CD_FUNDACAO = @CD_FUNDACAO
+  AND CD_EMPRESA = @CD_EMPRESA
+  AND CD_PLANO = @CD_PLANO
+  AND CD_PERFIL_INVEST = @CD_PERFIL_INVEST

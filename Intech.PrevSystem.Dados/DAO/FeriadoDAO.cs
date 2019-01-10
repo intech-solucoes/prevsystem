@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class FeriadoDAO : BaseDAO<FeriadoEntidade>
     {
         
+		public virtual IEnumerable<FeriadoEntidade> Buscar()
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FeriadoEntidade>("SELECT * FROM TB_FERIADO", new {  });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FeriadoEntidade>("SELECT * FROM TB_FERIADO", new {  });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<DateTime> BuscarDatas()
 		{
 			try

@@ -19,12 +19,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)ArquivoUploadEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BancoAgEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CarenciasDisponiveisEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CategoriaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComposicaoSRCEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_CATEGORIA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_PERIODICIDADE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SIM_NAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SITUACAO_CONTRATO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContratosAnterioresWebEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContratoWebEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContribuicaoIndividualEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosPessoaisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DependenteEntidade.cs" />
@@ -38,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EstadoCivilEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensoes\Feriado.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensoes\Indice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FaixaValorContribEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FatorRiscoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FeriadoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFechamentoPrevesEntidade.cs" />
@@ -52,11 +56,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)IndiceValoresEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoRendEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoRendGrupoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MargensCalculadasEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MargensEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MargensPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MensagemEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModalidadeEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NaturezaEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ParametrosEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PerfilInvestEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PerfilInvestIndiceEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlanoVinculadoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PrazosDisponiveisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrestacaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrestacaoParcialEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ProcessoBeneficioEntidade.cs" />
@@ -66,8 +77,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoSolicitacaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RecadastramentoSolicitacaoValorEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RecebedorBeneficioEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegraNaturezaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelacionamentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelIRRFEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RubricasAdicionaisEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RubricasPrevidencialEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SalarioBaseEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoDevedorEntidade.cs" />
@@ -76,6 +90,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)SitPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaConcessaoPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaEncargoPlanoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TaxasConcessaoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TaxasEncargosEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TempoServicoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UsuarioEntidade.cs" />
   </ItemGroup>

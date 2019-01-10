@@ -1,6 +1,7 @@
 ﻿#region Usings
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq; 
 #endregion

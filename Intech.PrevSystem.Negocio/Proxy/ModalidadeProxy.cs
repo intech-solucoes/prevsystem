@@ -1,6 +1,8 @@
 ﻿using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
+//using srbrettle.FinancialFormulas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,56 +10,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class ModalidadeProxy : ModalidadeDAO
     {
-        public List<ModalidadeEntidade> BuscarAtivasComNaturezas(string cdFundacao, string cdPlano, string cdCategoria, string numInscricao)
-        {
-            var modalidades = base.BuscarAtivas().ToList();
-
-            var proxyNaturezas = new NaturezaProxy();
-            var proxyFichaFinanceira = new FichaFinanceiraProxy();
-            var proxyCarenciasDisponiveis = new CarenciasDisponiveisProxy();
-            var proxyFeriados = new FeriadoProxy();
-
-            var feriados = proxyFeriados.BuscarDatas();
-
-            var ativo = cdCategoria == DMN_CATEGORIA.ATIVO ? "S" : null;
-            var assistido = cdCategoria == DMN_CATEGORIA.ASSISTIDO ? "S" : null;
-            var autopatrocinio = cdCategoria == DMN_CATEGORIA.AUTOPATROCINIO ? "S" : null;
-            var diferido = cdCategoria == DMN_CATEGORIA.DIFERIDO ? "S" : null;
-            
-            var tempoContribuicaoParticipante = 0;
-
-            var fichaFinanceira = proxyFichaFinanceira.BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao);
-
-            // Verifica se foi migrado do plano 1
-            var migrado = new PlanoVinculadoProxy().MigradoPlano1(numInscricao) > 0;
-            if (migrado)
-            {
-                tempoContribuicaoParticipante = proxyFichaFinanceira.BuscarPlanoUmDoisPorFundacaoInscricao(cdFundacao, numInscricao).Count();
-            }
-            else
-            {
-                if (cdPlano == "0001")
-                    tempoContribuicaoParticipante = fichaFinanceira.Where(x => x.CD_TIPO_CONTRIBUICAO == "01").Count();
-                else
-                    tempoContribuicaoParticipante = fichaFinanceira.Where(x => x.CALC_MARGEM_CONSIG == "S").Count();
-            }
-
-            var tempoContribuicao = ObtemTempoContribuicao(tempoContribuicaoParticipante);
-
-            modalidades.ForEach(modalidade =>
-            {
-                modalidade.Naturezas = proxyNaturezas.BuscarPorModalidadePlanoCategoriaTempoContrib(modalidade.CD_MODAL, null, ativo, assistido, autopatrocinio, diferido, tempoContribuicao).ToList();
-
-                modalidade.Naturezas.ForEach(natureza =>
-                {
-                    natureza.Carencias = proxyCarenciasDisponiveis.BuscarPorNatureza(natureza.CD_NATUR).ToList();
-                });
-            });
-
-            return modalidades;
-        }
-
-        private int ObtemTempoContribuicao(int tempoContribuicaoParticipante)
+        public int ObtemTempoContribuicao(int tempoContribuicaoParticipante)
         {
             if (tempoContribuicaoParticipante < 12)
                 return tempoContribuicaoParticipante;
@@ -76,6 +29,116 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             else
                 return 60;
+        }
+
+        public decimal CalcularMargem(PlanoVinculadoEntidade plano, string cdEmpresa, decimal cdModal, decimal cdNatur, DateTime dtCredito, string matricula, decimal origem, MargensEntidade margem, TaxasEncargosEntidade encargo, TaxasConcessaoEntidade taxaConcessao)
+        {
+            var valorMargemCalculada = 0M;
+
+            var parametros = new ParametrosProxy().Buscar();
+
+            if (parametros.REGRA_MARGEM_PLANO == DMN_SIM_NAO.SIM)
+            {
+                //TODO: Regra pelo plano
+            }
+            else
+            {
+
+                if (margem.MARGEM_BPA_EXTERNA == "E")
+                {
+                    decimal numeroGrFamil = 0;
+
+                    var margemCalDados = new MargensCalculadasProxy()
+                        .BuscarPorFundacaoEmpresaOrigemMatriculaGrupo(plano.CD_FUNDACAO, cdEmpresa, origem, matricula, numeroGrFamil);
+
+                    valorMargemCalculada = margemCalDados.VL_MARGEM ?? 0;
+                }
+                else if (margem.MARGEM_BPA_EXTERNA == "C")
+                {
+                    // Regra não existia no simulador antigo
+                }
+
+                decimal przMax = ObterPrazoMaximo(cdNatur);
+                decimal percTaxa = taxaConcessao.TX_JUROS.Value / 100;
+                decimal jurosPorPrazo = (decimal)Math.Pow((double)(1 + percTaxa), (double)przMax);
+                decimal w_tx_assist_prest_bl = margem.TX_ASSIST_MC.Value;
+                decimal w_vl_prest = plano.UltimoSalario * (w_tx_assist_prest_bl / 100);
+                decimal w_fator_taxas = 1;
+                DateTime dtAniversarioNatureza = ObterDataAniversarioNatureza(cdNatur, dtCredito);
+                decimal diferencaDias = (dtAniversarioNatureza - dtCredito).Days;
+                decimal w_fator_aplicado = Convert.ToDecimal(Math.Pow((double)(1 + percTaxa), (double)(diferencaDias / dtCredito.UltimoDiaDoMes().Day)));
+
+                switch (plano.CD_CATEGORIA)
+                {
+                    case DMN_CATEGORIA.ATIVO:
+                        valorMargemCalculada = plano.UltimoSalario * (margem.TX_ATIVO_SP.Value / 100); // futuramente utilizar parametrização 
+                        break;
+                    case DMN_CATEGORIA.AUTOPATROCINIO:
+                        valorMargemCalculada = plano.UltimoSalario * (margem.TX_MANTENEDOR_SP.Value / 100); // futuramente utilizar parametrização 
+                        break;
+                    case DMN_CATEGORIA.DIFERIDO:
+                        valorMargemCalculada = plano.UltimoSalario * (margem.TX_MANTENEDOR_SP.Value / 100); // futuramente utilizar parametrização 
+                        break;
+                    case DMN_CATEGORIA.EM_LICENCA: //Ativos, Autopatrocinados ou Em licença
+                        valorMargemCalculada = plano.UltimoSalario * (margem.TX_ASSIST_BL.Value / 100); // futuramente utilizar parametrização 
+                        break;
+                    case DMN_CATEGORIA.ASSISTIDO:
+                        w_vl_prest = w_vl_prest / w_fator_taxas;
+                        //valorMargemCalculada = Convert.ToDecimal(GeneralFinanceFormulas.CalcPresentValue(percTaxa, przMax, w_vl_prest)) / w_fator_aplicado;
+
+                        break;
+                }
+            }
+
+            return valorMargemCalculada;
+        }
+
+        public decimal ObterPrazoMaximo(decimal cdNatur)
+        {
+            try
+            {
+                var prazoDispProxy = new PrazosDisponiveisProxy();
+                var prazos = prazoDispProxy.BuscarPorNatureza(cdNatur).ToList();
+
+                return prazos.Select(x => x.PRAZO).Max(); //prazo não é null
+
+            }
+            catch (InvalidOperationException)
+            {
+                throw new Exception("Natureza não possui parametrização de prazos disponíveis");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DateTime ObterDataAniversarioNatureza(decimal cdNatur, DateTime dtCredito)
+        {
+            var natureza = new NaturezaProxy().BuscarPorCdNatur(cdNatur);
+            DateTime w_dt_aux;
+            int w_mes = 0;
+            int w_ano = 0;
+
+            if (natureza.MES_CRED_CIVIL == DMN_SIM_NAO.NAO)
+            {
+                w_mes = dtCredito.Month;
+                w_ano = dtCredito.Year;
+
+                if ((natureza.DIA_VENC_PREST == 99) || (natureza.DIA_VENC_PREST == 0))
+                    w_dt_aux = new DateTime(w_ano, w_mes, dtCredito.UltimoDiaDoMes().Day);
+                else
+                    w_dt_aux = new DateTime(w_ano, w_mes, (int)natureza.DIA_VENC_PREST);
+
+                if (w_dt_aux < dtCredito)
+                    w_dt_aux = w_dt_aux.AddMonths(1);
+            }
+            else
+            {
+                w_dt_aux = new DateTime(dtCredito.Year, dtCredito.Month, dtCredito.UltimoDiaDoMes().Day);
+            }
+
+            return w_dt_aux;
         }
     }
 }

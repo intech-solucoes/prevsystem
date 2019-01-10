@@ -42,6 +42,40 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
+        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+        {
+            List<FichaFinanceiraAssistidoEntidade> rubricas;
+
+            if (SeqRecebedor.HasValue)
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoCompetenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA).ToList();
+            else
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoCompetencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA).ToList();
+
+            var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
+            var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
+
+            foreach(var rubrica in descontos)
+                rubrica.VALOR_MC *= -1;
+
+            var bruto = proventos.Sum(x => x.VALOR_MC);
+            var valDescontos = descontos.Sum(x => x.VALOR_MC);
+            var liquido = bruto - Math.Abs(valDescontos.Value);
+
+            return new
+            {
+                Proventos = proventos,
+                Descontos = descontos,
+                Resumo = new
+                {
+                    Competencia = DT_COMPETENCIA,
+                    Bruto = bruto,
+                    Descontos = valDescontos,
+                    Liquido = liquido,
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
+                }
+            };
+        }
+
         public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
@@ -53,6 +87,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
             var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
+
+            foreach (var rubrica in descontos)
+                rubrica.VALOR_MC *= -1;
 
             var bruto = proventos.Sum(x => x.VALOR_MC);
             var valDescontos = descontos.Sum(x => x.VALOR_MC);

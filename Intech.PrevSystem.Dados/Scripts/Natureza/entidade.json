@@ -10,6 +10,26 @@
             "nome": "Carencias",
             "tipo": "List<CarenciasDisponiveisEntidade>",
             "aceitaNulo": false
+        },
+        {
+            "nome": "MargemConsignavel",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "TaxaMargemConsignavel",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "TaxaJuros",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "Concessao",
+            "tipo": "Concessao",
+            "aceitaNulo": false
         }
     ]
 }

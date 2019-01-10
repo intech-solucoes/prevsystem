@@ -16,19 +16,34 @@ namespace Intech.PrevSystem.Entidades
             //saldo.DataReferencia = DateTime.ParseExact($"01/{contribuicoes.First().MES_REF}/{contribuicoes.First().ANO_REF}", "dd/MM/yyyy", new CultureInfo("pt-BR"));
             saldo.DataReferencia = DateTime.Now;
 
+            var func = new FuncionarioProxy().BuscarPorInscricao(numInscricao);
+
+            var plano = new PlanoProxy().BuscarPorCodigo(cdPlano);
+            var planoVinculado = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(cdFundacao, cdEmpresa, func.NUM_MATRICULA, cdPlano);
             var fundoContrib = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(cdFundacao, cdPlano, cdFundo);
             var empresaPlano = new EmpresaPlanosProxy().BuscarPorFundacaoEmpresaPlano(cdFundacao, cdEmpresa, cdPlano);
-            var indice = new IndiceProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP);
+
+            IndiceEntidade indice;
+
+            if (plano.UTILIZA_PERFIL == "S")
+            {
+                var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(cdFundacao, cdEmpresa, cdPlano, planoVinculado.cd_perfil_invest.ToString());
+                indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP);
+            }
+            else
+            {
+                indice = new IndiceProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP);
+            }
             
             var dataCota = indice.VALORES.First().DT_IND;
 
             var valorIndice = indice.BuscarValorEm(dataCota);
 
-            contribuicoes.ForEach(contribuicao =>
+            foreach(var contribuicao in contribuicoes)
             {
                 if (fundoContrib.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO))
                 {
-                    if(contribuicao.CD_OPERACAO == "C")
+                    if (contribuicao.CD_OPERACAO == "C")
                         saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante + (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
                     else
                         saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante - (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
@@ -37,13 +52,13 @@ namespace Intech.PrevSystem.Entidades
                         saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora + (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
                     else
                         saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora - (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
-                    
+
                     saldo.ValorParticipante = saldo.QuantidadeCotasParticipante * valorIndice;
                     saldo.ValorPatrocinadora = saldo.QuantidadeCotasPatrocinadora * valorIndice;
                     saldo.DataCota = dataCota;
                     saldo.ValorCota = valorIndice;
                 }
-            });
+            }
         }
     }
 }

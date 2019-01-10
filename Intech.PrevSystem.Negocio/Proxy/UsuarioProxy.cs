@@ -22,7 +22,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string AlterarSenha(string cpf, string senhaAntiga, string senhaNova)
         {
-            
             var usuarioExistente = BuscarPorLogin(cpf, senhaAntiga);
 
             if (usuarioExistente == null)

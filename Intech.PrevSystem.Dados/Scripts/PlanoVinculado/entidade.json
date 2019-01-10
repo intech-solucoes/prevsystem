@@ -50,6 +50,11 @@
             "nome": "Modalidades",
             "tipo": "List<ModalidadeEntidade>",
             "aceitaNulo": false
+        },
+        {
+            "nome": "UltimoSalario",
+            "tipo": "decimal",
+            "aceitaNulo": false
         }
     ]
 }

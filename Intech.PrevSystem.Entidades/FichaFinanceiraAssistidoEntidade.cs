@@ -27,13 +27,14 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_BASE_CALC { get; set; }
 		public string CAMPO_CALCULADO { get; set; }
 		public string COD_COBRANCA { get; set; }
-		public string DS_RUBRICA { get; set; }
-		public string RUBRICA_PROV_DESC { get; set; }
-		public string ID_RUB_SUPLEMENTACAO { get; set; }
-		public bool IsAbonoAnual { get; set; }
-		public decimal? VAL_BRUTO { get; set; }
-		public decimal? VAL_DESCONTOS { get; set; }
-		public decimal? VAL_LIQUIDO { get; set; }
+		[Write(false)] public string DS_RUBRICA { get; set; }
+		[Write(false)] public string DS_ESPECIE { get; set; }
+		[Write(false)] public string RUBRICA_PROV_DESC { get; set; }
+		[Write(false)] public string ID_RUB_SUPLEMENTACAO { get; set; }
+		[Write(false)] public bool IsAbonoAnual { get; set; }
+		[Write(false)] public decimal? VAL_BRUTO { get; set; }
+		[Write(false)] public decimal? VAL_DESCONTOS { get; set; }
+		[Write(false)] public decimal? VAL_LIQUIDO { get; set; }
         
     }
 }

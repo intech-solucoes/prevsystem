@@ -115,5 +115,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual int BuscarUltimoNumeroContrato(string CD_FUNDACAO, int ANO_CONTRATO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<int>("SELECT TOP 1 NUM_CONTRATO FROM CE_CONTRATOS WHERE CD_FUNDACAO = @CD_FUNDACAO   AND ANO_CONTRATO = @ANO_CONTRATO ORDER BY NUM_CONTRATO DESC", new { CD_FUNDACAO, ANO_CONTRATO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<int>("SELECT NUM_CONTRATO FROM CE_CONTRATOS WHERE CD_FUNDACAO=:CD_FUNDACAO AND ANO_CONTRATO=:ANO_CONTRATO AND ROWNUM <= 1  ORDER BY NUM_CONTRATO DESC", new { CD_FUNDACAO, ANO_CONTRATO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
     }
 }

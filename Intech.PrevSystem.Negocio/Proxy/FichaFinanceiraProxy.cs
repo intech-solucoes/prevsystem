@@ -35,14 +35,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 listaFundos = fundoContrib.Concat(fundoContrib2).Concat(fundoContrib3).ToList();
             }
-            else
+            else if(CD_PLANO == "0003")
             {
                 listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
             }
             
             // Apura todas as contribuições
             var resumo = new List<FichaFinanceiraEntidade>();
-            grupoFicha.ForEach(grupo =>
+            foreach (var grupo in grupoFicha)
             {
                 var apuracao = new FichaFinanceiraEntidade
                 {
@@ -52,11 +52,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     CONTRIB_PARTICIPANTE = 0M,
                     CONTRIB_EMPRESA = 0M
                 };
-                
-                grupo.Items.ForEach(contribuicao =>
+
+                foreach(var contribuicao in grupo.Items)
                 {
                     // Filtra as contribuições por fundo
-                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO))
+                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO) || CD_PLANO == "0001")
                     {
                         // Cotas
                         if (contribuicao.CD_OPERACAO == "C")
@@ -80,13 +80,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         else
                             apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
                     }
-                });
+                }
 
                 apuracao.TOTAL_CONTRIB = apuracao.CONTRIB_PARTICIPANTE + apuracao.CONTRIB_EMPRESA;
                 apuracao.QTD_COTA = apuracao.QTD_COTA_RP_PARTICIPANTE + apuracao.QTD_COTA_RP_EMPRESA;
 
                 resumo.Add(apuracao);
-            });
+            }
 
             return resumo;
         }
@@ -122,14 +122,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 listaFundos = fundoContrib.Concat(fundoContrib2).Concat(fundoContrib3).ToList();
             }
-            else
+            else if(CD_PLANO == "0003")
             {
                 listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
             }
 
             // Apura todas as contribuições
             var resumo = new List<FichaFinanceiraEntidade>();
-            grupoFicha.ForEach(grupo =>
+            foreach (var grupo in grupoFicha)
             {
                 var apuracao = new FichaFinanceiraEntidade
                 {
@@ -141,10 +141,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     DES_MES_REF = DateTimeExtensoes.MesPorExtenso(grupo.MES_REF)
                 };
 
-                grupo.Items.ForEach(contribuicao =>
+                foreach (var contribuicao in grupo.Items)
                 {
                     // Filtra as contribuições por fundo
-                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO))
+                    if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO) || CD_PLANO == "0001")
                     {
                         // Cotas
                         if (contribuicao.CD_OPERACAO == "C")
@@ -168,13 +168,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         else
                             apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
                     }
-                });
+                }
 
                 apuracao.TOTAL_CONTRIB = apuracao.CONTRIB_PARTICIPANTE + apuracao.CONTRIB_EMPRESA;
                 apuracao.QTD_COTA = apuracao.QTD_COTA_RP_PARTICIPANTE + apuracao.QTD_COTA_RP_EMPRESA;
 
                 resumo.Add(apuracao);
-            });
+            }
 
             return resumo;
         }
@@ -237,6 +237,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo)
         {
             var contribuicoes = BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao).ToList();
+
+            if (contribuicoes.Count == 0)
+                throw new Exception("Nenhuma contribuição encontrada");
 
             var saldo = new SaldoContribuicoesEntidade();
             saldo.PreencherSaldo(contribuicoes, cdFundacao, cdEmpresa, cdPlano, numInscricao, cdFundo);

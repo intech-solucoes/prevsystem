@@ -41,16 +41,18 @@ namespace Intech.PrevSystem.Entidades
 		public string CK_EXTRATO_CST { get; set; }
 		public DateTime? DT_EMISSAO_CERTIFICADO { get; set; }
 		public string TIPO_IRRF_CANC { get; set; }
-		public string DS_PERFIL_INVEST { get; set; }
-		public string CD_CATEGORIA { get; set; }
-		public string DS_CATEGORIA { get; set; }
-		public string DS_PLANO { get; set; }
-		public string DS_SIT_PLANO { get; set; }
-		public string COD_CNPB { get; set; }
-		public decimal SalarioContribuicao { get; set; }
-		public decimal PercentualContribuicao { get; set; }
-		public ProcessoBeneficioEntidade ProcessoBeneficio { get; set; }
-		public List<ModalidadeEntidade> Modalidades { get; set; }
+		public string IND_OPTANTE_MAXIMA_BASICA { get; set; }
+		[Write(false)] public string DS_PERFIL_INVEST { get; set; }
+		[Write(false)] public string CD_CATEGORIA { get; set; }
+		[Write(false)] public string DS_CATEGORIA { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
+		[Write(false)] public string DS_SIT_PLANO { get; set; }
+		[Write(false)] public string COD_CNPB { get; set; }
+		[Write(false)] public decimal SalarioContribuicao { get; set; }
+		[Write(false)] public decimal PercentualContribuicao { get; set; }
+		[Write(false)] public ProcessoBeneficioEntidade ProcessoBeneficio { get; set; }
+		[Write(false)] public List<ModalidadeEntidade> Modalidades { get; set; }
+		[Write(false)] public decimal UltimoSalario { get; set; }
         
     }
 }

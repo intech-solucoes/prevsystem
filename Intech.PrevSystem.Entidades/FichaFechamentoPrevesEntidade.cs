@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -33,7 +33,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? QTE_COTA_ACUM { get; set; }
 		public decimal? VL_ACUMULADO { get; set; }
 		public DateTime? DT_FECHAMENTO { get; set; }
-		public string DS_LOTACAO { get; set; }
+		public DateTime? DT_PAGAMENTO { get; set; }
+		[Write(false)] public string DS_LOTACAO { get; set; }
         
     }
 }

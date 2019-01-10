@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class NaturezaDAO : BaseDAO<NaturezaEntidade>
     {
         
+		public virtual NaturezaEntidade BuscarPorCdNatur(decimal CD_NATUR)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<NaturezaEntidade>("SELECT * FROM CE_NATUREZA WHERE CD_NATUR = @CD_NATUR", new { CD_NATUR });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<NaturezaEntidade>("SELECT * FROM CE_NATUREZA WHERE CD_NATUR=:CD_NATUR", new { CD_NATUR });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<NaturezaEntidade> BuscarPorModalidadePlanoCategoriaTempoContrib(decimal CD_MODAL, string CD_PLANO, string ATIVO, string ASSISTIDO, string AUTOPATROCINADO, string DIFERIDO, int TEMPO_CONTRIBUICAO)
 		{
 			try

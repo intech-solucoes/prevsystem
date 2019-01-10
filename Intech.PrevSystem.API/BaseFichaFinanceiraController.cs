@@ -39,7 +39,7 @@ namespace Intech.PrevSystem.API
 
         [HttpGet("resumoAnosPorPlano/{cdPlano}")]
         [Authorize("Bearer")]
-        public IActionResult GetResumoAnosPorPlano(string cdPlano)
+        public virtual IActionResult GetResumoAnosPorPlano(string cdPlano)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Intech.PrevSystem.API
 
         [HttpGet("resumoMesesPorPlanoAno/{cdPlano}/{anoRef}")]
         [Authorize("Bearer")]
-        public IActionResult GetResumoMesesPorPlanoAno(string cdPlano, string anoRef)
+        public virtual IActionResult GetResumoMesesPorPlanoAno(string cdPlano, string anoRef)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Intech.PrevSystem.API
 
         [HttpGet("tiposPorPlanoAnoMes/{cdPlano}/{anoRef}/{mesRef}")]
         [Authorize("Bearer")]
-        public IActionResult GetTiposPorFundacaoPlanoAnoMes(string cdPlano, string anoRef, string mesRef)
+        public virtual IActionResult GetTiposPorFundacaoPlanoAnoMes(string cdPlano, string anoRef, string mesRef)
         {
             try
             {

@@ -47,6 +47,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual FuncionarioEntidade BuscarPorInscricao(string NUM_INSCRICAO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT       	EE_ENTIDADE.NOME_ENTID,      	CS_FUNCIONARIO.*  FROM CS_FUNCIONARIO  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = CS_FUNCIONARIO.COD_ENTID  WHERE CS_FUNCIONARIO.NUM_INSCRICAO = @NUM_INSCRICAO", new { NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.* FROM CS_FUNCIONARIO INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=CS_FUNCIONARIO.COD_ENTID WHERE CS_FUNCIONARIO.NUM_INSCRICAO=:NUM_INSCRICAO", new { NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual FuncionarioEntidade BuscarPorMatricula(string NUM_MATRICULA)
 		{
 			try

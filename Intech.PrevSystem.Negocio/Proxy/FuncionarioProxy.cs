@@ -15,7 +15,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return lista.OrderByDescending(x => x.DT_ADMISSAO).FirstOrDefault();
         }
 
-        public dynamic BuscarDadosPorCodEntid(string COD_ENTID)
+        public FuncionarioDados BuscarDadosPorCodEntid(string COD_ENTID)
         {
             var funcionario = base.BuscarPorCodEntid(COD_ENTID);
             var entidade = new EntidadeProxy().BuscarPorCodEntid(COD_ENTID);
@@ -30,17 +30,17 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 usuario = new UsuarioProxy().BuscarPorCpf(entidade.CPF_CGC);
             } catch { }
 
-            return new
+            return new FuncionarioDados
             {
-                funcionario,
-                dadosPessoais,
-                entidade,
-                usuario,
+                Funcionario = funcionario,
+                DadosPessoais = dadosPessoais,
+                Entidade = entidade,
+                Usuario = usuario,
                 NOME_EMPRESA = empresa.NOME_ENTID,
                 CPF = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF),
                 SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO",
                 IDADE = dadosPessoais.DT_NASCIMENTO.IdadeEm(DateTime.Now).ToShortString(),
-                estadoCivil.DS_ESTADO_CIVIL,
+                DS_ESTADO_CIVIL = estadoCivil.DS_ESTADO_CIVIL,
                 CEP = entidade.CEP_ENTID.AplicarMascara(Mascaras.CEP)
             };
         }

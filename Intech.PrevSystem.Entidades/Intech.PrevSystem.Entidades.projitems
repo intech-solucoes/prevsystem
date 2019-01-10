@@ -44,9 +44,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)FaixaValorContribEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FatorRiscoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FeriadoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FichaFechamentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFechamentoPrevesEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFinanceiraAssistidoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFinanceiraEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FuncionarioDados.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)FuncionarioEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FundacaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FundoContribEntidade.cs" />

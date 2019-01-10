@@ -40,6 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FatorRiscoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FeriadoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFechamentoPrevesProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFechamentoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraAssistidoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioProxy.cs" />

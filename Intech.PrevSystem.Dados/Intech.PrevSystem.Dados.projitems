@@ -38,6 +38,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FatorRisco\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Feriado\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarTodos.sql" />
@@ -122,6 +123,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoAnosPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoDetalhesPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoMesesPorFundacaoEmpresaPlanoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatas.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatasPorRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor.sql" />
@@ -223,6 +225,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FaixaValorContribDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FatorRiscoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FeriadoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFechamentoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFechamentoPrevesDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFinanceiraAssistidoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFinanceiraDAO.cs" />

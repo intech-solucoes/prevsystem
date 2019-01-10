@@ -9,8 +9,12 @@
     <Import_RootNamespace>Intech.PrevSystem.Metrus.Negocio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ConcessaoMetrus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContratoDisponivel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoProxyMetrus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosMetrusProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoExtensoes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModalidadeProxyMetrus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlanoVinculadoProxyMetrus.cs" />
   </ItemGroup>
 </Project>

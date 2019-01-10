@@ -1,9 +1,13 @@
 ﻿#region Usings
+using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Extensoes;
 using Intech.PrevSystem.Metrus.Negocio;
+using Intech.PrevSystem.Negocio;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 #endregion
 
@@ -103,7 +107,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             {
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
 
-                return Json(new PrestacaoProxy().BuscarPorFundacaoContrato(funcionario.CD_FUNDACAO, anoContrato, numContrato));
+                return Json(new PrestacaoProxy().BuscarResumoPorFundacaoContrato(funcionario.CD_FUNDACAO, anoContrato, numContrato));
             }
             catch (Exception ex)
             {
@@ -122,11 +126,13 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             {
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 
-                var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA);
+                var planos = new PlanoVinculadoProxyMetrus().BuscarPorFundacaoEmpresaMatriculaComModalidades(funcionario);
 
+                // ------------
                 // Datas de crédito
+
                 var feriados = new FeriadoProxy().BuscarDatas().ToList();
-                var dataCredito = DateTime.Now;
+                var dataCredito = DateTime.Today;
 
                 while (dataCredito.DayOfWeek != DayOfWeek.Friday)
                     dataCredito = dataCredito.AddDays(1);
@@ -159,10 +165,106 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
             catch (Exception ex)
             {
+                return BadRequest(new
+                {
+                    mensagem = ex.Message
+                });
+            }
+        }
+
+        [HttpGet("calcularDataDesconto/{dataCredito}/{carencia}")]
+        public IActionResult CalularDataDesconto(string dataCredito, int carencia)
+        {
+            DateTime dataAux = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
+
+            var listaFeriados = new FeriadoProxy().Buscar().ToList();
+            dataAux = dataAux.AddMonths(carencia + 1);
+
+            DateTime dataFinal = new DateTime(dataAux.Year, dataAux.Month,dataAux.UltimoDiaUtilDoMes(listaFeriados));
+
+            return Json(new { data = dataFinal });
+        }
+
+        [HttpGet("buscarConcessao/{codEntid}/{cdPlano}/{cdNatur}/{dataCredito}")]
+        public IActionResult BuscarConcessao(string codEntid, string cdPlano, decimal cdNatur, string dataCredito)
+        {
+            try
+            {
+                DateTime dtCredito = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
+                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+
+                var concessao = ConcessaoMetrus.ObtemConcessao(funcionario, cdPlano, cdNatur, 1, dtCredito, DateTime.Now);
+
+                return Json(new { concessao });
+            }
+            catch (Exception ex)
+            {
                 return BadRequest(ex.Message);
             }
         }
 
+        [HttpPost("parametrosParcelas")]
+        public IActionResult ParametrosParcelas([FromBody] ParametrosSimulacao dados)
+        {
+            try
+            {
+                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.Concessao, dados.CdPlano, dados.CD_MODAL, dados.CD_NATUR, dados.DataCredito, dados.ValorSolicitado, dados.Carencia);
+
+                if (contratosDisponiveis.Count > 0)
+                    return Json(contratosDisponiveis);
+                else
+                    return Json(new {
+                        mensagem = "Não existem parcelas disponíveis para simulação/contratação"
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("contratar")]
+        public IActionResult Contratar([FromBody] ParametrosContrato dados)
+        {
+            try
+            {
+                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                return Json(new
+                {
+                    AnoNumContrato = new ContratoProxyMetrus().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor)
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = ex.Message
+                });
+            }
+        }
+
         #endregion
+    }
+
+    public class ParametrosSimulacao
+    {
+        public string CodEntid { get; set; }
+        public string CdPlano { get; set; }
+        public decimal CD_MODAL { get; set; }
+        public decimal CD_NATUR { get; set; }
+        public DateTime DataCredito { get; set; }
+        public decimal ValorSolicitado { get; set; }
+        public decimal Carencia { get; set; }
+        public Concessao Concessao { get; set; }
+    }
+
+    public class ParametrosContrato
+    {
+        public string CodEntid { get; set; }
+        public string CdPlano { get; set; }
+        public ContratoDisponivel Contrato { get; set; }
+        public Concessao Concessao { get; set; }
+        public SaldoDevedorEntidade SaldoDevedor { get; set; }
     }
 }

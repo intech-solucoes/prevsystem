@@ -91,15 +91,15 @@ namespace Intech.PrevSystem.Metrus.API
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
-            app.UseMvc();
-
             app.UseCors(cors =>
             {
                 cors.AllowAnyHeader();
                 cors.AllowAnyOrigin();
                 cors.AllowAnyMethod();
             });
+
+            //app.UseHttpsRedirection();
+            app.UseMvc();
         }
     }
 }

@@ -13,16 +13,22 @@ namespace Intech.PrevSystem.Metrus.Negocio
             var empresa = new EmpresaProxy().BuscarPorCodigo(funcionario.CD_EMPRESA);
             var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
             var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA).ToList();
+            var entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);
+
+            if (dadosPessoais.CNT_ABERT_CRED == null)
+                dadosPessoais.CNT_ABERT_CRED = "N";
 
             var dados = new
             {
+                Status = true,
                 NOME = funcionario.NOME_ENTID,
                 CPF = dadosPessoais.CPF_CGC,
                 CD_EMPRESA = empresa.CD_EMPRESA,
                 DS_EMPRESA = empresa.NOME_ENTID,
                 DadosPessoais = dadosPessoais,
                 Funcionario = funcionario,
-                Planos = planos
+                Planos = planos,
+                Entidade = entidade
             };
 
             return dados;

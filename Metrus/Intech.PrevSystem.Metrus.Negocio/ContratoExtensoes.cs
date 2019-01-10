@@ -6,13 +6,14 @@ using Intech.PrevSystem.Entidades.Extensoes;
 using Intech.PrevSystem.Negocio.Proxy;
 using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Metrus.Negocio
 {
     public static class ContratoExtensoes
     {
+
         public static void BuscarSaldoDevedor(this ContratoEntidade contrato, string fundacao, string empresa, DateTime p_dt_quitacao)
         {
             decimal w_saldo_dev = 0, w_juros_mes = 0, w_seguro_mes_pro_rata = 0,
@@ -282,7 +283,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             if (taxaEncargo.CORRIGIR_SALDO_DEV == "N")
                 return dCorrecaoSaldo;
 
-            if (taxaConcessao.COD_IND != "")
+            if (!string.IsNullOrEmpty(taxaConcessao.COD_IND))
             {
                 if (taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM && taxaConcessao.IND_MESES_DEFAZAGEM > 0)
                     dtIndice = dtFim.AddMonths(-1 * (int)taxaConcessao.IND_MESES_DEFAZAGEM);
@@ -328,7 +329,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 diasMes = DateTime.DaysInMonth(dtFim.Year, dtFim.Month);
 
             double difDias = (dtFim - dtIni).Days;
-            decimal calc = (decimal)Math.Pow((double)taxaCorrecao, 1 / diasMes);
+            decimal calc = (decimal)Math.Pow((double)taxaCorrecao, (double)1 / (double)diasMes);
             decimal fator = (decimal)Math.Pow((double)calc, difDias);
 
             vlSaldo *= (fator - 1);
@@ -378,36 +379,17 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
             if (taxaEncargo.PERIODO_CARENCIA > 0)
             {
+                if (taxaEncargo.CARENCIA_VENCIMENTO == "D")
+                    w_dt_inad = w_dt_inad.AddDays(-1);
+
                 if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SIM_NAO.SIM)
                 {
-                    if (taxaEncargo.CARENCIA_VENCIMENTO == "D")
-                    {
-                        w_dt_inad = p_dt_ini.AddMonths(1);
-                        w_dt_inad = new DateTime(w_dt_inad.Year, w_dt_inad.Month, (int)taxaEncargo.PERIODO_CARENCIA);
+                    var feriados = new FeriadoProxy().Buscar().ToList();
 
-                        var feriados = new FeriadoProxy().Listar();
+                    for (int i = 0; i <= taxaEncargo.PERIODO_CARENCIA; i++)
+                        w_dt_aux = Feriado.BuscarDiaUtil(feriados, w_dt_aux.AddDays(1), Feriado.Direcao.Posterior, null);
 
-                        if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SIM_NAO.SIM)
-                        {
-                            for (int i = 0; i <= taxaEncargo.PERIODO_CARENCIA; i++)
-                                w_dt_aux = Feriado.BuscarDiaUtil(feriados, w_dt_aux.AddDays(1), Feriado.Direcao.Posterior, null);
-
-                            w_dt_inad = w_dt_aux;
-                        }
-                        else
-                        {
-                            w_dt_inad = p_dt_ini.AddDays(1);
-                        }
-                    }
-                    else
-                    {
-                        w_dt_inad = p_dt_ini.AddDays((double)taxaEncargo.PERIODO_CARENCIA);
-                    }
-
-                }
-                else
-                {
-                    w_dt_inad = p_dt_ini.AddDays(1);
+                    w_dt_inad = w_dt_aux;
                 }
 
                 if (w_dt_inad >= p_dt_fin)
@@ -421,48 +403,154 @@ namespace Intech.PrevSystem.Metrus.Negocio
             }
 
             //Calculo exponencial
+            //Não testado pois todos os registros de modalidade da base metrus indicam p_tipo_calc_prest == "L"
             if (p_tipo_calc_prest == "C")
             {
                 //corrige prestacao para depois calcular multa e juros
-                if ((taxaEncargo.CORRIGIR_PREST_ATRASO == "M") || taxaEncargo.CONSIDERAR_CORR_PREST == "A")
-                    w_vl_multa = w_vl_prest * (taxaEncargo.TX_MULTA.Value / 100M);
+                if (taxaEncargo.CORRIGIR_PREST_ATRASO == DMN_SIM_NAO.SIM)
+                {
+                    w_vl_ind_acum = 1;
+                    w_dt_aux = p_dt_ini;
+                    w_dt_aux1 = w_dt_aux;
+
+                    //acumulando os indices
+                    while (!(w_dt_aux >= p_dt_fin))
+                    {
+                        w_dt_aux = w_dt_aux.AddMonths(1);
+                        w_dt_aux = new DateTime(w_dt_aux.Year, w_dt_aux.Month, w_dt_aux.UltimoDiaDoMes().Day);
+
+                        if (w_dt_aux > p_dt_fin)
+                            w_dt_aux = p_dt_fin;
+
+                        if ((taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM) &&
+                            (taxaConcessao.IND_MESES_DEFAZAGEM > 0))
+                            w_dt_ind = w_dt_aux.AddMonths((int)-taxaConcessao.IND_MESES_DEFAZAGEM);
+                        else
+                            w_dt_ind = w_dt_aux;
+
+                        w_dt_ind = new DateTime(w_dt_ind.Year, w_dt_ind.Month, w_dt_ind.UltimoDiaDoMes().Day);
+
+                        if (taxaEncargo.COD_IND_JU_MORA != "")
+                        {
+                            var indice = new IndiceProxy().BuscarPorCodigo(taxaEncargo.COD_IND_JU_MORA);
+
+                            if (indice == null)
+                            {
+                                multa = 0;
+                                mora = 0;
+                                correcaoPrestacao = 0;
+                                //Msg_Erro('�?ndice ' + QyTaxasEncargos.FieldByname('COD_IND_JU_MORA').asString +
+                                //         ' não cadastrado para a Data: ' + DateToStr(w_dt_ind) +
+                                //         ', Correção Monetária não foi aplicada...');
+
+                                return;
+                            }
+                            else
+                            {
+                                if (taxaConcessao.TIPO_IND == "V")
+                                    w_vl_ind = (indice.ObtemVariacaoEm(w_dt_ind) / 100) + 1;
+                                else
+                                    w_vl_ind = (indice.BuscarValorEm(w_dt_ind) / 100) + 1;
+                            }
+
+                        }
+                        else
+                            w_vl_ind = 1;
+
+                        w_dias_mes = 30;
+                        //w_dif_dias = DataUtil.DiasEntreDatasPuro(w_dt_aux1, w_dt_aux);
+                        w_dif_dias = (w_dt_aux - w_dt_aux1).Days;
+                        if (w_dif_dias > 30)
+                            w_dif_dias = 30;
+
+                        w_calc = (decimal)Math.Pow((double)w_vl_ind, (double)1 / (double)w_dias_mes);
+                        w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
+
+                        w_vl_ind_acum = Math.Round(Math.Round(w_vl_ind_acum, 10) * Math.Round(w_fator, 10), 10);
+                        w_dt_aux1 = w_dt_aux;
+                    }
+
+                    //w_taxa_juros = w_vl_ind_acum;
+                    w_vl_ind = w_vl_ind_acum;
+
+                    if ((w_vl_ind != 0) && (w_taxa_juros != 0))
+                        w_tx_corr = ((((w_vl_ind * w_taxa_juros) - 1) * 100) / 100) + 1;
+
+                    if ((w_vl_ind != 0) && (w_taxa_juros == 0))
+                        w_tx_corr = w_vl_ind;
+
+                    if ((w_vl_ind == 0) && (w_taxa_juros != 0))
+                        w_tx_corr = w_taxa_juros;
+
+                    w_vl_correcao = (w_vl_prest * (w_vl_ind_acum - 1)).Arredonda(2);
+
+                    if (w_vl_correcao < 0)
+                        w_vl_correcao = 0;
+
+                    w_vl_prest = w_vl_prest + w_vl_correcao;
+
+
+                }
+
+                if ((taxaEncargo.CONSIDERAR_CORR_PREST == "M") ||
+                    (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
+                    w_vl_multa = w_vl_prest * (taxaEncargo.TX_MULTA.Value / 100);
                 else
-                    w_vl_multa = p_vl_prestacao * (taxaEncargo.TX_MULTA.Value / 100M);
+                    w_vl_multa = p_vl_prestacao * (taxaEncargo.TX_MULTA.Value / 100);
 
                 if (w_vl_multa < 0)
                     w_vl_multa = 0;
 
                 if (taxaEncargo.TX_JUROS_MORA > 0)
                 {
-                    w_taxa_juros = (taxaEncargo.TX_JUROS_MORA.Value / 100M) + 1;
+                    w_taxa_juros = ((taxaEncargo.TX_JUROS_MORA.Value / 100) + 1);
 
                     if (taxaEncargo.DIA_PRO_RATA_SALDO == DMN_SIM_NAO.SIM)
                         w_dias_mes = 30;
                     else
                         w_dias_mes = p_dt_fin.UltimoDiaDoMes().Day;
 
+                    //Colocado antes do switch para que não haja diferença na quantidade de dias do contrato, pois sempre vai pegar a data de vencimento do contrato.
                     w_dif_dias = (p_dt_fin - p_dt_ini).Days;
-                    w_calc = w_taxa_juros.ElevadoA(1 / w_dias_mes);
-                    w_fator = w_calc.ElevadoA(w_dif_dias);
+
+                    switch (contrato.Modalidade.DIA_CORRECAO)
+                    {
+                        case "S":
+                            p_dt_ini = new DateTime(p_dt_ini.Year, p_dt_ini.Month, 30);
+                            break;
+                        case "U":
+                            p_dt_ini = p_dt_ini.UltimoDiaDoMes();
+                            break;
+                        default:
+                            p_dt_ini = new DateTime(p_dt_ini.Year, p_dt_ini.Month, (int)contrato.Modalidade.DIA_CORR_INFORMADO);
+                            break;
+                    }
+
+                    w_calc = (decimal)Math.Pow((double)(w_taxa_juros), ((double)1 / (double)w_dias_mes));
+                    w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
+
+                    decimal t = (decimal)Math.Pow((double)w_taxa_juros, (double)w_dif_dias / 30);
+                    decimal t1 = (t * w_vl_prest) - w_vl_prest;
 
                     if (taxaEncargo.CONSIDERAR_MULTA == DMN_SIM_NAO.SIM)
                     {
-                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
+                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J")
+                            || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
                             w_vl_mora = ((w_vl_prest + w_vl_multa) * (w_fator - 1)).Arredonda(2);
                         else
                             w_vl_mora = ((p_vl_prestacao + w_vl_multa) * (w_fator - 1)).Arredonda(2);
                     }
                     else
                     {
-                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
-                            w_vl_mora = ((w_vl_prest) * (w_fator - 1)).Arredonda(2);
+                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J")
+                            || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
+                            w_vl_mora = (w_vl_prest * (w_fator - 1)).Arredonda(2);
                         else
-                            w_vl_mora = ((p_vl_prestacao) * (w_fator - 1)).Arredonda(2);
+                            w_vl_mora = (p_vl_prestacao * (w_fator - 1)).Arredonda(2);
                     }
 
                     if (w_vl_mora < 0)
                         w_vl_mora = 0;
-
                 }
             }
 
@@ -470,18 +558,9 @@ namespace Intech.PrevSystem.Metrus.Negocio
             if (p_tipo_calc_prest == "L")
             {
                 //   {corrige a prestação para depois calcular multa e juros}
-                if ((taxaEncargo.CONSIDERAR_CORR_PREST == "M") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
-                    w_vl_multa = (w_vl_prest * (taxaEncargo.TX_MULTA.Value / 100M));
-                else
-                    w_vl_multa = (p_vl_prestacao * (taxaEncargo.TX_MULTA.Value / 100M));
-
-                if (w_vl_multa < 0)
-                    w_vl_multa = 0;
-
-                if (taxaEncargo.TX_JUROS_MORA > 0)
+                if (taxaEncargo.CORRIGIR_PREST_ATRASO == DMN_SIM_NAO.SIM)
                 {
-                    w_vl_ind_acum = 0;
-                    w_taxa_juros = taxaEncargo.TX_JUROS_MORA.Value;
+                    // w_vl_ind_acum = 1; // 0 raphael;
                     w_dt_aux = p_dt_ini;
                     w_dt_aux1 = w_dt_aux;
 
@@ -490,45 +569,106 @@ namespace Intech.PrevSystem.Metrus.Negocio
                     {
                         w_dt_aux = w_dt_aux.AddMonths(1);
 
+                        if (w_vl_ind_acum == 0)
+                            w_vl_ind_acum = 1;
+
+
                         if (w_dt_aux > p_dt_fin)
                             w_dt_aux = p_dt_fin;
 
+                        if ((taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM) &&
+                            (taxaConcessao.IND_MESES_DEFAZAGEM > 0))
+                            w_dt_ind = w_dt_aux.AddMonths((int)-taxaConcessao.IND_MESES_DEFAZAGEM);
+                        else
+                            w_dt_ind = w_dt_aux;
+
+                        w_dt_ind = new DateTime(w_dt_ind.Year, w_dt_ind.Month, w_dt_ind.UltimoDiaDoMes().Day);
+
+                        if (taxaEncargo.COD_IND_JU_MORA != "")
+                        {
+                            var indice = new IndiceProxy().BuscarPorCodigo(taxaEncargo.COD_IND_JU_MORA);
+
+                            if (taxaConcessao.TIPO_IND == "V")
+                                w_vl_ind = (indice.ObtemVariacaoEm(w_dt_ind) / 100) + 1;
+                            else
+                                w_vl_ind = (indice.ObtemValorEm(w_dt_ind) / 100) + 1; 
+
+                        }
+                        else
+                            w_vl_ind = 1;
+
+                        //Silvio: Neste trecho da para otimizar pois w_fator sempre será elevado a 30 dias
                         w_dias_mes = 30;
+                        //w_dif_dias = DataUtil.DiasEntreDatasPuro(w_dt_aux1, w_dt_aux);
                         w_dif_dias = (w_dt_aux - w_dt_aux1).Days;
 
-                        if (w_dif_dias != 30)
-                        {
+                        if (w_dif_dias > 30)
                             w_dif_dias = 30;
-                        }
 
-                        w_fator = w_dif_dias / w_dias_mes;
-                        w_vl_ind_acum += w_fator;
+                        w_calc = (decimal)Math.Pow((double)w_vl_ind, ((double)1 / (double)w_dias_mes));
+                        w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
+
+                        w_vl_ind_acum = w_vl_ind_acum * w_fator;
                         w_dt_aux1 = w_dt_aux;
                     }
 
-                    w_fator = w_vl_ind_acum * w_taxa_juros;
+                    w_vl_ind = w_vl_ind_acum;
 
-                    if (taxaEncargo.CONSIDERAR_MULTA == DMN_SIM_NAO.SIM)
+                    if (taxaEncargo.CONSIDERAR_JUROS_CONC == DMN_SIM_NAO.SIM)
                     {
-                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
-                            w_vl_mora = (((w_vl_prest + w_vl_multa) * w_fator) / 100M).Arredonda(2);
-                        else
-                            w_vl_mora = (((p_vl_prestacao + w_vl_multa) * w_fator) / 100M).Arredonda(2);
+                        //{acumula a taxa de juros do contrato}
+                        w_taxa_juros = (p_tx_juros / 100) + 1;
+
+                        w_vl_ind_acum = 1;
+                        w_dt_aux = p_dt_ini;
+                        w_dt_aux1 = w_dt_aux;
+
+                        while (!(w_dt_aux >= p_dt_fin))
+                        {
+                            w_dt_aux = w_dt_aux.AddMonths(1);
+                            w_dt_aux = new DateTime(w_dt_aux.Year, w_dt_aux.Month, w_dt_aux.UltimoDiaDoMes().Day);
+
+                            if (w_dt_aux > p_dt_fin)
+                                w_dt_aux = p_dt_fin;
+
+                            w_dias_mes = 30;
+                            w_dif_dias = (w_dt_aux - w_dt_aux1).Days;
+
+                            if (w_dif_dias > 30)
+                                w_dif_dias = 30;
+
+                            w_calc = (decimal)Math.Pow((double)w_taxa_juros, (double)1 / (double)w_dias_mes);
+                            w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
+
+                            w_vl_ind_acum = w_vl_ind_acum * w_fator;
+                            w_dt_aux1 = w_dt_aux;
+                        }
+
+                        //w_taxa_juros = w_vl_ind_acum;
+
                     }
                     else
-                    {
-                        if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
-                        {
-                            w_vl_mora = ((w_vl_prest * w_fator) / 100M).Arredonda(2);
-                        }
-                        else
-                        {
-                            w_vl_mora = ((p_vl_prestacao * w_fator) / 100M).Arredonda(2);
-                        }
-                    }
+                        w_vl_ind_acum = 0;
 
-                    if (w_vl_mora < 0)
-                        w_vl_mora = 0;
+                    w_taxa_juros = w_vl_ind_acum;
+
+                    if ((w_vl_ind != 0) && (w_taxa_juros != 0))
+                        w_tx_corr = ((((w_vl_ind * w_taxa_juros) - 1) * 100) / 100) + 1;
+
+                    if ((w_vl_ind != 0) && (w_taxa_juros == 0))
+                        w_tx_corr = w_vl_ind;
+
+                    if ((w_vl_ind == 0) && (w_taxa_juros != 0))
+                        w_tx_corr = w_taxa_juros;
+
+                    w_vl_correcao = (w_vl_prest * (w_tx_corr - 1)).Arredonda(2);
+
+                    if (w_vl_correcao < 0)
+                        w_vl_correcao = 0;
+
+                    w_vl_prest = w_vl_prest + w_vl_correcao;
+
+
                 }
             }
 
@@ -538,90 +678,32 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 DataIni = new DateTime(DtAux.Year, DtAux.Month, 1);
                 DtVenc = new DateTime(p_dt_ini.Year, p_dt_ini.Month, p_dt_ini.UltimoDiaDoMes().Day);
 
-                if ((DtVenc < DataIni) && (((p_dt_fin - DtVenc).Days) > 15))
+                //DataUtil.DiasEntreDatasPuro(DtVenc, p_dt_fin)
+                if ((DtVenc < DataIni) && (((p_dt_fin - DtVenc.UltimoDiaDoMes()).Days) > 15))
                 {
-                    w_vl_multa = w_vl_multa + (w_vl_prest * (taxaEncargo.TX_MULTA.Value / 100M));
 
-                    DtAtu = DtVenc.AddMonths(1).PrimeiroDiaDoMes();
+                    w_vl_multa = w_vl_multa + ((w_vl_prest) * (taxaEncargo.TX_MULTA.Value / 100));
+
+                    DtVenc = DtVenc.AddMonths(1);
+                    DtAtu = new DateTime(DtVenc.Year, DtVenc.Month, 1);
 
                     while ((DtAtu.Month != DtAux.Month) || (DtAtu.Year != DtAux.Year))
                     {
                         DtAtu = new DateTime(DtAtu.Year, DtAtu.Month, DtAtu.UltimoDiaDoMes().Day);
-
                         w_vl_mora = w_vl_mora +
                                     ((w_vl_prest + w_vl_mora) *
-                                     (1 + (taxaEncargo.TX_JUROS_MORA.Value / 100M)).ElevadoA(DtAtu.UltimoDiaDoMes().Day / 30))
-                                    - (w_vl_prest + w_vl_mora);
-                        DtAtu = DtAtu.AddMonths(1).PrimeiroDiaDoMes();
+                                    (decimal)Math.Pow(((double)1 + (double)taxaEncargo.TX_JUROS_MORA / (double)100), (double)DtAtu.UltimoDiaDoMes().Day / (double)30)) -
+                                    (w_vl_prest + w_vl_mora);
+                        DtAtu = DtAtu.AddMonths(1);
+                        DtAtu = new DateTime(DtAtu.Year, DtAtu.Month, 1);
                     }
 
+                    //DataUtil.DiasEntreDatasPuro(DtAtu, p_dt_fin)
                     w_vl_mora = w_vl_mora +
                                 ((w_vl_prest + w_vl_mora) *
-                                 (1 + (taxaEncargo.TX_JUROS_MORA.Value / 100M)).ElevadoA(((p_dt_fin - DtAtu).Days + 1) / 30))
-                                - (w_vl_prest + w_vl_mora);
+                                (decimal)Math.Pow(((double)1 + (double)taxaEncargo.TX_JUROS_MORA / (double)100), ((double)(p_dt_fin - DtAtu).Days + (double)1) / (double)30)
+                                - (w_vl_prest + w_vl_mora));
                 }
-            }
-
-            //Na Sabesprev a correção da prestação é sobre a multa e juros
-            if (taxaEncargo.CORRIGIR_PREST_ATRASO == DMN_SIM_NAO.SIM)
-            {
-                w_vl_ind_acum = 1;
-                w_dt_aux = p_dt_ini;
-                w_dt_aux1 = w_dt_aux;
-
-                //{Acumulando os indices}
-                while (!(w_dt_aux >= p_dt_fin))
-                {
-                    w_dt_aux = w_dt_aux.AddMonths(1).UltimoDiaDoMes();
-                    if (w_dt_aux > p_dt_fin)
-                        w_dt_aux = p_dt_fin;
-
-                    if ((taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM) && (taxaConcessao.IND_MESES_DEFAZAGEM > 0))
-                        w_dt_ind = w_dt_aux.AddMonths((int)-taxaConcessao.IND_MESES_DEFAZAGEM);
-                    else
-                        w_dt_ind = w_dt_aux;
-
-                    w_dt_ind = w_dt_ind.UltimoDiaDoMes();
-
-                    if (taxaEncargo.COD_IND_JU_MORA != "")
-                    {
-                        var indice = new IndiceProxy().BuscarPorCodigo(taxaEncargo.COD_IND_JU_MORA);
-
-                        if (taxaConcessao.TIPO_IND == "V")
-                            w_vl_ind = (indice.ObtemVariacaoEm(w_dt_ind) / 100) + 1;
-                        else
-                            w_vl_ind = (indice.ObtemValorEm(w_dt_ind) / 100) + 1;
-                    }
-                    else
-                    {
-                        w_vl_ind = 1;
-                    }
-
-                    w_dias_mes = 30;
-                    w_dif_dias = (w_dt_aux - w_dt_aux1).Days;
-
-                    if (w_dif_dias > 30 || (w_dt_aux.Month == 2 && w_dif_dias >= 28))
-                        w_dif_dias = 30;
-
-                    w_calc = (decimal)Math.Pow((double)w_vl_ind, ((double)1 / (double)w_dias_mes));
-                    w_fator = (decimal)Math.Pow((double)w_calc, (double)w_dif_dias);
-
-                    w_vl_ind_acum = (w_vl_ind_acum * w_fator);
-                    w_dt_aux1 = w_dt_aux;
-                }
-
-                w_vl_ind = w_vl_ind_acum;
-
-                if (w_vl_ind != 0)
-                    w_tx_corr = w_vl_ind;
-
-                //w_vl_correcao = ((w_vl_prest + w_vl_multa + w_vl_mora) * (w_tx_corr - 1)).Arredonda(2);
-                w_vl_correcao = (w_vl_prest) * (w_tx_corr - 1);
-
-                if (w_vl_correcao < 0)
-                    w_vl_correcao = 0;
-
-                w_vl_prest = w_vl_prest + w_vl_correcao;
             }
 
             multa = w_vl_multa.Arredonda(2);

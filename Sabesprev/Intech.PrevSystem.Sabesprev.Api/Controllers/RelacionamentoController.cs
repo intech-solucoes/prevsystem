@@ -24,12 +24,12 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
             try
             {
                 var emailConfig = Config.GetSection("Email").Get<ConfigEmail>();
-                EnvioEmail.Enviar(emailConfig, emailConfig.EmailRemetente, $"Faceb Mobile - {relacionamentoEntidade.Assunto}", $"Mensagem de <b>{relacionamentoEntidade.Email}</b>:<br/><br/>{relacionamentoEntidade.Mensagem}");
+                EnvioEmail.EnviarMailKit(emailConfig, emailConfig.EmailRelacionamento, $"Sabesprev Mobile - {relacionamentoEntidade.Assunto}", $"Mensagem de <b>{relacionamentoEntidade.Email}</b>:<br/><br/>{relacionamentoEntidade.Mensagem}");
                 return Ok();
             }
             catch(Exception ex)
             {
-                return BadRequest("Ocorreu um erro ao enviar socilitação.");
+                return BadRequest(ex.Message);
             }
         }
     }

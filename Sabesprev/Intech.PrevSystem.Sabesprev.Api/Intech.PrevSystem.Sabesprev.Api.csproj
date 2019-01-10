@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>0.5.1</Version>
-    <AssemblyVersion>0.5.1.0</AssemblyVersion>
-    <FileVersion>0.5.1.0</FileVersion>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>0.6.1.0</AssemblyVersion>
+    <FileVersion>0.6.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +13,10 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
+    <PackageReference Include="DevExpress.AspNetCore.Core" Version="18.1.6" />
+    <PackageReference Include="DevExpress.DataAccess" Version="18.1.6" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
+    <PackageReference Include="FinancialFormulas" Version="1.2.2" />
     <PackageReference Include="MailKit" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />

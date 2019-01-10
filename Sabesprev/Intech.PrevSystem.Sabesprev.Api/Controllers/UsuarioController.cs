@@ -23,7 +23,6 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
             try
             {
                 string cpf = user.Cpf.Value;
-                string senha = user.Senha.Value;
 
                 var funcionarioProxy = new FuncionarioProxy();
 

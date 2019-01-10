@@ -112,7 +112,7 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
             }        
         }
 
-        private void GroupFooter1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void GroupFooter1_BeforePrint(object sender, EventArgs e)
         {
             decimal valCotaUltimaData = BuscarValorDaCotaNaUltimaData();
 
@@ -130,7 +130,7 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
             return indice.First().VALOR_IND;
         }
 
-        private void xrTableCellDataExoneracao_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCellDataExoneracao_BeforePrint(object sender, EventArgs e)
         {
 
         }

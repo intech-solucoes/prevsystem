@@ -10,8 +10,9 @@ using System.IO;
 
 namespace Intech.PrevSystem.Saofrancisco.API.Controllers
 {
-    [Route(RotasApi.FichaFinanceiraAssistido)]
-    public class FichaFinanceiraAssistidoController : BaseFichaFinanceiraAssistidoController
+    [Route("api/")]
+    public class VersaoController : BaseVersaoController
     {
+
     }
 }

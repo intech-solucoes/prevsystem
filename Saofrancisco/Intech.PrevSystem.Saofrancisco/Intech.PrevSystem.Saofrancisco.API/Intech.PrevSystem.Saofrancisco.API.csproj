@@ -10,12 +10,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
     <PackageReference Include="MailKit" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Drawing">
+      <HintPath>System.Drawing</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Import Project="..\Intech.PrevSystem.Negocio.Saofrancisco\Intech.PrevSystem.Negocio.Saofrancisco.projitems" Label="Shared" Condition="Exists('..\Intech.PrevSystem.Negocio.Saofrancisco\Intech.PrevSystem.Negocio.Saofrancisco.projitems')" />

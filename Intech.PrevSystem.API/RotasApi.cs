@@ -24,5 +24,6 @@
         public const string Fundacao = "api/fundacao";
         public const string Relacionamento = "api/relacionamento";
         public const string Emprestimo = "api/emprestimo";
+        public const string Dashboard = "api/dashboard";
     }
 }

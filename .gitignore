@@ -65,3 +65,5 @@ obj
 lib
 .sass-cache
 .vs
+
+\.DS_Store

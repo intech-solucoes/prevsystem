@@ -17,9 +17,6 @@ namespace Intech.PrevSystem.Metrus.Negocio
             var proxyNaturezas = new NaturezaProxy();
             var proxyFichaFinanceira = new FichaFinanceiraProxy();
             var proxyCarenciasDisponiveis = new CarenciasDisponiveisProxy();
-            var proxyFeriados = new FeriadoProxy();
-
-            var feriados = proxyFeriados.BuscarDatas();
 
             var ativo = plano.CD_CATEGORIA == DMN_CATEGORIA.ATIVO ? "S" : null;
             var assistido = plano.CD_CATEGORIA == DMN_CATEGORIA.ASSISTIDO ? "S" : null;

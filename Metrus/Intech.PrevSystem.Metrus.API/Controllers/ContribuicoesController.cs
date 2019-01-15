@@ -52,7 +52,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                 // Ultimas contribuicoes
                 var contribuicoes = fichaFinanceiraProxy.BuscarUltimaPorFundacaoPlanoInscricao(funcionario.CD_FUNDACAO, "0002", funcionario.NUM_INSCRICAO);
-
+                
                 return Json(new
                 {
                     saldoBasicaParticipante,

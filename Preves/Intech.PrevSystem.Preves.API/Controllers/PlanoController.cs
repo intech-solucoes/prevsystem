@@ -17,13 +17,13 @@ namespace Intech.PrevSystem.Preves.API.Controllers
     [Route(RotasApi.Plano)]
     public class PlanoController : BasePlanoController
     {
-        [HttpGet("relatorioExtratoPorPlanoReferencia/{cdPlano}/{dtInicio}/{dtFim}/{enviarPorEmail}")]
+        [HttpGet("relatorioExtratoPorPlanoEmpresaReferencia/{cdPlano}/{cdEmpresa}/{dtInicio}/{dtFim}/{enviarPorEmail}")]
         [Authorize("Bearer")]
-        public IActionResult GetRelatorioExtratoPorPlanoReferencia(string cdPlano, string dtInicio, string dtFim, bool enviarPorEmail)
+        public IActionResult GetRelatorioExtratoPorPlanoEmpresaReferencia(string cdPlano, string cdEmpresa, string dtInicio, string dtFim, bool enviarPorEmail)
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(CodEntid);
+                var funcionario = new FuncionarioProxy().BuscarPorMatriculaEmpresa(Matricula, cdEmpresa);
 
                 var dataInicio = DateTime.ParseExact(dtInicio, "dd.MM.yyyy", new CultureInfo("pt-BR"));
                 var dataFim = DateTime.ParseExact(dtFim, "dd.MM.yyyy", new CultureInfo("pt-BR"));
@@ -62,14 +62,14 @@ namespace Intech.PrevSystem.Preves.API.Controllers
             }
         }
 
-        [HttpGet("certificado/{cdPlano}/{enviarPorEmail}")]
+        [HttpGet("certificado/{cdPlano}/{cdEmpresa}/{enviarPorEmail}")]
         [Authorize("Bearer")]
-        public IActionResult GetCertificado(string cdPlano, bool enviarPorEmail)
+        public IActionResult GetCertificado(string cdPlano, string cdEmpresa, bool enviarPorEmail)
         {
             try
             {
                 var relatorio = new Relatorios.CertificadoDeRegistroNoPlano();
-                relatorio.GerarRelatorio(Matricula, cdPlano);
+                relatorio.GerarRelatorio(Matricula, cdPlano, cdEmpresa);
 
                 using (MemoryStream ms = new MemoryStream())
                 {

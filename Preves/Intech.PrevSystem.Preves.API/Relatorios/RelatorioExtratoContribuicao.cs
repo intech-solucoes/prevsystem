@@ -46,7 +46,7 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
             AnoRefMesRefFim = dtaFim.ToString("yyyyMM");
             NumMatricula = numMatricula;
 
-            Funcionario = new FuncionarioProxy().BuscarPorMatricula(numMatricula);
+            Funcionario = new FuncionarioProxy().BuscarPorMatriculaEmpresa(numMatricula, CdEmpresa);
 
             PreencherCabecalhoDoRelatorio();
 

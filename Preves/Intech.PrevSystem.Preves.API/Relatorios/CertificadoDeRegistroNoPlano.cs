@@ -13,9 +13,9 @@ namespace Intech.PrevSystem.Preves.API.Relatorios
             InitializeComponent();
         }
 
-        public void GerarRelatorio(string cdMatricula, string cdPlano)
+        public void GerarRelatorio(string cdMatricula, string cdPlano, string cdEmpresa)
         {
-            var funcionario = new FuncionarioProxy().BuscarPorMatricula(cdMatricula);
+            var funcionario = new FuncionarioProxy().BuscarPorMatriculaEmpresa(cdMatricula, cdEmpresa);
             var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
             var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano);
 

@@ -140,6 +140,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorMatriculaEmpresa.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Fundacao\BuscarPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Fundacao\BuscarTodas.sql" />
@@ -167,6 +168,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\PerfilInvestIndice\BuscarPorFundacaoEmpresaPlanoPerfilInvest.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaCpfPensionista.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatriculaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\MigradoPlano1.sql" />

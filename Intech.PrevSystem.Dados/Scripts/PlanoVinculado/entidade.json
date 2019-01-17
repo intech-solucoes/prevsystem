@@ -55,6 +55,11 @@
             "nome": "UltimoSalario",
             "tipo": "decimal",
             "aceitaNulo": false
+        },
+        {
+            "nome": "CD_EMPRESA",
+            "tipo": "string",
+            "aceitaNulo": true
         }
     ]
 }

@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -72,6 +72,23 @@ namespace Intech.PrevSystem.Dados.DAO
 					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT       	EE_ENTIDADE.NOME_ENTID,      	CS_FUNCIONARIO.*  FROM CS_FUNCIONARIO  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = CS_FUNCIONARIO.COD_ENTID  WHERE CS_FUNCIONARIO.NUM_MATRICULA = @NUM_MATRICULA", new { NUM_MATRICULA });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.* FROM CS_FUNCIONARIO INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=CS_FUNCIONARIO.COD_ENTID WHERE CS_FUNCIONARIO.NUM_MATRICULA=:NUM_MATRICULA", new { NUM_MATRICULA });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual FuncionarioEntidade BuscarPorMatriculaEmpresa(string NUM_MATRICULA, string CD_EMPRESA)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT       	EE_ENTIDADE.NOME_ENTID,      	CS_FUNCIONARIO.*  FROM CS_FUNCIONARIO  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = CS_FUNCIONARIO.COD_ENTID  WHERE CS_FUNCIONARIO.NUM_MATRICULA = @NUM_MATRICULA AND CS_FUNCIONARIO.CD_EMPRESA = @CD_EMPRESA", new { NUM_MATRICULA, CD_EMPRESA });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE_ENTIDADE.NOME_ENTID, CS_FUNCIONARIO.* FROM CS_FUNCIONARIO INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=CS_FUNCIONARIO.COD_ENTID WHERE CS_FUNCIONARIO.NUM_MATRICULA=:NUM_MATRICULA AND CS_FUNCIONARIO.CD_EMPRESA=:CD_EMPRESA", new { NUM_MATRICULA, CD_EMPRESA });
 				else
 					throw new Exception("Provider não suportado!");
 			}

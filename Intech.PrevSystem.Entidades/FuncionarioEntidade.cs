@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -57,7 +57,7 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_PART_RATIFICADO { get; set; }
 		public decimal? PERC_PECULIO { get; set; }
 		public string AGENDA2 { get; set; }
-		public string NOME_ENTID { get; set; }
+		[Write(false)] public string NOME_ENTID { get; set; }
         
     }
 }

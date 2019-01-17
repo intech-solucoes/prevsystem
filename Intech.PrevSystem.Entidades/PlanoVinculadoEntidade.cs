@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -53,6 +53,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public ProcessoBeneficioEntidade ProcessoBeneficio { get; set; }
 		[Write(false)] public List<ModalidadeEntidade> Modalidades { get; set; }
 		[Write(false)] public decimal UltimoSalario { get; set; }
+		[Write(false)] public string CD_EMPRESA { get; set; }
         
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Intech.PrevSystem.Negocio
+namespace Intech.PrevSystem.Entidades
 {
     public class Concessao
     {

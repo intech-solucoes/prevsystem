@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -58,7 +58,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_SALDO_MEDIO { get; set; }
 		public DateTime? DT_ENVIO_NOT_COBRANCA { get; set; }
 		public int? NUM_NOT_COBRANCA_ENVIADA { get; set; }
-		public string DES_VL_RECEBIDO { get; set; }
+		[Write(false)] public string DES_VL_RECEBIDO { get; set; }
         
     }
 }

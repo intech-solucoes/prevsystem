@@ -25,6 +25,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Entidades
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Negocio", "..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.shproj", "{A88CF162-E0EC-4213-9964-543ECA2BEE87}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Intech.PrevSystem.Negocio.Sabesprev", "Intech.PrevSystem.Negocio.Sabesprev\Intech.PrevSystem.Negocio.Sabesprev.shproj", "{662B191A-AE47-4B71-95A8-ECDF57EFF27D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{11d947ce-05e2-41db-8687-640404e96ef0}*SharedItemsImports = 13
@@ -32,6 +34,7 @@ Global
 		..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.projitems*{1b8bf169-24e1-48f0-b3bd-ec9fc413b578}*SharedItemsImports = 13
 		..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems*{21944d5c-2af2-467a-b973-172529bf229d}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems*{549415e4-d6a6-42b0-92b2-b30f6b2700f3}*SharedItemsImports = 13
+		Intech.PrevSystem.Negocio.Sabesprev\Intech.PrevSystem.Negocio.Sabesprev.projitems*{662b191a-ae47-4b71-95a8-ecdf57eff27d}*SharedItemsImports = 13
 		..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems*{73968e62-3181-49ac-8c2d-81331534bc6e}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems*{a88cf162-e0ec-4213-9964-543eca2bee87}*SharedItemsImports = 13
 		..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems*{ce1ab52d-fda8-41f8-975b-0d7ba605bd2e}*SharedItemsImports = 13

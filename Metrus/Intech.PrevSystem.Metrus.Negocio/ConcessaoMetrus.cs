@@ -20,7 +20,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
             var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(fundacao, empresa, funcionario.NUM_MATRICULA, cdPlano);
 
-            string Categoria = plano.CD_CATEGORIA;
+            string categoria = plano.CD_CATEGORIA;
 
             var naturProxy = new NaturezaProxy();
             var natureza = naturProxy.BuscarPorCdNatur(cdNatur);
@@ -56,7 +56,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             }
 
             decimal origem;
-            switch (Categoria)
+            switch (categoria)
             {
                 case DMN_CATEGORIA.ATIVO:
                 case DMN_CATEGORIA.AUTOPATROCINIO:
@@ -122,7 +122,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                     decimal diferencaDias = (dtAniversarioNatureza - dtCredito).Days;
                     decimal w_fator_aplicado = Convert.ToDecimal(Math.Pow((double)(1 + percTaxa), (double)(diferencaDias / dtCredito.UltimoDiaDoMes().Day)));
                     
-                    switch (Categoria)
+                    switch (categoria)
                     {
                         case DMN_CATEGORIA.ATIVO:
                             valorMargemCalculada = plano.UltimoSalario * (margem.TX_ATIVO_SP.Value / 100); // futuramente utilizar parametrização 

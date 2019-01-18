@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class NaturezaProxy : NaturezaDAO
+    public class CadastroRubricasProxy : CadastroRubricasDAO
     {
     }
 }

@@ -18,9 +18,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ArquivoUploadEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BancoAgEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CadastroRubricasEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CarenciasDisponiveisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CategoriaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComposicaoSRCEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConcessaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_CATEGORIA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_PERIODICIDADE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SIM_NAO.cs" />
@@ -29,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ContratosAnterioresWebEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoWebEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContribuicaoIndividualEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DadosEConsig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosPessoaisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DependenteEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Dicionarios\DicionariosInfoRend.cs" />
@@ -84,6 +87,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RegraNaturezaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelacionamentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RelIRRFEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RubricaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RubricasAdicionaisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RubricasPrevidencialEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SalarioBaseEntidade.cs" />

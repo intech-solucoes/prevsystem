@@ -63,6 +63,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IndiceValoresEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoRendEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InfoRendGrupoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LogSMSEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MargensCalculadasEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MargensEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MargensPlanoEntidade.cs" />

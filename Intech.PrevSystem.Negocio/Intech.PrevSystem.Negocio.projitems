@@ -50,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceValoresProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HeaderInfRendProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\InfoRendProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\LogSMSProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensCalculadasProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensProxy.cs" />

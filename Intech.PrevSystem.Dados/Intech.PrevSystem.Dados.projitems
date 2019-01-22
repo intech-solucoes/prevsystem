@@ -52,6 +52,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Indice\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\InfoRend\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\LogSMS\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensCalculadas\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Margens\entidade.json" />
@@ -249,6 +250,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\IndiceDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\IndiceValoresDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\InfoRendDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\LogSMSDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensCalculadasDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensPlanoDAO.cs" />

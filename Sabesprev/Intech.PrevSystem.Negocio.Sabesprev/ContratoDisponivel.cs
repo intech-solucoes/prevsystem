@@ -443,8 +443,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
                     ValorLiquido = CalculaValorLiquido(valorSolicitado, ValorAtualizacao, ValorTaxaIOF, ValorAdministracao, ValorSeguro, valorSeguroEspecial, ValorInadimplencia, ValorRenovacao, valReformado);
 
-                    if (natureza.CD_NATUR == 15 && ValorLiquido != 0)
-                        valorSolicitado -= ValorLiquido;
+                    //if (natureza.CD_NATUR == 15 && ValorLiquido != 0)
+                    //    valorSolicitado -= ValorLiquido;
                 }
 
                 if (modalidade.RESULTADO_CORRE == "A")

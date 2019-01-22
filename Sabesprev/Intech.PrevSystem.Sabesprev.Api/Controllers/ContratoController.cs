@@ -212,13 +212,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.Concessao, dados.CD_PLANO, dados.CD_MODAL, dados.CD_NATUR, dataCredito, dados.ValorSolicitado);
 
-                if (contratosDisponiveis.Count > 0)
-                    return Json(contratosDisponiveis);
-                else
-                    return Json(new
-                    {
-                        mensagem = "Não existem parcelas disponíveis para simulação/contratação"
-                    });
+                if (contratosDisponiveis.Count == 0)
+                    throw new Exception("Não existem parcelas disponíveis para simulação/contratação");
+
+                return Json(contratosDisponiveis);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 using System; 
 #endregion
 
@@ -33,6 +34,20 @@ namespace Intech.PrevSystem.API
                 return Json(listaDocumentos);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("buscarPorOidDocumento/{oidDocumento}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarPorOidDocumento(decimal oidDocumento)
+        {
+            try
+            {
+                var documento = new DocumentoProxy().BuscarPorChave(oidDocumento);
+                return Json(new ArquivoUploadProxy().BuscarPorChave(documento.OID_ARQUIVO_UPLOAD));
+            } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -114,6 +129,28 @@ namespace Intech.PrevSystem.API
                 return Ok();
             }
             catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("download/{OID_DOCUMENTO}")]
+        [Authorize("Bearer")]
+        public IActionResult Download(decimal OID_DOCUMENTO)
+        {
+            try
+            {
+                var documento = new DocumentoProxy().BuscarPorChave(OID_DOCUMENTO);
+                var arquivoUpload = new ArquivoUploadProxy().BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
+
+                var caminhoArquivo = System.IO.Path.Combine(arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+
+                var arquivo = new System.IO.FileInfo(caminhoArquivo);
+                var file = System.IO.File.ReadAllBytes(caminhoArquivo);
+                var mimeType = MimeTypes.GetMimeType(arquivo.Name);
+                
+                return File(file, mimeType);
+            } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

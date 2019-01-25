@@ -14,11 +14,11 @@ namespace Intech.PrevSystem.Preves.API.Controllers
     [Route("api/[controller]")]
     public class UploadController : Controller
     {
-        private IHostingEnvironment _hostingEnvironment;
+        private IHostingEnvironment HostingEnvironment;
 
         public UploadController(IHostingEnvironment hostingEnvironment)
         {
-            _hostingEnvironment = hostingEnvironment;
+            HostingEnvironment = hostingEnvironment;
         }
 
         [HttpPost, DisableRequestSizeLimit]
@@ -28,8 +28,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
             {
                 var file = model.File;
                 string folderName = "Upload";
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine(webRootPath, folderName);
+                string newPath = Path.Combine(HostingEnvironment.ContentRootPath, folderName);
 
                 if (!Directory.Exists(newPath))
                     Directory.CreateDirectory(newPath);

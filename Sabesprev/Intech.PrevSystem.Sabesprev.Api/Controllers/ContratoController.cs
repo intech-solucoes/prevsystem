@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Intech.Lib.Servicos;
+using Intech.Lib.Util.Date;
 using Intech.Lib.Util.Email;
 using Intech.Lib.Util.Seguranca;
 using Intech.Lib.Web;
@@ -101,12 +102,30 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var planoVinculadoProxy = new PlanoVinculadoProxy();
                 var modalidadeProxy = new ModalidadeProxy();
                 var fichaFinanceiraProxy = new FichaFinanceiraProxy();
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(CodEntid);
+                var funcionario = new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid);
 
                 // Plano
                 var plano = planoVinculadoProxy.BuscarPorFundacaoEmpresaMatriculaPermiteEmprestimo(CdFundacao, CdEmpresa, Matricula)
                     .Where(x => x.CD_PLANO == cdPlano).FirstOrDefault();
-                
+
+                if(plano.DT_INSC_PLANO.AddMonths(12) >= DateTime.Now)
+                    throw new Exception("Simulação não permitida. O participante tem menos de 12 meses de participação no plano. Contate a SABESPREV – 08000-55-1827");
+
+                var categoria = new CategoriaProxy().BuscarPorCdCategoria(plano.CD_CATEGORIA);
+                var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(plano.CD_SIT_PLANO);
+
+                if (categoria.PERMITE_EMPRESTIMO == "N" || sitPlano.permite_emprestimo_em == "N")
+                    throw new Exception("Simulação de empréstimo não permitida, visto sua situação junto ao plano. Dúvidas, contate nosso call center 0800 55 1827");
+
+                var bloqueios = new BloqueioProxy().BuscarBloqueioEmprestimoPorCodEntid(CodEntid).ToList();
+
+                if (bloqueios.Count > 0)
+                    throw new Exception("Há um bloqueio em sua situação junto ao Plano que impede simulação. Contate a SABESPREV – 08000-55-1827.");
+
+                var idade = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos;
+                if (idade >= 88)
+                    throw new Exception("Para realizar simulações, favor entrar em contato pelo 08000 55 1827 ou comparecer no nosso atendimento pessoal.");
+
                 decimal origem;
                 switch (plano.CD_CATEGORIA)
                 {

@@ -184,8 +184,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
                     CONTRATO_MIGRADO: "N",                                                        //CONTRATO_MIGRADO
                     VL_MARGEN_LIVRE: concessao.MargemConsignavelCalculada, 					            //VL_MARGEN_LIVRE
                     BLOQUEIO_COBRANCA: "N",                                                        //BLOQUEIO_COBRANCA
-                    ADE_NUMERO: concessao.DadosEConsig.AdeNumero,				//ADE_NUMERO
-                    VALOR_ECONSIG_ANT: concessao.DadosEConsig.ValorMargemLivreAntiga, //VALOR_ECONSIG_ANT
+                    ADE_NUMERO: null,				//ADE_NUMERO
+                    VALOR_ECONSIG_ANT: null, //VALOR_ECONSIG_ANT
                     ALT_DADOS_BANCARIO: ""                                       //ALT_DADOS_BANCARIO);
                 );
 

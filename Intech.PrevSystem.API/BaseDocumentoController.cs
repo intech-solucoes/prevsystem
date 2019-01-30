@@ -68,7 +68,7 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpDelete("{OID_DOCUMENTO}")]
+        [HttpPost("{OID_DOCUMENTO}")]
         [Authorize("Bearer")]
         public IActionResult Deletar(decimal OID_DOCUMENTO)
         {
@@ -111,7 +111,7 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpDelete("deletarPasta/{OID_DOCUMENTO_PASTA}")]
+        [HttpPost("deletarPasta/{OID_DOCUMENTO_PASTA}")]
         [Authorize("Bearer")]
         public IActionResult DeletarPasta(decimal OID_DOCUMENTO_PASTA)
         {

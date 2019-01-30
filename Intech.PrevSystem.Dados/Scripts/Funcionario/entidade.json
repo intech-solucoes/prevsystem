@@ -5,6 +5,16 @@
             "nome": "NOME_ENTID",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "DS_LOTACAO",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "DS_CARGO",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

@@ -18,6 +18,7 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ArquivoUpload\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Bloqueio\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\CadastroRubricas\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\CarenciasDisponiveis\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Categoria\entidade.json" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\BuscarPorCodBancoCodAgencia.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Bloqueio\BuscarBloqueioEmprestimoPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\CadastroRubricas\BuscarPorFundacaoInscricaoEmpresa.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\CarenciasDisponiveis\BuscarPorNatureza.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Categoria\BuscarPorCdCategoria.sql" />
@@ -218,6 +220,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ArquivoUploadDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\BancoAgDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\BloqueioDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\CadastroRubricasDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\CarenciasDisponiveisDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\CategoriaDAO.cs" />

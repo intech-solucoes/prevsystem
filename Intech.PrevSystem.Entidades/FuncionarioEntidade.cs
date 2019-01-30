@@ -58,6 +58,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PERC_PECULIO { get; set; }
 		public string AGENDA2 { get; set; }
 		[Write(false)] public string NOME_ENTID { get; set; }
+		[Write(false)] public string DS_LOTACAO { get; set; }
+		[Write(false)] public string DS_CARGO { get; set; }
         
     }
 }

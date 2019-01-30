@@ -47,7 +47,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             if(dadosPessoais.DT_NASCIMENTO != dataNascimento)
                 throw ExceptionDadosInvalidos;
 
-            var senha = "123";//new Random().Next(999999).ToString();
+            var senha = new Random().Next(999999).ToString();
             var senhaEncriptada = Criptografia.Encriptar(senha);
 
             // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
@@ -82,7 +82,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             // Envia e-mail com nova senha de acesso
             var emailConfig = AppSettings.Get().Email;
-            //EnvioEmail.EnviarMailKit(emailConfig, dadosPessoais.EMAIL_AUX, $"Portal Preves - Nova senha de acesso", $"Esta é sua nova senha do Portal Preves: {senha}");
+            EnvioEmail.EnviarMailKit(emailConfig, dadosPessoais.EMAIL_AUX, $"Portal Preves - Nova senha de acesso", $"Esta é sua nova senha do Portal Preves: {senha}");
 
             return "Sua nova senha foi enviada para seu e-mail!";
         }

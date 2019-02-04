@@ -68,14 +68,16 @@ namespace Intech.PrevSystem.API
 
                 mensagem.DTA_MENSAGEM = DateTime.Now;
 
-                var listaDestinatarios = funcionarioProxy.BuscarPorPesquisa(mensagem.CD_FUNDACAO, mensagem.CD_EMPRESA, mensagem.CD_PLANO, mensagem.CD_SIT_PLANO, mensagem.NUM_MATRICULA);
-
-                foreach (var destinatario in listaDestinatarios)
+                // Se opção de enviar e-mail for habilitada
+                if (mensagem.IND_EMAIL == DMN_SIM_NAO.SIM)
                 {
-                    var dadosDestinatario = funcionarioProxy.BuscarDadosPorCodEntid(destinatario.COD_ENTID.ToString());
+                    var listaDestinatarios = funcionarioProxy.BuscarPorPesquisa(mensagem.CD_FUNDACAO, mensagem.CD_EMPRESA, mensagem.CD_PLANO, mensagem.CD_SIT_PLANO, mensagem.NUM_MATRICULA);
 
-                    if (mensagem.IND_EMAIL == DMN_SIM_NAO.SIM)
+                    foreach (var destinatario in listaDestinatarios)
+                    {
+                        var dadosDestinatario = funcionarioProxy.BuscarDadosPorCodEntid(destinatario.COD_ENTID.ToString());
                         EnviarEmail(dadosDestinatario, mensagem);
+                    }
                 }
 
                 new MensagemProxy().Insert(mensagem);

@@ -1,9 +1,13 @@
 ﻿#region Usings
+using Intech.Lib.Util.Email;
+using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System; 
+using System;
+using System.Collections.Generic;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -46,6 +50,8 @@ namespace Intech.PrevSystem.API
         {
             try
             {
+                var funcionarioProxy = new FuncionarioProxy();
+
                 mensagem.CD_EMPRESA = mensagem.CD_EMPRESA == string.Empty ? null : mensagem.CD_EMPRESA;
                 mensagem.CD_PLANO = mensagem.CD_PLANO == string.Empty ? null : mensagem.CD_PLANO;
                 mensagem.CD_SIT_PLANO = mensagem.CD_SIT_PLANO == string.Empty ? null : mensagem.CD_SIT_PLANO;
@@ -58,9 +64,19 @@ namespace Intech.PrevSystem.API
                 if (string.IsNullOrEmpty(mensagem.NUM_MATRICULA))
                     mensagem.COD_ENTID = null;
                 else
-                    mensagem.COD_ENTID = new FuncionarioProxy().BuscarPorMatricula(mensagem.NUM_MATRICULA).COD_ENTID;
+                    mensagem.COD_ENTID = funcionarioProxy.BuscarPorMatricula(mensagem.NUM_MATRICULA).COD_ENTID;
 
                 mensagem.DTA_MENSAGEM = DateTime.Now;
+
+                var listaDestinatarios = funcionarioProxy.BuscarPorPesquisa(mensagem.CD_FUNDACAO, mensagem.CD_EMPRESA, mensagem.CD_PLANO, mensagem.CD_SIT_PLANO, mensagem.NUM_MATRICULA);
+
+                foreach (var destinatario in listaDestinatarios)
+                {
+                    var dadosDestinatario = funcionarioProxy.BuscarDadosPorCodEntid(destinatario.COD_ENTID.ToString());
+
+                    if (mensagem.IND_EMAIL == DMN_SIM_NAO.SIM)
+                        EnviarEmail(dadosDestinatario, mensagem);
+                }
 
                 new MensagemProxy().Insert(mensagem);
 
@@ -69,6 +85,22 @@ namespace Intech.PrevSystem.API
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        public void EnviarEmail(FuncionarioDados destinatario, MensagemEntidade mensagem)
+        {
+            if (string.IsNullOrEmpty(destinatario.DadosPessoais.EMAIL_AUX))
+                throw new Exception("Não existe email cadastrado para seu usuário contacte o administrador do sistema.");
+
+            try
+            {
+                var emailConfig = AppSettings.Get().Email;
+                EnvioEmail.EnviarMailKit(emailConfig, destinatario.DadosPessoais.EMAIL_AUX, mensagem.TXT_TITULO, mensagem.TXT_CORPO);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao enviar o token por email. Contacte o administrador do sistema." + e.Message);
             }
         }
     }

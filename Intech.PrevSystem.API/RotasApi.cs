@@ -25,5 +25,7 @@
         public const string Relacionamento = "api/relacionamento";
         public const string Emprestimo = "api/emprestimo";
         public const string Dashboard = "api/dashboard";
+        public const string SalarioBase = "api/salarioBase";
+        public const string FichaFechamento = "api/fichaFechamento";
     }
 }

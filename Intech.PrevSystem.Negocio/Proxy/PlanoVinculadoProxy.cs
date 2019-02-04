@@ -124,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             //Buscar todas RUBRICAS_PREVIDENCIAL com INCID_LIQUIDO  = 'S' e INCID_MARGEM_CONSIG = 'S'
             var proxyRubricas = new RubricasPrevidencialProxy();
-            var enRubrica = proxyRubricas.BuscarIncideLiquidoMargemConsig(DMN_SIM_NAO.SIM, DMN_SIM_NAO.SIM).ToList();
+            var enRubrica = proxyRubricas.BuscarIncideLiquidoMargemConsig(DMN_SN.SIM, DMN_SN.SIM).ToList();
             
             var proxyFichaFinancAssistido = new FichaFinanceiraAssistidoProxy();
             var dtFichas = proxyFichaFinancAssistido

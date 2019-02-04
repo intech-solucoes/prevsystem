@@ -2,7 +2,7 @@
 {
     public static class DMN_SIM_NAO
     {
-        public const string SIM = "S";
-        public const string NAO = "N";
+        public const string SIM = "SIM";
+        public const string NAO = "NAO";
     }
 }

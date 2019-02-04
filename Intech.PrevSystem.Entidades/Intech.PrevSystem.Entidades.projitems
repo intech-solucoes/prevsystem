@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConcessaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_CATEGORIA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_PERIODICIDADE.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SN.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SIM_NAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_SITUACAO_CONTRATO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_TIPO_FICHA_FECHAMENTO_PREVEScs.cs">

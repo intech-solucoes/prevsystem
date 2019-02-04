@@ -37,7 +37,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             var parametros = new ParametrosProxy().Buscar();
 
-            if (parametros.REGRA_MARGEM_PLANO == DMN_SIM_NAO.SIM)
+            if (parametros.REGRA_MARGEM_PLANO == DMN_SN.SIM)
             {
                 //TODO: Regra pelo plano
             }
@@ -120,7 +120,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             int w_mes = 0;
             int w_ano = 0;
 
-            if (natureza.MES_CRED_CIVIL == DMN_SIM_NAO.NAO)
+            if (natureza.MES_CRED_CIVIL == DMN_SN.NAO)
             {
                 w_mes = dtCredito.Month;
                 w_ano = dtCredito.Year;

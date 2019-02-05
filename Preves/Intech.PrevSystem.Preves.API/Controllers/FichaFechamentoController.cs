@@ -19,17 +19,42 @@ namespace Intech.PrevSystem.Preves.API.Controllers
         {
             try
             {
-                var fichaFechamento = new FichaFechamentoPrevesProxy().BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipo(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO);
+                var fichaFechamentoProxy = new FichaFechamentoPrevesProxy();
+
                 var empresaPlano = new EmpresaPlanosProxy().BuscarPorFundacaoEmpresaPlano(CdFundacao, CdEmpresa, cdPlano);
                 var indice = new IndiceValoresProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP).First();
 
-                return Json(new
+                if (cdPlano == "0002")
                 {
-                    Cotas = fichaFechamento.QTE_COTA_ACUM,
-                    DataIndice = indice.DT_IND,
-                    ValorIndice = indice.VALOR_IND,
-                    Saldo = fichaFechamento.QTE_COTA_ACUM * indice.VALOR_IND
-                });
+                    var fichaFechamento = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.SIM);
+
+                    return Json(new
+                    {
+                        Cotas = fichaFechamento.QTE_COTA_ACUM,
+                        DataIndice = indice.DT_IND,
+                        ValorIndice = indice.VALOR_IND,
+                        Saldo = fichaFechamento.QTE_COTA_ACUM * indice.VALOR_IND
+                    });
+                }
+                else
+                {
+                    var fichaFechamentoPartic = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.SIM);
+                    var fichaFechamentoPatroc = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.NAO);
+
+                    var saldoPartic = fichaFechamentoPartic.QTE_COTA_ACUM * indice.VALOR_IND;
+                    var saldoPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM * indice.VALOR_IND;
+
+                    return Json(new
+                    {
+                        CotasPartic = fichaFechamentoPartic.QTE_COTA_ACUM,
+                        CotasPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM,
+                        DataIndice = indice.DT_IND,
+                        ValorIndice = indice.VALOR_IND,
+                        SaldoPartic = saldoPartic,
+                        SaldoPatroc = saldoPatroc,
+                        Total = saldoPartic + saldoPatroc
+                    });
+                }
             }
             catch (Exception ex)
             {

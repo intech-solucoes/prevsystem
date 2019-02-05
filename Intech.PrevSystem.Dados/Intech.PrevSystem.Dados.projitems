@@ -126,7 +126,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FaixaValorContrib\BuscarPorFundacaoPlanoTipoContribMantenedora.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Feriado\Buscar.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Feriado\BuscarDatas.sql" />
-    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipo.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarPorFundacaoEmpresaPlanoInscricaoTipo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoAnosPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoDetalhesPorFundacaoEmpresaPlanoInscricao.sql" />

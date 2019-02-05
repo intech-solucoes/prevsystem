@@ -5,7 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
-using System; 
+using System;
+using Intech.Lib.Util.Email;
+using Intech.Lib.Web;
+using System.IO;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -156,7 +159,50 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
+        [HttpGet("enviarDocumento/{OID_DOCUMENTO}")]
+        [Authorize("Bearer")]
+        public IActionResult EnviarDocumento(decimal OID_DOCUMENTO)
+        {
+            try
+            {
+                var dados = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
+                var documento = new DocumentoProxy().BuscarPorChave(OID_DOCUMENTO);
+                var arquivoUpload = new ArquivoUploadProxy().BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
+
+                var caminhoArquivo = System.IO.Path.Combine(arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+
+                //var arquivo = new System.IO.FileInfo(caminhoArquivo);
+                string fileName = caminhoArquivo.ToString();
+                string[] nomeArquivo = fileName.Split('\\');
+                fileName = nomeArquivo[nomeArquivo.Length - 1];
+
+                //var file = System.IO.File.ReadAllBytes(caminhoArquivo);
+
+                var arquivoStream = System.IO.File.Open(caminhoArquivo, FileMode.Open);
+                var ms = new MemoryStream();
+                int arquivoBytes;
+                var buffer = new byte[4096];
+                do
+                {
+                    arquivoBytes = arquivoStream.Read(buffer, 0, buffer.Length);
+                    ms.Write(buffer, 0, arquivoBytes);
+                } while (arquivoBytes > 0);
+
+                ms.Position = 0;
+                arquivoStream.Close();
+
+                var emailConfig = AppSettings.Get().Email;
+                EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, null, null, "Preves", "", ms, fileName);
+
+                return Json($"Documento enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+        }
+    }
+
+private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
         {
             var documentoProxy = new DocumentoProxy();
             var documentoPastaProxy = new DocumentoPastaProxy();

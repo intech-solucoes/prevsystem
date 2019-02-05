@@ -169,7 +169,7 @@ namespace Intech.PrevSystem.API
                 var documento = new DocumentoProxy().BuscarPorChave(OID_DOCUMENTO);
                 var arquivoUpload = new ArquivoUploadProxy().BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
 
-                var caminhoArquivo = System.IO.Path.Combine(arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                var caminhoArquivo = Path.Combine(arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
                 //var arquivo = new System.IO.FileInfo(caminhoArquivo);
                 string fileName = caminhoArquivo.ToString();

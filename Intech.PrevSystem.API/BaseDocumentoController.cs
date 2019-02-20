@@ -9,6 +9,7 @@ using System;
 using Intech.Lib.Util.Email;
 using Intech.Lib.Web;
 using System.IO;
+using Intech.PrevSystem.Preves.API.Controllers;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -86,8 +87,8 @@ namespace Intech.PrevSystem.API
                 var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
                 arquivoUploadProxy.Deletar(arquivoUpload);
 
-                var webRootPath = HostingEnvironment.WebRootPath;
-                var arquivo = System.IO.Path.Combine(webRootPath, arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                //var webRootPath = HostingEnvironment.WebRootPath;
+                var arquivo = System.IO.Path.Combine(UploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
                 System.IO.File.Delete(arquivo);
 

@@ -14,6 +14,9 @@ namespace Intech.PrevSystem.Saofrancisco.API.Controllers
     [Route("api/[controller]")]
     public class UploadController : Controller
     {
+        public static string DiretorioUpload =>
+            Path.Combine(Environment.CurrentDirectory, "Upload");
+
         private IHostingEnvironment _hostingEnvironment;
 
         public UploadController(IHostingEnvironment hostingEnvironment)
@@ -27,19 +30,18 @@ namespace Intech.PrevSystem.Saofrancisco.API.Controllers
             try
             {
                 var file = model.File;
-                string folderName = "Upload";
-                string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine(webRootPath, folderName);
+                //string folderName = "Upload";
+                //string newPath = Path.Combine(webRootPath, folderName);
 
-                if (!Directory.Exists(newPath))
-                    Directory.CreateDirectory(newPath);
+                if (!Directory.Exists(DiretorioUpload))
+                    Directory.CreateDirectory(DiretorioUpload);
 
                 long oidArquivoUpload = 0;
 
                 if (file.Length > 0)
                 {
                     string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    string fullPath = Path.Combine(newPath, fileName);
+                    string fullPath = Path.Combine(DiretorioUpload, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);

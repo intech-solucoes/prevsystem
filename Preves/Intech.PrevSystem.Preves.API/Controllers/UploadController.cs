@@ -1,29 +1,19 @@
 ﻿#region Usings
+using Intech.PrevSystem.API;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
-using System.Net.Http.Headers; 
+using System.Net.Http.Headers;
 #endregion
 
 namespace Intech.PrevSystem.Preves.API.Controllers
 {
     [Route("api/[controller]")]
-    public class UploadController : Controller
+    public class UploadController : BaseUploadController
     {
-        public static string DiretorioUpload =>
-            Path.Combine(Environment.CurrentDirectory, "Upload");
-
-        private IHostingEnvironment HostingEnvironment;
-
-        public UploadController(IHostingEnvironment hostingEnvironment)
-        {
-            HostingEnvironment = hostingEnvironment;
-        }
-
         [HttpPost, DisableRequestSizeLimit]
         public ActionResult UploadFile(FileUploadViewModel model)
         {
@@ -61,7 +51,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
 
                 return Json(oidArquivoUpload);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 return Json("Upload Failed: " + ex.Message);
             }

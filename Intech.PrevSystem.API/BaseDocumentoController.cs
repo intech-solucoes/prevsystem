@@ -9,21 +9,12 @@ using System;
 using Intech.Lib.Util.Email;
 using Intech.Lib.Web;
 using System.IO;
-using Intech.PrevSystem.Preves.API.Controllers;
-using Intech.PrevSystem.Saofrancisco.API.Controllers;
 #endregion
 
 namespace Intech.PrevSystem.API
 {
     public class BaseDocumentoController : BaseController
     {
-        private IHostingEnvironment HostingEnvironment;
-
-        public BaseDocumentoController(IHostingEnvironment hostingEnvironment)
-        {
-            HostingEnvironment = hostingEnvironment;
-        }
-
         [HttpGet("porPasta/{oidPasta}")]
         [Authorize("Bearer")]
         public IActionResult Buscar(decimal? oidPasta)
@@ -89,7 +80,7 @@ namespace Intech.PrevSystem.API
                 arquivoUploadProxy.Deletar(arquivoUpload);
 
                 //var webRootPath = HostingEnvironment.WebRootPath;
-                var arquivo = System.IO.Path.Combine(UploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                var arquivo = System.IO.Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
                 System.IO.File.Delete(arquivo);
 
@@ -219,9 +210,8 @@ private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
 
                 var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
                 arquivoUploadProxy.Deletar(arquivoUpload);
-
-                var webRootPath = HostingEnvironment.WebRootPath;
-                var arquivo = System.IO.Path.Combine(webRootPath, arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                
+                var arquivo = System.IO.Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
                 System.IO.File.Delete(arquivo);
             }

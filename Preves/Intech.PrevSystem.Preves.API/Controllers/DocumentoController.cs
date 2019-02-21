@@ -9,7 +9,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
     [Route(RotasApi.Documento)]
     public class DocumentoController : BaseDocumentoController
     {
-        public DocumentoController(IHostingEnvironment hostingEnvironment) : base(hostingEnvironment)
+        public DocumentoController(IHostingEnvironment hostingEnvironment) : base()
         {
         }
     }

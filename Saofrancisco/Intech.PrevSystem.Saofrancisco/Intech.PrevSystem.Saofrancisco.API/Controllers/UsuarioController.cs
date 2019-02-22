@@ -98,15 +98,15 @@ namespace Intech.PrevSystem.Saofrancisco.API.Controllers
         {
             var funcionarioProxy = new FuncionarioProxy();
 
-            UsuarioEntidade usuario;
+            var usuario = new UsuarioEntidade();
 
-            if(semSenha)
-                usuario = new UsuarioProxy().BuscarPorCpf(cpf);
-            else
+            if (!semSenha)
+            {
                 usuario = new UsuarioProxy().BuscarPorLogin(cpf, senha);
 
-            if (usuario == null)
-                throw new Exception("Matrícula ou senha incorretos!");
+                if (usuario == null)
+                    throw new Exception("Matrícula ou senha incorretos!");
+            }
 
             var pensionista = false;
             string codEntid;
@@ -132,6 +132,12 @@ namespace Intech.PrevSystem.Saofrancisco.API.Controllers
                 pensionista = true;
                 seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR.ToString();
                 grupoFamilia = recebedorBeneficio.NUM_SEQ_GR_FAMIL.ToString();
+            }
+
+            if (semSenha)
+            {
+                usuario.NOM_LOGIN = cpf;
+                usuario.IND_ADMINISTRADOR = "N";
             }
 
             if (codEntid != null)

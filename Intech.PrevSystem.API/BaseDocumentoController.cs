@@ -23,8 +23,9 @@ namespace Intech.PrevSystem.API
             {
                 var listaDocumentos = new
                 {
-                    pastas = new DocumentoPastaProxy().BuscarPorPasta(oidPasta),
-                    documentos = new DocumentoProxy().BuscarPorPasta(oidPasta)
+                    pastas = new DocumentoPastaProxy().BuscarPorPastaPai(oidPasta),
+                    documentos = new DocumentoProxy().BuscarPorPasta(oidPasta),
+                    pastaAtual = new DocumentoPastaProxy().BuscarPorChave(oidPasta)
                 };
 
                 return Json(listaDocumentos);
@@ -192,10 +193,10 @@ namespace Intech.PrevSystem.API
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
         }
-    }
 
-private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
+        private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
         {
             var documentoProxy = new DocumentoProxy();
             var documentoPastaProxy = new DocumentoPastaProxy();
@@ -217,7 +218,7 @@ private void DeletarPastaRecursivo(decimal OID_DOCUMENTO_PASTA)
             }
 
             // Deleta pastas dentro da pasta
-            var pastas = documentoPastaProxy.BuscarPorPasta(OID_DOCUMENTO_PASTA);
+            var pastas = documentoPastaProxy.BuscarPorPastaPai(OID_DOCUMENTO_PASTA);
 
             foreach (var pastaItem in pastas)
             {

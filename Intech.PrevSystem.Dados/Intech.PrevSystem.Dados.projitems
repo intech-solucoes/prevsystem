@@ -114,7 +114,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\ContribuicaoIndividual\BuscarPorFundacaoInscricaoTipo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\DadosPessoais\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Dependente\BuscarPorFundacaoInscricaoPlano.sql" />
-    <None Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\BuscarPorPasta.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\BuscarPorPastaPai.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Documento\BuscarPorPasta.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empregador\BuscarPorCdEmpregador.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\BuscarPorFundacaoEmpresaPlano.sql" />

@@ -39,7 +39,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 //prest = contratoAtivo.Prestacoes.LastOrDefault();
                 prazo = 0;
 
-                if (contrato.Modalidade.CORRIGIR != DMN_SIM_NAO.SIM)
+                if (contrato.Modalidade.CORRIGIR != DMN_SN.SIM)
                 {
                     dataPrestacao = contrato.DT_CREDITO_AUX;
                 }
@@ -63,7 +63,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 }
                 else
                 {
-                    if (contrato.Modalidade.CORRIGIR != DMN_SIM_NAO.SIM)
+                    if (contrato.Modalidade.CORRIGIR != DMN_SN.SIM)
                     {
                         dataPrestacao = contrato.DT_CREDITO_AUX;
                         w_saldo_dev = contrato.VL_SOLICITADO.Value + contrato.VL_CORRIGIDO.Value;
@@ -102,7 +102,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 .Where(x => x.SEQUENCIA == taxaEncargo.SEQUENCIA)
                 .FirstOrDefault();
 
-            if ((taxaEncargo.COBRAR_JUROS_NA_REFORMA == DMN_SIM_NAO.SIM) && (contrato.Modalidade.PREV_REC_PREST == DMN_SIM_NAO.NAO))
+            if ((taxaEncargo.COBRAR_JUROS_NA_REFORMA == DMN_SN.SIM) && (contrato.Modalidade.PREV_REC_PREST == DMN_SN.NAO))
             {
                 DateTime dt1 = contrato.DT_CREDITO.AddMonths(1).PrimeiroDiaDoMes();
                 DateTime dt2 = contrato.DT_CREDITO.AddMonths(1).UltimoDiaDoMes();
@@ -133,7 +133,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             bool valorComCorrecao = true;
 
             //Verifica se as prest em atraso do contrato reformado serão cobradas na reforma ou na tabela de prestações em atraso.
-            if (contrato.Modalidade.COBRAR_PA_CONCESSAO == DMN_SIM_NAO.NAO || contrato.Modalidade.COBRAR_PM_CONCESSAO == DMN_SIM_NAO.SIM)
+            if (contrato.Modalidade.COBRAR_PA_CONCESSAO == DMN_SN.NAO || contrato.Modalidade.COBRAR_PM_CONCESSAO == DMN_SN.SIM)
             {
 
                 ////verifica se existe prestacoes em atraso para calcular multa e mora
@@ -179,7 +179,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
                         if (maVenc == maQuit)
                         {
-                            if (contrato.Modalidade.COBRAR_PM_CONCESSAO == DMN_SIM_NAO.SIM || contrato.Modalidade.TIPO_CALC_PREST == "013")
+                            if (contrato.Modalidade.COBRAR_PM_CONCESSAO == DMN_SN.SIM || contrato.Modalidade.TIPO_CALC_PREST == "013")
                             {
                                 w_saldo_dev += prestacao.VL_PRESTACAO.Value;
                                 
@@ -236,7 +236,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                             w_multa = w_multa + w_multa_Temp; //definicao original possui - w_multa_parcial porem valor de variavel naao é atribuido
                             w_mora = w_mora + w_mora_Temp;
 
-                            if (taxaEncargo.CONSIDERAR_IOF_COMPL_INAD == DMN_SIM_NAO.SIM)
+                            if (taxaEncargo.CONSIDERAR_IOF_COMPL_INAD == DMN_SN.SIM)
                                 valorIofComplementar += CalculaIofComplementar(p_dt_quitacao, contrato.DT_CREDITO, Convert.ToDateTime(prestacao.DT_VENC), taxaEncargo.TX_IOF.Value, prestacao.VL_PRINCIPAL.Value).Arredonda(2);
                         }
                         else//TODO[HIULLI] - Verificar depois
@@ -320,7 +320,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             if (!string.IsNullOrEmpty(taxaConcessao.COD_IND))
             {
-                if (taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM && taxaConcessao.IND_MESES_DEFAZAGEM > 0)
+                if (taxaConcessao.IND_DEFAZAGEM == DMN_SN.SIM && taxaConcessao.IND_MESES_DEFAZAGEM > 0)
                     dtIndice = dtFim.AddMonths(-1 * (int)taxaConcessao.IND_MESES_DEFAZAGEM);
                 else
                     dtIndice = dtFim;
@@ -346,7 +346,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 vlIndice = 1;
             }
 
-            if (taxaEncargo.CONSIDERAR_JUROS_CONC == DMN_SIM_NAO.SIM)
+            if (taxaEncargo.CONSIDERAR_JUROS_CONC == DMN_SN.SIM)
                 taxaJuros = (txJuros / 100) + 1;
 
             if ((vlIndice != 0) && (taxaJuros != 0))
@@ -358,7 +358,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             if ((vlIndice == 0) && (taxaJuros != 0))
                 taxaCorrecao = taxaJuros;
 
-            if (taxaEncargo.DIA_PRO_RATA_SALDO == DMN_SIM_NAO.SIM)
+            if (taxaEncargo.DIA_PRO_RATA_SALDO == DMN_SN.SIM)
                 diasMes = 30;
             else
                 diasMes = DateTime.DaysInMonth(dtFim.Year, dtFim.Month);
@@ -414,7 +414,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             if (taxaEncargo.PERIODO_CARENCIA > 0)
             {
-                if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SIM_NAO.SIM)
+                if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SN.SIM)
                 {
                     if (taxaEncargo.CARENCIA_VENCIMENTO == "D")
                     {
@@ -423,7 +423,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
                         var feriados = new FeriadoProxy().Listar();
 
-                        if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SIM_NAO.SIM)
+                        if (taxaEncargo.CARENCIA_DIA_UTIL == DMN_SN.SIM)
                         {
                             for (int i = 0; i <= taxaEncargo.PERIODO_CARENCIA; i++)
                                 w_dt_aux = Feriado.BuscarDiaUtil(feriados, w_dt_aux.AddDays(1), Feriado.Direcao.Posterior, null);
@@ -472,7 +472,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 {
                     w_taxa_juros = (taxaEncargo.TX_JUROS_MORA.Value / 100M) + 1;
 
-                    if (taxaEncargo.DIA_PRO_RATA_SALDO == DMN_SIM_NAO.SIM)
+                    if (taxaEncargo.DIA_PRO_RATA_SALDO == DMN_SN.SIM)
                         w_dias_mes = 30;
                     else
                         w_dias_mes = p_dt_fin.UltimoDiaDoMes().Day;
@@ -481,7 +481,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                     w_calc = w_taxa_juros.ElevadoA(1 / w_dias_mes);
                     w_fator = w_calc.ElevadoA(w_dif_dias);
 
-                    if (taxaEncargo.CONSIDERAR_MULTA == DMN_SIM_NAO.SIM)
+                    if (taxaEncargo.CONSIDERAR_MULTA == DMN_SN.SIM)
                     {
                         if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
                             w_vl_mora = ((w_vl_prest + w_vl_multa) * (w_fator - 1)).Arredonda(2);
@@ -544,7 +544,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
                     w_fator = w_vl_ind_acum * w_taxa_juros;
 
-                    if (taxaEncargo.CONSIDERAR_MULTA == DMN_SIM_NAO.SIM)
+                    if (taxaEncargo.CONSIDERAR_MULTA == DMN_SN.SIM)
                     {
                         if ((taxaEncargo.CONSIDERAR_CORR_PREST == "J") || (taxaEncargo.CONSIDERAR_CORR_PREST == "A"))
                             w_vl_mora = (((w_vl_prest + w_vl_multa) * w_fator) / 100M).Arredonda(2);
@@ -599,7 +599,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             }
 
             //Na Sabesprev a correção da prestação é sobre a multa e juros
-            if (taxaEncargo.CORRIGIR_PREST_ATRASO == DMN_SIM_NAO.SIM)
+            if (taxaEncargo.CORRIGIR_PREST_ATRASO == DMN_SN.SIM)
             {
                 w_vl_ind_acum = 1;
                 w_dt_aux = p_dt_ini;
@@ -612,7 +612,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                     if (w_dt_aux > p_dt_fin)
                         w_dt_aux = p_dt_fin;
 
-                    if ((taxaConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM) && (taxaConcessao.IND_MESES_DEFAZAGEM > 0))
+                    if ((taxaConcessao.IND_DEFAZAGEM == DMN_SN.SIM) && (taxaConcessao.IND_MESES_DEFAZAGEM > 0))
                         w_dt_ind = w_dt_aux.AddMonths((int)-taxaConcessao.IND_MESES_DEFAZAGEM);
                     else
                         w_dt_ind = w_dt_aux;

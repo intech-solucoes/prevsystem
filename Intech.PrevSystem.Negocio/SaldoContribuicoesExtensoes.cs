@@ -53,14 +53,14 @@ namespace Intech.PrevSystem.Entidades
                 if (dataReferencia <= dataCota)
                 {
                     if (contribuicao.CD_OPERACAO == "C")
-                        saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante + (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante + (decimal)(contribuicao.QTD_COTA_RP_PARTICIPANTE.HasValue ? contribuicao.QTD_COTA_RP_PARTICIPANTE.Value : 0);
                     else
-                        saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante - (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        saldo.QuantidadeCotasParticipante = saldo.QuantidadeCotasParticipante - (decimal)(contribuicao.QTD_COTA_RP_PARTICIPANTE.HasValue ? contribuicao.QTD_COTA_RP_PARTICIPANTE.Value : 0);
 
                     if (contribuicao.CD_OPERACAO == "C")
-                        saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora + (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora + (decimal)(contribuicao.QTD_COTA_RP_EMPRESA.HasValue ? contribuicao.QTD_COTA_RP_EMPRESA.Value : 0);
                     else
-                        saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora - (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        saldo.QuantidadeCotasPatrocinadora = saldo.QuantidadeCotasPatrocinadora - (decimal)(contribuicao.QTD_COTA_RP_EMPRESA.HasValue ? contribuicao.QTD_COTA_RP_EMPRESA.Value : 0);
 
                     saldo.ValorParticipante = saldo.QuantidadeCotasParticipante * valorIndice;
                     saldo.ValorPatrocinadora = saldo.QuantidadeCotasPatrocinadora * valorIndice;

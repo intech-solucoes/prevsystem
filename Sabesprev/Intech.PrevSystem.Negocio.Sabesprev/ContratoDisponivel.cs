@@ -411,7 +411,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                     }
                     var ValorPrincipalMaisJurosContratosAReformar = 0M;
 
-                    if (encargo.IOF_IN1609 == DMN_SIM_NAO.SIM)
+                    if (encargo.IOF_IN1609 == DMN_SN.SIM)
                     {
                         if (contratosAReformar.Any())
                         {
@@ -577,7 +577,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             int w_mes = 0;
             int w_ano = 0;
 
-            if (natureza.MES_CRED_CIVIL == DMN_SIM_NAO.NAO)
+            if (natureza.MES_CRED_CIVIL == DMN_SN.NAO)
             {
                 w_mes = dataCredito.Month;
                 w_ano = dataCredito.Year;
@@ -663,7 +663,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             w_calc = 0;
             w_fator = 0;
 
-            if ((modalidade.PRORATA_TX_JUROS == DMN_SIM_NAO.NAO) & (modalidade.CORRIGIR) == DMN_SIM_NAO.SIM)
+            if ((modalidade.PRORATA_TX_JUROS == DMN_SN.NAO) & (modalidade.CORRIGIR) == DMN_SN.SIM)
             {
                 if (modalidade.DIA_CORRECAO == "U")
                     w_num_dias = dtCredito.UltimoDiaDoMes().Day;
@@ -684,7 +684,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 }
                 else
                 {
-                    if ((txConcessao.IND_DEFAZAGEM == DMN_SIM_NAO.SIM) & (txConcessao.IND_MESES_DEFAZAGEM > 0))
+                    if ((txConcessao.IND_DEFAZAGEM == DMN_SN.SIM) & (txConcessao.IND_MESES_DEFAZAGEM > 0))
                         w_dt_ind = dtCredito.AddMonths(-1 * (int)txConcessao.IND_MESES_DEFAZAGEM);
                     else
                         w_dt_ind = dtCredito;
@@ -755,7 +755,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             var carenciaProxy = new CarenciasDisponiveisProxy();
             var carencia = carenciaProxy.BuscarPorNatureza(natureza.CD_NATUR).FirstOrDefault(x => x.MES == mesesDeCarencia);
 
-            if (natureza.CONSIDERAR_CARENCIA_CONCESSAO == DMN_SIM_NAO.SIM)
+            if (natureza.CONSIDERAR_CARENCIA_CONCESSAO == DMN_SN.SIM)
             {
                 if (carencia.MES > 0)
                     w_carencia = carencia.MES;
@@ -862,7 +862,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             if (encargo.TP_COBRANCA_TX == "C")
             {
-                if (encargo.CONSIDERAR_RENOVACOES_ADM == DMN_SIM_NAO.SIM)
+                if (encargo.CONSIDERAR_RENOVACOES_ADM == DMN_SN.SIM)
                     calculado = ((ValorSolicitado - ValorReformado) * (encargo.TX_ADM.Value / 100));
                 else
                     calculado = (ValorSolicitado * (encargo.TX_ADM.Value / 100));
@@ -877,16 +877,16 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             if (encargo.TP_COBRANCA_SEGURO == "C")
             {
-                if (encargo.CONSIDERAR_RENOVACOES_SEGUROS == DMN_SIM_NAO.SIM)
+                if (encargo.CONSIDERAR_RENOVACOES_SEGUROS == DMN_SN.SIM)
                 {
-                    //if (encargo.SEGURO_TABELADO == DMN_SIM_NAO.SIM)
+                    //if (encargo.SEGURO_TABELADO == DMN_SN.SIM)
                     //    calculado = CalculaValorSeguroTabelado(funcionario, plano, valorSolicitado - somaReformados, prazo, dataCredito);
                     //else
                     calculado = (valorSolicitado - somaReformados) * (encargo.TX_SEGURO.Value / 100);
                 }
                 else
                 {
-                    //if (encargo.SEGURO_TABELADO == DMN_SIM_NAO.SIM)
+                    //if (encargo.SEGURO_TABELADO == DMN_SN.SIM)
                     //    calculado = CalculaValorSeguroTabelado(funcionario, plano, valorSolicitado, prazo, dataCredito);
                     //else
                     calculado = (valorSolicitado * (encargo.TX_SEGURO.Value / 100));
@@ -902,7 +902,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             if (encargo.TP_COBRANCA_INAD == "C")
             {
-                if (encargo.CONSIDERAR_RENOVACOES_INAD == DMN_SIM_NAO.SIM)
+                if (encargo.CONSIDERAR_RENOVACOES_INAD == DMN_SN.SIM)
                     calculado = (ValorSolicitado - SomaReformados) * (encargo.TX_INAD.Value / 100);
                 else
                     calculado = (ValorSolicitado * (encargo.TX_INAD.Value / 100));

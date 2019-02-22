@@ -266,7 +266,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(planoVinculado.CD_SIT_PLANO);
 
-            if (sitPlano.altera_salario_em != DMN_SIM_NAO.SIM)
+            if (sitPlano.altera_salario_em != DMN_SN.SIM)
             {
                 inicioRecebimento = ultimoRecebimento.AddMonths(-2);
                 w_media_salario = lista.Where(x => new DateTime(Convert.ToInt32(x.ANO_COMPETENCIA), Convert.ToInt32(x.MES_COMPETENCIA), 01).UltimoDiaDoMes() >= inicioRecebimento)
@@ -296,7 +296,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 }
             }
 
-            if (sitPlano.altera_salario_em != DMN_SIM_NAO.SIM)
+            if (sitPlano.altera_salario_em != DMN_SN.SIM)
                 w_media_salario /= 3;
 
             return w_media_salario;
@@ -315,7 +315,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             DateTime dtInicioRecimento = dtUltimoRecebimento.AddMonths(-2).PrimeiroDiaDoMes();
 
             //var cadastroRubrica = getCadastroRubrica(fundacao, inscricao, empresa);
-            //var rubricaMC = getRubricas(fundacao, empresa, DMN_SIM_NAO.SIM);
+            //var rubricaMC = getRubricas(fundacao, empresa, DMN_SN.SIM);
 
             var listaFichas = from item in fichas
                               where item.DT_COMPETENCIA >= dtInicioRecimento
@@ -383,7 +383,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
         private static List<FichaFinanceiraAssistidoEntidade> ObtemFichaFinancAssistido(string fundacao, string empresa, string plano, string matricula, decimal? seqRecebedor)
         {
             //Buscar todas RUBRICAS_PREVIDENCIAL com INCID_LIQUIDO  = 'S' e INCID_MARGEM_CONSIG = 'S'
-            var enRubrica = new RubricasPrevidencialProxy().BuscarIncideLiquidoMargemConsig(DMN_SIM_NAO.SIM, DMN_SIM_NAO.SIM);
+            var enRubrica = new RubricasPrevidencialProxy().BuscarIncideLiquidoMargemConsig(DMN_SN.SIM, DMN_SN.SIM);
             
             var dtFichas = new FichaFinanceiraAssistidoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor(fundacao, empresa, matricula, (int)seqRecebedor.Value, plano);
 

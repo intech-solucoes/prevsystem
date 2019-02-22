@@ -108,7 +108,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var plano = planoVinculadoProxy.BuscarPorFundacaoEmpresaMatriculaPermiteEmprestimo(CdFundacao, CdEmpresa, Matricula)
                     .Where(x => x.CD_PLANO == cdPlano).FirstOrDefault();
 
-                if(plano.DT_INSC_PLANO.AddMonths(12) >= DateTime.Now)
+                if (plano == null)
+                    throw new Exception("Simulação de empréstimo não permitida, visto sua situação junto ao plano. Dúvidas, contate nosso call center 0800 55 1827");
+
+                if (plano.DT_INSC_PLANO.AddMonths(12) >= DateTime.Now)
                     throw new Exception("Simulação não permitida. O participante tem menos de 12 meses de participação no plano. Contate a SABESPREV – 08000-55-1827");
 
                 var categoria = new CategoriaProxy().BuscarPorCdCategoria(plano.CD_CATEGORIA);

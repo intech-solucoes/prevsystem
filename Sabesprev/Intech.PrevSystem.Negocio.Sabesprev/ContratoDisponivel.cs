@@ -324,8 +324,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             string MotivoGlobal = "";
 
-            if ((controle == "P") && (contratosAReformar.Count != 0 && contratosAReformar.Count >= qtde))
-                MotivoGlobal += "O participante já possui o limite máximo de contratos estipulados pelo sistema.\n";
+            //if ((controle == "P") && (contratosAReformar.Count != 0 && contratosAReformar.Count >= qtde))
+            //MotivoGlobal += "O participante já possui o limite máximo de contratos estipulados pelo sistema.\n";
 
             bool PrestacoesMinimasPagas = true;
             bool PercentualMinimoPago = true;

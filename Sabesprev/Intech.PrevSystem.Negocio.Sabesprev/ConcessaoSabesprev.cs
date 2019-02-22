@@ -253,7 +253,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             var cadastroRubrica = new CadastroRubricasProxy().BuscarPorFundacaoInscricaoEmpresa(fundacao, inscricao, empresa);
             decimal w_media_salario = 0;
 
-            var rubricaMC = new RubricaProxy().BuscarPorFundacaoEmpresaMargemConsig(fundacao, empresa, DMN_SIM_NAO.SIM);
+            var rubricaMC = new RubricaProxy().BuscarPorFundacaoEmpresaMargemConsig(fundacao, empresa, DMN_SN.SIM);
 
             var lista = (from item in cadastroRubrica
                          where rubricaMC.Select(x => x.CD_RUBRICA).Contains(item.CD_RUBRICA)

@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BaseDependenteController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseDocumentoController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseEmailController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BaseUploadController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseEmpresaController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseEntidadeController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BaseFatorRiscoController.cs" />

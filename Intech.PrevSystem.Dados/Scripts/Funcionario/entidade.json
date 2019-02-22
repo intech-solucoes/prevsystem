@@ -15,6 +15,11 @@
             "nome": "DS_CARGO",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "CPF_CGC",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

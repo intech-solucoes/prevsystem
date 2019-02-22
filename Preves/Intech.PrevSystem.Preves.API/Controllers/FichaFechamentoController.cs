@@ -24,42 +24,57 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 var empresaPlano = new EmpresaPlanosProxy().BuscarPorFundacaoEmpresaPlano(CdFundacao, CdEmpresa, cdPlano);
                 var indice = new IndiceValoresProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP).First();
 
-                if (cdPlano == "0002")
-                {
-                    var fichaFechamento = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.SIM);
+                var fichaFechamentoPartic = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.SIM);
+                var fichaFechamentoPatroc = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.NAO);
 
-                    return Json(new
-                    {
-                        Cotas = fichaFechamento.QTE_COTA_ACUM,
+                Saldo saldo;
+
+                if(fichaFechamentoPatroc == null)
+                {
+                    saldo = new Saldo {
+                        CotasPartic = fichaFechamentoPartic.QTE_COTA_ACUM.Value,
+                        SaldoPartic = fichaFechamentoPartic.QTE_COTA_ACUM.Value * indice.VALOR_IND,
                         DataIndice = indice.DT_IND,
-                        ValorIndice = indice.VALOR_IND,
-                        Saldo = fichaFechamento.QTE_COTA_ACUM * indice.VALOR_IND
-                    });
+                        ValorIndice = indice.VALOR_IND
+                    };
                 }
                 else
                 {
-                    var fichaFechamentoPartic = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.SIM);
-                    var fichaFechamentoPatroc = fichaFechamentoProxy.BuscarUltimaPorFundacaoEmpresaPlanoInscricaoTipoPartic(CdFundacao, CdEmpresa, cdPlano, Inscricao, DMN_TIPO_FICHA_FECHAMENTO_PREVES.ANALITICO, DMN_SN.NAO);
+                    var saldoPartic = fichaFechamentoPartic.QTE_COTA_ACUM.Value * indice.VALOR_IND;
+                    var saldoPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM.Value * indice.VALOR_IND;
 
-                    var saldoPartic = fichaFechamentoPartic.QTE_COTA_ACUM * indice.VALOR_IND;
-                    var saldoPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM * indice.VALOR_IND;
-
-                    return Json(new
+                    saldo = new Saldo
                     {
-                        CotasPartic = fichaFechamentoPartic.QTE_COTA_ACUM,
-                        CotasPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM,
-                        DataIndice = indice.DT_IND,
-                        ValorIndice = indice.VALOR_IND,
+                        CotasPartic = fichaFechamentoPartic.QTE_COTA_ACUM.Value,
+                        CotasPatroc = fichaFechamentoPatroc.QTE_COTA_ACUM.Value,
                         SaldoPartic = saldoPartic,
                         SaldoPatroc = saldoPatroc,
-                        Total = saldoPartic + saldoPatroc
-                    });
+                        DataIndice = indice.DT_IND,
+                        ValorIndice = indice.VALOR_IND
+                    };
                 }
+
+                return Json(saldo);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+    }
+
+    public class Saldo
+    {
+        public decimal CotasPartic { get; set; }
+        public decimal CotasPatroc { get; set; }
+        public DateTime DataIndice { get; set; }
+        public decimal ValorIndice { get; set; }
+        public decimal SaldoPartic { get; set; }
+        public decimal SaldoPatroc { get; set; }
+
+        public decimal Total
+        {
+            get => SaldoPartic + SaldoPatroc;
         }
     }
 }

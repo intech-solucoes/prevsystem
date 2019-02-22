@@ -14,7 +14,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
     {
         [HttpGet]
         [Authorize("Bearer")]
-        public IActionResult Get(string cdPlano)
+        public IActionResult Get()
         {
             try
             {

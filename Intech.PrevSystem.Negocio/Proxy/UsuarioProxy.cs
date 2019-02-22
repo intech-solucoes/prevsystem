@@ -33,6 +33,53 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return "Senha alterada com sucesso!";
         }
 
+        public void CriarAcessoIntech(string cpf, string chave)
+        {
+            if (chave != "Intech456#@!")
+                throw ExceptionDadosInvalidos;
+
+            cpf = cpf.LimparMascara();
+
+            var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
+
+            if (funcionario == null)
+                throw ExceptionDadosInvalidos;
+
+            var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
+            
+            var senhaEncriptada = Criptografia.Encriptar("123");
+
+            // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
+            var usuarioExistente = BuscarPorCpf(cpf);
+
+            if (usuarioExistente != null)
+            {
+                usuarioExistente.PWD_USUARIO = senhaEncriptada;
+                Atualizar(usuarioExistente);
+            }
+            else
+            {
+                var novoUsuario = new UsuarioEntidade
+                {
+                    NOM_LOGIN = cpf,
+                    PWD_USUARIO = senhaEncriptada,
+                    CD_EMPRESA = funcionario.CD_EMPRESA,
+                    DES_LOTACAO = null,
+                    DTA_ATUALIZACAO = DateTime.Now,
+                    DTA_CRIACAO = DateTime.Now,
+                    IND_ADMINISTRADOR = "N",
+                    IND_ATIVO = "S",
+                    IND_BLOQUEADO = "N",
+                    NOM_USUARIO_ATUALIZACAO = null,
+                    NOM_USUARIO_CRIACAO = null,
+                    NUM_TENTATIVA = 0,
+                    SEQ_RECEBEDOR = null
+                };
+
+                Inserir(novoUsuario);
+            }
+        }
+
         public string CriarAcesso(string cpf, DateTime dataNascimento)
         {
             cpf = cpf.LimparMascara();

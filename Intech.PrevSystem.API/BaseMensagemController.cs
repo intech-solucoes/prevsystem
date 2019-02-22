@@ -44,6 +44,21 @@ namespace Intech.PrevSystem.API
             }
         }
 
+        [HttpGet("porPlano/{cdPlano}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarPorPlano(string cdPlano)
+        {
+            try
+            {
+                var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano);
+
+                return Json(new MensagemProxy().BuscarPorFundacaoEmpresaPlanoSitPlanoCodEntid(CdFundacao, CdEmpresa, cdPlano, plano.CD_SIT_PLANO, CodEntid));
+            } catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize("Bearer")]
         public IActionResult Criar([FromBody] MensagemEntidade mensagem)
@@ -71,7 +86,7 @@ namespace Intech.PrevSystem.API
                 // Se opção de enviar e-mail for habilitada
                 if (mensagem.IND_EMAIL == DMN_SIM_NAO.SIM)
                 {
-                    var listaDestinatarios = funcionarioProxy.BuscarPorPesquisa(mensagem.CD_FUNDACAO, mensagem.CD_EMPRESA, mensagem.CD_PLANO, mensagem.CD_SIT_PLANO, mensagem.NUM_MATRICULA);
+                    var listaDestinatarios = funcionarioProxy.BuscarPorPesquisa(mensagem.CD_FUNDACAO, mensagem.CD_EMPRESA, mensagem.CD_PLANO, mensagem.CD_SIT_PLANO, mensagem.NUM_MATRICULA, string.Empty);
 
                     foreach (var destinatario in listaDestinatarios)
                     {

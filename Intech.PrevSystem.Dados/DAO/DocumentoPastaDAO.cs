@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -13,7 +13,7 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class DocumentoPastaDAO : BaseDAO<DocumentoPastaEntidade>
     {
         
-		public virtual IEnumerable<DocumentoPastaEntidade> BuscarPorPasta(decimal? OID_DOCUMENTO_PASTA_PAI)
+		public virtual IEnumerable<DocumentoPastaEntidade> BuscarPorPastaPai(decimal? OID_DOCUMENTO_PASTA_PAI)
 		{
 			try
 			{

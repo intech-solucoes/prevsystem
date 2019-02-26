@@ -124,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             
             decimal sumContratosMarcados = 0;
 
-            var contratosAReformar = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, "3").ToList();
+            var contratosAReformar = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, "3", dtCredito.ToString()).ToList();
 
             //contratos marcados para reforma
             foreach (var contrato in contratosAReformar)
@@ -428,7 +428,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
         private static decimal ObtemSaldoReservaPoupanca(Concessao concessao, PlanoVinculadoEntidade plano, string cdEmpresa, string numInscricao)
         {
-            var fichaFinanceiraProxy = new FichaFinanceiraProxy();
+            var fichaFinanceiraProxy = new FichaFinanceiraProxySabesprev();
 
             DateTime dataSaldo = ObterDataSaldoEmCotas(concessao, plano.CD_CATEGORIA);
             dataSaldo = dataSaldo.UltimoDiaDoMes();
@@ -436,9 +436,9 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             decimal saldoReservaPoupanca = 0;
 
             if (plano.CD_PLANO == "0003")
-                saldoReservaPoupanca = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(plano.CD_FUNDACAO, cdEmpresa, plano.CD_PLANO, numInscricao, "6").ValorTotal;
+                saldoReservaPoupanca = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(plano.CD_FUNDACAO, cdEmpresa, plano.CD_PLANO, numInscricao, "6", dataSaldo).ValorTotal;
             else
-                saldoReservaPoupanca = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricao(plano.CD_FUNDACAO, cdEmpresa, plano.CD_PLANO, numInscricao).ValorTotal;
+                saldoReservaPoupanca = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricao(plano.CD_FUNDACAO, cdEmpresa, plano.CD_PLANO, numInscricao, dataSaldo).ValorTotal;
 
             return saldoReservaPoupanca;
         }

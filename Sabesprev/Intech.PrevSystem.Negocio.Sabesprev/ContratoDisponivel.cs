@@ -319,7 +319,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             string controle = parametros.CONTROLE_CONTR_ATIVOS == null ? "P" : parametros.CONTROLE_CONTR_ATIVOS;
             var qtde = parametros.MAX_CONTR_ATIVOS == null ? 0 : parametros.MAX_CONTR_ATIVOS;
 
-            var contratosAReformar = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, "3").ToList();
+            var contratosAReformar = new ContratoProxySabesprev().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, "3", dataCredito.ToString()).ToList();
             var contratoAReformar = contratosAReformar.FirstOrDefault();
 
             string MotivoGlobal = "";
@@ -369,6 +369,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                 VencimentoInicial = ObterDataVencimento(natureza, dtAniversario, true, PrazoDisponivel.PRAZO);
                 VencimentoFinal = ObterDataVencimento(natureza, dtAniversario, false, PrazoDisponivel.PRAZO);
                 Fator = ObterFator(taxaConcessao.TX_JUROS.Value, PrazoDisponivel.PRAZO);
+
+                //Parei aqui
 
                 ValorAtualizacao = ObterValorAtualizacao(funcionario, modalidade, natureza, encargo, taxaConcessao, valorSolicitado, dataCredito);
 
@@ -691,7 +693,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
                     w_dt_ind = new DateTime(w_dt_ind.Year, w_dt_ind.Month, w_dt_ind.UltimoDiaDoMes().Day);
 
-                    var indice = new IndiceProxy().BuscarUltimoPorCodigo(modalidade.IND_CORR_VL_SOLIC);
+                    var indice = new IndiceProxy().BuscarPorCodigo(modalidade.IND_CORR_VL_SOLIC);
 
                     if (indice == null)
                     {

@@ -11,7 +11,7 @@ namespace Intech.PrevSystem.Entidades
 {
     public static class SaldoContribuicoesExtensoes
     {
-        public static void PreencherSaldo(this SaldoContribuicoesEntidade saldo, List<FichaFinanceiraEntidade> contribuicoes, string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo = null)
+        public static void PreencherSaldo(this SaldoContribuicoesEntidade saldo, List<FichaFinanceiraEntidade> contribuicoes, string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo = null, string dataSaldo = null)
         {
             //saldo.DataReferencia = DateTime.ParseExact($"01/{contribuicoes.First().MES_REF}/{contribuicoes.First().ANO_REF}", "dd/MM/yyyy", new CultureInfo("pt-BR"));
             saldo.DataReferencia = DateTime.Now;
@@ -30,10 +30,16 @@ namespace Intech.PrevSystem.Entidades
             }
             else
             {
-                indice = new IndiceProxy().BuscarUltimoPorCodigo(empresaPlano.IND_RESERVA_POUP);
+                indice = new IndiceProxy().BuscarPorCodigo(empresaPlano.IND_RESERVA_POUP);
             }
             
             var dataCota = indice.VALORES.First().DT_IND;
+
+            if (dataSaldo != null)
+            {
+                dataCota = Convert.ToDateTime(dataSaldo);
+            }
+
 
             var valorIndice = indice.BuscarValorEm(dataCota);
 

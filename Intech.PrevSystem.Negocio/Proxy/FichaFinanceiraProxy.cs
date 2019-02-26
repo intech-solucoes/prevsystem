@@ -234,7 +234,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         /// <param name="cdFundacao"></param>
         /// <param name="cdPlano"></param>
         /// <returns></returns>
-        public SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricao(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao)
+        public virtual SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricao(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao)
         {
             var contribuicoes = BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao).ToList();
 
@@ -253,7 +253,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         /// <param name="cdFundacao"></param>
         /// <param name="cdPlano"></param>
         /// <returns></returns>
-        public SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo)
+        public virtual SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo)
         {
             var contribuicoes = BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao).ToList();
 
@@ -261,7 +261,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 throw new Exception("Nenhuma contribuição encontrada");
 
             var saldo = new SaldoContribuicoesEntidade();
-            saldo.PreencherSaldo(contribuicoes, cdFundacao, cdEmpresa, cdPlano, numInscricao, cdFundo);
+            saldo.PreencherSaldo(contribuicoes, cdFundacao, cdEmpresa, cdPlano, numInscricao, cdFundo, null);
 
             return saldo;
         }

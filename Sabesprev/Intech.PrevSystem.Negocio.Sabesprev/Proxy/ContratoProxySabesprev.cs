@@ -22,14 +22,18 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
 
             return listaContratos;
         }
-        public List<ContratoEntidade> BuscarPorFundacaoEmpresaInscricaoSituacao(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string CD_SITUACAO)
+        public List<ContratoEntidade> BuscarPorFundacaoEmpresaInscricaoSituacao(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string CD_SITUACAO, string DATA_QUITACAO = null)
         {
             var listaContratos = base.BuscarPorFundacaoInscricaoSituacao(CD_FUNDACAO, NUM_INSCRICAO, CD_SITUACAO).ToList();
+            var dataQuitacao = DateTime.Now;
+
+            if (DATA_QUITACAO != null)
+                dataQuitacao = Convert.ToDateTime(DATA_QUITACAO);
 
             listaContratos.ForEach(contrato =>
             {
                 contrato = BuscarDetalhesContratos(CD_FUNDACAO, contrato);
-                contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+                contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, dataQuitacao);
             });
 
             return listaContratos;

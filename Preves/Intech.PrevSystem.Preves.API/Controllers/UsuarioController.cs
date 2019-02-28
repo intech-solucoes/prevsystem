@@ -173,31 +173,38 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 var usuario = new UsuarioProxy().BuscarPorCpf(Cpf);
 
                 var codEntid = funcionario.COD_ENTID.ToString();
-                var claims = new List<KeyValuePair<string, string>> {
-                            new KeyValuePair<string, string>("Cpf", Cpf),
-                            new KeyValuePair<string, string>("CodEntid", codEntid),
-                            new KeyValuePair<string, string>("Matricula", funcionario.NUM_MATRICULA),
-                            new KeyValuePair<string, string>("Inscricao", funcionario.NUM_INSCRICAO),
-                            new KeyValuePair<string, string>("CdFundacao", funcionario.CD_FUNDACAO),
-                            new KeyValuePair<string, string>("CdEmpresa", funcionario.CD_EMPRESA),
-                            new KeyValuePair<string, string>("Pensionista", Pensionista.ToString()),
-                            new KeyValuePair<string, string>("SeqRecebedor", SeqRecebedor.ToString()),
-                            new KeyValuePair<string, string>("GrupoFamilia", GrupoFamilia),
-                            new KeyValuePair<string, string>("Admin", usuario.IND_ADMINISTRADOR)
-                        };
 
-                var token = AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims);
-
-                return Json(new
+                if(codEntid != null)
                 {
-                    token.AccessToken,
-                    token.Authenticated,
-                    token.Created,
-                    token.Expiration,
-                    token.Message,
-                    Pensionista,
-                    Admin = usuario.IND_ADMINISTRADOR
-                });
+                    var claims = new List<KeyValuePair<string, string>> {
+                                new KeyValuePair<string, string>("Cpf", Cpf),
+                                new KeyValuePair<string, string>("CodEntid", codEntid),
+                                new KeyValuePair<string, string>("Matricula", funcionario.NUM_MATRICULA),
+                                new KeyValuePair<string, string>("Inscricao", funcionario.NUM_INSCRICAO),
+                                new KeyValuePair<string, string>("CdFundacao", funcionario.CD_FUNDACAO),
+                                new KeyValuePair<string, string>("CdEmpresa", funcionario.CD_EMPRESA),
+                                new KeyValuePair<string, string>("Pensionista", Pensionista.ToString()),
+                                new KeyValuePair<string, string>("SeqRecebedor", SeqRecebedor.ToString()),
+                                new KeyValuePair<string, string>("GrupoFamilia", GrupoFamilia),
+                                new KeyValuePair<string, string>("Admin", usuario.IND_ADMINISTRADOR)
+                            };
+
+                    var token = AuthenticationToken.Generate(signingConfigurations, tokenConfigurations, usuario.NOM_LOGIN, claims);
+
+                    return Json(new
+                    {
+                        token.AccessToken,
+                        token.Authenticated,
+                        token.Created,
+                        token.Expiration,
+                        token.Message,
+                        Pensionista,
+                        Admin = usuario.IND_ADMINISTRADOR
+                    });
+                } else
+                {
+                    return Unauthorized();
+                }
 
             } catch(Exception ex)
             {

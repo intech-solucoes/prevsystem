@@ -139,6 +139,8 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoCompetenciaRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarInformePorFundacaoInscricaoAno.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarDatasInformePorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPlanoUmDoisPorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />

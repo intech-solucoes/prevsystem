@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -49,12 +49,13 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DATA_ALTERACAO { get; set; }
 		public string OBS { get; set; }
 		public string CALC_RESERVA { get; set; }
+		public string TIPO_IRRF { get; set; }
 		public string CONTRIB_CANCELADA { get; set; }
-		public string DS_TIPO_CONTRIBUICAO { get; set; }
-		public decimal? TOTAL_CONTRIB { get; set; }
-		public decimal? QTD_COTA { get; set; }
-		public string DES_MES_REF { get; set; }
-		public string CALC_MARGEM_CONSIG { get; set; }
+		[Write(false)] public string DS_TIPO_CONTRIBUICAO { get; set; }
+		[Write(false)] public decimal? TOTAL_CONTRIB { get; set; }
+		[Write(false)] public decimal? QTD_COTA { get; set; }
+		[Write(false)] public string DES_MES_REF { get; set; }
+		[Write(false)] public string CALC_MARGEM_CONSIG { get; set; }
         
     }
 }

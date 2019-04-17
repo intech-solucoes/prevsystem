@@ -13,6 +13,5 @@ namespace Intech.PrevSystem.Saofrancisco.API.Controllers
     [Route("api/")]
     public class VersaoController : BaseVersaoController
     {
-
     }
 }

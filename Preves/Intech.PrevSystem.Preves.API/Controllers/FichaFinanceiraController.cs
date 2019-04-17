@@ -53,27 +53,28 @@ namespace Intech.PrevSystem.Preves.API.Controllers
             }
         }
 
-        [HttpGet("datasPorFundacaoInscricao/{cdFundacao}/{inscricao}")]
+        [HttpGet("datasInforme")]
         [Authorize("Bearer")]
-        public IActionResult BuscarDatasInformePorFundacaoInscricao(string cdFundacao, string inscricao)
+        public IActionResult BuscarDatasInforme()
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarDatasInformePorFundacaoInscricao(cdFundacao, inscricao));
+                return Json(new FichaFinanceiraProxy().BuscarDatasInformePorFundacaoInscricao(CdFundacao, Inscricao));
             } catch(Exception ex)
             {
                 return BadRequest(ex);
             }
         }
 
-        [HttpGet("informePorFundacaInscricaoAno/{cdFundacao}/{inscricao}/{ano}")]
+        [HttpGet("informePorAno/{ano}")]
         [Authorize("Bearer")]
-        public IActionResult BuscarInformePorFundacaoInscricaoAno(string cdFundacao, string inscricao, string ano)
+        public IActionResult BuscarInformePorFundacaoInscricaoAno(string ano)
         {
             try
             {
-                return Json(new FichaFinanceiraProxy().BuscarInformePorFundacaoInscricaoAno(cdFundacao, inscricao, ano));
-            } catch(Exception ex)
+                return Json(new FichaFinanceiraProxy().BuscarInformePorFundacaoInscricaoAno(CdFundacao, Inscricao, ano));
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }

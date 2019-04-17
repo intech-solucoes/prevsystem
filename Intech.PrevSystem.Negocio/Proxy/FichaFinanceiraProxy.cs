@@ -286,5 +286,38 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 Percentual = ultimaContrib.VL_PERC_PAR
             };
         }
+
+        public override IEnumerable<FichaFinanceiraEntidade> BuscarInformePorFundacaoInscricaoAno(string CD_FUNDACAO, string NUM_INSCRICAO, string ANO)
+        {
+            var informe = base.BuscarInformePorFundacaoInscricaoAno(CD_FUNDACAO, NUM_INSCRICAO, ANO);
+            var listaRetorno = new List<FichaFinanceiraEntidade>();
+
+            for(int i = 1; i <= 12; i++)
+            {
+                var item = informe.SingleOrDefault(x => x.MES_REF.TrimStart('0') == i.ToString());
+
+                if (item != null) {
+                    item.DES_MES_REF = DateTimeExtensoes.MesPorExtenso(item.MES_REF.TrimStart('0'));
+                    listaRetorno.Add(item);
+                }
+                else {
+                    listaRetorno.Add(new FichaFinanceiraEntidade
+                    {
+                        MES_REF = i.ToString(),
+                        DES_MES_REF = DateTimeExtensoes.MesPorExtenso(i.ToString()),
+                        CONTRIB_PARTICIPANTE = 0
+                    });
+                }
+            }
+
+            listaRetorno.Add(new FichaFinanceiraEntidade
+            {
+                MES_REF = "13",
+                DES_MES_REF = "Total",
+                CONTRIB_PARTICIPANTE = listaRetorno.Sum(x => x.CONTRIB_PARTICIPANTE)
+            });
+
+            return listaRetorno;
+        }
     }
 }

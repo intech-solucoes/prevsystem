@@ -2,7 +2,8 @@
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Globalization; 
+using System.Globalization;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Metrus.API.Controllers
@@ -21,7 +22,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarDatas(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dtReferencia);
-                
+
                 return Json(fichaFinanceira);
             }
             catch (Exception ex)

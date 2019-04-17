@@ -1,8 +1,7 @@
 ﻿using eConsig;
 using Intech.Lib.Web;
-using Intech.PrevSystem.Negocio;
+using Intech.PrevSystem.Entidades;
 using System;
-using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 

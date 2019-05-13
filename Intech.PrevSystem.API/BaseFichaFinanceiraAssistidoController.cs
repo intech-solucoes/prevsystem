@@ -64,5 +64,26 @@ namespace Intech.PrevSystem.API
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("ultimaFolhaPorPlano/{cdPlano}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarUltimaPorPlano(string cdPlano)
+        {
+            try
+            {
+                dynamic rubricas;
+
+                if (Pensionista)
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano, SeqRecebedor);
+                else
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano);
+
+                return Json(rubricas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

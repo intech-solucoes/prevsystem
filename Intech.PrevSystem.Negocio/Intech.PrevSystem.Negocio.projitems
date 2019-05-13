@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\BancoAgProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\BloqueioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\CadastroRubricasProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\CalendarioPagamentoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\CarenciasDisponiveisProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\CategoriaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ComposicaoSRCProxy.cs" />

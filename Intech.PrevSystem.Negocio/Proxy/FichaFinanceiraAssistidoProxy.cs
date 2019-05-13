@@ -108,5 +108,45 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 }
             };
         }
+
+        public dynamic BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, int? SeqRecebedor = null)
+        {
+            List<FichaFinanceiraAssistidoEntidade> rubricas;
+
+            if (SeqRecebedor.HasValue)
+            {
+                var data = base.BuscarUltimaDataPorRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO);
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, data, "1").ToList();
+            }
+            else
+            {
+                var data = base.BuscarUltimaData(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data, "1").ToList();
+            }
+
+            var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
+            var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
+
+            foreach (var rubrica in descontos)
+                rubrica.VALOR_MC *= -1;
+
+            var bruto = proventos.Sum(x => x.VALOR_MC);
+            var valDescontos = descontos.Sum(x => x.VALOR_MC);
+            var liquido = bruto - Math.Abs(valDescontos.Value);
+
+            return new
+            {
+                Proventos = proventos,
+                Descontos = descontos,
+                Resumo = new
+                {
+                    Referencia = rubricas.First().DT_REFERENCIA,
+                    Bruto = bruto,
+                    Descontos = valDescontos,
+                    Liquido = liquido,
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
+                }
+            };
+        }
     }
 }

@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BancoAgEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BloqueioEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CadastroRubricasEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CalendarioPagamentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CarenciasDisponiveisEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CategoriaEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ComposicaoSRCEntidade.cs" />

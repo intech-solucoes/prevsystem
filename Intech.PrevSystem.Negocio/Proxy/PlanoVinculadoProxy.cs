@@ -113,9 +113,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
         }
 
-        private decimal ObtemSalarioDosAssistidos(string cdEmpresa, string numMatricula, PlanoVinculadoEntidade plano, int seqRecebedor)
+        private decimal ObtemSalarioDosAssistidos(string cdEmpresa, string numMatricula, PlanoVinculadoEntidade plano, int? seqRecebedor)
         {
-            if (seqRecebedor == null)
+            if (!seqRecebedor.HasValue)
                 throw new Exception("Assistido não possui SeqRecebedor ao buscar Salario Real de Contribuicao");
 
             //var fichas = new FichaFinanceiraAssistidoProxy().BuscarDatasPorRecebedor(plano.CD_FUNDACAO, cdEmpresa, numMatricula, seqRecebedor, plano.CD_PLANO, );
@@ -128,7 +128,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             
             var proxyFichaFinancAssistido = new FichaFinanceiraAssistidoProxy();
             var dtFichas = proxyFichaFinancAssistido
-                .BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor(plano.CD_FUNDACAO, cdEmpresa, numMatricula, seqRecebedor, plano.CD_PLANO);
+                .BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor(plano.CD_FUNDACAO, cdEmpresa, numMatricula, seqRecebedor.Value, plano.CD_PLANO);
 
             var qry = from row in dtFichas
                       where enRubrica.Select(x => x.CD_RUBRICA).Contains(row.CD_RUBRICA)

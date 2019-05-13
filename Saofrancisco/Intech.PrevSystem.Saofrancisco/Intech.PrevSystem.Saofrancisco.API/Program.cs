@@ -19,7 +19,6 @@ namespace Intech.PrevSystem.Saofrancisco.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseUrls("http://localhost:5000", "http://10.10.172.134:5000");
+                .UseStartup<Startup>();
     }
 }

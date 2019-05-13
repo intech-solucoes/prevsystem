@@ -212,23 +212,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
         }
 
         /// <summary>
-        /// Busca as contribuições do ultimo mês
-        /// </summary>
-        /// <param name="cdFundacao"></param>
-        /// <param name="numInscricao"></param>
-        /// <returns></returns>
-        public List<FichaFinanceiraEntidade> BuscarUltimaPorFundacaoPlanoInscricao(string cdFundacao, string cdPlano, string numInscricao)
-        {
-            // Agrupa e seleciona apenas o primeiro registro do agrupamento, que é referente ao ultimo mês
-            var lista = BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao)
-                .GroupBy(x => new { x.ANO_REF, x.MES_REF })
-                .Select(x => new { Referencia = x.Key, Itens = x })
-                .First();
-
-            return lista.Itens.ToList();
-        }
-
-        /// <summary>
         /// Busca o saldo de contribuições do participante
         /// </summary>
         /// <param name="cdFundacao"></param>

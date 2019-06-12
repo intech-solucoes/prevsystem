@@ -10,7 +10,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
 {
     public class PlanoVinculadoProxyMetrus : PlanoVinculadoProxy
     {
-        public IEnumerable<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatriculaComModalidades(FuncionarioEntidade funcionario)
+        public IEnumerable<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatriculaComModalidades(FuncionarioEntidade funcionario, bool abatePensao = true)
         {
             var planos = base.BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA).ToList();
 
@@ -54,7 +54,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                         throw new Exception("Concessão de empréstimo não permitida para usuários na situação Desligado");
                 }
 
-                plano.UltimoSalario = BuscarUltimoSalario(funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, origem, plano);
+                plano.UltimoSalario = BuscarUltimoSalario(funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, origem, plano, abatePensao);
                 plano.ProcessoBeneficio = proxyBeneficio.BuscarPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO);
                 plano.Modalidades = new ModalidadeProxyMetrus().BuscarAtivasComNaturezas(funcionario, funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, origem, plano);
             }

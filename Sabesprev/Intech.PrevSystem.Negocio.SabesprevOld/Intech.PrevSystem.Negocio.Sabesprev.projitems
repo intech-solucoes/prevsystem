@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConcessaoSabesprev.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoDisponivel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoExtensoes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FichaFinanceiraProxySabesprev.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContratoProxySabesprev.cs" />
   </ItemGroup>
 </Project>

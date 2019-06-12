@@ -50,8 +50,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)EstadoCivilEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensoes\Feriado.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensoes\Indice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensoes\PlanoVinculadoExtensoes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensoes\TaxaEvolPerfilExtensao.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FaixaValorContribEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FatAtuMetrusG1Entidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FatorRiscoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FatSimuladorMetrusEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FeriadoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFechamentoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FichaFechamentoPrevesEntidade.cs" />
@@ -79,6 +83,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ParametrosEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PerfilInvestEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PerfilInvestIndiceEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PerfilSitPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlanoVinculadoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrazosDisponiveisEntidade.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SitPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaConcessaoPlanoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxaEncargoPlanoEntidade.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TaxaEvolPerfilEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxasConcessaoEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TaxasEncargosEntidade.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TempoServicoEntidade.cs" />

@@ -29,6 +29,19 @@ namespace Intech.PrevSystem.Preves.API.Controllers
 
                 Saldo saldo;
 
+                if(fichaFechamentoPartic == null)
+                {
+                    saldo = new Saldo
+                    {
+                        CotasPartic = 0M,
+                        SaldoPartic = 0M,
+                        DataIndice = indice.DT_IND,
+                        ValorIndice = indice.VALOR_IND
+                    };
+
+                    return Json(saldo);
+                }
+
                 if(fichaFechamentoPatroc == null)
                 {
                     saldo = new Saldo {

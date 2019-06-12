@@ -1,50 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>1.0.0</Version>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Version>1.0.1</Version>
   </PropertyGroup>
-
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
-    <PackageReference Include="DevExpress.AspNetCore.Core" Version="18.1.6" />
-    <PackageReference Include="DevExpress.DataAccess" Version="18.1.6" />
-    <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
-    <PackageReference Include="FinancialFormulas" Version="1.2.2" />
-    <PackageReference Include="MailKit" Version="2.0.5" />
+    <None Remove="Relatorios\ContratoAberturaCredito.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Relatorios\ContratoAberturaCredito.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.11" />
+    <PackageReference Include="DevExpress.Xpo" Version="18.1.11" />
+    <PackageReference Include="FinancialFormulas" Version="1.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.SMS\Intech.Lib.SMS.csproj" />
+    <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
+    <ProjectReference Include="..\Intech.PrevSystem.Negocio.Sabesprev\Intech.PrevSystem.Negocio.Sabesprev.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="HumanAPIClient">
       <HintPath>..\..\..\lib\terceiros\HumanAPIClient.dll</HintPath>
     </Reference>
   </ItemGroup>
-
   <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
-
-  <Import Project="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems" Label="Shared" />
-
-  <Import Project="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems" Label="Shared" />
-
-  <Import Project="..\Intech.PrevSystem.Negocio.Sabesprev\Intech.PrevSystem.Negocio.Sabesprev.projitems" Label="Shared" />
-
   <Import Project="..\..\..\..\git\prevsystem\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Servicos\Intech.Lib.Servicos.projitems" Label="Shared" />
-  
+  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Relatorios\Intech.Lib.Relatorios.projitems" Label="Shared" />
 </Project>

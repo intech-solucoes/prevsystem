@@ -30,7 +30,7 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(CdFundacao, Inscricao));
+                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoMatricula(CdFundacao, Matricula));
             }
             catch (Exception ex)
             {

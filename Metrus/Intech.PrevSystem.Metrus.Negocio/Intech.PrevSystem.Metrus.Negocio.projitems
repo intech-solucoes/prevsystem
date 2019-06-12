@@ -16,5 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ContratoExtensoes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ModalidadeProxyMetrus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlanoVinculadoProxyMetrus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ParametrosSimuladorBeneficio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimuladorBeneficio.cs" />
   </ItemGroup>
 </Project>

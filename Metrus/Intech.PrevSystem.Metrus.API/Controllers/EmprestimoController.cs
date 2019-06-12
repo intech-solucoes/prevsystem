@@ -204,7 +204,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         }
 
         [HttpPost("parametrosParcelas")]
-        public IActionResult ParametrosParcelas([FromBody] ParametrosSimulacao dados)
+        public IActionResult ParametrosParcelas([FromBody] ParametrosSimulacaoEmprestimo dados)
         {
             try
             {
@@ -229,7 +229,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
+                //throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
                 return Json(new
                 {
@@ -248,7 +248,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         #endregion
     }
 
-    public class ParametrosSimulacao
+    public class ParametrosSimulacaoEmprestimo
     {
         public string CodEntid { get; set; }
         public string CdPlano { get; set; }

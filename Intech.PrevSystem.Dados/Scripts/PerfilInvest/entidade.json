@@ -1,3 +1,10 @@
 ﻿{
-    "nomeTabela": "TB_PERFIL_INVEST"
+    "nomeTabela": "TB_PERFIL_INVEST",
+    "colunasExtras": [
+        {
+            "nome": "TaxasProjetadas",
+            "tipo": "List<TaxaEvolPerfilEntidade>",
+            "aceitaNulo": false
+        }
+    ]
 }

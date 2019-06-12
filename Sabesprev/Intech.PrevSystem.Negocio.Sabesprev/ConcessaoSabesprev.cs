@@ -11,13 +11,13 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 {
     public class ConcessaoSabesprev
     {
-        public static Concessao ObtemConcessao(FuncionarioEntidade funcionario, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao, bool pensionista, decimal seqRecebedor)
+        public static Concessao ObtemConcessao(string numMatricula, string fundacao, string empresa, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao, bool pensionista, int? seqRecebedor = null)
         {
+            var funcionario = new FuncionarioProxy().BuscarPorMatricula(numMatricula);
             var dados = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
-            string empresa = funcionario.CD_EMPRESA;
-            string fundacao = funcionario.CD_FUNDACAO;
 
-            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(fundacao, empresa, funcionario.NUM_MATRICULA, cdPlano);
+
+            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(fundacao, empresa, funcionario.NUM_MATRICULA, cdPlano, seqRecebedor);
 
             string categoria = plano.CD_CATEGORIA;
 
@@ -77,45 +77,38 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             //Criando o objeto para controlar a concessao
             var concessao = new Concessao();
+            
+            var parametros = new ParametrosProxy().Buscar();
+            var margemPlanoProxy = new MargensPlanoProxy();
 
-            try
-            {
-                var parametros = new ParametrosProxy().Buscar();
-                var margemPlanoProxy = new MargensPlanoProxy();
+            var margem = margemPlanoProxy.BuscarPorFundacaoEmpresaPlanoModalNaturEmVigencia(fundacao, empresa, plano.CD_PLANO, cdModal, cdNatur, DateTime.Now);
 
-                var margem = margemPlanoProxy.BuscarPorFundacaoEmpresaPlanoModalNaturEmVigencia(fundacao, empresa, plano.CD_PLANO, cdModal, cdNatur, DateTime.Now);
-
-                if (margem == null)
-                    throw new Exception("Não há regra de cálculo para a Margem Consignável com os Dados Informados");
-
-                //extraido do fabrica
-                decimal txRedutoraReservaPoup = margem.TX_ATIVO_RP.HasValue ? 100 : margem.TX_ATIVO_RP.Value; ;
-                decimal taxaRedutoraPrest = 0;
-
-                if (margem.TX_ATIVO_PREST_MEDIA_SP != 0)
-                    taxaRedutoraPrest = margem.TX_ATIVO_PREST_MEDIA_SP == null ? 100 : margem.TX_ATIVO_PREST_MEDIA_SP.Value;
-                else
-                    taxaRedutoraPrest = margem.TX_ATIVO_PREST_SP == null ? 100 : margem.TX_ATIVO_PREST_SP.Value;
-
-                concessao.TetoMinimo = margem.TETO_MINIMO_ATIVO == null ? 0 : margem.TETO_MINIMO_ATIVO.Value; //nao tem 
-                concessao.SSCA = margem.SSCA_ATIVO;
-                concessao.TaxaMargemConsignavel = taxaRedutoraPrest;
-
-                concessao.FlagDataConversaoRP = margem.DT_CONVERSAO_RP == null ? "" : margem.DT_CONVERSAO_RP;
-                concessao.TipoDataConversaoRP = margem.TP_DT_CONV_RP == null ? "" : margem.TP_DT_CONV_RP;
-                concessao.TipoDataConversaoRpAp = margem.TP_DT_CONV_RP_AP == null ? "" : margem.TP_DT_CONV_RP_AP;
-                concessao.TipoDataConversaoRpDf = margem.TP_DT_CONV_RP_DF == null ? "" : margem.TP_DT_CONV_RP_DF;
-                concessao.DataSolicitacao = dtSolicitacao;
-
-                concessao.TaxaRedutoraReservaPoupanca = txRedutoraReservaPoup;
-                decimal valorMargem = ObtemMargemConsignavel(funcionario, plano, fundacao, empresa, funcionario.NUM_INSCRICAO, funcionario.NUM_MATRICULA, seqRecebedor, dtSolicitacao, categoria, concessao);
-                concessao.MargemConsignavel = valorMargem;
-                concessao.MargemConsignavelCalculada = (valorMargem * (taxaRedutoraPrest / 100)).Arredonda(2);
-            }
-            catch (Exception ex)
-            {
+            if (margem == null)
                 throw new Exception("Não há regra de cálculo para a Margem Consignável com os Dados Informados");
-            }
+
+            //extraido do fabrica
+            decimal txRedutoraReservaPoup = margem.TX_ATIVO_RP.HasValue ? 100 : margem.TX_ATIVO_RP.Value; ;
+            decimal taxaRedutoraPrest = 0;
+
+            if (margem.TX_ATIVO_PREST_MEDIA_SP != 0)
+                taxaRedutoraPrest = margem.TX_ATIVO_PREST_MEDIA_SP == null ? 100 : margem.TX_ATIVO_PREST_MEDIA_SP.Value;
+            else
+                taxaRedutoraPrest = margem.TX_ATIVO_PREST_SP == null ? 100 : margem.TX_ATIVO_PREST_SP.Value;
+
+            concessao.TetoMinimo = margem.TETO_MINIMO_ATIVO == null ? 0 : margem.TETO_MINIMO_ATIVO.Value; //nao tem 
+            concessao.SSCA = margem.SSCA_ATIVO;
+            concessao.TaxaMargemConsignavel = taxaRedutoraPrest;
+
+            concessao.FlagDataConversaoRP = margem.DT_CONVERSAO_RP == null ? "" : margem.DT_CONVERSAO_RP;
+            concessao.TipoDataConversaoRP = margem.TP_DT_CONV_RP == null ? "" : margem.TP_DT_CONV_RP;
+            concessao.TipoDataConversaoRpAp = margem.TP_DT_CONV_RP_AP == null ? "" : margem.TP_DT_CONV_RP_AP;
+            concessao.TipoDataConversaoRpDf = margem.TP_DT_CONV_RP_DF == null ? "" : margem.TP_DT_CONV_RP_DF;
+            concessao.DataSolicitacao = dtSolicitacao;
+
+            concessao.TaxaRedutoraReservaPoupanca = txRedutoraReservaPoup;
+            decimal valorMargem = ObtemMargemConsignavel(funcionario, plano, fundacao, empresa, funcionario.NUM_INSCRICAO, funcionario.NUM_MATRICULA, dtSolicitacao, categoria, concessao, seqRecebedor);
+            concessao.MargemConsignavel = valorMargem;
+            concessao.MargemConsignavelCalculada = (valorMargem * (taxaRedutoraPrest / 100)).Arredonda(2);
 
             var prazosDisponiveis = new PrazosDisponiveisProxy().BuscarPorNatureza(cdNatur);
             concessao.PrazoMaximo = prazosDisponiveis.Select(x => x.PRAZO).Max();
@@ -146,7 +139,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                      && !x.DT_PAGTO.HasValue
                      && (x.TIPO.ToUpper() == "P" || x.TIPO.ToUpper() == "I")
                      && (x.CD_ORIGEM_REC == 0 || x.CD_ORIGEM_REC == 50)))
-                    throw new Exception("O participante possui prestação(ões) em atraso. Favor procurar a Fundação Sabesprev pelo 08000 55 1827.");
+                    throw new Exception("O participante possui contrato de empréstimo em andamento, cuja a quantidade de parcelas pagas impossibilita o refinanciamento. Em caso de dúvidas,contate a SABESPREV – 08000-55-1827");
 
                 sumContratosMarcados += contrato.SaldoDevedor.ValorReformado;
             }
@@ -180,7 +173,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             }
             else
             {
-                concessao.ValorUltimoSalario = ObtemSalarioDosAssistidos(plano, fundacao, empresa, funcionario.NUM_INSCRICAO, cdPlano, seqRecebedor);
+                concessao.ValorUltimoSalario = ObtemSalarioDosAssistidos(plano, fundacao, empresa, funcionario.NUM_INSCRICAO, funcionario.NUM_MATRICULA, seqRecebedor);
             }
 
             //3.5 vem do regulamento logo depois de alteração ser homologada havera uma alteração no prevsystem para que esse parametro grava 3.5
@@ -230,7 +223,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return concessao;
         }
 
-        private static decimal ObtemMargemConsignavel(FuncionarioEntidade funcionario, PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, decimal seqRecebedorTemp, DateTime dtSolicitacao, string categoria, Concessao concessao)
+        private static decimal ObtemMargemConsignavel(FuncionarioEntidade funcionario, PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, DateTime dtSolicitacao, string categoria, Concessao concessao, int? seqRecebedorTemp)
         {
             switch (categoria)
             {
@@ -261,7 +254,8 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
             ObterDataSaldoEmCotas(concessao, categoria);
 
-            DateTime inicioRecebimento = ObterDataSaldoEmCotas(concessao, categoria).UltimoDiaDoMes();
+            //DateTime inicioRecebimento = ObterDataSaldoEmCotas(concessao, categoria).UltimoDiaDoMes();
+            DateTime inicioRecebimento = new DateTime(Convert.ToInt32(lista.First().ANO_COMPETENCIA), Convert.ToInt32(lista.First().MES_COMPETENCIA), 1).UltimoDiaDoMes();
             DateTime ultimoRecebimento = inicioRecebimento;
 
             var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(planoVinculado.CD_SIT_PLANO);
@@ -302,11 +296,11 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return w_media_salario;
         }
 
-        private static decimal ObtemMediaSalarioAssistidos(PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, decimal seqRecebedor, DateTime dtSolicitacao)
+        private static decimal ObtemMediaSalarioAssistidos(PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, int? seqRecebedor, DateTime dtSolicitacao)
         {
             decimal w_media_salario = 0;
 
-            var fichas = ObtemFichaFinancAssistido(fundacao, empresa, matricula, plano.CD_PLANO, seqRecebedor);
+            var fichas = ObtemFichaFinancAssistido(fundacao, empresa, plano.CD_PLANO, matricula, seqRecebedor);
 
             //Obtem a ultima data da folha de assistido.
             DateTime dt = fichas.OrderByDescending(x => x.DT_COMPETENCIA).FirstOrDefault().DT_COMPETENCIA;
@@ -380,14 +374,19 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             }
         }
 
-        private static List<FichaFinanceiraAssistidoEntidade> ObtemFichaFinancAssistido(string fundacao, string empresa, string plano, string matricula, decimal? seqRecebedor)
+        private static List<FichaFinanceiraAssistidoEntidade> ObtemFichaFinancAssistido(string fundacao, string empresa, string plano, string matricula, int? seqRecebedor)
         {
             //Buscar todas RUBRICAS_PREVIDENCIAL com INCID_LIQUIDO  = 'S' e INCID_MARGEM_CONSIG = 'S'
             var enRubrica = new RubricasPrevidencialProxy().BuscarIncideLiquidoMargemConsig(DMN_SN.SIM, DMN_SN.SIM);
-            
-            var dtFichas = new FichaFinanceiraAssistidoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor(fundacao, empresa, matricula, (int)seqRecebedor.Value, plano);
 
-            var qry = from row in dtFichas
+            IEnumerable<FichaFinanceiraAssistidoEntidade> fichas;
+
+            if(seqRecebedor != 0)
+                fichas = new FichaFinanceiraAssistidoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor(fundacao, empresa, matricula, seqRecebedor.Value, plano);
+            else
+                fichas = new FichaFinanceiraAssistidoProxy().BuscarPorFundacaoEmpresaMatriculaPlano(fundacao, empresa, matricula, plano);
+
+            var qry = from row in fichas
                       where enRubrica.Select(x => x.CD_RUBRICA).Contains(row.CD_RUBRICA)
                       select row;
 
@@ -479,7 +478,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                                                     string empresa,
                                                     string inscricao,
                                                     string matricula,
-                                                    decimal? seqRecebedor)
+                                                    int? seqRecebedor)
         {
             //Se SeqRecebedor for null, é o próprio  Assistido, e temos que descobrir o SeqRecebedor dele
             if (seqRecebedor == null)

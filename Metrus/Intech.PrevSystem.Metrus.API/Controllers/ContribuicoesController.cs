@@ -62,9 +62,6 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                     var contribuicoesBasicasPatrocinadora = proxyContribuicaoIndividual.BuscarPorFundacaoInscricaoTipo(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO, "28");
                     var contribuicoesSuplementaresPatrocinadora = proxyContribuicaoIndividual.BuscarPorFundacaoInscricaoTipo(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO, "24");
 
-                    //var contribuicoesEspeciaisParticipante = proxyContribuicaoIndividual.BuscarPorFundacaoInscricaoTipo(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO, "46");
-                    //var contribuicoesEspeciaisPatrocinadora = proxyContribuicaoIndividual.BuscarPorFundacaoInscricaoTipo(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO, "34");
-
                     var contribuicoesEspeciaisParticipante = new FaixaValorContribProxy().BuscarPorFundacaoPlanoTipoContribMantenedora(funcionario.CD_FUNDACAO, plano.CD_PLANO, "46", "2");
                     var contribuicoesEspeciaisPatrocinadora = new FaixaValorContribProxy().BuscarPorFundacaoPlanoTipoContribMantenedora(funcionario.CD_FUNDACAO, plano.CD_PLANO, "34", "1");
 

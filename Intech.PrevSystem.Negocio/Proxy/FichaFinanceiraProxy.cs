@@ -59,26 +59,38 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     if (listaFundos.Any(fundo => fundo.CD_TIPO_CONTRIBUICAO == contribuicao.CD_TIPO_CONTRIBUICAO) || CD_PLANO == "0001")
                     {
                         // Cotas
-                        if (contribuicao.CD_OPERACAO == "C")
-                            apuracao.QTD_COTA_RP_PARTICIPANTE += (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
-                        else
-                            apuracao.QTD_COTA_RP_PARTICIPANTE -= (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        if (contribuicao.QTD_COTA_RP_PARTICIPANTE.HasValue)
+                        {
+                            if (contribuicao.CD_OPERACAO == "C")
+                                apuracao.QTD_COTA_RP_PARTICIPANTE += (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                            else
+                                apuracao.QTD_COTA_RP_PARTICIPANTE -= (decimal)contribuicao.QTD_COTA_RP_PARTICIPANTE;
+                        }
 
-                        if (contribuicao.CD_OPERACAO == "C")
-                            apuracao.QTD_COTA_RP_EMPRESA += (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
-                        else
-                            apuracao.QTD_COTA_RP_EMPRESA -= (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        if (contribuicao.QTD_COTA_RP_EMPRESA.HasValue)
+                        {
+                            if (contribuicao.CD_OPERACAO == "C")
+                                apuracao.QTD_COTA_RP_EMPRESA += (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                            else
+                                apuracao.QTD_COTA_RP_EMPRESA -= (decimal)contribuicao.QTD_COTA_RP_EMPRESA;
+                        }
 
                         // Valores
-                        if (contribuicao.CD_OPERACAO == "C")
-                            apuracao.CONTRIB_PARTICIPANTE += (decimal)contribuicao.CONTRIB_PARTICIPANTE;
-                        else
-                            apuracao.CONTRIB_PARTICIPANTE -= (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+                        if (contribuicao.CONTRIB_PARTICIPANTE.HasValue)
+                        {
+                            if (contribuicao.CD_OPERACAO == "C")
+                                apuracao.CONTRIB_PARTICIPANTE += (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+                            else
+                                apuracao.CONTRIB_PARTICIPANTE -= (decimal)contribuicao.CONTRIB_PARTICIPANTE;
+                        }
 
-                        if (contribuicao.CD_OPERACAO == "C")
-                            apuracao.CONTRIB_EMPRESA += (decimal)contribuicao.CONTRIB_EMPRESA;
-                        else
-                            apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
+                        if (contribuicao.CONTRIB_EMPRESA.HasValue)
+                        {
+                            if (contribuicao.CD_OPERACAO == "C")
+                                apuracao.CONTRIB_EMPRESA += (decimal)contribuicao.CONTRIB_EMPRESA;
+                            else
+                                apuracao.CONTRIB_EMPRESA -= (decimal)contribuicao.CONTRIB_EMPRESA;
+                        }
                     }
                 }
 

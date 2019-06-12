@@ -30,6 +30,21 @@
             "nome": "DT_INICIO_FUND",
             "tipo": "DateTime",
             "aceitaNulo": true
+        },
+        {
+            "nome": "VL_PARCELA_MENSAL",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_OPCAO_RECEB",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DT_APOSENTADORIA",
+            "tipo": "DateTime",
+            "aceitaNulo": true
         }
     ]
 }

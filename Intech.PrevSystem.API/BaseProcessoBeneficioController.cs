@@ -15,7 +15,10 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano));
+                if(cdPlano == "0002")
+                    return Json(new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaInscricaoPlano(CdFundacao, CdEmpresa, Inscricao, "0002"));
+                else
+                    return Json(new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, "0001"));
             }
             catch (Exception ex)
             {

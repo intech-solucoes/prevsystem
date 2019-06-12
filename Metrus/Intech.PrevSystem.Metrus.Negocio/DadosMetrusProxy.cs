@@ -15,6 +15,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
             var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA).ToList();
             var entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);
 
+            //foreach(var plano in planos)
+            //{
+            //    plano.UltimoSalario = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO).UltimoSalario;
+            //}
+
             if (dadosPessoais.CNT_ABERT_CRED == null)
                 dadosPessoais.CNT_ABERT_CRED = "N";
 

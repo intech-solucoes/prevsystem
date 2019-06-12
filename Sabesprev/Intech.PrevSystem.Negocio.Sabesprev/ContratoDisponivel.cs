@@ -474,15 +474,6 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
                     ValorPrestacao = ObtemUmaPrestacao(valorSolicitado, PrazoDisponivel.PRAZO, taxaConcessao, encargo);
                 }
 
-                string Motivo = "";
-                bool Disponibilidade = VerificarDisponibilidadeGlobal(concessao, MotivoGlobal, ValorPrestacao, ValorLiquido, valorSolicitado, ref Motivo);
-
-                if (Disponibilidade && ((!PrestacoesMinimasPagas || !PercentualMinimoPago) && natureza.DS_NATUR.Substring(0, 3) != "EXC"))
-                {
-                    Disponibilidade = false;
-                    Motivo += "Contrato não pode ser reformado, quantidade ou percentual de parcelas pagas menor que o limite mínimo";
-                }
-
                 if (encargo.TP_COBRANCA_TX == "P" && encargo.TP_COBRANCA_INAD == "P" && encargo.TP_COBRANCA_SEGURO == "P" && encargo.TIPO_CALC_ADM == "P")
                 {
                     decimal valorPrestacaoAux = ValorPrestacao;
@@ -493,6 +484,15 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
 
                     ValorPrestacao += (valorPrestacaoAux * (encargo.TX_INAD.Value / 100)).Arredonda(2);
+                }
+
+                string Motivo = "";
+                bool Disponibilidade = VerificarDisponibilidadeGlobal(concessao, MotivoGlobal, ValorPrestacao, ValorLiquido, valorSolicitado, ref Motivo);
+
+                if (Disponibilidade && ((!PrestacoesMinimasPagas || !PercentualMinimoPago) && natureza.DS_NATUR.Substring(0, 3) != "EXC"))
+                {
+                    Disponibilidade = false;
+                    Motivo += "Contrato não pode ser reformado, quantidade ou percentual de parcelas pagas menor que o limite mínimo";
                 }
 
                 //Buscar data da inscricao do plano selecionado

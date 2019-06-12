@@ -1,8 +1,9 @@
 ﻿#region Usings
-using Intech.Lib.Servicos;
+using DevExpress.DataAccess.ObjectBinding;
+using DevExpress.XtraReports.UI;
+using Intech.Lib.SMS;
 using Intech.Lib.Util.Date;
 using Intech.Lib.Util.Email;
-using Intech.Lib.Util.Seguranca;
 using Intech.Lib.Web;
 using Intech.PrevSystem.API;
 using Intech.PrevSystem.Entidades;
@@ -11,10 +12,14 @@ using Intech.PrevSystem.Negocio.Proxy;
 using Intech.PrevSystem.Negocio.Sabesprev;
 using Intech.PrevSystem.Negocio.Sabesprev.Proxy;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 #endregion
 
@@ -23,6 +28,13 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
     [Route(RotasApi.Contrato)]
     public class ContratoController : BaseContratoController
     {
+        private IHostingEnvironment HostingEnvironment;
+
+        public ContratoController(IHostingEnvironment hostingEnvironment)
+        {
+            HostingEnvironment = hostingEnvironment;
+        }
+
         [HttpGet("sabesprevAtivosPorPlano/{cdPlano}")]
         [Authorize("Bearer")]
         public IActionResult BuscarAtivos(string cdPlano)
@@ -102,7 +114,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var planoVinculadoProxy = new PlanoVinculadoProxy();
                 var modalidadeProxy = new ModalidadeProxy();
                 var fichaFinanceiraProxy = new FichaFinanceiraProxy();
-                var funcionario = new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid);
+
+                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
+
+                //var funcionario = new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid);
 
                 // Plano
                 var plano = planoVinculadoProxy.BuscarPorFundacaoEmpresaMatriculaPermiteEmprestimo(CdFundacao, CdEmpresa, Matricula)
@@ -125,7 +140,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 if (bloqueios.Count > 0)
                     throw new Exception("Há um bloqueio em sua situação junto ao Plano que impede simulação. Contate a SABESPREV – 08000-55-1827.");
 
-                var idade = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos;
+                var idade = new Intervalo(DateTime.Now, dadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos;
                 if (idade >= 88)
                     throw new Exception("Para realizar simulações, favor entrar em contato pelo 08000 55 1827 ou comparecer no nosso atendimento pessoal.");
 
@@ -146,7 +161,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         throw new Exception("Concessão de empréstimo não permitida para usuários na situação Desligado");
                 }
 
-                plano.UltimoSalario = planoVinculadoProxy.BuscarUltimoSalario(CdEmpresa, Matricula, origem, plano);
+                plano.UltimoSalario = planoVinculadoProxy.BuscarUltimoSalario(CdEmpresa, Matricula, origem, plano, seqRecebedor: SeqRecebedor);
 
                 // Modalidades
                 var modalidades = modalidadeProxy.BuscarAtivas().ToList();
@@ -200,7 +215,19 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
             }
         }
 
-
+        [HttpGet("buscarQuantidadeEmDeferimento")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarQuantidadeEmDeferimento()
+        {
+            try
+            {
+                return Json(new ContratoWebProxy().BuscarQuantidadeEmDeferimento(CdFundacao, Inscricao));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpGet("buscarConcessao/{cdPlano}/{cdModal}/{cdNatur}/{dataCredito}")]
         [Authorize("Bearer")]
@@ -211,7 +238,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 DateTime dtCredito = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(CodEntid);
 
-                var concessao = ConcessaoSabesprev.ObtemConcessao(funcionario, cdPlano, cdNatur, cdModal, dtCredito, DateTime.Now, Pensionista, SeqRecebedor);
+                var concessao = ConcessaoSabesprev.ObtemConcessao(Matricula, CdFundacao, CdEmpresa, cdPlano, cdNatur, cdModal, dtCredito, DateTime.Now, Pensionista, SeqRecebedor);
 
                 return Json(new { concessao });
             }
@@ -238,6 +265,99 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     throw new Exception("Não existem parcelas disponíveis para simulação/contratação");
 
                 return Json(contratosDisponiveis);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("dadosBancarios"), DisableRequestSizeLimit]
+        [Authorize("Bearer")]
+        public IActionResult AnexarDadosBancarios(FileUploadModel files)
+        {
+            try
+            {
+                var file = files.File;
+
+                var diretorioUpload = Path.Combine(Environment.CurrentDirectory, "Upload");
+
+                if (!Directory.Exists(diretorioUpload))
+                    Directory.CreateDirectory(diretorioUpload);
+
+                if (file.Length > 0)
+                {
+                    string fileName = $"{Guid.NewGuid().ToString()}.{Path.GetExtension(file.FileName)}";
+                    string fullPath = Path.Combine(diretorioUpload, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var arquivo = new ArquivoUploadEntidade
+                    {
+                        DTA_UPLOAD = DateTime.Now,
+                        IND_STATUS = 2,
+                        NOM_ARQUIVO_LOCAL = fileName,
+                        NOM_ARQUIVO_ORIGINAL = fileName,
+                        NOM_DIRETORIO_LOCAL = "Upload"
+                    };
+
+                    new ArquivoUploadProxy().Inserir(arquivo);
+                }
+
+                return Json("Arquivo enviado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("enviarCAC/{email}")]
+        [Authorize("Bearer")]
+        public IActionResult EnviarCAC(string email, [FromBody]ContratoDisponivel contrato)
+        {
+            try
+            {
+                //var parametros = new List<KeyValuePair<string, object>>
+                //{
+                //    new KeyValuePair<string, object>("COD_ENTID", "6318"),
+                //    new KeyValuePair<string, object>("CD_EMPRESA", "0001")
+                //};
+
+                //var relatorio = GeradorRelatorio.Gerar("ContratoAberturaCredito", HostingEnvironment.ContentRootPath, parametros);
+
+                var nomeArquivoRepx = "ContratoAberturaCredito";
+                var relatorio = XtraReport.FromFile($"Relatorios/{nomeArquivoRepx}.repx");
+
+                ((ObjectDataSource)relatorio.DataSource).Constructor.Parameters.First(x => x.Name == "dados").Value = new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid);
+                ((ObjectDataSource)relatorio.DataSource).Constructor.Parameters.First(x => x.Name == "contrato").Value = contrato;
+
+                relatorio.FillDataSource();
+
+                var folderName = "Temp";
+                var tempFolder = Path.Combine(HostingEnvironment.ContentRootPath, folderName);
+                var nomeArquivo = $"{nomeArquivoRepx}_{Guid.NewGuid().ToString()}.pdf";
+                var arquivo = Path.Combine(tempFolder, nomeArquivo);
+
+                if (!Directory.Exists(tempFolder))
+                    Directory.CreateDirectory(tempFolder);
+
+                var tfc = new TempFileCollection(tempFolder, false);
+                tfc.AddFile(arquivo, false);
+
+                relatorio.ExportToPdf(arquivo);
+
+                var pdf = System.IO.File.OpenRead(arquivo);
+
+                var filename = $"CAC.pdf";
+
+                var dados = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
+                var emailConfig = AppSettings.Get().Email;
+                EnvioEmail.EnviarMailKit(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", "", pdf, filename);
+
+                return Json($"CAC enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
             }
             catch (Exception ex)
             {
@@ -278,7 +398,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         var mensagem = $"SABESPREV: Para validar a operação de empréstimo, insira o código a seguir e clique em Contratar.<br/>" +
                             $"<br/>" +
                             $"<h3>{token}</h3>";
-                        EnvioEmail.Enviar(config.Email, funcionario.DadosPessoais.EMAIL_AUX, "Token para contratar empréstimo Sabesprev", mensagem);
+                        EnvioEmail.EnviarMailKit(config.Email, funcionario.DadosPessoais.EMAIL_AUX, "Token para contratar empréstimo Sabesprev", mensagem);
                     }
                     catch (Exception ex)
                     {
@@ -295,8 +415,26 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                         var mensagem = $"Para validar a operacao de emprestimo, insira o codigo a seguir e clique em 'Contratar Emprestimo': {token}";
                         var retorno = new EnvioSMS()
-                            .EnviarHumanAPI(funcionario.DadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, "SABESPREV", mensagem, Matricula, Inscricao, true);
-
+                            .EnviarHumanAPI(funcionario.DadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, "SABESPREV", mensagem, Matricula, Inscricao, 
+                                new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
+                                {
+                                    try
+                                    {
+                                        var logSMSProxy = new LogSMSProxy();
+                                        logSMSProxy.Inserir(new LogSMSEntidade
+                                        {
+                                            RESPOSTA_ENVIO = args.Retorno,
+                                            NUM_TELEFONE = args.NumTelefone,
+                                            NUM_MATRICULA = args.Matricula,
+                                            NUM_INSCRICAO = args.Inscricao,
+                                            DTA_ENVIO = DateTime.Today
+                                        });
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
+                                    }
+                                }));
                     }
                     catch (Exception ex)
                     {
@@ -376,5 +514,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         public ContratoDisponivel Contrato { get; set; }
         public Concessao Concessao { get; set; }
         public SaldoDevedorEntidade SaldoDevedor { get; set; }
+    }
+
+    public class FileUploadModel
+    {
+        public IFormFile File { get; set; }
     }
 }

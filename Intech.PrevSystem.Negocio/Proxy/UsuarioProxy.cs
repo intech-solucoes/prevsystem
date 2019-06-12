@@ -129,7 +129,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             // Envia e-mail com nova senha de acesso
             var emailConfig = AppSettings.Get().Email;
-            EnvioEmail.EnviarMailKit(emailConfig, dadosPessoais.EMAIL_AUX, $"Portal Preves - Nova senha de acesso", $"Esta é sua nova senha do Portal Preves: {senha}");
+
+            var emails = dadosPessoais.EMAIL_AUX.Split(';');
+
+            foreach (var email in emails)
+            {
+                EnvioEmail.EnviarMailKit(emailConfig, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
+            }
 
             return "Sua nova senha foi enviada para seu e-mail!";
         }

@@ -3,7 +3,6 @@
         -int
     Parametros
         -CD_FUNDACAO:string
-        -ANO_CONTRATO:int
         -NUM_INSCRICAO:string
 */
 

@@ -34,7 +34,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return plano;
         }
 
-        public  PlanoVinculadoEntidade BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
+        public  PlanoVinculadoEntidade BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, int? seqRecebedor)
         {
             var plano = BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
 
@@ -55,12 +55,12 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     throw new Exception("Concessão de empréstimo não permitida para usuários na situação Desligado");
             }
 
-            plano.UltimoSalario = BuscarUltimoSalario(CD_EMPRESA, NUM_MATRICULA, origem, plano);
+            plano.UltimoSalario = BuscarUltimoSalario(CD_EMPRESA, NUM_MATRICULA, origem, plano, seqRecebedor: seqRecebedor);
 
             return plano;
         }
 
-        public decimal BuscarUltimoSalario(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano)
+        public decimal BuscarUltimoSalario(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano, bool abatePensao = true, int? seqRecebedor = null)
         {
             var dataAtual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
             var dataAnterior = new DateTime(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month, 01);
@@ -72,14 +72,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
             switch (plano.CD_CATEGORIA)
             {
                 case DMN_CATEGORIA.ATIVO:
-                    return ObtemSalarioAtivoMetrus(plano).Value - valorPensao;
+                    var salario = ObtemSalarioAtivoMetrus(plano).Value;
+                    return abatePensao ? salario - valorPensao : salario;
                 case DMN_CATEGORIA.AUTOPATROCINIO:
                 case DMN_CATEGORIA.EM_LICENCA:       //Ativos, Autopatrocinados ou Em licença
                 case DMN_CATEGORIA.DIFERIDO:
                     return 0;
                     //return p.ObtemUltimoSRCFichaFinanceira() - valorPensao;//Buscar entrada mais recente da ficha financeira 
                 case DMN_CATEGORIA.ASSISTIDO:      //Assistidos
-                    var seqRecebedor = new RecebedorBeneficioProxy().BuscarPorFundacaoEmpresaInscricao(plano.CD_FUNDACAO, cdEmpresa, plano.NUM_INSCRICAO).SEQ_RECEBEDOR;
                     return ObtemSalarioDosAssistidos(cdEmpresa, matricula, plano, seqRecebedor);
                 case DMN_CATEGORIA.DESLIGADO:       //Desligados
                 default:

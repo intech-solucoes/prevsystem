@@ -1,4 +1,4 @@
-﻿#region Usings
+#region Usings
 using Intech.Lib.Web.JWT;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.IO;
 #endregion
 
 namespace Intech.PrevSystem.Sabesprev.Api
@@ -27,7 +29,7 @@ namespace Intech.PrevSystem.Sabesprev.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMvc()
+                .AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(jsonOptions => {
                     jsonOptions.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
@@ -45,7 +47,6 @@ namespace Intech.PrevSystem.Sabesprev.Api
                 Configuration.GetSection("TokenConfigurations"))
                     .Configure(tokenConfigurations);
             services.AddSingleton(tokenConfigurations);
-
 
             services.AddAuthentication(authOptions =>
             {

@@ -25,6 +25,11 @@
             "nome": "CALC_MARGEM_CONSIG",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "COMPOE_SALDO_BENEFICIO",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

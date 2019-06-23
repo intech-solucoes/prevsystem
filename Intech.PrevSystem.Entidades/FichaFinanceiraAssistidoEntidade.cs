@@ -36,6 +36,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public decimal? VAL_BRUTO { get; set; }
 		[Write(false)] public decimal? VAL_DESCONTOS { get; set; }
 		[Write(false)] public decimal? VAL_LIQUIDO { get; set; }
+		[Write(false)] public string DS_TIPO_FOLHA { get; set; }
         
     }
 }

@@ -40,6 +40,11 @@
             "nome": "VAL_LIQUIDO",
             "tipo": "decimal",
             "aceitaNulo": true
+        },
+        {
+            "nome": "DS_TIPO_FOLHA",
+            "tipo": "string",
+            "aceitaNulo": true
         }
     ]
 }

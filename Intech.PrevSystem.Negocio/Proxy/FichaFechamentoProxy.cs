@@ -12,9 +12,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return new FichaFechamentoEntidade
             {
-                VL_GRUPO1 = saldos.Sum(x => x.VL_GRUPO1),
-                VL_GRUPO2 = saldos.Sum(x => x.VL_GRUPO2),
-                VL_ACUMULADO = saldos.First().VL_ACUMULADO,
+                VL_GRUPO1 = saldos.Sum(x => x.VL_GRUPO1) + (saldos.Sum(x => x.VL_GRUPO3) / 2),
+                VL_GRUPO2 = saldos.Sum(x => x.VL_GRUPO2) + (saldos.Sum(x => x.VL_GRUPO3) / 2),
+                VL_ACUMULADO = (saldos.Sum(x => x.VL_GRUPO1) + saldos.Sum(x => x.VL_GRUPO2) + saldos.Sum(x => x.VL_GRUPO3)),
                 VL_COTA = saldos.First().VL_COTA,
                 DT_FECHAMENTO = saldos.First().DT_FECHAMENTO
             };

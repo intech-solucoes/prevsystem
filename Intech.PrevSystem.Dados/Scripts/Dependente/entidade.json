@@ -1,3 +1,10 @@
 ﻿{
-    "nomeTabela": "CS_DEPENDENTE"
+    "nomeTabela": "CS_DEPENDENTE",
+    "colunasExtras": [
+        {
+            "nome": "DS_GRAU_PARENTESCO",
+            "tipo": "string",
+            "aceitaNulo": true
+        }
+    ]
 }

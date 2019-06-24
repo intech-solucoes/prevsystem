@@ -18,9 +18,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<NoticiaSabesprevEntidade>("SELECT *  FROM VW_APP_INSTITUCIONAL_NOTICIA  WHERE ID = @ID", new { ID });
+					return Conexao.QuerySingleOrDefault<NoticiaSabesprevEntidade>("SELECT *  FROM VW_APP_INSTITUCIONAL_NOTICIA  WHERE INSTITUCIONAL_ID = @ID", new { ID });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.QuerySingleOrDefault<NoticiaSabesprevEntidade>("SELECT * FROM VW_APP_INSTITUCIONAL_NOTICIA WHERE ID=:ID", new { ID });
+					return Conexao.QuerySingleOrDefault<NoticiaSabesprevEntidade>("SELECT * FROM VW_APP_INSTITUCIONAL_NOTICIA WHERE INSTITUCIONAL_ID=:ID", new { ID });
 				else
 					throw new Exception("Provider não suportado!");
 			}

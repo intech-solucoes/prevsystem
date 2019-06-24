@@ -8,7 +8,7 @@ namespace Intech.PrevSystem.Entidades
     public class NoticiaSabesprevEntidade
     {
 		[Key]
-		public decimal ID { get; set; }
+		public decimal INSTITUCIONAL_ID { get; set; }
 		public string INSTITUCIONAL_NOME { get; set; }
 		public string INSTITUCIONAL_TEXTO { get; set; }
 		public DateTime DT_PUBLICACAO { get; set; }

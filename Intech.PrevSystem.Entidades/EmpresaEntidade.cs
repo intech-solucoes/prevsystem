@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -32,8 +32,9 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_MATRIC_IGUAL_INSC { get; set; }
 		public string IND_INSC_IGUAL_MATRIC { get; set; }
 		public string CK_SEQ_MATRICULA { get; set; }
-		public string NOME_ENTID { get; set; }
-		public List<PlanoEntidade> Planos { get; set; }
+		[Write(false)] public string NOME_ENTID { get; set; }
+		[Write(false)] public string CPF_CGC { get; set; }
+		[Write(false)] public List<PlanoEntidade> Planos { get; set; }
         
     }
 }

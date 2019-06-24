@@ -7,6 +7,11 @@
             "aceitaNulo": false
         },
         {
+            "nome": "CPF_CGC",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
             "nome": "Planos",
             "tipo": "List<PlanoEntidade>",
             "aceitaNulo": false

@@ -95,11 +95,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var valDescontos = descontos.Sum(x => x.VALOR_MC);
             var liquido = bruto - Math.Abs(valDescontos.Value);
 
-            return new
+            return new Contracheque
             {
                 Proventos = proventos,
                 Descontos = descontos,
-                Resumo = new {
+                Resumo = new ContrachequeResumo {
                     Referencia = DT_REFERENCIA,
                     Bruto = bruto,
                     Descontos = valDescontos,
@@ -148,5 +148,21 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 }
             };
         }
+    }
+
+    public class Contracheque
+    {
+        public List<FichaFinanceiraAssistidoEntidade> Proventos { get; internal set; }
+        public List<FichaFinanceiraAssistidoEntidade> Descontos { get; internal set; }
+        public ContrachequeResumo Resumo { get; internal set; }
+    }
+
+    public class ContrachequeResumo
+    {
+        public DateTime Referencia { get; internal set; }
+        public decimal? Bruto { get; internal set; }
+        public decimal? Descontos { get; internal set; }
+        public decimal? Liquido { get; internal set; }
+        public string TipoFolha { get; internal set; }
     }
 }

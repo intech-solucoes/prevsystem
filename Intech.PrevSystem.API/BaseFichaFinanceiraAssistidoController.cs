@@ -19,15 +19,15 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                var quantidadeMesesContraCheque = 18;
-                var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
+                //var quantidadeMesesContraCheque = 18;
+                //var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
 
                 List<FichaFinanceiraAssistidoEntidade> datas;
 
                 if (Pensionista)
-                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatasPorRecebedor(CdFundacao, CdEmpresa, Matricula, SeqRecebedor, cdPlano, dtReferencia).ToList();
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatasPorRecebedor(CdFundacao, CdEmpresa, Matricula, SeqRecebedor, cdPlano).ToList();
                 else
-                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatas(CdFundacao, CdEmpresa, Matricula, cdPlano, dtReferencia).ToList();
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatas(CdFundacao, CdEmpresa, Matricula, cdPlano).ToList();
 
                 datas.ForEach(x =>
                 {

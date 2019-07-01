@@ -10,13 +10,15 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class FichaFinanceiraAssistidoProxy : FichaFinanceiraAssistidoDAO
     {
-        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA)
+        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
         {
-            var datas = base.BuscarDatas(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA).ToList();
+            var datas = base.BuscarDatas(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO).ToList();
+
+            datas = datas.Take(18).ToList();
 
             datas.ForEach(data =>
             {
-                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data.DT_REFERENCIA, "1");
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferencia(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data.DT_REFERENCIA, data.CD_TIPO_FOLHA);
 
                 data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
                 data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);
@@ -26,13 +28,15 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
-        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO, DateTime DT_REFERENCIA)
+        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO)
         {
-            var datas = base.BuscarDatasPorRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, DT_REFERENCIA).ToList();
+            var datas = base.BuscarDatasPorRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO).ToList();
+
+            datas = datas.Take(18).ToList();
 
             datas.ForEach(data =>
             {
-                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, data.DT_REFERENCIA, "1");
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, data.DT_REFERENCIA, data.CD_TIPO_FOLHA);
 
                 data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
                 data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);
@@ -71,7 +75,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     Bruto = bruto,
                     Descontos = valDescontos,
                     Liquido = liquido,
-                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
                 }
             };
         }
@@ -104,7 +109,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     Bruto = bruto,
                     Descontos = valDescontos,
                     Liquido = liquido,
-                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
                 }
             };
         }
@@ -144,7 +150,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     Bruto = bruto,
                     Descontos = valDescontos,
                     Liquido = liquido,
-                    TipoFolha = rubricas.First().CD_TIPO_FOLHA
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
                 }
             };
         }
@@ -164,5 +171,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public decimal? Descontos { get; internal set; }
         public decimal? Liquido { get; internal set; }
         public string TipoFolha { get; internal set; }
+        public string DesTipoFolha { get; internal set; }
     }
 }

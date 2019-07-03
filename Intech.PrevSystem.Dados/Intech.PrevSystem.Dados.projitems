@@ -180,6 +180,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FatorRisco\BuscarPorFundacaoPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\HistSaldo\BuscarPorFundacaoEmpresaPlanoEspecieNumAnoProcesso.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\BuscarPorCodigo.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\BuscarReservaPoupanca.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\BuscarUltimoPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Indice\BuscarPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\InfoRend\BuscarPorOidHeader.sql" />

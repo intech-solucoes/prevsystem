@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,9 +18,26 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES WHERE COD_IND = @COD_IND ORDER BY DT_IND DESC", new { COD_IND });
+					return Conexao.Query<IndiceValoresEntidade>("SELECT *  FROM TB_IND_VALORES  WHERE COD_IND = @COD_IND  ORDER BY DT_IND DESC", new { COD_IND });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES WHERE COD_IND=:COD_IND ORDER BY DT_IND DESC", new { COD_IND });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual IndiceValoresEntidade BuscarReservaPoupanca(DateTime DT_REFERENCIA)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<IndiceValoresEntidade>("SELECT DISTINCT IV.*    FROM TB_IND_VALORES IV   INNER JOIN TB_EMPRESA_PLANOS EP ON IV.COD_IND = EP.IND_RESERVA_POUP  WHERE EP.CD_FUNDACAO = '01'    AND EP.CD_PLANO = '0002'    AND IV.DT_IND = @DT_REFERENCIA", new { DT_REFERENCIA });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<IndiceValoresEntidade>("SELECT DISTINCT IV.* FROM TB_IND_VALORES  IV  INNER  JOIN TB_EMPRESA_PLANOS   EP  ON IV.COD_IND=EP.IND_RESERVA_POUP WHERE EP.CD_FUNDACAO='01' AND EP.CD_PLANO='0002' AND IV.DT_IND=:DT_REFERENCIA", new { DT_REFERENCIA });
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -35,7 +52,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT *   FROM TB_IND_VALORES V  WHERE COD_IND = @COD_IND   AND V.DT_IND = (SELECT MAX(DT_IND)                      FROM TB_IND_VALORES                     WHERE COD_IND = V.COD_IND)", new { COD_IND });
+					return Conexao.Query<IndiceValoresEntidade>("SELECT *    FROM TB_IND_VALORES V   WHERE COD_IND = @COD_IND    AND V.DT_IND = (SELECT MAX(DT_IND)                       FROM TB_IND_VALORES                      WHERE COD_IND = V.COD_IND)", new { COD_IND });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES  V  WHERE COD_IND=:COD_IND AND V.DT_IND=(SELECT MAX(DT_IND) FROM TB_IND_VALORES WHERE COD_IND=V.COD_IND)", new { COD_IND });
 				else

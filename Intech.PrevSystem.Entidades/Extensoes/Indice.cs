@@ -54,9 +54,9 @@ namespace Intech.PrevSystem.Entidades
             if (indice.VALORES.Count > 0)
             {
                 if (indice.PERIODIC == DMN_PERIODICIDADE.MENSAL)
-                    return indice.VALORES.OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND.MenorOuIgualQueMesAno(data)).VARIACAO_IND;
+                    return indice.VALORES.OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND.MenorOuIgualQueMesAno(data)).VARIACAO_IND.Value;
                 else
-                    return indice.VALORES.OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND <= data).VARIACAO_IND;
+                    return indice.VALORES.OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND <= data).VARIACAO_IND.Value;
             }
 
             return 0;

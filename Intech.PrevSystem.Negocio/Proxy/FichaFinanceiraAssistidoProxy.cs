@@ -139,6 +139,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var bruto = proventos.Sum(x => x.VALOR_MC);
             var valDescontos = descontos.Sum(x => x.VALOR_MC);
             var liquido = bruto - Math.Abs(valDescontos.Value);
+            var indice = new IndiceValoresProxy().BuscarReservaPoupanca(rubricas.First().DT_REFERENCIA.PrimeiroDiaDoMes());
 
             return new
             {
@@ -151,7 +152,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     Descontos = valDescontos,
                     Liquido = liquido,
                     TipoFolha = rubricas.First().CD_TIPO_FOLHA,
-                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA,
+                    Indice = indice
                 }
             };
         }

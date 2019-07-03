@@ -144,6 +144,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoMesesPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarUltimaPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatas.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatasPorRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarUltimaDataPorRecebedor.sql" />

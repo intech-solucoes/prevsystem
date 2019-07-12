@@ -14,6 +14,7 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_ATIVO { get; set; }
 		public decimal NUM_ORDEM { get; set; }
 		public decimal? OID_DOCUMENTO_PASTA { get; set; }
+		[Write(false)] public string CD_PLANO { get; set; }
         
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -22,11 +22,11 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_PORTAL { get; set; }
 		public string IND_EMAIL { get; set; }
 		public string IND_SMS { get; set; }
-		public string NOM_FUNDACAO { get; set; }
-		public string NOM_EMPRESA { get; set; }
-		public string DS_PLANO { get; set; }
-		public string DS_SIT_PLANO { get; set; }
-		public string NUM_MATRICULA { get; set; }
+		[Write(false)] public string NOM_FUNDACAO { get; set; }
+		[Write(false)] public string NOM_EMPRESA { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
+		[Write(false)] public string DS_SIT_PLANO { get; set; }
+		[Write(false)] public string NUM_MATRICULA { get; set; }
         
     }
 }

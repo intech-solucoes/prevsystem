@@ -30,6 +30,16 @@
             "nome": "COMPOE_SALDO_BENEFICIO",
             "tipo": "string",
             "aceitaNulo": false
+        },
+        {
+            "nome": "COD_AGRUPADOR_WEB",
+            "tipo": "string",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "DS_AGRUPADOR_WEB",
+            "tipo": "string",
+            "aceitaNulo": false
         }
     ]
 }

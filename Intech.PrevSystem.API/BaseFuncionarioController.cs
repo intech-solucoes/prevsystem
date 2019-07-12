@@ -15,7 +15,10 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid));
+                if(Pensionista)
+                    return Json(new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntidFuncionario));
+                else
+                    return Json(new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid));
             }
             catch (Exception ex)
             {

@@ -1,5 +1,5 @@
 ﻿#region Usings
-using Intech.Lib.Util.Email;
+using Intech.Lib.Email;
 using Intech.Lib.Web;
 using Microsoft.AspNetCore.Mvc;
 using System; 

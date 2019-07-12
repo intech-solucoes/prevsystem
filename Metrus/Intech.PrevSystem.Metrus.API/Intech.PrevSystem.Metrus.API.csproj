@@ -1,19 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper.Contrib" Version="1.50.5" />
     <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
     <PackageReference Include="FinancialFormulas" Version="1.2.2" />
-    <PackageReference Include="MailKit" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta2" />
     <PackageReference Include="System.Private.ServiceModel" Version="4.5.3" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
@@ -22,20 +17,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <WCFMetadata Include="Connected Services" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Web\Intech.Lib.Web.csproj" />
+    <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems" Label="Shared" />
-
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems" Label="Shared" />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
 
   <Import Project="..\..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
 
   <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
-
-  <Import Project="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems" Label="Shared" />
 
   <Import Project="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems" Label="Shared" />
 

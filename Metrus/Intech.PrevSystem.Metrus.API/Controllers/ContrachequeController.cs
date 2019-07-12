@@ -21,7 +21,9 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
 
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
-                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarDatas(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dtReferencia);
+                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarDatas(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano);
+
+                fichaFinanceira = fichaFinanceira.Take(quantidadeMesesContraCheque).ToList();
 
                 return Json(fichaFinanceira);
             }

@@ -60,6 +60,21 @@
             "nome": "CD_EMPRESA",
             "tipo": "string",
             "aceitaNulo": true
+        },
+        {
+            "nome": "DT_INIC_VALIDADE",
+            "tipo": "DateTime",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "VL_BENEF_SALDADO_ATUAL",
+            "tipo": "decimal",
+            "aceitaNulo": false
+        },
+        {
+            "nome": "VL_BENEF_SALDADO_INICIAL",
+            "tipo": "decimal",
+            "aceitaNulo": false
         }
     ]
 }

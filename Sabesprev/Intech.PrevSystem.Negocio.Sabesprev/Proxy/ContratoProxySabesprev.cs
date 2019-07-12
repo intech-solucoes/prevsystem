@@ -84,9 +84,6 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
             {
                 try
                 {
-                    var contratosAnterioresWebProxy = new ContratosAnterioresWebProxy();
-                    var contratosWeb = new ContratoWebProxy();
-
                     var num_gr_fam = 0;
 
                     //10-buscar novo numero de contrato
@@ -98,18 +95,17 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
                     //43-atualizar o contrato a reformar
                     //44-inserir contrato reformado em contratos anteriores
                     //50-19/01/2011 AT 1785/2010 - Ota 
-
-                    var prxParamentros = new ParametrosProxy();
-                    var parametros = prxParamentros.Buscar();
+                    
+                    var parametros = new ParametrosProxy().Buscar();
 
                     int num_contrato = 0;
 
-                    var contratosEmDeferimento = contratosWeb.BuscarQuantidadeEmDeferimento(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO);
+                    var contratosEmDeferimento = new ContratoWebProxy().BuscarQuantidadeEmDeferimento(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO);
 
                     if (contratosEmDeferimento > 0)
                         throw new Exception("Já existe um contrato em deferimento");
 
-                    num_contrato = contratosWeb.BuscarUltimoNumeroContrato(funcionario.CD_FUNDACAO, contrato.DataCredito.Year) + 1;
+                    num_contrato = new ContratoWebProxy().BuscarUltimoNumeroContrato(funcionario.CD_FUNDACAO, contrato.DataCredito.Year) + 1;
 
                     string cd_forma_pagto = contrato.FormaCredito;
                     var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA);
@@ -121,7 +117,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
                     if (recebedorBeneficio != null)
                         valorInss = recebedorBeneficio.VAL_INSS_LIQ;
 
-                    contratosWeb.InserirContratoWeb(
+                    new ContratoWebProxy().InserirContratoWeb(
                         CD_FUNDACAO: funcionario.CD_FUNDACAO,                       //CD_FUNDACAO
                         ANO_CONTRATO: contrato.DataCredito.Year,					//ANO_CONTRATO
                         NUM_CONTRATO: num_contrato,												//NUM_CONTRATO
@@ -226,7 +222,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
                                         .OrderBy(x => x.SEQ_PREST)
                                         .LastOrDefault();
                         i++;
-                        contratosAnterioresWebProxy.InserirContratosAnteriores(
+                        new ContratosAnterioresWebProxy().InserirContratosAnteriores(
                             CD_FUNDACAO: funcionario.CD_FUNDACAO, //CD_FUNDACAO
                             ANO_CONTRATO: contratoAReformar.ANO_CONTRATO, //ANO_CONTRATO
                             NUM_CONTRATO: contratoAReformar.NUM_CONTRATO,//NUM_CONTRATO

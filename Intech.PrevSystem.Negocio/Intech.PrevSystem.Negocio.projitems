@@ -30,7 +30,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ContribuicaoIndividualProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DadosPessoaisProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DependenteProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DirfProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoPastaProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\DocumentoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpregadorProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\EmpresaPlanosProxy.cs" />

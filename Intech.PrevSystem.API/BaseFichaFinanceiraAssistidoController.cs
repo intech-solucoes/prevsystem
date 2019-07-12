@@ -25,9 +25,9 @@ namespace Intech.PrevSystem.API
                 List<FichaFinanceiraAssistidoEntidade> datas;
 
                 if (Pensionista)
-                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatasPorRecebedor(CdFundacao, CdEmpresa, Matricula, SeqRecebedor, cdPlano).ToList();
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarResumoPorRecebedor(CdFundacao, Inscricao, SeqRecebedor).ToList();
                 else
-                    datas = new FichaFinanceiraAssistidoProxy().BuscarDatas(CdFundacao, CdEmpresa, Matricula, cdPlano).ToList();
+                    datas = new FichaFinanceiraAssistidoProxy().BuscarResumo(CdFundacao, Inscricao).ToList();
 
                 datas.ForEach(x =>
                 {

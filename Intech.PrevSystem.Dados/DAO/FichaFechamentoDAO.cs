@@ -13,6 +13,40 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class FichaFechamentoDAO : BaseDAO<FichaFechamentoEntidade>
     {
         
+		public virtual DateTime BuscarDataPrimeiraContrib(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DateTime>("SELECT MIN(DT_FECHAMENTO)  FROM CC_FICHA_FECHAMENTO  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND CD_EMPRESA = @CD_EMPRESA    AND CD_PLANO = @CD_PLANO    AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DateTime>("SELECT MIN(DT_FECHAMENTO) FROM CC_FICHA_FECHAMENTO WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_EMPRESA=:CD_EMPRESA AND CD_PLANO=:CD_PLANO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual DateTime BuscarDataUltimaContrib(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DateTime>("SELECT MAX(DT_FECHAMENTO)  FROM CC_FICHA_FECHAMENTO  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND CD_EMPRESA = @CD_EMPRESA    AND CD_PLANO = @CD_PLANO    AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DateTime>("SELECT MAX(DT_FECHAMENTO) FROM CC_FICHA_FECHAMENTO WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_EMPRESA=:CD_EMPRESA AND CD_PLANO=:CD_PLANO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<FichaFechamentoEntidade> BuscarPorFundacaoEmpresaPlanoInscricao(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_INSCRICAO)
 		{
 			try

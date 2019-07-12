@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             string empresa = funcionario.CD_EMPRESA;
             string fundacao = funcionario.CD_FUNDACAO;
 
-            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(fundacao, empresa, funcionario.NUM_MATRICULA, cdPlano);
+            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(fundacao, empresa, funcionario.NUM_MATRICULA, cdPlano, null);
 
             string categoria = plano.CD_CATEGORIA;
 

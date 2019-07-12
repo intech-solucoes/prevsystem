@@ -1,0 +1,16 @@
+﻿/*Config
+    Retorno
+        -DateTime
+    Parametros
+        -CD_FUNDACAO:string
+        -CD_EMPRESA:string
+        -CD_PLANO:string
+        -NUM_INSCRICAO:string
+*/
+
+SELECT MIN(DT_FECHAMENTO)
+FROM CC_FICHA_FECHAMENTO
+WHERE CD_FUNDACAO = @CD_FUNDACAO
+  AND CD_EMPRESA = @CD_EMPRESA
+  AND CD_PLANO = @CD_PLANO
+  AND NUM_INSCRICAO = @NUM_INSCRICAO

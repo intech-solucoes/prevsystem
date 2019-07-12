@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
 using System;
-using Intech.Lib.Util.Email;
+using Intech.Lib.Email;
 using Intech.Lib.Web;
 using System.IO;
 #endregion
@@ -25,6 +25,27 @@ namespace Intech.PrevSystem.API
                 {
                     pastas = new DocumentoPastaProxy().BuscarPorPastaPai(oidPasta),
                     documentos = new DocumentoProxy().BuscarPorPasta(oidPasta),
+                    pastaAtual = new DocumentoPastaProxy().BuscarPorChave(oidPasta)
+                };
+
+                return Json(listaDocumentos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("porPlanoPasta/{cdPlano}/{oidPasta}")]
+        [Authorize("Bearer")]
+        public IActionResult Buscar(string cdPlano, decimal? oidPasta)
+        {
+            try
+            {
+                var listaDocumentos = new
+                {
+                    pastas = new DocumentoPastaProxy().BuscarPorPastaPai(oidPasta),
+                    documentos = new DocumentoProxy().BuscarPorPlanoPasta(cdPlano, oidPasta),
                     pastaAtual = new DocumentoPastaProxy().BuscarPorChave(oidPasta)
                 };
 
@@ -56,7 +77,15 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                new DocumentoProxy().Inserir(documento);
+                var oidDocumento = new DocumentoProxy().Inserir(documento);
+
+                new DocumentoPlanoProxy().Inserir(new DocumentoPlanoEntidade
+                {
+                    OID_DOCUMENTO = oidDocumento,
+                    CD_FUNDACAO = "01",
+                    CD_PLANO = documento.CD_PLANO
+                });
+
                 return Ok();
             }
             catch (Exception ex)
@@ -81,7 +110,7 @@ namespace Intech.PrevSystem.API
                 arquivoUploadProxy.Deletar(arquivoUpload);
 
                 //var webRootPath = HostingEnvironment.WebRootPath;
-                var arquivo = System.IO.Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                var arquivo = Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
                 System.IO.File.Delete(arquivo);
 

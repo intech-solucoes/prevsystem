@@ -17,10 +17,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         {
             try
             {
-                using (var dao = new PlanoVinculadoProxy())
-                {
-                    return Json(dao.BuscarPorFundacaoEmpresaCpfPensionista(fundacao, empresa, cpf));
-                }
+                if(Pensionista)
+                    return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaCpfPensionista(fundacao, empresa, cpf));
+                else
+                    return Json(new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaCpf(fundacao, empresa, cpf));
             }
             catch (Exception ex)
             {

@@ -56,6 +56,8 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string DES_MES_REF { get; set; }
 		[Write(false)] public string CALC_MARGEM_CONSIG { get; set; }
 		[Write(false)] public string COMPOE_SALDO_BENEFICIO { get; set; }
+		[Write(false)] public string COD_AGRUPADOR_WEB { get; set; }
+		[Write(false)] public string DS_AGRUPADOR_WEB { get; set; }
         
     }
 }

@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="1.60.1" />
-    <PackageReference Include="Intech.Lib.Util" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
   </ItemGroup>
 
 </Project>

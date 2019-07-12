@@ -30,7 +30,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ContribuicaoIndividual\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\DadosPessoais\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Dependente\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Dirf\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Documento\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Empregador\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\entidade.json" />
@@ -123,8 +125,10 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\DadosPessoais\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Dependente\BuscarPorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Dependente\BuscarPorFundacaoInscricaoPlano.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Dirf\Buscar.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\DocumentoPasta\BuscarPorPastaPai.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Documento\BuscarPorPasta.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Documento\BuscarPorPlanoPasta.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empregador\BuscarPorCdEmpregador.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\EmpresaPlanos\BuscarPorFundacaoEmpresaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Empresa\BuscarPorCodigo.sql" />
@@ -142,11 +146,15 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoAnosPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoDetalhesPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarResumoMesesPorFundacaoEmpresaPlanoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarDataUltimaContrib.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarDataPrimeiraContrib.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\BuscarUltimaPorFundacaoEmpresaPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatas.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatasPorRecebedor.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarResumoPorRecebedor.sqlserver.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarResumo.sqlserver.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarUltimaDataPorRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlano.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoRecebedor.sql" />
@@ -158,6 +166,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarInformePorFundacaoInscricaoAno.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarDatasInformePorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPlanoUmDoisPorFundacaoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarResumoCusteio.sqlserver.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarUltimaPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />
@@ -207,6 +216,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatricula.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatriculaPermiteEmprestimo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\BuscarPorFundacaoEmpresaMatriculaPlano.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\FSFBuscarSaldado.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\PlanoVinculado\MigradoPlano1.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Plano\BuscarPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Plano\BuscarPorEmpresa.sql" />
@@ -262,8 +272,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ContribuicaoIndividualDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DadosPessoaisDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DependenteDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\DirfDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DocumentoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\DocumentoPastaDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\DocumentoPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpregadorDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpresaDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\EmpresaPlanosDAO.cs" />

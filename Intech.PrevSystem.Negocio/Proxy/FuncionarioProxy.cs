@@ -12,7 +12,15 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var lista = base.BuscarPorCpf(CPF);
 
-            return lista.OrderByDescending(x => x.DT_ADMISSAO).FirstOrDefault();
+            foreach(var funcionario in lista)
+            {
+                var planos = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA).ToList();
+
+                if (planos.Count > 0)
+                    return funcionario;
+            }
+
+            return null;
         }
 
         public FuncionarioDados BuscarDadosPorCodEntid(string COD_ENTID)

@@ -1,5 +1,5 @@
 ﻿#region Usings
-using Intech.Lib.Util.Email;
+using Intech.Lib.Email;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
@@ -66,7 +66,7 @@ namespace Intech.PrevSystem.API
             try
             {
                 var funcionarioProxy = new FuncionarioProxy();
-
+                
                 mensagem.CD_EMPRESA = mensagem.CD_EMPRESA == string.Empty ? null : mensagem.CD_EMPRESA;
                 mensagem.CD_PLANO = mensagem.CD_PLANO == string.Empty ? null : mensagem.CD_PLANO;
                 mensagem.CD_SIT_PLANO = mensagem.CD_SIT_PLANO == string.Empty ? null : mensagem.CD_SIT_PLANO;

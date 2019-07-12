@@ -355,9 +355,17 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 var dados = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
                 var emailConfig = AppSettings.Get().Email;
+                var corpo = $"Prezado(a) Sr(a), {dados.NOME_ENTID} <br/>" +
+                    "<br/>" +
+                    "Você deverá preencher com seus dados pessoais e corporativos, imprimir e assinar em duas vias nos locais indicados, " +
+                    "lembrando que é obrigatório obter a assinatura de duas testemunhas também.<br/>" +
+                    "Encaminhe este contrato para a Sabesprev por malote ou pessoalmente.<br/>" +
+                    "Este contrato é válido para Empréstimos pessoais vinculados aos planos Sabesprev Mais e Benefícios Básico.<br/>" +
+                    "<br/>" +
+                    "Fundação Sabesp de Seguridade Social - Sabesprev";
                 EnvioEmail.EnviarMailKit(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", "", pdf, filename);
 
-                return Json($"CAC enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
+                return Json($"CAC enviado com sucesso para o e-mail {email}");
             }
             catch (Exception ex)
             {

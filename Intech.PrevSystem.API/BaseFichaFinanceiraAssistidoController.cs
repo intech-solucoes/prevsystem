@@ -34,7 +34,16 @@ namespace Intech.PrevSystem.API
                     x.IsAbonoAnual = x.CD_TIPO_FOLHA == "3";
                 });
 
-                return Json(datas);
+                var grupo = datas
+                    .GroupBy(x => x.DS_ESPECIE)
+                    .Select(x => new
+                    {
+                        DS_ESPECIE = x.Key,
+                        Lista = x.ToList()
+                    })
+                    .ToList();
+
+                return Json(grupo);
             }
             catch (Exception ex)
             {

@@ -12,6 +12,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var dadosPessoais = base.BuscarPorCodEntid(COD_ENTID);
 
+
+
             return new
             {
                 dadosPessoais,

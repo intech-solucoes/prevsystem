@@ -109,7 +109,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             if (codEntid != null)
             {
-                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
+                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
 
                 if (dadosPessoais.DT_NASCIMENTO != dataNascimento)
                     throw ExceptionDadosInvalidos;

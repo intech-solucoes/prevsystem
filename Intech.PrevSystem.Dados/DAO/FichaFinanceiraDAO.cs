@@ -81,6 +81,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarPorFundacaoPlanoInscricaoPeriodo(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, DateTime DT_INICIO, DateTime DT_FIM)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT TC.DS_TIPO_CONTRIBUICAO,         TC.CALC_MARGEM_CONSIG,         FI.*   FROM CC_FICHA_FINANCEIRA FI  INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FI.CD_TIPO_CONTRIBUICAO  WHERE FI.CD_FUNDACAO = @CD_FUNDACAO    AND FI.CD_PLANO = @CD_PLANO    AND FI.NUM_INSCRICAO = @NUM_INSCRICAO    AND '' + FI.ANO_REF + '-' + FI.MES_REF + '-01' BETWEEN @DT_INICIO AND @DT_FIM   ORDER BY FI.ANO_REF DESC,            FI.MES_REF DESC,           FI.CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, DT_INICIO, DT_FIM });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT TC.DS_TIPO_CONTRIBUICAO, TC.CALC_MARGEM_CONSIG, FI.* FROM CC_FICHA_FINANCEIRA  FI  INNER  JOIN TB_TIPO_CONTRIBUICAO   TC  ON TC.CD_TIPO_CONTRIBUICAO=FI.CD_TIPO_CONTRIBUICAO WHERE FI.CD_FUNDACAO=:CD_FUNDACAO AND FI.CD_PLANO=:CD_PLANO AND FI.NUM_INSCRICAO=:NUM_INSCRICAO AND '' || FI.ANO_REF || '-' || FI.MES_REF || '-01' BETWEEN :DT_INICIO AND :DT_FIM ORDER BY FI.ANO_REF DESC, FI.MES_REF DESC, FI.CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, DT_INICIO, DT_FIM });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarResumoAnosPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
 		{
 			try

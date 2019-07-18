@@ -79,12 +79,15 @@ namespace Intech.PrevSystem.API
             {
                 var oidDocumento = new DocumentoProxy().Inserir(documento);
 
-                new DocumentoPlanoProxy().Inserir(new DocumentoPlanoEntidade
+                if (!string.IsNullOrEmpty(documento.CD_PLANO))
                 {
-                    OID_DOCUMENTO = oidDocumento,
-                    CD_FUNDACAO = "01",
-                    CD_PLANO = documento.CD_PLANO
-                });
+                    new DocumentoPlanoProxy().Inserir(new DocumentoPlanoEntidade
+                    {
+                        OID_DOCUMENTO = oidDocumento,
+                        CD_FUNDACAO = "01",
+                        CD_PLANO = documento.CD_PLANO
+                    });
+                }
 
                 return Ok();
             }

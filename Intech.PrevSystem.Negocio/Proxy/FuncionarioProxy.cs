@@ -23,9 +23,15 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return null;
         }
 
-        public FuncionarioDados BuscarDadosPorCodEntid(string COD_ENTID)
+        public FuncionarioDados BuscarDadosPorCodEntid(string COD_ENTID, string codEntidFuncionario = null)
         {
-            var funcionario = base.BuscarPorCodEntid(COD_ENTID);
+            FuncionarioEntidade funcionario;
+
+            if(string.IsNullOrEmpty(codEntidFuncionario))
+                funcionario = base.BuscarPorCodEntid(COD_ENTID);
+            else
+                funcionario = base.BuscarPorCodEntid(codEntidFuncionario);
+
             var entidade = new EntidadeProxy().BuscarPorCodEntid(COD_ENTID);
             var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(COD_ENTID);
             var empresa = new EmpresaProxy().BuscarPorCodigo(funcionario.CD_EMPRESA);

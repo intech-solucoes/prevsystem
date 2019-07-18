@@ -166,6 +166,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarInformePorFundacaoInscricaoAno.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarDatasInformePorFundacaoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPlanoUmDoisPorFundacaoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricaoPeriodo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarResumoCusteio.sqlserver.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarUltimaPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricao.sql" />

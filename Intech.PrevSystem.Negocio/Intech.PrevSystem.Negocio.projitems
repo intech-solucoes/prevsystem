@@ -65,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\NaturezaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\NoticiaSabesprevProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ParametrosProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ParametrosResgateProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PerfilInvestIndiceProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PerfilInvestProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PerfilSitPlanoProxy.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxasEncargosProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TempoServicoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\UsuarioProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\ValoresPercIdadeProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesExtensoes.cs" />
   </ItemGroup>
 </Project>

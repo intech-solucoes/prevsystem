@@ -58,6 +58,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Indice\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\InfoRend\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\LGPDConsentimento\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\LogSMS\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensCalculadas\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensPlano\entidade.json" />
@@ -201,6 +202,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\IndiceValores\BuscarUltimoPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Indice\BuscarPorCodigo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\InfoRend\BuscarPorOidHeader.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\LGPDConsentimento\BuscarPorCPF.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\MargensCalculadas\BuscarPorFundacaoEmpresaOrigemMatriculaGrupo.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\MargensPlano\BuscarPorFundacaoEmpresaPlanoModalNaturEmVigencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Margens\BuscarPorFundacaoEmpresaModalidadeNaturezaEmVigencia.sql" />
@@ -307,6 +309,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\IndiceDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\IndiceValoresDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\InfoRendDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\LGPDConsentimentoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\LogSMSDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensCalculadasDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensDAO.cs" />

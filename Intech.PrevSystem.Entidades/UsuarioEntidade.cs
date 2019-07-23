@@ -22,6 +22,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DTA_ATUALIZACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public decimal? SEQ_RECEBEDOR { get; set; }
+		public string IND_PRIMEIRO_ACESSO { get; set; }
         
     }
 }

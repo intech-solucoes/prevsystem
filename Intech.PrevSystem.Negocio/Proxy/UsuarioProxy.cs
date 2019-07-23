@@ -4,6 +4,7 @@ using Intech.Lib.Util.Seguranca;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Constantes;
 using System; 
 #endregion
 
@@ -28,6 +29,17 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 throw new Exception("Senha antiga incorreta!");
 
             usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
+            Atualizar(usuarioExistente);
+
+            return "Senha alterada com sucesso!";
+        }
+
+        public string AlterarSenhaPrimeiroAcesso(string cpf, string senhaNova)
+        {
+            var usuarioExistente = BuscarPorCpf(cpf);
+
+            usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
+            usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
             Atualizar(usuarioExistente);
 
             return "Senha alterada com sucesso!";

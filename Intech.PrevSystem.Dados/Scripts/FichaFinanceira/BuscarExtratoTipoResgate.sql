@@ -26,6 +26,8 @@ WHERE FI.CD_FUNDACAO = @CD_FUNDACAO
                                    AND CD_PLANO = FI.CD_PLANO 
                                    AND CD_TIPO_CONTRIBUICAO = FI.CD_TIPO_CONTRIBUICAO 
                                    AND CD_TIPO_RESGATE = @CD_TIPO_RESGATE)
-ORDER BY FI.ANO_REF DESC, 
-         FI.MES_REF DESC,
+ORDER BY FI.ANO_REF, 
+         FI.MES_REF,
+         FI.ANO_COMP, 
+         FI.MES_COMP,
          FI.CD_TIPO_CONTRIBUICAO

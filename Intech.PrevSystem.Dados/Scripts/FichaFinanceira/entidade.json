@@ -1,45 +1,45 @@
-﻿{
-    "nomeTabela": "CC_FICHA_FINANCEIRA",
-    "colunasExtras": [
-        {
-            "nome": "DS_TIPO_CONTRIBUICAO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "TOTAL_CONTRIB",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "QTD_COTA",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DES_MES_REF",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "CALC_MARGEM_CONSIG",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "COMPOE_SALDO_BENEFICIO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "COD_AGRUPADOR_WEB",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DS_AGRUPADOR_WEB",
-            "tipo": "string",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "CC_FICHA_FINANCEIRA",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_TIPO_CONTRIBUICAO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "TOTAL_CONTRIB",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "QTD_COTA",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DES_MES_REF",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CALC_MARGEM_CONSIG",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "COMPOE_SALDO_BENEFICIO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "COD_AGRUPADOR_WEB",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_AGRUPADOR_WEB",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ]
 }

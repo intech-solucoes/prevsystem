@@ -175,8 +175,9 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricaoTipoResgate.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricaoPeriodoTipoResgate.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarResumoCusteio.sqlserver.sql" />
-    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarUltimoFechamentoPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarUltimaPorFundacaoPlanoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarUltimoFechamentoPorFundacaoPlanoInscricao.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPrimeiraPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarPorFundacaoPlanoInscricao.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamentoPreves\BuscarRelatorioPorFundacaoEmpresaPlanoInscricaoReferencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\BuscarTiposPorFundacaoPlanoInscricaoAnoMes.sql" />

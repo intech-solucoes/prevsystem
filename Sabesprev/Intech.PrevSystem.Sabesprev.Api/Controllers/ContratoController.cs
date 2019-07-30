@@ -3,7 +3,7 @@ using DevExpress.DataAccess.ObjectBinding;
 using DevExpress.XtraReports.UI;
 using Intech.Lib.SMS;
 using Intech.Lib.Util.Date;
-using Intech.Lib.Util.Email;
+using Intech.Lib.Email;
 using Intech.Lib.Web;
 using Intech.PrevSystem.API;
 using Intech.PrevSystem.Entidades;
@@ -363,7 +363,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     "Este contrato é válido para Empréstimos pessoais vinculados aos planos Sabesprev Mais e Benefícios Básico.<br/>" +
                     "<br/>" +
                     "Fundação Sabesp de Seguridade Social - Sabesprev";
-                EnvioEmail.EnviarMailKit(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", "", pdf, filename);
+                EnvioEmail.EnviarMailKit(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, pdf, filename);
 
                 return Json($"CAC enviado com sucesso para o e-mail {email}");
             }

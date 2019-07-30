@@ -229,7 +229,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                //throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
+                throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
                 return Json(new
                 {

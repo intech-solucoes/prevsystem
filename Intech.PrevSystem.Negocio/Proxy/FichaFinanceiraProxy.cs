@@ -262,6 +262,29 @@ namespace Intech.PrevSystem.Negocio.Proxy
         }
 
         /// <summary>
+        /// Busca o saldo de contribuições do participante
+        /// </summary>
+        /// <param name="cdFundacao"></param>
+        /// <param name="cdPlano"></param>
+        /// <returns></returns>
+        public virtual SaldoContribuicoesEntidade BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundoPeriodo(string cdFundacao, string cdEmpresa, string cdPlano, string numInscricao, string cdFundo, DateTime dtInicio, DateTime dtFim)
+        {
+            var contribuicoes = BuscarPorFundacaoPlanoInscricao(cdFundacao, cdPlano, numInscricao).ToList();
+            contribuicoes = contribuicoes
+                .Where(x => new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) >= dtInicio
+                         && new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) <= dtFim)
+                .ToList();
+
+            if (contribuicoes.Count == 0)
+                throw new Exception("Nenhuma contribuição encontrada");
+
+            var saldo = new SaldoContribuicoesEntidade();
+            saldo.PreencherSaldo(contribuicoes, cdFundacao, cdEmpresa, cdPlano, numInscricao, cdFundo, null);
+
+            return saldo;
+        }
+
+        /// <summary>
         /// Busca o salário e o percentual de contribuição do participante por plano
         /// </summary>
         /// <param name="cdFundacao"></param>

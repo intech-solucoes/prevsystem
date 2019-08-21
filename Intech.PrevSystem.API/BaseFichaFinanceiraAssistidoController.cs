@@ -35,10 +35,10 @@ namespace Intech.PrevSystem.API
                 });
 
                 var grupo = datas
-                    .GroupBy(x => x.DS_ESPECIE)
+                    .GroupBy(x => new { x.DS_ESPECIE, x.NUM_PROCESSO, x.ANO_PROCESSO })
                     .Select(x => new
                     {
-                        DS_ESPECIE = x.Key,
+                        Especie = x.Key,
                         Lista = x.ToList()
                     })
                     .ToList();
@@ -51,9 +51,9 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("porPlanoReferenciaTipoFolha/{cdPlano}/{referencia}/{cdTipoFolha}")]
+        [HttpGet("porPlanoReferenciaTipoFolha/{cdPlano}/{referencia}/{cdTipoFolha}/{cdEspecie}")]
         [Authorize("Bearer")]
-        public IActionResult BuscarPorDataReferencia(string cdPlano, string referencia, string cdTipoFolha)
+        public IActionResult BuscarPorDataReferencia(string cdPlano, string referencia, string cdTipoFolha, string cdEspecie)
         {
             try
             {
@@ -62,9 +62,9 @@ namespace Intech.PrevSystem.API
                 dynamic rubricas;
 
                 if (Pensionista)
-                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha, SeqRecebedor);
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha, cdEspecie, SeqRecebedor);
                 else
-                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha);
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CdFundacao, CdEmpresa, Matricula, cdPlano, dataReferencia, cdTipoFolha, cdEspecie);
 
                 return Json(rubricas);
             }
@@ -74,7 +74,7 @@ namespace Intech.PrevSystem.API
             }
         }
 
-        [HttpGet("ultimaFolhaPorPlano/{cdPlano}")]
+        [HttpGet("ultimaFolhaPorPlano/{cdPlano}/{cdEspecie}")]
         [Authorize("Bearer")]
         public IActionResult BuscarUltimaPorPlano(string cdPlano)
         {
@@ -86,6 +86,27 @@ namespace Intech.PrevSystem.API
                     rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano, SeqRecebedor);
                 else
                     rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlano(CdFundacao, CdEmpresa, Matricula, cdPlano);
+
+                return Json(rubricas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ultimaFolhaPorPlanoProcesso/{cdPlano}/{cdEspecie}/{ano}/{num}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarUltimaPorPlanoProcesso(string cdPlano, string cdEspecie, string ano, string num)
+        {
+            try
+            {
+                dynamic rubricas;
+
+                if (Pensionista)
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlanoProcesso(CdFundacao, CdEmpresa, Matricula, cdPlano, cdEspecie, ano, num, SeqRecebedor);
+                else
+                    rubricas = new FichaFinanceiraAssistidoProxy().BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlanoProcesso(CdFundacao, CdEmpresa, Matricula, cdPlano, cdEspecie, ano, num);
 
                 return Json(rubricas);
             }

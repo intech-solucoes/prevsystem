@@ -105,7 +105,10 @@ namespace Intech.PrevSystem.API
             {
                 var arquivoUploadProxy = new ArquivoUploadProxy();
                 var documentoProxy = new DocumentoProxy();
+                var documentoPlanoProxy = new DocumentoPlanoProxy();
                 var documento = documentoProxy.BuscarPorChave(OID_DOCUMENTO);
+
+                documentoPlanoProxy.DeletarPorOidDocumento(documento.OID_DOCUMENTO);
 
                 documentoProxy.Deletar(documento);
 
@@ -174,10 +177,13 @@ namespace Intech.PrevSystem.API
 
                 var caminhoArquivo = System.IO.Path.Combine(arquivoUpload.NOM_DIRETORIO_LOCAL, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
+                if (!System.IO.File.Exists(caminhoArquivo))
+                    throw new Exception("Arquivo não encontrado!");
+
                 var arquivo = new System.IO.FileInfo(caminhoArquivo);
-                var file = System.IO.File.ReadAllBytes(caminhoArquivo);
+                var file = System.IO.File.OpenRead(caminhoArquivo);
                 var mimeType = MimeTypes.GetMimeType(arquivo.Name);
-                
+
                 return File(file, mimeType);
             } catch (Exception ex)
             {

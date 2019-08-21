@@ -70,6 +70,7 @@ namespace Intech.PrevSystem.API
                 mensagem.CD_EMPRESA = mensagem.CD_EMPRESA == string.Empty ? null : mensagem.CD_EMPRESA;
                 mensagem.CD_PLANO = mensagem.CD_PLANO == string.Empty ? null : mensagem.CD_PLANO;
                 mensagem.CD_SIT_PLANO = mensagem.CD_SIT_PLANO == string.Empty ? null : mensagem.CD_SIT_PLANO;
+                mensagem.NUM_MATRICULA = mensagem.NUM_MATRICULA.Replace("_", "").PadLeft(9, '0');
 
                 if (!mensagem.DTA_EXPIRACAO.HasValue)
                     mensagem.DTA_EXPIRACAO = null;

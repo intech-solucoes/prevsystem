@@ -1,4 +1,5 @@
 ﻿/*Config
+    RetornaLista
     Retorno
         -ProcessoBeneficioEntidade
     Parametros
@@ -13,7 +14,8 @@ SELECT PB.*,
        HP.DT_INICIO_FUND,
 	   ST.DS_SITUACAO,
 	   HR.VL_PARCELA_MENSAL,
-	   OP.DS_OPCAO_RECEB	    
+	   OP.DS_OPCAO_RECEB,
+       HR.OPCAO_RECB_13
 FROM GB_PROCESSOS_BENEFICIO PB
 	 INNER JOIN GB_HIST_RENDAS HR ON
 			PB.CD_FUNDACAO  = HR.CD_FUNDACAO AND

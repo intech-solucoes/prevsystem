@@ -15,11 +15,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var planos = base.BuscarPorFundacaoEmpresaMatricula(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA).ToList();
 
-            var proxyBeneficio = new ProcessoBeneficioProxy();
-
             planos.ForEach(plano =>
             {
-                plano.ProcessoBeneficio = proxyBeneficio.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO);
+                plano.ProcessoBeneficio = new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO).FirstOrDefault();
             });
 
             return planos;
@@ -29,7 +27,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var plano = base.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
 
-            plano.ProcessoBeneficio = new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO);
+            plano.ProcessoBeneficio = new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO).FirstOrDefault();
 
             return plano;
         }
@@ -123,8 +121,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var fichas = new List<FichaFinanceiraAssistidoEntidade>();
 
             //Buscar todas RUBRICAS_PREVIDENCIAL com INCID_LIQUIDO  = 'S' e INCID_MARGEM_CONSIG = 'S'
-            var proxyRubricas = new RubricasPrevidencialProxy();
-            var enRubrica = proxyRubricas.BuscarIncideLiquidoMargemConsig(DMN_SN.SIM, DMN_SN.SIM).ToList();
+            var enRubrica = new RubricasPrevidencialProxy().BuscarIncideLiquidoMargemConsig(DMN_SN.SIM, DMN_SN.SIM).ToList();
             
             var proxyFichaFinancAssistido = new FichaFinanceiraAssistidoProxy();
             var dtFichas = proxyFichaFinancAssistido

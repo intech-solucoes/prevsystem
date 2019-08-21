@@ -288,25 +288,32 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 if (file.Length > 0)
                 {
                     string fileName = $"{Guid.NewGuid().ToString()}.{Path.GetExtension(file.FileName)}";
-                    string fullPath = Path.Combine(diretorioUpload, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
+                    
+                    var emailDestino = ConfigSabesprev.Get().EmailDestinoArquivoBancario;
+                    var dados = new FuncionarioProxy().BuscarDadosPorCodEntid(CodEntid);
+                    var emailConfig = AppSettings.Get().Email;
+                    var corpo = $"<div style='font-family: Courier New; width: 800px;'>" +
+                        "<br />" +
+                        "<div style='font - size: 10px; color: #000000;'>Documento: <b>Empréstimo – Concessão Web – Comprovante dados bancários</b></div>" +
+                        "<br />" +
+                       $"<div style='font - size: 10px; color: #000000;'>Data de envio: <b>{DateTime.Now.ToString("dd/MM/yyyy")} - {DateTime.Now.ToString("HH:MM:ss")}</b></div>" +
+                        "<br />" +
+                       $"<div style='font - size: 10px; color: #000000;'>Empresa: <b>{dados.NOME_EMPRESA}</b></div>" +
+                        "<br />" +
+                       $"<div style='font - size: 10px; color: #000000;'>Nome do participante/solicitante: <b>{dados.DadosPessoais.NOME_ENTID}</b></div>" +
+                        "<br/>" +
+                       $"<div style='font - size: 10px; color: #000000;'>Matrícula: <b>{dados.Funcionario.NUM_MATRICULA}</b></div>" +
+                        "<br/>" +
+                       $"<div style='font - size: 10px; color: #000000;'>Cod_Benef: <b>{dados.Funcionario.NUM_PROTOCOLO}</b></div>" +
+                        "<br/>" +
+                       $"<div style='font - size: 10px; color: #000000;'>CPF: <b>{dados.DadosPessoais.CPF_CGC}</b></div>" +
+                        "</div>";
+                    EnvioEmail.EnviarMailKit(emailConfig, emailDestino, $"Empréstimo – Concessão Web – Comprovante dados bancários - {dados.DadosPessoais.NOME_ENTID}", corpo, file.OpenReadStream(), fileName);
 
-                    var arquivo = new ArquivoUploadEntidade
-                    {
-                        DTA_UPLOAD = DateTime.Now,
-                        IND_STATUS = 2,
-                        NOM_ARQUIVO_LOCAL = fileName,
-                        NOM_ARQUIVO_ORIGINAL = fileName,
-                        NOM_DIRETORIO_LOCAL = "Upload"
-                    };
-
-                    new ArquivoUploadProxy().Inserir(arquivo);
+                    return Json($"Dados Bancários enviados com sucesso.");
                 }
 
-                return Json("Arquivo enviado com sucesso");
+                return Json("Nenhum arquivo enviado");
             }
             catch (Exception ex)
             {
@@ -320,14 +327,6 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         {
             try
             {
-                //var parametros = new List<KeyValuePair<string, object>>
-                //{
-                //    new KeyValuePair<string, object>("COD_ENTID", "6318"),
-                //    new KeyValuePair<string, object>("CD_EMPRESA", "0001")
-                //};
-
-                //var relatorio = GeradorRelatorio.Gerar("ContratoAberturaCredito", HostingEnvironment.ContentRootPath, parametros);
-
                 var nomeArquivoRepx = "ContratoAberturaCredito";
                 var relatorio = XtraReport.FromFile($"Relatorios/{nomeArquivoRepx}.repx");
 
@@ -478,15 +477,12 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 return Json(new
                 {
-                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor)
+                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor, GrupoFamilia, SeqRecebedor)
                 });
             }
             catch (Exception ex)
             {
-                return BadRequest(new
-                {
-                    mensagem = ex.Message
-                });
+                return BadRequest(ex.Message);
             }
         }
 

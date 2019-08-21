@@ -1,4 +1,5 @@
 ﻿/*Config
+    RetornaLista
     Retorno
         -ProcessoBeneficioEntidade
     Parametros
@@ -8,7 +9,7 @@
         -CD_PLANO:string
 */
 
-SELECT TOP 1 GB_PROCESSOS_BENEFICIO.*,
+SELECT GB_PROCESSOS_BENEFICIO.*,
        GB_ESPECIE_BENEFICIO.DS_ESPECIE, 
 	   GB_SITUACAO.DS_SITUACAO,
        GB_HIST_PROCESSOS.DT_REQUERIMENTO, 

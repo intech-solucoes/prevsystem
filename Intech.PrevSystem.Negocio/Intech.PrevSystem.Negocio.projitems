@@ -51,6 +51,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundacaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundoContribProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\HistRendasProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HistSaldoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceValoresProxy.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PerfilInvestProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PerfilSitPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanosContratoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PlanoVinculadoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrazosDisponiveisProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\PrestacaoParcialProxy.cs" />

@@ -55,7 +55,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 }
 
                 plano.UltimoSalario = BuscarUltimoSalario(funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, origem, plano, abatePensao);
-                plano.ProcessoBeneficio = proxyBeneficio.BuscarPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO);
+                plano.ProcessoBeneficio = proxyBeneficio.BuscarPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO).FirstOrDefault();
                 plano.Modalidades = new ModalidadeProxyMetrus().BuscarAtivasComNaturezas(funcionario, funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, origem, plano);
             }
 

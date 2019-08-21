@@ -1,50 +1,66 @@
-﻿{
-    "nomeTabela": "GB_PROCESSOS_BENEFICIO",
-    "colunasExtras": [
-        {
-            "nome": "DS_ESPECIE",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_SITUACAO",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_REQUERIMENTO",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_AFASTAMENTO",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_INICIO_PREV",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_INICIO_FUND",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "VL_PARCELA_MENSAL",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_OPCAO_RECEB",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_APOSENTADORIA",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        }
-    ]
+{
+  "NomeTabela": "GB_PROCESSOS_BENEFICIO",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_SITUACAO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DT_REQUERIMENTO",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DT_AFASTAMENTO",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DT_INICIO_PREV",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DT_INICIO_FUND",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "VL_PARCELA_MENSAL",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_OPCAO_RECEB",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DT_APOSENTADORIA",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_PROCESSO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "ESPECIE_ANO_NUM_PROCESSO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+        "Nome": "OPCAO_RECB_13",
+        "Tipo": "string",
+        "AceitaNulo": false
+    }
+  ],
+  "Imports": []
 }

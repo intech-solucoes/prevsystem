@@ -61,78 +61,23 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 var saldoAno = BuscarSaldoNoPeriodo(cdPlano, funcionario, fichaFinanceiraProxy, dataPrimeiraContribAno, dataUltimaContribAno);
                 var saldoAtual = BuscarSaldoNoPeriodo(cdPlano, funcionario, fichaFinanceiraProxy, dataInicio, dataUltimaContribAno);
 
+                // Calcular rendimentos
+                var contribuicoes = new FichaFinanceiraProxy().BuscarPorFundacaoPlanoInscricao(funcionario.CD_FUNDACAO, cdPlano, funcionario.NUM_INSCRICAO).ToList();
+                contribuicoes = contribuicoes
+                    .Where(x => new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) >= dataInicio
+                             && new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) <= dataUltimaContribAno)
+                    .ToList();
+
+                var totalContribuicoes = contribuicoes.Sum(x => x.CONTRIB_PARTICIPANTE + x.CONTRIB_EMPRESA);
+                var rendimentos = saldoAtual.SaldoTotalValor - totalContribuicoes;
+
                 return Json(new
                 {
                     saldoAnterior,
                     saldoAno,
-                    saldoAtual
+                    saldoAtual,
+                    rendimentos = rendimentos.Value.ToString("C")
                 });
-
-                //// Saldo anterior
-                //var dataSaldoAnterior = DateTime.Now.AddYears(-1).UltimoDiaDoAno();
-                ////var dataSaldoAnterior = new DateTime(2017, 12, 29);
-
-                //while (!dataSaldoAnterior.EhDiaUtil(feriados))
-                //{
-                //    dataSaldoAnterior = dataSaldoAnterior.AddDays(-1);
-                //}
-
-                //var ficha = fichaFinanceiraProxy.BuscarPorFundacaoPlanoInscricao(funcionario.CD_FUNDACAO, cdPlano, funcionario.NUM_INSCRICAO);
-                //var listaSaldoAnterior = ficha
-                //    .Where(x => new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) < dataSaldoAnterior)
-                //    .ToList();
-
-                //var saldoAnteriorParticipante = listaSaldoAnterior.Sum(x => x.CONTRIB_PARTICIPANTE);
-                //var saldoAnteriorPatrocinadora = listaSaldoAnterior.Sum(x => x.CONTRIB_EMPRESA);
-                //var saldoAnteriorTotal = saldoAnteriorParticipante + saldoAnteriorPatrocinadora;
-
-                //// Contribuições
-                //var dataPrimeiraContribAno = DateTime.Now.PrimeiroDiaDoAno();
-                ////var dataUltimaContribAno = DateTime.Now;
-                //var dataUltimaContribAno = new DateTime(2019, 4, 1);
-                //var listaContribs = ficha
-                //    .Where(x => new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) > dataPrimeiraContribAno
-                //             && new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) < dataUltimaContribAno)
-                //    .ToList();
-
-                //var saldoAnoParticipante = listaContribs.Sum(x => x.CONTRIB_PARTICIPANTE);
-                //var saldoAnoPatrocinadora = listaContribs.Sum(x => x.CONTRIB_EMPRESA);
-                //var saldoAnoTotal = saldoAnoParticipante + saldoAnoPatrocinadora;
-
-                //// Saldo atual
-                //var listaSaldoAtual = new FichaFinanceiraProxy().BuscarPorFundacaoPlanoInscricao(funcionario.CD_FUNDACAO, cdPlano, funcionario.NUM_INSCRICAO)
-                //    .Where(x => new DateTime(Convert.ToInt32(x.ANO_REF), Convert.ToInt32(x.MES_REF), 1) < dataUltimaContribAno)
-                //    .ToList();
-
-                //var saldoAtualParticipante = listaSaldoAtual.Sum(x => x.CONTRIB_PARTICIPANTE);
-                //var saldoAtualPatrocinadora = listaSaldoAtual.Sum(x => x.CONTRIB_EMPRESA);
-                //var saldoAtualTotal = saldoAtualParticipante + saldoAtualPatrocinadora;
-
-                //return Json(new
-                //{
-                //    saldoAnterior = new
-                //    {
-                //        saldoAnteriorParticipante,
-                //        saldoAnteriorPatrocinadora,
-                //        saldoAnteriorTotal,
-                //        dataSaldoAnterior
-                //    },
-                //    contribuicoes = new
-                //    {
-                //        dataPrimeiraContribAno,
-                //        dataUltimaContribAno,
-                //        saldoAnoParticipante,
-                //        saldoAnoPatrocinadora,
-                //        saldoAnoTotal
-                //    },
-                //    saldoAtual = new
-                //    {
-                //        dataAtual = dataUltimaContribAno,
-                //        saldoAtualParticipante,
-                //        saldoAtualPatrocinadora,
-                //        saldoAtualTotal
-                //    }
-                //});
             }
             catch (Exception ex)
             {
@@ -158,6 +103,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             {
                 SaldoTotalParticipante = saldoTotalParticipante.ToString("C"),
                 SaldoTotalPatrocinadora = saldoTotalPatrocinadora.ToString("C"),
+                SaldoTotalValor = saldoTotal,
                 SaldoTotal = saldoTotal.ToString("C"),
                 DataInicio = dtInicio,
                 DataFim = dtFim
@@ -169,6 +115,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     {
         public string SaldoTotalParticipante { get; set; }
         public string SaldoTotalPatrocinadora { get; set; }
+        public decimal SaldoTotalValor { get; set; }
         public string SaldoTotal { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }

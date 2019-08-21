@@ -5,7 +5,8 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
-using System; 
+using System;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Negocio.Proxy
@@ -109,7 +110,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
             else
             {
-                var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf);
+                var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).First();
 
                 if (recebedorBeneficio == null)
                     throw ExceptionDadosInvalidos;

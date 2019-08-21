@@ -11,6 +11,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal OID_CALENDARIO_PGT { get; set; }
 		public string DES_MES { get; set; }
 		public decimal NUM_DIA { get; set; }
+		public string CD_PLANO { get; set; }
         
     }
 }

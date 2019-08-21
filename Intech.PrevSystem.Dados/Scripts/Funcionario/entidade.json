@@ -1,25 +1,35 @@
-﻿{
-    "nomeTabela": "CS_FUNCIONARIO",
-    "colunasExtras": [
-        {
-            "nome": "NOME_ENTID",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DS_LOTACAO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DS_CARGO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "CPF_CGC",
-            "tipo": "string",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "CS_FUNCIONARIO",
+  "ColunasExtras": [
+    {
+      "Nome": "NOME_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_LOTACAO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_CARGO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CPF_CGC",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "PENSIONISTA",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CD_PLANO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ]
 }

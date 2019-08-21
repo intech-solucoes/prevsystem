@@ -5,7 +5,8 @@ using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Sabesprev.Api.Controllers
@@ -40,7 +41,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 }
                 else
                 {
-                    var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf);
+                    var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
 
                     if (recebedorBeneficio == null)
                         return BadRequest("CPF ou senha incorretos!");

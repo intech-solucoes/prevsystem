@@ -9,6 +9,8 @@ using System;
 using Intech.Lib.Email;
 using Intech.Lib.Web;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -42,14 +44,32 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                var listaDocumentos = new
+                var documentos = new DocumentoProxy().BuscarPorPasta(oidPasta);
+
+                var planosVinculados = new PlanoVinculadoProxy().BuscarPorFundacaoEmpresaMatricula(CdFundacao, CdEmpresa, Matricula);
+                var listaDocumentos = new List<DocumentoEntidade>();
+
+                var documentosPlanos = new DocumentoPlanoProxy().Listar();
+
+                foreach (var documento in documentos)
+                {
+                    if (documentosPlanos.Any(x => x.OID_DOCUMENTO == documento.OID_DOCUMENTO))
+                    {
+                        if (documentosPlanos.Any(x => planosVinculados.Any(x2 => x2.CD_PLANO == x.CD_PLANO)))
+                            listaDocumentos.Add(documento);
+                    }
+                    else
+                    {
+                        listaDocumentos.Add(documento);
+                    }
+                }
+
+                return Json(new
                 {
                     pastas = new DocumentoPastaProxy().BuscarPorPastaPai(oidPasta),
-                    documentos = new DocumentoProxy().BuscarPorPlanoPasta(cdPlano, oidPasta),
+                    documentos = listaDocumentos,
                     pastaAtual = new DocumentoPastaProxy().BuscarPorChave(oidPasta)
-                };
-
-                return Json(listaDocumentos);
+                });
             }
             catch (Exception ex)
             {

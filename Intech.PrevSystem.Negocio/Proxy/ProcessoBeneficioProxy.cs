@@ -29,7 +29,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 var totalAnos = Convert.ToInt32(Math.Floor(mesesRecebimento));
                 var totalMeses = Convert.ToInt32(Math.Floor(fracaoMeses));
 
-                processo.DT_APOSENTADORIA = processo.DT_INICIO_FUND.Value.AddYears(totalAnos).AddMonths(totalMeses);
+                processo.DT_APOSENTADORIA = processo.DT_CONCESSAO.Value.AddYears(totalAnos).AddMonths(totalMeses);
                 processo.DS_PROCESSO = $"{processo.DS_ESPECIE} - {processo.NUM_PROCESSO}/{processo.ANO_PROCESSO}";
                 processo.ESPECIE_ANO_NUM_PROCESSO = $"{processo.CD_ESPECIE}{processo.ANO_PROCESSO}{processo.NUM_PROCESSO}";
             }

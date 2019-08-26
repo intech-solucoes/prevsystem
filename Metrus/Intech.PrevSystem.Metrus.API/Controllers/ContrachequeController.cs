@@ -51,15 +51,15 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlanoReferencia/{codEntid}/{cdPlano}/{referencia}")]
-        public ActionResult GetPorCodEntidPlanoReferencia(string codEntid, string cdPlano, string referencia)
+        [HttpGet("porCodEntidPlanoReferencia/{codEntid}/{cdPlano}/{referencia}/{cdTipoFolha}")]
+        public ActionResult GetPorCodEntidPlanoReferencia(string codEntid, string cdPlano, string referencia, string cdTipoFolha)
         {
             try
             {
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
 
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
-                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, "1");
+                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, cdTipoFolha);
 
                 return Json(fichaFinanceira);
             }

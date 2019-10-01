@@ -114,7 +114,7 @@ namespace Intech.PrevSystem.API
             try
             {
                 var emailConfig = AppSettings.Get().Email;
-                EnvioEmail.EnviarMailKit(emailConfig, destinatario.DadosPessoais.EMAIL_AUX, mensagem.TXT_TITULO, mensagem.TXT_CORPO);
+                EnvioEmail.Enviar(emailConfig, destinatario.DadosPessoais.EMAIL_AUX, mensagem.TXT_TITULO, mensagem.TXT_CORPO);
             }
             catch (Exception e)
             {

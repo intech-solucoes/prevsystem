@@ -244,7 +244,7 @@ namespace Intech.PrevSystem.API
                 arquivoStream.Close();
 
                 var emailConfig = AppSettings.Get().Email;
-                EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, null, null, "Preves", "", ms, fileName);
+                EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, "Preves", "", ms, fileName);
 
                 return Json($"Documento enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
             }

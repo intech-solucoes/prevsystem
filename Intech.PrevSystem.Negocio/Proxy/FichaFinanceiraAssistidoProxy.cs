@@ -91,9 +91,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             List<FichaFinanceiraAssistidoEntidade> rubricas;
                 
             if(SeqRecebedor.HasValue)
-                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
             else
-                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
 
             if(!string.IsNullOrEmpty(CD_ESPECIE))
                 rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();

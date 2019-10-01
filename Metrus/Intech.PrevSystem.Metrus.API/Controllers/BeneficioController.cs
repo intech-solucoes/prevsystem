@@ -62,7 +62,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                 var limiteSalarioBeneficio = new IndiceValoresProxy().BuscarUltimoPorCodigo("TETOFUND").First().VALOR_IND;
 
-                List<EvolucaoContribuicao> evolucaoContribuicoes = CriaEvolucoes(funcionario, plano, parametros.TaxaAnualCrescimento, parametros.IdadeAposentadoria, dataAposentadoria, parametros);
+                List<EvolucaoContribuicao> evolucaoContribuicoes = CriaEvolucoes(funcionario, plano, parametros.TaxaAnualCrescimento, parametros.IdadeAposentadoria, dataAposentadoria, parametros.ContribuicoesAtuais, parametros);
 
                 decimal salarioRealBeneficio = CalculaSalarioRealBeneficio(evolucaoContribuicoes, limiteSalarioBeneficio);
 
@@ -86,14 +86,6 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                 var resultado = resultadoSimulacoes.First(x => x.CodigoPerfil == plano.cd_perfil_invest);
 
-                //var resultadosOrdenados = new List<ResultadoSimulacaoBeneficio>();
-                //resultadosOrdenados.Add(resultadoSimulacoes.Single(x => x.NomePerfil.ToUpper().Equals(planoVinculado.PerfilSelecionado.Descricao)));
-                //resultado = resultadosOrdenados.FirstOrDefault();
-
-                //RepeaterResultado.DataSource = resultadosOrdenados;
-                //RepeaterResultado.DataBind();
-                //LabelPercentual.Text = TextBoxPercentual.Text;
-
                 return Json(new
                 {
                     DataSimulacao = DateTime.Now.ToString("dd/MM/yyyy"),
@@ -107,7 +99,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        protected List<EvolucaoContribuicao> CriaEvolucoes(FuncionarioEntidade funcionario, PlanoVinculadoEntidade planoVinculado, decimal taxaCrescimentoSalarial, int idadeAposentadoria, DateTime dataAposentadoria, ParametrosSimulacaoBeneficio parametros)
+        protected List<EvolucaoContribuicao> CriaEvolucoes(FuncionarioEntidade funcionario, PlanoVinculadoEntidade planoVinculado, decimal taxaCrescimentoSalarial, int idadeAposentadoria, DateTime dataAposentadoria, bool contribuicoesAtuais , ParametrosSimulacaoBeneficio parametros)
         {
             var data = DateTime.Now.PrimeiroDiaDoMes();
             List<EvolucaoContribuicao> evolucoes = new List<EvolucaoContribuicao>();
@@ -134,20 +126,35 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 //    salarioComLimite = salarioComLimite * (1 + taxaCrescimentoSalarial / 100M);
                 //    salarioSemLimitante = salarioSemLimitante * (1 + taxaCrescimentoSalarial / 100M);
                 //}
-                //if (RadioButtonList.SelectedValue == "Atu") //atuais
-                //{
-                //    varContribuicaoParticipanteBasica = salarioComLimite * (parametros.ContribuicaoBasica / 100);
-                //    varContribuicaoParticipanteSuplementar = salarioComLimite * (parametros.ContribuicaoSuplementar / 100);
-                //    varContribuicaoPatrocinadoraNormal = salarioComLimite * (contribuicoesBasicasPatrocinadora.FirstOrDefault()?.VL_PERC_EMP ?? 0 / 100);
-                //    varContribuicaoPatrocinadoraAdicional = salarioComLimite * (contribuicoesSuplementaresPatrocinadora.FirstOrDefault()?.VL_PERC_EMP ?? 0 / 100);
-                //}
-                //else //alterados
-                //{
-                varContribuicaoParticipanteBasica = salarioComLimite * (parametros.ContribuicaoBasica / 100);
-                varContribuicaoParticipanteSuplementar = salarioComLimite * (parametros.ContribuicaoSuplementar / 100);
-                varContribuicaoPatrocinadoraNormal = salarioComLimite * (parametros.ContribuicaoBasica / 100);
-                varContribuicaoPatrocinadoraAdicional = salarioComLimite * (parametros.ContribuicaoSuplementar / 100);
-                //}
+                if (contribuicoesAtuais) //atuais
+                {
+                    var tipoContribPatrocinadoraNormal = "28";
+                    var tipoContribPatrocinadoraAdicional = "24";
+                    var tipoContribPartSuplementar = "24";
+
+                    if(planoVinculado.CD_CATEGORIA == "3")
+                    {
+                        tipoContribPatrocinadoraNormal = "78";
+                        tipoContribPatrocinadoraAdicional = "41";
+                        tipoContribPartSuplementar = "74";
+                    }
+
+                    var contribuicoesBasicasPatrocinadora = new ContribuicaoIndividualProxy().BuscarPorFundacaoPlanoInscricaoTipo("01", planoVinculado.CD_PLANO, funcionario.NUM_INSCRICAO, tipoContribPatrocinadoraNormal);
+                    var contribuicoesAdicionaisPatrocinadora = new ContribuicaoIndividualProxy().BuscarPorFundacaoPlanoInscricaoTipo("01", planoVinculado.CD_PLANO, funcionario.NUM_INSCRICAO, tipoContribPatrocinadoraAdicional);
+                    var contribuicoesSuplementaresParticipante = new ContribuicaoIndividualProxy().BuscarPorFundacaoPlanoInscricaoTipo("01", planoVinculado.CD_PLANO, funcionario.NUM_INSCRICAO, tipoContribPartSuplementar);
+
+                    varContribuicaoParticipanteBasica = salarioComLimite * (parametros.ContribuicaoBasica / 100);
+                    varContribuicaoParticipanteSuplementar = salarioComLimite * (contribuicoesSuplementaresParticipante.VL_PERC_PAR.Value / 100);
+                    varContribuicaoPatrocinadoraNormal= salarioComLimite * (contribuicoesBasicasPatrocinadora.VL_PERC_EMP.Value / 100);
+                    varContribuicaoPatrocinadoraAdicional = salarioComLimite * (contribuicoesAdicionaisPatrocinadora.VL_PERC_EMP.Value / 100);
+                }
+                else //alterados
+                {
+                    varContribuicaoParticipanteBasica = salarioComLimite * (parametros.ContribuicaoBasica / 100);
+                    varContribuicaoParticipanteSuplementar = salarioComLimite * (parametros.ContribuicaoSuplementar / 100);
+                    varContribuicaoPatrocinadoraNormal = salarioComLimite * (parametros.ContribuicaoBasica / 100);
+                    varContribuicaoPatrocinadoraAdicional = salarioComLimite * (parametros.ContribuicaoSuplementar / 100);
+                }
 
                 EvolucaoContribuicao contribuicao =
                     new EvolucaoContribuicao()
@@ -166,10 +173,10 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                         TaxaSalario = 0
                     };
 
-                //if (!(RadioButtonList.SelectedValue == "Atu") && (dataReferenciaVoluntaria.IgualMesAno(data))) //somente quando simulação de valores alterados
-                //{
-                //    contribuicao.ContribuicaoParticipanteSuplementar += contribSuplementarVoluntaria;
-                //}
+                if (contribuicoesAtuais) //somente quando simulação de valores alterados
+                {
+                    contribuicao.ContribuicaoParticipanteSuplementar += parametros.ContribuicaoSuplementarVoluntaria;
+                }
 
                 evolucoes.Add(contribuicao);
                 data = data.AddMonths(1);
@@ -259,10 +266,12 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             public int AnosPagamento { get; set; }
             public decimal ContribuicaoBasica { get; set; }
             public decimal ContribuicaoSuplementar { get; set; }
+            public decimal ContribuicaoSuplementarVoluntaria { get; set; }
             public decimal PercentualSaldoAVista { get; set; }
             public string RecebimentoRendaMensal { get; set; }
             public decimal PercentualRecebimento { get; set; }
             public decimal TaxaAnualCrescimento { get; set; }
+            public bool ContribuicoesAtuais { get; set; }
         }
 
         public class EvolucaoContribuicao

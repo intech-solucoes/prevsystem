@@ -10,6 +10,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var saldos = base.BuscarPorFundacaoEmpresaPlanoInscricao(CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO).ToList();
 
+            if (saldos.Count == 0)
+                return new FichaFechamentoEntidade();
+
             return new FichaFechamentoEntidade
             {
                 VL_GRUPO1 = saldos.Sum(x => x.VL_GRUPO1) + (saldos.Sum(x => x.VL_GRUPO3) / 2),

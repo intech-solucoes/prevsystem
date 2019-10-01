@@ -162,6 +162,8 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarDatasPorRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaProcesso.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaProcessoRecebedor.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\BuscarResumoPorRecebedor.sqlserver.sql" />

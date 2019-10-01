@@ -17,9 +17,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public override UsuarioEntidade BuscarPorLogin(string NOM_LOGIN, string PWD_USUARIO)
         {
-            var senha = Criptografia.Encriptar(PWD_USUARIO);
+            NOM_LOGIN = NOM_LOGIN.LimparMascara();
+            PWD_USUARIO = Criptografia.Encriptar(PWD_USUARIO);
 
-            return base.BuscarPorLogin(NOM_LOGIN, senha);
+            return base.BuscarPorLogin(NOM_LOGIN, PWD_USUARIO);
         }
 
         public string AlterarSenha(string cpf, string senhaAntiga, string senhaNova)
@@ -37,6 +38,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string AlterarSenhaPrimeiroAcesso(string cpf, string senhaNova)
         {
+            cpf = cpf.LimparMascara();
             var usuarioExistente = BuscarPorCpf(cpf);
 
             usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
@@ -48,10 +50,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public void CriarAcessoIntech(string cpf, string chave)
         {
+            cpf = cpf.LimparMascara();
+
             if (chave != "Intech456#@!")
                 throw ExceptionDadosInvalidos;
-
-            cpf = cpf.LimparMascara();
 
             var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
 
@@ -95,9 +97,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string CriarAcesso(string cpf, DateTime dataNascimento)
         {
-            var funcionarioProxy = new FuncionarioProxy();
-
             cpf = cpf.LimparMascara();
+
+            var funcionarioProxy = new FuncionarioProxy();
             
             string codEntid;
             decimal seqRecebedor;
@@ -167,7 +169,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 foreach (var email in emails)
                 {
-                    EnvioEmail.EnviarMailKit(emailConfig, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
+                    EnvioEmail.Enviar(emailConfig, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
                 }
 
                 return "Sua nova senha foi enviada para seu e-mail!";

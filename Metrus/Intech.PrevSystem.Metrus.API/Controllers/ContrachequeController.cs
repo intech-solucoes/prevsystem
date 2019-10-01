@@ -23,7 +23,16 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarDatas(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano);
 
-                fichaFinanceira = fichaFinanceira.Take(quantidadeMesesContraCheque).ToList();
+                fichaFinanceira = fichaFinanceira
+                    .Take(quantidadeMesesContraCheque)
+                    .ToList();
+                
+                // Subtrai um mês da data de referência
+                // GAMBIARRA QUE NÃO É CULPA MINHA, É CULPA DO PULSCHEN QUE TAVA TEIMANDO
+                foreach (var ficha in fichaFinanceira)
+                {
+                    ficha.DT_REFERENCIA = ficha.DT_REFERENCIA.AddMonths(-1);
+                }
 
                 return Json(fichaFinanceira);
             }
@@ -33,30 +42,38 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlanoCompetencia/{codEntid}/{cdPlano}/{competencia}")]
-        public ActionResult GetPorCodEntidPlanoCompetencia(string codEntid, string cdPlano, string competencia)
-        {
-            try
-            {
-                var dataCompetencia = DateTime.ParseExact(competencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
-
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
-                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataCompetencia, "1");
-
-                return Json(fichaFinanceira);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("porCodEntidPlanoReferencia/{codEntid}/{cdPlano}/{referencia}/{cdTipoFolha}")]
-        public ActionResult GetPorCodEntidPlanoReferencia(string codEntid, string cdPlano, string referencia, string cdTipoFolha)
+        [HttpGet("porCodEntidPlanoReferencia/{codEntid}/{cdPlano}/{referencia}")]
+        public ActionResult GetPorCodEntidPlanoReferencia(string codEntid, string cdPlano, string referencia)
         {
             try
             {
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
+
+                // Soma um mês da data de referência
+                // GAMBIARRA QUE NÃO É CULPA MINHA, É CULPA DO PULSCHEN QUE TAVA TEIMANDO
+                dataReferencia = dataReferencia.AddMonths(1);
+
+                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, "1");
+
+                return Json(fichaFinanceira);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("porCodEntidPlanoReferenciaTipoFolha/{codEntid}/{cdPlano}/{referencia}/{cdTipoFolha}")]
+        public ActionResult GetPorCodEntidPlanoReferenciaTipoFolha(string codEntid, string cdPlano, string referencia, string cdTipoFolha)
+        {
+            try
+            {
+                var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
+
+                // Soma um mês da data de referência
+                // GAMBIARRA QUE NÃO É CULPA MINHA, É CULPA DO PULSCHEN QUE TAVA TEIMANDO
+                dataReferencia = dataReferencia.AddMonths(1);
 
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var fichaFinanceira = new FichaFinanceiraAssistidoProxy().BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, cdTipoFolha);

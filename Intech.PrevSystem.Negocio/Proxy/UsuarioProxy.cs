@@ -42,7 +42,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var usuarioExistente = BuscarPorCpf(cpf);
 
             usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
-            usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
+            //usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
             Atualizar(usuarioExistente);
 
             return "Senha alterada com sucesso!";
@@ -55,43 +55,64 @@ namespace Intech.PrevSystem.Negocio.Proxy
             if (chave != "Intech456#@!")
                 throw ExceptionDadosInvalidos;
 
-            var funcionario = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
+            var funcionarioProxy = new FuncionarioProxy();
 
-            if (funcionario == null)
-                throw ExceptionDadosInvalidos;
+            string codEntid;
+            decimal seqRecebedor;
+            var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf);
 
-            var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
-            
-            var senhaEncriptada = Criptografia.Encriptar("123");
-
-            // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
-            var usuarioExistente = BuscarPorCpf(cpf);
-
-            if (usuarioExistente != null)
+            if (funcionario != null)
             {
-                usuarioExistente.PWD_USUARIO = senhaEncriptada;
-                Atualizar(usuarioExistente);
+                codEntid = funcionario.COD_ENTID.ToString();
+                seqRecebedor = 0;
             }
             else
             {
-                var novoUsuario = new UsuarioEntidade
-                {
-                    NOM_LOGIN = cpf,
-                    PWD_USUARIO = senhaEncriptada,
-                    CD_EMPRESA = funcionario.CD_EMPRESA,
-                    DES_LOTACAO = null,
-                    DTA_ATUALIZACAO = DateTime.Now,
-                    DTA_CRIACAO = DateTime.Now,
-                    IND_ADMINISTRADOR = "N",
-                    IND_ATIVO = "S",
-                    IND_BLOQUEADO = "N",
-                    NOM_USUARIO_ATUALIZACAO = null,
-                    NOM_USUARIO_CRIACAO = null,
-                    NUM_TENTATIVA = 0,
-                    SEQ_RECEBEDOR = null
-                };
+                var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).First();
 
-                Inserir(novoUsuario);
+                if (recebedorBeneficio == null)
+                    throw ExceptionDadosInvalidos;
+
+                codEntid = recebedorBeneficio.COD_ENTID.ToString();
+                funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
+                seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
+            }
+
+            if (codEntid != null)
+            {
+                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
+
+                var senhaEncriptada = Criptografia.Encriptar("123");
+
+                // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
+                var usuarioExistente = BuscarPorCpf(cpf);
+
+                if (usuarioExistente != null)
+                {
+                    usuarioExistente.PWD_USUARIO = senhaEncriptada;
+                    Atualizar(usuarioExistente);
+                }
+                else
+                {
+                    var novoUsuario = new UsuarioEntidade
+                    {
+                        NOM_LOGIN = cpf,
+                        PWD_USUARIO = senhaEncriptada,
+                        CD_EMPRESA = funcionario.CD_EMPRESA,
+                        DES_LOTACAO = null,
+                        DTA_ATUALIZACAO = DateTime.Now,
+                        DTA_CRIACAO = DateTime.Now,
+                        IND_ADMINISTRADOR = "N",
+                        IND_ATIVO = "S",
+                        IND_BLOQUEADO = "N",
+                        NOM_USUARIO_ATUALIZACAO = null,
+                        NOM_USUARIO_CRIACAO = null,
+                        NUM_TENTATIVA = 0,
+                        SEQ_RECEBEDOR = seqRecebedor
+                    };
+
+                    Inserir(novoUsuario);
+                }
             }
         }
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Intech.PrevSystem.Preves.API.Controllers
 {
-    [Route(RotasApi.Depentende)]
+    [Route(RotasApi.Dependente)]
     public class DependenteController : BaseDependenteController
     {
     }

@@ -1,0 +1,6 @@
+{
+  "NomeTabela": "TB_NACIONALIDADE",
+  "ChavePrimaria": "CD_NACIONALIDADE",
+  "ColunasExtras": [],
+  "Imports": []
+}

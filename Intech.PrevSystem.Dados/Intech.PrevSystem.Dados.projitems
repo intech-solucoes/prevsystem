@@ -16,6 +16,11 @@
     <Import_RootNamespace>Intech.PrevSystem.Dados</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\AdesaoContrib\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\AdesaoDependente\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\AdesaoEmpresaPlano\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\AdesaoPlano\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Adesao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ArquivoUpload\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Bloqueio\entidade.json" />
@@ -48,10 +53,12 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFechamento\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceiraAssistido\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\FuncionarioNP\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarTodos.sql" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Fundacao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\FundoContrib\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\GrauParentesco\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\GrupoNatureza\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\HeaderInfoRend\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\HistRendas\entidade.json" />
@@ -60,12 +67,14 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Indice\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\InfoRend\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\LGPDConsentimento\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\LimiteContribuicao\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\LogSMS\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensCalculadas\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\MargensPlano\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Margens\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Mensagem\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Modalidade\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\Nacionalidade\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Natureza\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\NoticiaSabesprev\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ParametrosResgate\entidade.json" />
@@ -99,14 +108,20 @@
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxaEvolPerfil\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxasEncargos\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TaxasConcessao\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\TbgIndiceVal\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\TbgIndice\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TempoServico\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\TmpMetrusSaudeInadimplencia\entidade.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Scripts\UF\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Usuario\BuscarPorLogin.sql" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\Usuario\entidade.json" />
     <Content Include="$(MSBuildThisFileDirectory)Scripts\ValoresPercIdade\entidade.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Scripts\AdesaoEmpresaPlano\BuscarPorEmpresa.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\Adesao\BuscarPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ArquivoUpload\Insert.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\BuscarBancos.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\BancoAg\BuscarPorCodBancoCodAgencia.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Bloqueio\BuscarBloqueioEmprestimoPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\CadastroRubricas\BuscarPorFundacaoInscricaoEmpresa.sql" />
@@ -200,6 +215,7 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\FSF_BuscarCotasSaldado.sqlserver.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\FSF_BuscarCotasSaldadoFDAntes98.sqlserver.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\FichaFinanceira\FSF_BuscarCotasSaldadoFDApos98.sqlserver.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\FuncionarioNP\BuscarPorFundacaoEmpresaMatriculaCpfDataNascimento.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Funcionario\BuscarPorInscricao.sql" />
@@ -285,12 +301,21 @@
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxaEvolPerfil\BuscarPorFundacaoPerfil.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxasConcessao\BuscarPorFundacaoEmpresaSeqModalNatur.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TaxasEncargos\BuscarPorFundacaoEmpresaModalidadeNatureza.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\TbgIndiceVal\BuscarPorCodIndice.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\TbgIndiceVal\BuscarPorCodIndiceData.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\TbgIndiceVal\BuscarUltimoPorCodIndice.sql" />
+    <None Include="$(MSBuildThisFileDirectory)Scripts\TbgIndice\BuscarPorCodIndice.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TempoServico\BuscarPorCodEntid.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\TmpMetrusSaudeInadimplencia\BuscarPorMatriculaVencimento.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\Usuario\BuscarPorCpf.sql" />
     <None Include="$(MSBuildThisFileDirectory)Scripts\ValoresPercIdade\BuscarPercentual.sqlserver.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\AdesaoContribDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\AdesaoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\AdesaoDependenteDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\AdesaoEmpresaPlanoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\AdesaoPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ArquivoUploadDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\BancoAgDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\BloqueioDAO.cs" />
@@ -324,8 +349,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFinanceiraAssistidoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FichaFinanceiraDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FuncionarioDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\FuncionarioNPDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FundacaoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\FundoContribDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\GrauParentescoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\HeaderInfoRendDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\HistRendasDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\HistSaldoDAO.cs" />
@@ -333,12 +360,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\IndiceValoresDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\InfoRendDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\LGPDConsentimentoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\LimiteContribuicaoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\LogSMSDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensCalculadasDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MargensPlanoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\MensagemDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ModalidadeDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\NacionalidadeDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\NaturezaDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\NoticiaSabesprevDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ParametrosDAO.cs" />
@@ -370,7 +399,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxaEvolPerfilDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxasConcessaoDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TaxasEncargosDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\TbgIndiceDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\TbgIndiceValDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\TempoServicoDAO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DAO\UFDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\UsuarioDAO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DAO\ValoresPercIdadeDAO.cs" />
   </ItemGroup>

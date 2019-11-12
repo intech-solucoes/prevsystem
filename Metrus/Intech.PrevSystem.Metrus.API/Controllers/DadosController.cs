@@ -5,7 +5,10 @@ using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 #endregion
 
@@ -43,9 +46,28 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                     var config = AppSettings.Get();
 
                     var client = new HttpClient();
-                    var response = await client.GetStringAsync($"{config.Servicos.AutenticacaoGSM}/api/seguranca/validar_token?token=" + token);
 
-                    var jsonResponse = JsonConvert.DeserializeObject<GSMResult>(response);
+                    var parametros = new List<KeyValuePair<string, string>>
+                    {
+                        new KeyValuePair<string, string>("username", "webservices_intech"),
+                        new KeyValuePair<string, string>("password", "intech123@"),
+                        new KeyValuePair<string, string>("grant_type", "password")
+                    };
+
+                    var req = new HttpRequestMessage(HttpMethod.Post, $"{config.Servicos.AutenticacaoGSM}/app_services/auth.oauth2.svc/token") { Content = new FormUrlEncodedContent(parametros) };
+                    var res = await client.SendAsync(req);
+                    var tokenAuth = JsonConvert.DeserializeObject<BennerToken>(await res.Content.ReadAsStringAsync());
+
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer" , tokenAuth.access_token);
+
+                    var parametrosToken = new
+                    {
+                        Token = token
+                    };
+
+                    var content = new StringContent(JsonConvert.SerializeObject(parametrosToken), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync($"{config.Servicos.AutenticacaoGSM}/api/logintoken/validartoken", content);
+                    var jsonResponse = JsonConvert.DeserializeObject<GSMResult>(await response.Content.ReadAsStringAsync());
 
                     if (!jsonResponse.TokenValido)
                     {
@@ -80,5 +102,13 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     public class GSMResult
     {
         public bool TokenValido { get; set; }
+    }
+
+    public class BennerToken
+    {
+        public string access_token { get; set; }
+        public string token_type { get; set; }
+        public int expires_in { get; set; }
+        public string username { get; set; }
     }
 }

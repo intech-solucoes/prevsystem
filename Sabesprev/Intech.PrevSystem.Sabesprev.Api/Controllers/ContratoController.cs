@@ -308,7 +308,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         "<br/>" +
                        $"<div style='font - size: 10px; color: #000000;'>CPF: <b>{dados.DadosPessoais.CPF_CGC}</b></div>" +
                         "</div>";
-                    EnvioEmail.EnviarMailKit(emailConfig, emailDestino, $"Empréstimo – Concessão Web – Comprovante dados bancários - {dados.DadosPessoais.NOME_ENTID}", corpo, file.OpenReadStream(), fileName);
+                    EnvioEmail.Enviar(emailConfig, emailDestino, $"Empréstimo – Concessão Web – Comprovante dados bancários - {dados.DadosPessoais.NOME_ENTID}", corpo, file.OpenReadStream(), fileName);
 
                     return Json($"Dados Bancários enviados com sucesso.");
                 }
@@ -362,7 +362,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     "Este contrato é válido para Empréstimos pessoais vinculados aos planos Sabesprev Mais e Benefícios Básico.<br/>" +
                     "<br/>" +
                     "Fundação Sabesp de Seguridade Social - Sabesprev";
-                EnvioEmail.EnviarMailKit(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, pdf, filename);
+                EnvioEmail.Enviar(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, pdf, filename);
 
                 return Json($"CAC enviado com sucesso para o e-mail {email}");
             }
@@ -405,7 +405,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         var mensagem = $"SABESPREV: Para validar a operação de empréstimo, insira o código a seguir e clique em Contratar.<br/>" +
                             $"<br/>" +
                             $"<h3>{token}</h3>";
-                        EnvioEmail.EnviarMailKit(config.Email, funcionario.DadosPessoais.EMAIL_AUX, "Token para contratar empréstimo Sabesprev", mensagem);
+                        EnvioEmail.Enviar(config.Email, funcionario.DadosPessoais.EMAIL_AUX, "Token para contratar empréstimo Sabesprev", mensagem);
                     }
                     catch (Exception ex)
                     {

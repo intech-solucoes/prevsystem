@@ -1,6 +1,6 @@
 ﻿#region Usings
 using ICSharpCode.SharpZipLib.Zip;
-using Intech.Lib.Util.Email;
+using Intech.Lib.Email;
 using Intech.Lib.Web;
 using Intech.PrevSystem.API;
 using Intech.PrevSystem.Negocio.Proxy;
@@ -46,7 +46,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                     {
                         var dados = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
                         var emailConfig = AppSettings.Get().Email;
-                        EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, null, null, "Extrato de Contribuições", "", pdfStream, filename);
+                        EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, "Extrato de Contribuições", "", pdfStream, filename);
 
                         return Json($"Extrato enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
                     }
@@ -86,7 +86,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                     {
                         var dados = new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid);
                         var emailConfig = AppSettings.Get().Email;
-                        EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, null, null, "Certificado de Participação", "", pdfStream, filename);
+                        EnvioEmail.Enviar(emailConfig, dados.EMAIL_AUX, "Certificado de Participação", "", pdfStream, filename);
 
                         return Json($"Certificado enviado com sucesso para o e-mail {dados.EMAIL_AUX}");
                     }
@@ -187,7 +187,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 if (enviarPorEmail)
                 {
                     var emailConfig = AppSettings.Get().Email;
-                    EnvioEmail.Enviar(emailConfig, dados.dadosPessoais.EMAIL_AUX, null, null, "Certificado de Seguro", "", ms, filename);
+                    EnvioEmail.Enviar(emailConfig, dados.dadosPessoais.EMAIL_AUX, "Certificado de Seguro", "", ms, filename);
 
                     return Json($"Certificado enviado com sucesso para o e-mail {dados.dadosPessoais.EMAIL_AUX}");
                 }

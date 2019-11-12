@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Intech.PrevSystem.Dados.DAO
 {   
-    public abstract class TesteDAO : BaseDAO<TesteEntidade>
+    public abstract class UFDAO : BaseDAO<UFEntidade>
     {
         
     }

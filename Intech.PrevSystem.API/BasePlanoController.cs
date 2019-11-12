@@ -1,9 +1,10 @@
 ﻿#region Usings
-using Intech.Lib.Web.JWT;
+using Intech.Lib.JWT;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System; 
+using System;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.API
@@ -30,7 +31,9 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new PlanoVinculadoProxy().BuscarPorFundacaoMatricula(CdFundacao, Matricula));
+                var planos = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(CdFundacao, Inscricao).Where(x => x.CD_CATEGORIA != "2").ToList();
+
+                return Json(planos);
             }
             catch (Exception ex)
             {

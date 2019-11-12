@@ -1,5 +1,5 @@
 ﻿#region Usings
-using Intech.Lib.Web.JWT;
+using Intech.Lib.JWT;
 using Intech.PrevSystem.API;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;

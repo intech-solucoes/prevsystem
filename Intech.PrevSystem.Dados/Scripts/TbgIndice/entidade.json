@@ -1,0 +1,12 @@
+{
+  "NomeTabela": "TBG_INDICE",
+  "Sinonimo": true,
+  "ColunasExtras": [
+    {
+      "Nome": "Valores",
+      "Tipo": "List<TbgIndiceValEntidade>",
+      "AceitaNulo": false
+    }
+  ],
+  "Imports": []
+}

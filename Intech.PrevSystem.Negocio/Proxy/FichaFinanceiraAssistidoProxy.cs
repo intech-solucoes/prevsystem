@@ -83,6 +83,47 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
+        public dynamic Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+            => Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
+
+        public dynamic Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
+        {
+            List<FichaFinanceiraAssistidoEntidade> rubricas;
+
+            if (SeqRecebedor.HasValue)
+                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+            else
+                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+
+            if (!string.IsNullOrEmpty(CD_ESPECIE))
+                rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();
+
+            var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
+            var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
+
+            foreach (var rubrica in descontos)
+                rubrica.VALOR_MC *= -1;
+
+            var bruto = proventos.Sum(x => x.VALOR_MC);
+            var valDescontos = descontos.Sum(x => x.VALOR_MC);
+            var liquido = bruto - Math.Abs(valDescontos.Value);
+
+            return new Contracheque
+            {
+                Proventos = proventos,
+                Descontos = descontos,
+                Resumo = new ContrachequeResumo
+                {
+                    Referencia = DT_REFERENCIA,
+                    Bruto = bruto,
+                    Descontos = valDescontos,
+                    Liquido = liquido,
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
+                }
+            };
+        }
+
         public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
@@ -91,9 +132,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             List<FichaFinanceiraAssistidoEntidade> rubricas;
                 
             if(SeqRecebedor.HasValue)
-                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
             else
-                rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
+                rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
 
             if(!string.IsNullOrEmpty(CD_ESPECIE))
                 rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();

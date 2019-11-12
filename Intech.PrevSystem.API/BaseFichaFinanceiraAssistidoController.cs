@@ -35,7 +35,7 @@ namespace Intech.PrevSystem.API
                 });
 
                 var grupo = datas
-                    .GroupBy(x => new { x.DS_ESPECIE, x.NUM_PROCESSO, x.ANO_PROCESSO })
+                    .GroupBy(x => new { x.DS_ESPECIE, x.NUM_PROCESSO, x.ANO_PROCESSO, x.CD_PLANO, x.DS_PLANO })
                     .Select(x => new
                     {
                         Especie = x.Key,

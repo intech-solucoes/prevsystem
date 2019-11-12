@@ -1,6 +1,6 @@
 #region Usings
 using Intech.Lib.Util.Seguranca;
-using Intech.Lib.Web.JWT;
+using Intech.Lib.JWT;
 using Intech.PrevSystem.API;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 #endregion
 
 namespace Intech.PrevSystem.Preves.API.Controllers
@@ -70,7 +71,7 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                     }
                     else
                     {
-                        var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf);
+                        var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
 
                         if (recebedorBeneficio == null)
                             return BadRequest("CPF ou senha incorretos!");
@@ -119,6 +120,30 @@ namespace Intech.PrevSystem.Preves.API.Controllers
                 }
 
                 return Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Cria acesso para usuários internos.
+        /// </summary>
+        /// <param name="data">{ Cpf: "12345678901", Chave: "123" }</param>
+        /// <returns>200 OK</returns>
+        [HttpPost("criarAcessoIntech")]
+        [AllowAnonymous]
+        public IActionResult CriarAcessoIntech([FromBody] dynamic data)
+        {
+            try
+            {
+                string cpf = data.Cpf.Value;
+                string chave = data.Chave.Value;
+
+                new UsuarioProxy().CriarAcessoIntech(cpf, chave);
+
+                return Ok();
             }
             catch (Exception ex)
             {

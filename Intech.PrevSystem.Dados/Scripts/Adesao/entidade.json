@@ -1,0 +1,21 @@
+{
+  "NomeTabela": "WEB_ADESAO",
+  "ColunasExtras": [
+    {
+      "Nome": "Dependentes",
+      "Tipo": "List<AdesaoDependenteEntidade>",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "Contrib",
+      "Tipo": "AdesaoContribEntidade",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "Plano",
+      "Tipo": "AdesaoPlanoEntidade",
+      "AceitaNulo": false
+    }
+  ],
+  "Imports": []
+}

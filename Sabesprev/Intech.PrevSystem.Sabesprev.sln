@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.Lib.Dapper", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.Lib.Email", "..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj", "{22DF6CED-5A0B-4BA2-B2B0-AF1494E9290A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.Lib.JWT", "..\..\Intech.Lib\Intech.Lib.JWT\Intech.Lib.JWT.csproj", "{FA2E2820-15BD-430B-836F-7018FD904CFB}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\..\lib\dotnet-lib\Intech.Lib.Relatorios\Intech.Lib.Relatorios.projitems*{067f6a75-7dd8-48f9-9c4c-1a34b928a124}*SharedItemsImports = 13
@@ -143,6 +145,18 @@ Global
 		{22DF6CED-5A0B-4BA2-B2B0-AF1494E9290A}.Release|x64.Build.0 = Release|Any CPU
 		{22DF6CED-5A0B-4BA2-B2B0-AF1494E9290A}.Release|x86.ActiveCfg = Release|Any CPU
 		{22DF6CED-5A0B-4BA2-B2B0-AF1494E9290A}.Release|x86.Build.0 = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|x64.Build.0 = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Debug|x86.Build.0 = Debug|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|x64.ActiveCfg = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|x64.Build.0 = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA2E2820-15BD-430B-836F-7018FD904CFB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +172,7 @@ Global
 		{06E1EEB3-20EC-44F2-BC2A-6A27EEC84846} = {7BD8590C-E143-40EC-8A72-C2AEAA846612}
 		{EDDEB155-45CB-4E3A-A57C-558135CD8841} = {7BD8590C-E143-40EC-8A72-C2AEAA846612}
 		{22DF6CED-5A0B-4BA2-B2B0-AF1494E9290A} = {7BD8590C-E143-40EC-8A72-C2AEAA846612}
+		{FA2E2820-15BD-430B-836F-7018FD904CFB} = {7BD8590C-E143-40EC-8A72-C2AEAA846612}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E873F527-C780-473E-AB5B-3853975355E9}

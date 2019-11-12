@@ -25,10 +25,10 @@
     <None Remove="Temp\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="Dapper.Contrib" Version="1.50.4" />
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
     <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
-    <PackageReference Include="MailKit" Version="2.0.5" />
+    <PackageReference Include="MailKit" Version="2.4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
@@ -39,23 +39,25 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="MimeTypes" Version="1.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Oracle.ManagedDataAccess" Version="12.2.1100" />
     <PackageReference Include="SharpZipLib" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.JWT\Intech.Lib.JWT.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Web\Intech.Lib.Web.csproj" />
+    <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\img\certificadoDeRegistroNoPlano.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Dapper\Intech.Lib.Dapper.projitems" Label="Shared" />
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Data\Intech.Lib.Data.projitems" Label="Shared" />
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Util\Intech.Lib.Util.projitems" Label="Shared" />
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.Web\Intech.Lib.Web.projitems" Label="Shared" />
   <Import Project="..\..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
   <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
-  <Import Project="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.projitems" Label="Shared" />
   <Import Project="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.projitems" Label="Shared" />
   <Import Project="..\Intech.PrevSystem.Preves.Negocio\Intech.PrevSystem.Preves.Negocio.projitems" Label="Shared" />
-  <Import Project="..\..\..\lib\dotnet-lib\Intech.Lib.IO\Intech.Lib.IO.projitems" Label="Shared" />
 </Project>

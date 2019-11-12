@@ -16,6 +16,11 @@
     <Import_RootNamespace>Intech.PrevSystem.Negocio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\AdesaoContribProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\AdesaoDependenteProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\AdesaoEmpresaPlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\AdesaoPlanoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\AdesaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ArquivoUploadProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\BancoAgProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\BloqueioProxy.cs" />
@@ -48,9 +53,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFechamentoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraAssistidoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FichaFinanceiraProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioNPProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FuncionarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundacaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\FundoContribProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\GrauParentescoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HistRendasProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HistSaldoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\IndiceProxy.cs" />
@@ -58,12 +65,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\HeaderInfRendProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\InfoRendProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\LGPDConsentimentoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\LimiteContribuicaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\LogSMSProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensCalculadasProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensPlanoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MargensProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\MensagemProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ModalidadeProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\NacionalidadeProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\NaturezaProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\NoticiaSabesprevProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ParametrosProxy.cs" />
@@ -95,7 +104,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxaEvolPerfilProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxasConcessaoProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TaxasEncargosProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\TbgIndiceProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\TbgIndiceValProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\TempoServicoProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Proxy\UFProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\UsuarioProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Proxy\ValoresPercIdadeProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SaldoContribuicoesExtensoes.cs" />

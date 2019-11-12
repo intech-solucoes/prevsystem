@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class TesteProxy : TesteDAO
+    public class LimiteContribuicaoProxy : LimiteContribuicaoDAO
     {
     }
 }

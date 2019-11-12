@@ -1,50 +1,56 @@
-﻿{
-    "nomeTabela": "GB_FICHA_FINANC_ASSISTIDO",
-    "colunasExtras": [
-        {
-            "nome": "DS_RUBRICA",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DS_ESPECIE",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "RUBRICA_PROV_DESC",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "ID_RUB_SUPLEMENTACAO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "IsAbonoAnual",
-            "tipo": "bool",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "VAL_BRUTO",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "VAL_DESCONTOS",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "VAL_LIQUIDO",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_TIPO_FOLHA",
-            "tipo": "string",
-            "aceitaNulo": true
-        }
-    ]
+{
+  "NomeTabela": "GB_FICHA_FINANC_ASSISTIDO",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_RUBRICA",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "RUBRICA_PROV_DESC",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "ID_RUB_SUPLEMENTACAO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "IsAbonoAnual",
+      "Tipo": "bool",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "VAL_BRUTO",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "VAL_DESCONTOS",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "VAL_LIQUIDO",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_TIPO_FOLHA",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_PLANO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ],
+  "Imports": []
 }

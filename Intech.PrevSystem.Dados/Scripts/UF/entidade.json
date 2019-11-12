@@ -1,0 +1,6 @@
+{
+  "NomeTabela": "TB_UNID_FED",
+  "ChavePrimaria": "CD_UNID_FED",
+  "ColunasExtras": [],
+  "Imports": []
+}

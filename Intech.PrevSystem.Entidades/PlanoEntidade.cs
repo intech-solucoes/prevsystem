@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -23,6 +23,9 @@ namespace Intech.PrevSystem.Entidades
 		public int? NU_SEQ_CUSTODIANTE { get; set; }
 		public string MES_REF_AUT { get; set; }
 		public string CK_INSTITUIDO { get; set; }
+		public string PL_CONTRIB_INDIV_OBR { get; set; }
+		public string EFINANC_PP_TPPRODUTO { get; set; }
+		public string COD_CARTEIRA { get; set; }
         
     }
 }

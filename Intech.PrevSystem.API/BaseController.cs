@@ -1,6 +1,4 @@
 ﻿#region Usings
-using Intech.PrevSystem.Entidades;
-using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
 #endregion

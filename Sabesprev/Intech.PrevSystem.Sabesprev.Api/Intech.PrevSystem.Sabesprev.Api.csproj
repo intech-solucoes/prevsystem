@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="wwwroot\**" />
@@ -28,9 +28,14 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj" />
     <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.JWT\Intech.Lib.JWT.csproj" />
     <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.SMS\Intech.Lib.SMS.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
+    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Web\Intech.Lib.Web.csproj" />
+    <ProjectReference Include="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
+    <ProjectReference Include="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj" />
     <ProjectReference Include="..\Intech.PrevSystem.Negocio.Sabesprev\Intech.PrevSystem.Negocio.Sabesprev.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +59,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <Import Project="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.projitems" Label="Shared" />
-  <Import Project="..\..\..\..\git\prevsystem\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
+  <Import Project="..\..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems" Label="Shared" />
 </Project>

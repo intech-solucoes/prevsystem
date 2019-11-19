@@ -364,6 +364,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     "Fundação Sabesp de Seguridade Social - Sabesprev";
                 EnvioEmail.Enviar(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, pdf, filename);
 
+
+
                 return Json($"CAC enviado com sucesso para o e-mail {email}");
             }
             catch (Exception ex)

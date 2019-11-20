@@ -40,7 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HumanAPIClient">
-      <HintPath>..\..\..\lib\terceiros\HumanAPIClient.dll</HintPath>
+      <HintPath>..\..\..\Intech.Lib\Intech.Lib.SMS\HumanAPIClient.dll</HintPath>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>

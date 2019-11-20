@@ -393,7 +393,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 if(enviarSMS && string.IsNullOrEmpty(funcionario.DadosPessoais.FONE_CELULAR))
                     throw new Exception("ATENÇÃO! Telefone celular não cadastrado.");
                 
-                string erros;
+                string erros = string.Empty;
 
                 var config = AppSettings.Get();
 
@@ -430,14 +430,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                                     try
                                     {
                                         var logSMSProxy = new LogSMSProxy();
-                                        logSMSProxy.Inserir(new LogSMSEntidade
-                                        {
-                                            RESPOSTA_ENVIO = args.Retorno,
-                                            NUM_TELEFONE = args.NumTelefone,
-                                            NUM_MATRICULA = args.Matricula,
-                                            NUM_INSCRICAO = args.Inscricao,
-                                            DTA_ENVIO = DateTime.Today
-                                        });
+                                        logSMSProxy.Insert(args.Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
                                     }
                                     catch (Exception ex)
                                     {
@@ -449,6 +442,9 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     {
                         erros = "Erro ao enviar o Token via SMS para o celular. Favor contactar a Sabesprev. Erro: " + ex.Message;
                     }
+
+                    if (!string.IsNullOrEmpty(erros))
+                        throw new Exception(erros);
                 }
 
                 return Json(new

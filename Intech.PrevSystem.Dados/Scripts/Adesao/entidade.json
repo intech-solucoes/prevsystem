@@ -15,6 +15,11 @@
       "Nome": "Plano",
       "Tipo": "AdesaoPlanoEntidade",
       "AceitaNulo": false
+    },
+    {
+      "Nome": "Documentos",
+      "Tipo": "List<AdesaoDocumentoEntidade>",
+      "AceitaNulo": false
     }
   ],
   "Imports": []

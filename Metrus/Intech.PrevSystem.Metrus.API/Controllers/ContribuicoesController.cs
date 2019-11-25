@@ -42,15 +42,24 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 }
                 else
                 {
-                    var saldoBasicaParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "1");
-                    var saldoSuplementarParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "11");
+                    var processo = new ProcessoBeneficioProxy().BuscarAtivoPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO);
+                    var histRendas = new HistRendasProxy().BuscarPorFundacaoEmpresaPlanoAnoNumEspecie(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, processo.ANO_PROCESSO, processo.NUM_PROCESSO, processo.CD_ESPECIE);
 
-                    var saldoTotalParticipante = saldoBasicaParticipante.ValorParticipante + saldoSuplementarParticipante.ValorParticipante;
+                    var saldoTotalParticipante = 0M;
+                    var saldoTotalPatrocinadora = 0M;
 
-                    var saldoBasicaPatrocinadora = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "2");
-                    var saldoSuplementarPatrocinadora = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "12");
+                    if (histRendas.CD_OPCAO_RECEB != "01")
+                    {
+                        var saldoBasicaParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "1");
+                        var saldoSuplementarParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "11");
 
-                    var saldoTotalPatrocinadora = saldoBasicaPatrocinadora.ValorPatrocinadora + saldoSuplementarPatrocinadora.ValorPatrocinadora;
+                        saldoTotalParticipante = saldoBasicaParticipante.ValorParticipante + saldoSuplementarParticipante.ValorParticipante;
+
+                        var saldoBasicaPatrocinadora = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "2");
+                        var saldoSuplementarPatrocinadora = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "12");
+
+                        saldoTotalPatrocinadora = saldoBasicaPatrocinadora.ValorPatrocinadora + saldoSuplementarPatrocinadora.ValorPatrocinadora;
+                    }
 
                     var saldoTotal = saldoTotalParticipante + saldoTotalPatrocinadora;
 
@@ -70,10 +79,10 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                     return Json(new
                     {
-                        saldoBasicaParticipante,
-                        saldoSuplementarParticipante,
-                        saldoBasicaPatrocinadora,
-                        saldoSuplementarPatrocinadora,
+                        //saldoBasicaParticipante,
+                        //saldoSuplementarParticipante,
+                        //saldoBasicaPatrocinadora,
+                        //saldoSuplementarPatrocinadora,
                         saldoTotal,
                         contribuicoesBasicasParticipante = new
                         {

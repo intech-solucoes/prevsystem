@@ -3,7 +3,7 @@
 /*==============================================================*/
 CREATE TABLE WEB_ADESAO_DOCUMENTO (
    OID_ADESAO_DOCUMENTO NUMERIC(10)          IDENTITY,
-   OID_ADESAO           NUMERIC(10)          NOT NULL,
+   OID_ADESAO           NUMERIC(10)          NULL,
    TXT_TITULO           VARCHAR(100)         NOT NULL,
    TXT_NOME_FISICO      VARCHAR(100)         NOT NULL,
    CONSTRAINT WEB_ADESAO_DOCUMENTO_PK PRIMARY KEY (OID_ADESAO_DOCUMENTO)

@@ -70,9 +70,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var listaProcessos = base.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
 
-            var situacoesBloqueadas = new string[] { "03", "04", "06", "12", "20" };
+            var situacoesBloqueadas = new string[] { "03", "04", "06", "07", "12", "20" };
 
-            var processo = listaProcessos.Single(x => !situacoesBloqueadas.Contains(x.CD_SITUACAO));
+            var processo = listaProcessos.First(x => !situacoesBloqueadas.Contains(x.CD_SITUACAO));
 
             return processo;
         }

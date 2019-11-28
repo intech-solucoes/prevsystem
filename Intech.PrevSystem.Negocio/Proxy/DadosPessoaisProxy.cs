@@ -8,18 +8,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class DadosPessoaisProxy : DadosPessoaisDAO
     {
-        public dynamic BuscarDadosPorCodEntid(string COD_ENTID)
+        public override DadosPessoaisEntidade BuscarPorCodEntid(string COD_ENTID)
         {
             var dadosPessoais = base.BuscarPorCodEntid(COD_ENTID);
 
+            dadosPessoais.CPF_CGC = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF);
+            dadosPessoais.DS_SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO";
 
-
-            return new
-            {
-                dadosPessoais,
-                CPF = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF),
-                SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO"
-            };
+            return dadosPessoais;
         }
     }
 }

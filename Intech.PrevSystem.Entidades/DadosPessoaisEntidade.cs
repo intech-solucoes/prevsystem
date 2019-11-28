@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -62,8 +62,11 @@ namespace Intech.PrevSystem.Entidades
 		public string PAIS_ORIGEM_PASSAPORTE { get; set; }
 		public DateTime? DT_CHEGADA { get; set; }
 		public string NOME_SOCIAL { get; set; }
-		public string CPF_CGC { get; set; }
-		public string NOME_ENTID { get; set; }
+		public string IND_RECEBER_EMAIL { get; set; }
+		public string ID_EMP_ONLINE { get; set; }
+		[Write(false)] public string CPF_CGC { get; set; }
+		[Write(false)] public string NOME_ENTID { get; set; }
+		[Write(false)] public string DS_SEXO { get; set; }
         
     }
 }

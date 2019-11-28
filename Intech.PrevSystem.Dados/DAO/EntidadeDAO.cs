@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<EntidadeEntidade>("SELECT * FROM EE_ENTIDADE WHERE COD_ENTID = @COD_ENTID", new { COD_ENTID });
+					return Conexao.QuerySingleOrDefault<EntidadeEntidade>("SELECT *  FROM EE_ENTIDADE  WHERE COD_ENTID = @COD_ENTID", new { COD_ENTID });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<EntidadeEntidade>("SELECT * FROM EE_ENTIDADE WHERE COD_ENTID=:COD_ENTID", new { COD_ENTID });
 				else

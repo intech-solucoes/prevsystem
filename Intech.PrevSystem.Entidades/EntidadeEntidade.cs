@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -111,6 +111,7 @@ namespace Intech.PrevSystem.Entidades
 		public string NUM_NIF_EFINANCEIRA { get; set; }
 		public string IND_FATCA { get; set; }
 		public string CD_PAIS_EFINANCEIRA { get; set; }
+		public string IND_DESONERA_CPRB { get; set; }
         
     }
 }

@@ -52,7 +52,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 Usuario = usuario,
                 NOME_EMPRESA = empresa.NOME_ENTID,
                 CNPJ_EMPRESA = empresa.CPF_CGC.AplicarMascara(Mascaras.CNPJ),
-                CPF = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF),
+                CPF = dadosPessoais.CPF_CGC,
                 SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO",
                 IDADE = dadosPessoais.DT_NASCIMENTO.IdadeEm(DateTime.Now).ToShortString(),
                 DS_ESTADO_CIVIL = estadoCivil.DS_ESTADO_CIVIL,

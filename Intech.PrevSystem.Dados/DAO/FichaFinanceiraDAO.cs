@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class FichaFinanceiraDAO : BaseDAO<FichaFinanceiraEntidade>
     {
         
+		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarContribuicaoPorInscricao(string NUM_INSCRICAO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT FF.ANO_REF,         FF.MES_REF,         TC.DS_TIPO_CONTRIBUICAO,         FF.SRC,         FF.CONTRIB_PARTICIPANTE,         FF.CONTRIB_EMPRESA,         CASE WHEN FF.SRC = 0 THEN 0  		ELSE ROUND((FF.CONTRIB_PARTICIPANTE / IIF(CAST(FF.SRC AS NUMERIC(30,8)) < CAST(FVC.LIMITE_SUP_FAIXA AS NUMERIC(30,8)), CAST(FF.SRC AS NUMERIC(30,8)), FVC.LIMITE_SUP_FAIXA) * 100),3)   	   END AS SEQ_CONTRIBUICAO  FROM CC_FICHA_FINANCEIRA FF      INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO      INNER JOIN TB_FAIXA_VALOR_CONTRIB FVC ON FVC.CD_FUNDACAO = FF.CD_FUNDACAO          AND FVC.CD_PLANO = FF.CD_PLANO          AND FVC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO          AND FVC.CD_MANTENEDORA = '2'  WHERE FF.CD_FUNDACAO   = '01'    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.CD_PLANO      = '0002'    AND (FF.ANO_REF * 12 + FF.MES_REF) = (SELECT MAX(FF2.ANO_REF * 12 + FF2.MES_REF)                                            FROM CC_FICHA_FINANCEIRA FF2                                            WHERE FF2.CD_FUNDACAO = FF.CD_FUNDACAO                                             AND FF2.NUM_INSCRICAO = FF.NUM_INSCRICAO                                             AND FF2.CD_PLANO = FF.CD_PLANO)    AND (FVC.ANO_REF * 12 + FVC.MES_REF) = (SELECT MAX(FVC2.ANO_REF * 12 + FVC2.MES_REF)                                            FROM TB_FAIXA_VALOR_CONTRIB FVC2                                            WHERE FVC2.CD_FUNDACAO = FVC.CD_FUNDACAO                                             AND FVC2.CD_PLANO = FVC.CD_PLANO                                             AND FVC2.CD_TIPO_CONTRIBUICAO = FVC.CD_TIPO_CONTRIBUICAO                                             AND FVC.CD_MANTENEDORA = '2')                                                     ORDER BY FF.CD_TIPO_CONTRIBUICAO", new { NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("", new { NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarDatasInformePorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
 		{
 			try
@@ -21,6 +38,23 @@ namespace Intech.PrevSystem.Dados.DAO
 					return Conexao.Query<FichaFinanceiraEntidade>("SELECT DISTINCT FF.ANO_REF  FROM CC_FICHA_FINANCEIRA FF  	INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = FF.CD_FUNDACAO   			AND FN.NUM_INSCRICAO = FF.NUM_INSCRICAO  	INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO  WHERE TC.CK_COMPOE_IR_AM = 'S'    AND FF.CD_FUNDACAO = @CD_FUNDACAO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO  GROUP BY FF.ANO_REF  ORDER BY FF.ANO_REF DESC", new { CD_FUNDACAO, NUM_INSCRICAO });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<FichaFinanceiraEntidade>("SELECT DISTINCT FF.ANO_REF FROM CC_FICHA_FINANCEIRA  FF  INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=FF.CD_FUNDACAO AND FN.NUM_INSCRICAO=FF.NUM_INSCRICAO INNER  JOIN TB_TIPO_CONTRIBUICAO   TC  ON TC.CD_TIPO_CONTRIBUICAO=FF.CD_TIPO_CONTRIBUICAO WHERE TC.CK_COMPOE_IR_AM='S' AND FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO GROUP BY FF.ANO_REF ORDER BY FF.ANO_REF DESC", new { CD_FUNDACAO, NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarDatasPorFundacaoInscricaoPlano(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT DISTINCT          FF.ANO_REF,         FF.MES_REF  FROM CC_FICHA_FINANCEIRA FF  WHERE FF.CD_FUNDACAO   = @CD_FUNDACAO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.CD_PLANO      = @CD_PLANO  ORDER BY FF.ANO_REF, FF.MES_REF", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT DISTINCT FF.ANO_REF, FF.MES_REF FROM CC_FICHA_FINANCEIRA  FF  WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.CD_PLANO=:CD_PLANO ORDER BY FF.ANO_REF, FF.MES_REF", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -225,6 +259,40 @@ namespace Intech.PrevSystem.Dados.DAO
 					return Conexao.Query<FichaFinanceiraEntidade>("SELECT *   FROM CC_FICHA_FINANCEIRA FI  WHERE FI.CD_FUNDACAO = @CD_FUNDACAO    AND FI.CD_PLANO = @CD_PLANO    AND FI.NUM_INSCRICAO = @NUM_INSCRICAO    AND FI.ANO_REF = @ANO_REF  ORDER BY FI.MES_REF", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<FichaFinanceiraEntidade>("SELECT * FROM CC_FICHA_FINANCEIRA  FI  WHERE FI.CD_FUNDACAO=:CD_FUNDACAO AND FI.CD_PLANO=:CD_PLANO AND FI.NUM_INSCRICAO=:NUM_INSCRICAO AND FI.ANO_REF=:ANO_REF ORDER BY FI.MES_REF", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarSaldosComRecursoPortadoPorInscricao(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN FF.CONTRIB_PARTICIPANTE * -1 ELSE FF.CONTRIB_PARTICIPANTE END) AS CONTRIB_PARTICIPANTE,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN FF.CONTRIB_EMPRESA * -1 ELSE FF.CONTRIB_EMPRESA END) AS CONTRIB_EMPRESA,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN ISNULL(FF.QTD_COTA_RP_PARTICIPANTE,0) * -1 ELSE ISNULL(FF.QTD_COTA_RP_PARTICIPANTE,0) END) AS QTD_COTA_RP_PARTICIPANTE,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN ISNULL(FF.QTD_COTA_RP_EMPRESA,0) * -1 ELSE ISNULL(FF.QTD_COTA_RP_EMPRESA,0) END) AS QTD_COTA_RP_EMPRESA  FROM CC_FICHA_FINANCEIRA FF      INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO  WHERE FF.CD_FUNDACAO   = @CD_FUNDACAO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.CD_PLANO      = @CD_PLANO    AND TC.RECURSO_PORTADO = 'S'", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual IEnumerable<FichaFinanceiraEntidade> BuscarSaldosSemRecursoPortadoPorInscricao(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN FF.CONTRIB_PARTICIPANTE * -1 ELSE FF.CONTRIB_PARTICIPANTE END) AS CONTRIB_PARTICIPANTE,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN FF.CONTRIB_EMPRESA * -1 ELSE FF.CONTRIB_EMPRESA END) AS CONTRIB_EMPRESA,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN ISNULL(FF.QTD_COTA_RP_PARTICIPANTE,0) * -1 ELSE ISNULL(FF.QTD_COTA_RP_PARTICIPANTE,0) END) AS QTD_COTA_RP_PARTICIPANTE,         SUM(CASE WHEN FF.CD_OPERACAO = 'D' THEN ISNULL(FF.QTD_COTA_RP_EMPRESA,0) * -1 ELSE ISNULL(FF.QTD_COTA_RP_EMPRESA,0) END) AS QTD_COTA_RP_EMPRESA  FROM CC_FICHA_FINANCEIRA FF      INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO  WHERE FF.CD_FUNDACAO   = @CD_FUNDACAO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.CD_PLANO      = @CD_PLANO    AND TC.COMPOE_SALDO_BENEFICIO = 'S'    AND TC.RECURSO_PORTADO = 'N'", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO });
 				else
 					throw new Exception("Provider não suportado!");
 			}

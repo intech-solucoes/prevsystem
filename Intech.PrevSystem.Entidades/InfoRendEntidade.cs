@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -14,9 +14,9 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_QUADRO { get; set; }
 		public decimal? VAL_LINHA { get; set; }
 		public string ORIGEM { get; set; }
-		public string DES_INFO_REND { get; set; }
-		public string COD_GRUPO { get; set; }
-		public string DES_GRUPO { get; set; }
+		[Write(false)] public string DES_INFO_REND { get; set; }
+		[Write(false)] public string COD_GRUPO { get; set; }
+		[Write(false)] public string DES_GRUPO { get; set; }
         
     }
 }

@@ -25,7 +25,6 @@ namespace Intech.PrevSystem.Entidades
 		public string CK_INSTITUIDO { get; set; }
 		public string PL_CONTRIB_INDIV_OBR { get; set; }
 		public string EFINANC_PP_TPPRODUTO { get; set; }
-		public string COD_CARTEIRA { get; set; }
         
     }
 }

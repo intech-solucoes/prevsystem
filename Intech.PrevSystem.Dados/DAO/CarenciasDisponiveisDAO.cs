@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<CarenciasDisponiveisEntidade>("SELECT * FROM CE_CARENCIAS_DISPONIVEIS WHERE CD_NATUR = @CD_NATUR   AND DISPONIVEL = 'S'", new { CD_NATUR });
+					return Conexao.Query<CarenciasDisponiveisEntidade>("SELECT *  FROM CE_CARENCIAS_DISPONIVEIS  WHERE CD_NATUR = @CD_NATUR    AND DISPONIVEL = 'S'", new { CD_NATUR });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<CarenciasDisponiveisEntidade>("SELECT * FROM CE_CARENCIAS_DISPONIVEIS WHERE CD_NATUR=:CD_NATUR AND DISPONIVEL='S'", new { CD_NATUR });
 				else

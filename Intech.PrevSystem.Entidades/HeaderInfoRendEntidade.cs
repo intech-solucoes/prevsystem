@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -18,10 +18,10 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime DATA_GERACAO { get; set; }
 		public string ORIGEM { get; set; }
 		public string IND_RETENCAO { get; set; }
-		public string NOME { get; set; }
-		public string NOM_EMPRESA { get; set; }
-		public string CNPJ_EMPRESA { get; set; }
-		public List<InfoRendGrupoEntidade> Grupos { get; set; }
+		[Write(false)] public string NOME { get; set; }
+		[Write(false)] public string NOM_EMPRESA { get; set; }
+		[Write(false)] public string CNPJ_EMPRESA { get; set; }
+		[Write(false)] public List<InfoRendGrupoEntidade> Grupos { get; set; }
         
     }
 }

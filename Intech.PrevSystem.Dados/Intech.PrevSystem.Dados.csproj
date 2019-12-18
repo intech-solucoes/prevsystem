@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\WebUsuario\AtualizarPrimeiroAcesso.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
   </ItemGroup>

@@ -21,17 +21,16 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_PRIMEIRA_CONTRIB { get; set; }
 		public DateTime? DT_VENC_CARENCIA { get; set; }
 		public string CD_SIT_INSCRICAO { get; set; }
-		public DateTime? DT_TERMINO_PREST { get; set; }
-		public decimal? DIA_VENC { get; set; }
 		public string TIPO_IRRF { get; set; }
 		public int? IDADE_RECEB_BENEF { get; set; }
 		public string cd_tipo_cobranca { get; set; }
 		public string NUM_BANCO { get; set; }
 		public string NUM_AGENCIA { get; set; }
 		public string NUM_CONTA { get; set; }
+		public decimal? DIA_VENC { get; set; }
+		public string CD_GRUPO { get; set; }
 		public decimal? cd_perfil_invest { get; set; }
 		public string NUM_PROTOCOLO { get; set; }
-		public string CD_GRUPO { get; set; }
 		public string VITALICIO { get; set; }
 		public decimal? VL_PERC_VITALICIO { get; set; }
 		public string LEI_108 { get; set; }

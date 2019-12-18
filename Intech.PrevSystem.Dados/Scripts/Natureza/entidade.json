@@ -1,35 +1,31 @@
-﻿{
-    "nomeTabela": "CE_NATUREZA",
-    "colunasExtras": [
-        {
-            "nome": "DatasCredito",
-            "tipo": "List<DateTime>",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Carencias",
-            "tipo": "List<CarenciasDisponiveisEntidade>",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "MargemConsignavel",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "TaxaMargemConsignavel",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "TaxaJuros",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Concessao",
-            "tipo": "Concessao",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "CE_NATUREZA",
+  "ColunasExtras": [
+    {
+      "Nome": "Carencias",
+      "Tipo": "List<CarenciasDisponiveisEntidade>",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "MargemConsignavel",
+      "Tipo": "decimal",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "TaxaMargemConsignavel",
+      "Tipo": "decimal",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "TaxaJuros",
+      "Tipo": "decimal",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DatasCredito",
+      "Tipo": "List<DateTime>",
+      "AceitaNulo": false
+    }
+  ],
+  "Imports": []
 }

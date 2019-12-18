@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE SITUACAO = 'A'", new {  });
+					return Conexao.Query<ModalidadeEntidade>("SELECT *  FROM CE_MODALIDADE  WHERE SITUACAO = 'A'", new {  });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE SITUACAO='A'", new {  });
 				else
@@ -35,7 +35,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE CD_MODAL = @CD_MODAL", new { CD_MODAL });
+					return Conexao.QuerySingleOrDefault<ModalidadeEntidade>("SELECT *  FROM CE_MODALIDADE  WHERE CD_MODAL = @CD_MODAL", new { CD_MODAL });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<ModalidadeEntidade>("SELECT * FROM CE_MODALIDADE WHERE CD_MODAL=:CD_MODAL", new { CD_MODAL });
 				else

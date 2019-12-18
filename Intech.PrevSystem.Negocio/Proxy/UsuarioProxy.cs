@@ -42,7 +42,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var usuarioExistente = BuscarPorCpf(cpf);
 
             usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
-            //usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
+            usuarioExistente.IND_PRIMEIRO_ACESSO = "N";
             Atualizar(usuarioExistente);
 
             return "Senha alterada com sucesso!";
@@ -59,7 +59,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             string codEntid;
             decimal seqRecebedor;
-            var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf);
+            var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
             if (funcionario != null)
             {
@@ -124,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             
             string codEntid;
             decimal seqRecebedor;
-            var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf);
+            var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
             if (funcionario != null)
             {

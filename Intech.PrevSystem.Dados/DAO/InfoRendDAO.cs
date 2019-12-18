@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<InfoRendEntidade>("SELECT * FROM TB_INFO_REND WHERE OID_HEADER_INFO_REND = @OID_HEADER_INFO_REND", new { OID_HEADER_INFO_REND });
+					return Conexao.Query<InfoRendEntidade>("SELECT *  FROM TB_INFO_REND  WHERE OID_HEADER_INFO_REND = @OID_HEADER_INFO_REND", new { OID_HEADER_INFO_REND });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<InfoRendEntidade>("SELECT * FROM TB_INFO_REND WHERE OID_HEADER_INFO_REND=:OID_HEADER_INFO_REND", new { OID_HEADER_INFO_REND });
 				else

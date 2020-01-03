@@ -5,16 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Scripts\WebUsuario\AtualizarPrimeiroAcesso.sql" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
+    <PackageReference Include="Intech.Lib.Dapper" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
     <ProjectReference Include="..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
   </ItemGroup>
 

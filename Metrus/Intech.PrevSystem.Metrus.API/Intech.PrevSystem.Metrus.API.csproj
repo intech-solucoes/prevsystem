@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
     <PackageReference Include="FinancialFormulas" Version="1.2.2" />
+    <PackageReference Include="Intech.Lib.JWT" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="System.Private.ServiceModel" Version="4.5.3" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
@@ -17,11 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.JWT\Intech.Lib.JWT.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Web\Intech.Lib.Web.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj" />

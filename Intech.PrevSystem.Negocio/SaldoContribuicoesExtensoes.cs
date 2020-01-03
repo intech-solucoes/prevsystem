@@ -1,9 +1,7 @@
 ﻿#region Usings
-using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Negocio.Proxy;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 #endregion
 

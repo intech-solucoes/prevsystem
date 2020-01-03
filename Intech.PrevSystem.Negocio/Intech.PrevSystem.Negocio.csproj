@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Intech.Lib.Email" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
   </ItemGroup>
 

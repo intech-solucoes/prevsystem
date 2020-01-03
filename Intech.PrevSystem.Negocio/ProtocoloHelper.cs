@@ -1,8 +1,10 @@
-﻿using Intech.PrevSystem.Entidades;
+﻿#region Usings
+using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text; 
+#endregion
 
 namespace Intech.PrevSystem.Negocio
 {
@@ -49,9 +51,10 @@ namespace Intech.PrevSystem.Negocio
                 TXT_ORIGEM = TXT_ORIGEM,
                 TXT_IPV4_EXTERNO = TXT_IPV4_EXTERNO
             };
-            proxyProtocolo.Inserir(protocoloEntidade);
+            var oidProtocolo = proxyProtocolo.Inserir(protocoloEntidade);
+            var protocoloInserido = proxyProtocolo.BuscarPorChave(oidProtocolo);
 
-            return protocolo;
+            return protocoloInserido.COD_IDENTIFICADOR;
         }
 
         public static string MontarConteudo(List<ItemTransacao> listaConteudo)

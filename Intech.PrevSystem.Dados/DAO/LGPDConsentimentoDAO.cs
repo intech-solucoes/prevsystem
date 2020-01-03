@@ -13,14 +13,14 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class LGPDConsentimentoDAO : BaseDAO<LGPDConsentimentoEntidade>
     {
         
-		public virtual LGPDConsentimentoEntidade BuscarPorCPF(string CPF)
+		public virtual IEnumerable<LGPDConsentimentoEntidade> BuscarPorCPF(string CPF)
 		{
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF", new { CPF });
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF", new { CPF });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.QuerySingleOrDefault<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF });
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF });
 				else
 					throw new Exception("Provider não suportado!");
 			}

@@ -42,7 +42,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var usuarioExistente = BuscarPorCpf(cpf);
 
             usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
-            usuarioExistente.IND_PRIMEIRO_ACESSO = "N";
+            usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
+
             Atualizar(usuarioExistente);
 
             return "Senha alterada com sucesso!";

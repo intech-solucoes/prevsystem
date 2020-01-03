@@ -127,7 +127,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
-        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
+        public Contracheque BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
                 
@@ -272,9 +272,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
     public class Contracheque
     {
-        public List<FichaFinanceiraAssistidoEntidade> Proventos { get; internal set; }
-        public List<FichaFinanceiraAssistidoEntidade> Descontos { get; internal set; }
-        public ContrachequeResumo Resumo { get; internal set; }
+        public List<FichaFinanceiraAssistidoEntidade> Rubricas { get; set; }
+        public List<FichaFinanceiraAssistidoEntidade> Proventos { get; set; }
+        public List<FichaFinanceiraAssistidoEntidade> Descontos { get; set; }
+        public List<FichaFinanceiraAssistidoEntidade> Outros { get; set; }
+        public ContrachequeResumo Resumo { get; set; }
     }
 
     public class ContrachequeResumo

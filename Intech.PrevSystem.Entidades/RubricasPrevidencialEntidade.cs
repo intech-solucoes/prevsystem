@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -49,13 +49,13 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_RUB_CM_NEG { get; set; }
 		public string CC_FOLHAS_AUTORIZADAS { get; set; }
 		public string INCID_MARGEM_CONSIG { get; set; }
+		public string COMPOE_LIQ_DESC { get; set; }
+		public string RUB_DESC_MARGEM { get; set; }
+		public string DESC_CONTRIB_ASSISTENCIAL { get; set; }
+		public string ID_RUB_EMPRESTIMO { get; set; }
 		public string COMPOE_RENDA_COMPL { get; set; }
 		public string CD_RUB_RCOMPL_ADIANT { get; set; }
 		public string CD_RUB_RCOMPL_ABONO { get; set; }
-		public string DESC_CONTRIB_ASSISTENCIAL { get; set; }
-		public string COMPOE_LIQ_DESC { get; set; }
-		public string RUB_DESC_MARGEM { get; set; }
-		public string ID_RUB_EMPRESTIMO { get; set; }
 		public string PROVISAO_CONTAB_CONTPAT { get; set; }
 		public string INCID_DESC_MARGEM_FOLHA { get; set; }
 		public string INCID_COMP_SALARIAL { get; set; }
@@ -70,12 +70,13 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_RUB_DEPARA { get; set; }
 		public string INCID_MASSA_FIXA { get; set; }
 		public string INCID_SRB { get; set; }
-		public string INCID_INSS { get; set; }
+		public string NCID_INSS { get; set; }
 		public string INCID_ABONO_ANUAL { get; set; }
 		public string INCID_ADIANT_ABONO_ANUAL { get; set; }
 		public string INCID_COTA { get; set; }
 		public string ID_CALCULO_AUTOMATICO { get; set; }
 		public decimal? CD_CALCULO { get; set; }
+		public string INCID_INSS { get; set; }
 		public string RESGATE_COTAS { get; set; }
 		public string AQUISICAO_COTAS { get; set; }
 		public string REGRA_DESCONTO { get; set; }
@@ -99,6 +100,8 @@ namespace Intech.PrevSystem.Entidades
 		public string ID_RUB_BITRIBUTACAO { get; set; }
 		public string CD_CONSIGNATARIO_PR { get; set; }
 		public string INCID_REAJUSTE { get; set; }
+		public string ID_RUB_TAXA_ADM { get; set; }
+		public string COD_PP_TPPRODUTO { get; set; }
         
     }
 }

@@ -1,6 +1,6 @@
 ﻿/*Config
     Retorno
-        -WebUsuarioEntidade
+        -UsuarioEntidade
     Parametros
         -NOM_LOGIN:string
 */

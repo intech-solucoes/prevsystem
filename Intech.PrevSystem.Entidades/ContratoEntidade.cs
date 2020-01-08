@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -122,12 +122,13 @@ namespace Intech.PrevSystem.Entidades
 		public string OBSERVACAO2 { get; set; }
 		public string ID_IOF_CF { get; set; }
 		public string STATUS_IOF_CF { get; set; }
-		public string DES_NUM_CONTRATO { get; set; }
-		public string DES_PARCELAS { get; set; }
-		public decimal? NUM_SALDO_DEVEDOR { get; set; }
-		public List<PrestacaoEntidade> Prestacoes { get; set; }
-		public ModalidadeEntidade Modalidade { get; set; }
-		public SaldoDevedorEntidade SaldoDevedor { get; set; }
+		[Write(false)] public string DES_NUM_CONTRATO { get; set; }
+		[Write(false)] public string DES_PARCELAS { get; set; }
+		[Write(false)] public decimal? NUM_SALDO_DEVEDOR { get; set; }
+		[Write(false)] public List<PrestacaoEntidade> Prestacoes { get; set; }
+		[Write(false)] public ModalidadeEntidade Modalidade { get; set; }
+		[Write(false)] public SaldoDevedorEntidade SaldoDevedor { get; set; }
+		[Write(false)] public string DS_SITUACAO { get; set; }
         
     }
 }

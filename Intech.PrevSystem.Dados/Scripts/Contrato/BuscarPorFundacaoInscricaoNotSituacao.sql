@@ -1,0 +1,17 @@
+﻿/*Config
+    RetornaLista
+    Retorno
+        -ContratoEntidade
+    Parametros
+        -CD_FUNDACAO:string
+        -NUM_INSCRICAO:string
+*/
+
+SELECT ST.DS_SITUACAO,
+       CE.*
+FROM CE_CONTRATOS CE
+    INNER JOIN CE_SITUACAO_CONTRATO ST ON ST.CD_SITUACAO = CE.CD_SITUACAO
+WHERE CE.CD_FUNDACAO = @CD_FUNDACAO
+  AND CE.NUM_INSCRICAO = @NUM_INSCRICAO
+  AND CE.CD_SITUACAO NOT IN ('0', '4', '6')
+ORDER BY CE.DT_CREDITO DESC

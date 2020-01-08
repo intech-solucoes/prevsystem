@@ -1,35 +1,41 @@
-﻿{
-    "nomeTabela": "CE_CONTRATOS",
-    "colunasExtras": [
-        {
-            "nome": "DES_NUM_CONTRATO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DES_PARCELAS",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "NUM_SALDO_DEVEDOR",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "Prestacoes",
-            "tipo": "List<PrestacaoEntidade>",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Modalidade",
-            "tipo": "ModalidadeEntidade",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "SaldoDevedor",
-            "tipo": "SaldoDevedorEntidade",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "CE_CONTRATOS",
+  "ColunasExtras": [
+    {
+      "Nome": "DES_NUM_CONTRATO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DES_PARCELAS",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "NUM_SALDO_DEVEDOR",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "Prestacoes",
+      "Tipo": "List<PrestacaoEntidade>",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "Modalidade",
+      "Tipo": "ModalidadeEntidade",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "SaldoDevedor",
+      "Tipo": "SaldoDevedorEntidade",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_SITUACAO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
 }

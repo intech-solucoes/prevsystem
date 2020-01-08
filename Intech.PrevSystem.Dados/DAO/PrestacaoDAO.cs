@@ -30,6 +30,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<PrestacaoEntidade> BuscarPorFundacaoAnoNumero(string CD_FUNDACAO, string ANO_CONTRATO, string NUM_CONTRATO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<PrestacaoEntidade>("SELECT *   FROM CE_PRESTACOES PR  WHERE PR.CD_FUNDACAO = @CD_FUNDACAO    AND PR.ANO_CONTRATO = @ANO_CONTRATO    AND PR.NUM_CONTRATO = @NUM_CONTRATO  ORDER BY PR.SEQ_PREST", new { CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<PrestacaoEntidade>("SELECT * FROM CE_PRESTACOES  PR  WHERE PR.CD_FUNDACAO=:CD_FUNDACAO AND PR.ANO_CONTRATO=:ANO_CONTRATO AND PR.NUM_CONTRATO=:NUM_CONTRATO ORDER BY PR.SEQ_PREST", new { CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<PrestacaoEntidade> BuscarPorFundacaoContrato(string CD_FUNDACAO, decimal ANO_CONTRATO, decimal NUM_CONTRATO)
 		{
 			try

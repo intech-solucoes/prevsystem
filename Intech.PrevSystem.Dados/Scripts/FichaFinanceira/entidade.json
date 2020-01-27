@@ -40,6 +40,12 @@
       "Nome": "DS_AGRUPADOR_WEB",
       "Tipo": "string",
       "AceitaNulo": false
+    },
+    {
+      "Nome": "VALOR_IND",
+      "Tipo": "decimal",
+      "AceitaNulo": true
     }
-  ]
+  ],
+  "Imports": []
 }

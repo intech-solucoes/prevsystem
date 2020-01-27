@@ -124,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
-        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+        public Contracheque BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
         public Contracheque BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
@@ -148,7 +148,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var bruto = proventos.Sum(x => x.VALOR_MC);
             var valDescontos = descontos.Sum(x => x.VALOR_MC);
             var liquido = bruto - Math.Abs(valDescontos.Value);
-
+            
             return new Contracheque
             {
                 Proventos = proventos,
@@ -281,11 +281,12 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
     public class ContrachequeResumo
     {
-        public DateTime Referencia { get; internal set; }
-        public decimal? Bruto { get; internal set; }
-        public decimal? Descontos { get; internal set; }
-        public decimal? Liquido { get; internal set; }
-        public string TipoFolha { get; internal set; }
-        public string DesTipoFolha { get; internal set; }
+        public DateTime Referencia { get; set; }
+        public DateTime DataCredito { get; set; }
+        public decimal? Bruto { get; set; }
+        public decimal? Descontos { get; set; }
+        public decimal? Liquido { get; set; }
+        public string TipoFolha { get; set; }
+        public string DesTipoFolha { get; set; }
     }
 }

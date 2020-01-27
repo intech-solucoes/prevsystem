@@ -47,5 +47,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<PlanoSaudeEntidade> BuscarPorMatriculaAnoCalendario(string NUM_MATRICULA, decimal ANO_CALENDARIO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<PlanoSaudeEntidade>("SELECT *  FROM TB_DIRF_PSAUDE  WHERE NUM_MATRICULA = @NUM_MATRICULA    AND ANO_CALENDARIO = @ANO_CALENDARIO", new { NUM_MATRICULA, ANO_CALENDARIO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<PlanoSaudeEntidade>("SELECT * FROM TB_DIRF_PSAUDE WHERE NUM_MATRICULA=:NUM_MATRICULA AND ANO_CALENDARIO=:ANO_CALENDARIO", new { NUM_MATRICULA, ANO_CALENDARIO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
     }
 }

@@ -58,6 +58,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string COMPOE_SALDO_BENEFICIO { get; set; }
 		[Write(false)] public string COD_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public string DS_AGRUPADOR_WEB { get; set; }
+		[Write(false)] public decimal? VALOR_IND { get; set; }
         
     }
 }

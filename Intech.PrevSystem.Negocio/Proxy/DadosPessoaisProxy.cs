@@ -12,8 +12,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var dadosPessoais = base.BuscarPorCodEntid(COD_ENTID);
 
-            dadosPessoais.CPF_CGC = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF);
-            dadosPessoais.DS_SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO";
+            if(!string.IsNullOrEmpty(dadosPessoais.CPF_CGC))
+                dadosPessoais.CPF_CGC = dadosPessoais.CPF_CGC.AplicarMascara(Mascaras.CPF);
+
+            if (!string.IsNullOrEmpty(dadosPessoais.SEXO))
+                dadosPessoais.DS_SEXO = dadosPessoais.SEXO.Substring(0, 1).ToUpper() == "F" ? "FEMININO" : "MASCULINO";
+            else
+                dadosPessoais.DS_SEXO = "-";
 
             return dadosPessoais;
         }

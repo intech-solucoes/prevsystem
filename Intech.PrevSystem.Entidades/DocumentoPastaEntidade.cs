@@ -9,8 +9,8 @@ namespace Intech.PrevSystem.Entidades
     {
 		[Key]
 		public decimal OID_DOCUMENTO_PASTA { get; set; }
-		public string NOM_PASTA { get; set; }
 		public decimal? OID_DOCUMENTO_PASTA_PAI { get; set; }
+		public string NOM_PASTA { get; set; }
         
     }
 }

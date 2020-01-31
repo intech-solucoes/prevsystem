@@ -31,6 +31,20 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return funcionario;
         }
 
+        public FuncionarioDados BuscarDadosPorCodEntidEmpresaLogin(string codEntid, string cdEmpresa, string NomLogin)
+        {
+            var funcionario = new FuncionarioDados();
+
+            funcionario.Funcionario = base.BuscarPorCodEntid(codEntid);
+            funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
+            funcionario.Empresa = new EmpresaProxy().BuscarPorCodigo(cdEmpresa);
+            funcionario.Entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);
+            funcionario.Usuario = new UsuarioProxy().BuscarPorCpf(NomLogin);
+            funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
+
+            return funcionario;
+        }
+
         public FuncionarioDados BuscarDadosPorCodEntidEmpresa(string codEntid, string codEntidFuncionario, string cdEmpresa)
         {
             var funcionario = new FuncionarioDados();

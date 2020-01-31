@@ -146,12 +146,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             if (codEntid != null)
             {
+                var usarSenhaComplexa = AppSettings.Get().SenhaComplexa || false;
                 var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
 
                 if (dadosPessoais.DT_NASCIMENTO != dataNascimento)
                     throw ExceptionDadosInvalidos;
 
-                var senha = new Random().Next(999999).ToString();
+                var senha = GerarSenha(usarSenhaComplexa);
+
                 var senhaEncriptada = Criptografia.Encriptar(senha);
 
                 // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
@@ -160,6 +162,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if (usuarioExistente != null)
                 {
                     usuarioExistente.PWD_USUARIO = senhaEncriptada;
+                    if (usarSenhaComplexa) {
+                        usuarioExistente.IND_PRIMEIRO_ACESSO = "S";
+                    }
                     Atualizar(usuarioExistente);
                 }
                 else
@@ -199,5 +204,41 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             throw ExceptionDadosInvalidos;
         }
+
+        private static string GerarSenha(bool senhaComplexa = false)
+        {
+            if (senhaComplexa)
+                return (String.Concat(gerarCharSpecial(), gerarLetraMaiscula(), gerarLetraMinuscula(), gerarCharSpecial())) + (new Random().Next(99).ToString());
+            else
+                return new Random().Next(999999).ToString();
+        }
+
+        //var chars = [gerarCharSpecial, gerarLetraMaiscula, senha, gerarLetraMinuscula, gerarCharSpecial];
+        //senha = String.Concat(chars);
+             
+        public static string gerarLetraMinuscula()
+        {
+            string chars = "abcdefghijklmnopqrstuvwxyz";
+            Random rand = new Random();
+            int num = rand.Next(0, chars.Length - 1);
+            return chars[num].ToString();
+        }
+
+        public static string gerarLetraMaiscula()
+        {
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Random rand = new Random();
+            int num = rand.Next(0, chars.Length - 1);
+            return chars[num].ToString();
+        }
+
+        public static string gerarCharSpecial()
+        {
+            string chars = "$%#@!*?;:^&";
+            Random rand = new Random();
+            int num = rand.Next(0, chars.Length - 1);
+            return chars[num].ToString();
+        }
+
     }
 }

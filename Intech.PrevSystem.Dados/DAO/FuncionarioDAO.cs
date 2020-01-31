@@ -115,6 +115,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<FuncionarioEntidade> BuscarPorPesquisaNotDesligado(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string CD_SIT_PLANO, string NUM_MATRICULA, string NOME)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FuncionarioEntidade>("SELECT DISTINCT *  FROM   VW_FUNC_PLANO_DADOS  WHERE (CD_FUNDACAO = @CD_FUNDACAO OR @CD_FUNDACAO IS NULL)    AND (CD_EMPRESA = @CD_EMPRESA OR @CD_EMPRESA IS NULL)    AND (CD_PLANO = @CD_PLANO OR @CD_PLANO IS NULL)    AND (CD_SIT_PLANO = @CD_SIT_PLANO OR @CD_SIT_PLANO IS NULL)    AND (NUM_MATRICULA LIKE '%' + @NUM_MATRICULA + '%' OR @NUM_MATRICULA IS NULL)     AND (NOME_ENTID LIKE '%' + @NOME + '%' OR @NOME IS NULL)    AND (CD_SIT_PLANO NOT IN ('21', '31', '26'))", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, CD_SIT_PLANO, NUM_MATRICULA, NOME });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FuncionarioEntidade>("", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, CD_SIT_PLANO, NUM_MATRICULA, NOME });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<FuncionarioEntidade> BuscarPrimeiroPorCpf(string CPF)
 		{
 			try

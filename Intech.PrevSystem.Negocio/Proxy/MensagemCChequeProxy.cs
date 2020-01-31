@@ -12,13 +12,19 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public string BuscarTextoMensagens(string CD_FUNDACAO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_EMPRESA, string CD_PLANO, string CD_ESPECIE, int? SEQ_RECEBEDOR, string CD_RUBRICA)
         {
             var sbMensagens = new StringBuilder();
-            List<MensagemCChequeEntidade> mensagens;
+            var mensagens = base.BuscarMensagens(CD_FUNDACAO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
 
-            if(string.IsNullOrEmpty(CD_RUBRICA))
-                mensagens = base.BuscarMensagens(CD_FUNDACAO, DT_REFERENCIA, CD_TIPO_FOLHA, CD_EMPRESA, CD_PLANO, CD_ESPECIE, SEQ_RECEBEDOR).ToList();
-            else
-                mensagens = base.BuscarMensagens(CD_FUNDACAO, DT_REFERENCIA, CD_TIPO_FOLHA, CD_EMPRESA, CD_PLANO, CD_ESPECIE, SEQ_RECEBEDOR).ToList();
-            
+            // CD_EMPRESA
+            mensagens = mensagens
+                .Where(x
+                    => string.IsNullOrEmpty(CD_EMPRESA) ? x.CD_EMPRESA == null : x.CD_EMPRESA == CD_EMPRESA
+                    && string.IsNullOrEmpty(CD_PLANO) ? x.CD_PLANO == null : x.CD_PLANO == CD_PLANO
+                    && string.IsNullOrEmpty(CD_ESPECIE) ? x.CD_ESPECIE == null : x.CD_ESPECIE == CD_ESPECIE
+                    && x.SEQ_RECEBEDOR == null
+                    //&& (!SEQ_RECEBEDOR.HasValue || SEQ_RECEBEDOR.Value == 0) ? x.SEQ_RECEBEDOR == null : x.SEQ_RECEBEDOR == SEQ_RECEBEDOR
+                )
+                .ToList();
+
             foreach (var mensagem in mensagens)
             {
                 sbMensagens.Append($"{mensagem.MENSAGEM} " +
@@ -31,10 +37,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     $"{mensagem.MENSAGEM_8} " +
                     $"{mensagem.MENSAGEM_9} " +
                     $"{mensagem.MENSAGEM_10} " +
-                    $"{mensagem.MENSAGEM_11}");
+                    $"{mensagem.MENSAGEM_11} ");
             }
 
-            return sbMensagens.ToString();
+            if (string.IsNullOrWhiteSpace(sbMensagens.ToString()))
+                return "";
+
+            return sbMensagens.ToString().ToUpper().Trim();
         }
     }
 }

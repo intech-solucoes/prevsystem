@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -36,8 +37,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCpf/{cpf}/{token}")]
-        public async Task<ActionResult> GetPorCpf(string cpf, string token)
+        [HttpPost("porCpf/{cpf}")]
+        public async Task<ActionResult> GetPorCpf(string cpf, [FromBody] dynamic dados)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                     var parametrosToken = new
                     {
-                        Token = token
+                        Token = (string)dados.token
                     };
 
                     var content = new StringContent(JsonConvert.SerializeObject(parametrosToken), Encoding.UTF8, "application/json");
@@ -85,7 +86,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                     });
                 }
 
-                var func = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf);
+                var func = new FuncionarioProxy().BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
                 if (func == null)
                     throw new Exception("Participante não encontrado.");

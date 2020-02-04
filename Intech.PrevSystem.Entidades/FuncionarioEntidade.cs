@@ -62,6 +62,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string CPF_CGC { get; set; }
 		[Write(false)] public string PENSIONISTA { get; set; }
 		[Write(false)] public string CD_PLANO { get; set; }
+		[Write(false)] public string CD_SIT_PLANO { get; set; }
         
     }
 }

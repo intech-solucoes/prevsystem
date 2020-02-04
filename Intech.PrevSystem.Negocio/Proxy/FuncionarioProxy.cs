@@ -1,5 +1,6 @@
 ﻿using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
+using System.Collections.Generic;
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {

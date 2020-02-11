@@ -1,0 +1,11 @@
+{
+  "NomeTabela": "WEB_AREA_FUNDACAO",
+  "ColunasExtras": [
+    {
+      "Nome": "TXT_ASSUNTO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
+}

@@ -16,13 +16,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             // CD_EMPRESA
             mensagens = mensagens
-                .Where(x
-                    => string.IsNullOrEmpty(CD_EMPRESA) ? x.CD_EMPRESA == null : x.CD_EMPRESA == CD_EMPRESA
-                    && string.IsNullOrEmpty(CD_PLANO) ? x.CD_PLANO == null : x.CD_PLANO == CD_PLANO
-                    && string.IsNullOrEmpty(CD_ESPECIE) ? x.CD_ESPECIE == null : x.CD_ESPECIE == CD_ESPECIE
-                    && x.SEQ_RECEBEDOR == null
+                .Where(x => string.IsNullOrEmpty(CD_EMPRESA) ? x.CD_EMPRESA == null : x.CD_EMPRESA == CD_EMPRESA)
+                .Where(x => string.IsNullOrEmpty(CD_PLANO) ? x.CD_PLANO == null : x.CD_PLANO == CD_PLANO)
+                .Where(x => string.IsNullOrEmpty(CD_ESPECIE) ? x.CD_ESPECIE == null : x.CD_ESPECIE == CD_ESPECIE)
+                .Where(x => x.SEQ_RECEBEDOR == null)
                     //&& (!SEQ_RECEBEDOR.HasValue || SEQ_RECEBEDOR.Value == 0) ? x.SEQ_RECEBEDOR == null : x.SEQ_RECEBEDOR == SEQ_RECEBEDOR
-                )
                 .ToList();
 
             foreach (var mensagem in mensagens)

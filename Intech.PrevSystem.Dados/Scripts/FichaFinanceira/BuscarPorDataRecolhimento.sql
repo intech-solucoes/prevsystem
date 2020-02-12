@@ -14,6 +14,7 @@
 
 SELECT FF.ANO_REF,
        FF.MES_REF,
+       FF.CD_OPERACAO,
        FF.ANO_COMP,
        FF.MES_COMP,
        TC.DS_TIPO_CONTRIBUICAO,

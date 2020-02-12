@@ -50,7 +50,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var funcionario = new FuncionarioDados();
 
-            funcionario.Funcionario = base.BuscarPorMatricula(matricula);
+            funcionario.Funcionario = base.BuscarPorMatriculaEmpresa(matricula, cdEmpresa);
             funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
             funcionario.Empresa = new EmpresaProxy().BuscarPorCodigo(cdEmpresa);
             funcionario.Entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);

@@ -13,6 +13,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public override bool DeletarPorChave(object chave)
         {
             new DocumentoPastaProxy().DeletarPorOidGrupoUsuario((decimal)chave);
+            new UsuarioGrupoProxy().DeletarPorOidGrupoUsuario((decimal)chave);
 
             return base.DeletarPorChave(chave);
         }

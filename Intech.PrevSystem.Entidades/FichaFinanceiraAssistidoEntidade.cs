@@ -22,6 +22,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VALOR_CT { get; set; }
 		public decimal? PRAZO { get; set; }
 		public string CD_TIPO_FOLHA { get; set; }
+		public string GB__CD_FUNDACAO { get; set; }
 		public decimal? NUM_PRESTACAO { get; set; }
 		public decimal? TOT_PRESTACAO { get; set; }
 		public decimal? VL_BASE_CALC { get; set; }

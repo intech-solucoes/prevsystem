@@ -54,6 +54,7 @@ namespace Intech.PrevSystem.Entidades
 		public string PERMITE_REFORMA { get; set; }
 		public decimal? PERCENTUAL_DESCONTO { get; set; }
 		public string ID_TEMP_VINC { get; set; }
+		public string PERMITE_CONCESSAO_WEB { get; set; }
 		[Write(false)] public List<CarenciasDisponiveisEntidade> Carencias { get; set; }
 		[Write(false)] public decimal MargemConsignavel { get; set; }
 		[Write(false)] public decimal TaxaMargemConsignavel { get; set; }

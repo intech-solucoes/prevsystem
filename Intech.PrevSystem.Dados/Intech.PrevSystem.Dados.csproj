@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
-    <PackageReference Include="Intech.Lib.Dapper" Version="1.1.1" />
+    <PackageReference Include="Intech.Lib.Dapper" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
   </ItemGroup>
 

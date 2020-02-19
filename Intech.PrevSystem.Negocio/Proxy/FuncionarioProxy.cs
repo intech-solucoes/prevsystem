@@ -64,10 +64,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
         {
             var funcionario = new FuncionarioDados();
 
-            funcionario.Funcionario = base.BuscarPorCodEntid(codEntidFuncionario);
+            funcionario.Funcionario = base.BuscarPorCodEntid(!string.IsNullOrEmpty(codEntidFuncionario) ? codEntidFuncionario : codEntid);
             funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
             funcionario.Empresa = new EmpresaProxy().BuscarPorCodigo(cdEmpresa);
             funcionario.Entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);
+            funcionario.Usuario = new UsuarioProxy().BuscarPorCpf(funcionario.Entidade.CPF_CGC);
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
 
             return funcionario;

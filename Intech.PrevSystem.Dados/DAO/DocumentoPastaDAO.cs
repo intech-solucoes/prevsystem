@@ -30,5 +30,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual void DeletarPorOidGrupoUsuario(decimal OID_GRUPO_USUARIO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					Conexao.Execute("DELETE FROM WEB_DOCUMENTO_PASTA  WHERE (OID_GRUPO_USUARIO = @OID_GRUPO_USUARIO)", new { OID_GRUPO_USUARIO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					Conexao.Execute("DELETE FROM WEB_DOCUMENTO_PASTA WHERE (OID_GRUPO_USUARIO=:OID_GRUPO_USUARIO)", new { OID_GRUPO_USUARIO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
     }
 }

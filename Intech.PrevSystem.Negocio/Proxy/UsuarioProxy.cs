@@ -49,7 +49,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return "Senha alterada com sucesso!";
         }
 
-        public void CriarAcessoIntech(string cpf, string chave)
+        public void CriarAcessoIntech(string cpf, string chave, string senha = "123")
         {
             cpf = cpf.LimparMascara();
 
@@ -83,7 +83,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             {
                 var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
 
-                var senhaEncriptada = Criptografia.Encriptar("123");
+                var senhaEncriptada = Criptografia.Encriptar(senha);
 
                 // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
                 var usuarioExistente = BuscarPorCpf(cpf);
@@ -162,9 +162,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if (usuarioExistente != null)
                 {
                     usuarioExistente.PWD_USUARIO = senhaEncriptada;
-                    if (usarSenhaComplexa) {
+
+                    if (usarSenhaComplexa)
                         usuarioExistente.IND_PRIMEIRO_ACESSO = "S";
-                    }
+                    
                     Atualizar(usuarioExistente);
                 }
                 else

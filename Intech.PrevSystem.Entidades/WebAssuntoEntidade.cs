@@ -13,6 +13,7 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_FUNDACAO { get; set; }
 		public string TXT_ASSUNTO { get; set; }
 		public string IND_ATIVO { get; set; }
+		[Write(false)] public string DES_AREA_FUNDACAO { get; set; }
         
     }
 }

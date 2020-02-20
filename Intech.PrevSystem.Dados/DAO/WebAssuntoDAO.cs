@@ -30,5 +30,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<WebAssuntoEntidade> Pesquisar(string TXT_ASSUNTO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<WebAssuntoEntidade>("SELECT *  FROM WEB_ASSUNTO WA JOIN WEB_AREA_FUNDACAO WAF  ON WA.OID_AREA_FUNDACAO = WAF.OID_AREA_FUNDACAO  WHERE (TXT_ASSUNTO LIKE '%' +@TXT_ASSUNTO + '%' OR @TXT_ASSUNTO IS NULL)  ORDER BY WA.OID_ASSUNTO", new { TXT_ASSUNTO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<WebAssuntoEntidade>("SELECT * FROM WEB_ASSUNTO  WA   JOIN WEB_AREA_FUNDACAO   WAF  ON WA.OID_AREA_FUNDACAO=WAF.OID_AREA_FUNDACAO WHERE (TXT_ASSUNTO LIKE '%' || :TXT_ASSUNTO || '%' OR :TXT_ASSUNTO IS NULL ) ORDER BY WA.OID_ASSUNTO", new { TXT_ASSUNTO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
     }
 }

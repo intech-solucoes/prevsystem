@@ -1,5 +1,11 @@
 {
   "NomeTabela": "WEB_ASSUNTO",
-  "ColunasExtras": [],
+  "ColunasExtras": [
+    {
+      "Nome": "DES_AREA_FUNDACAO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ],
   "Imports": []
 }

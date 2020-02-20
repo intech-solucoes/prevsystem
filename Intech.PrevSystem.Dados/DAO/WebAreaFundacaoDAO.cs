@@ -47,6 +47,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<WebAreaFundacaoEntidade> BuscarPorOrdemAlfabetica()
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<WebAreaFundacaoEntidade>("SELECT *  FROM WEB_AREA_FUNDACAO WAF  ORDER BY DES_AREA_FUNDACAO ASC", new {  });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<WebAreaFundacaoEntidade>("SELECT * FROM WEB_AREA_FUNDACAO  WAF  ORDER BY DES_AREA_FUNDACAO ASC", new {  });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<WebAreaFundacaoEntidade> Pesquisar(string DES_AREA_FUNDACAO)
 		{
 			try

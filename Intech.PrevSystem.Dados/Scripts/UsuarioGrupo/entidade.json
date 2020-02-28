@@ -1,5 +1,16 @@
 {
   "NomeTabela": "WEB_USUARIO_GRUPO",
-  "ColunasExtras": [],
+  "ColunasExtras": [
+    {
+      "Nome": "CPF_CGC",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "NOME_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
   "Imports": []
 }

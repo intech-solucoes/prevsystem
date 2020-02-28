@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class GrupoUsuarioDAO : BaseDAO<GrupoUsuarioEntidade>
     {
         
+		public virtual IEnumerable<GrupoUsuarioEntidade> BuscarPorIndAtivo(string @IND_ATIVO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<GrupoUsuarioEntidade>("SELECT * FROM WEB_GRUPO_USUARIO  WHERE IND_ATIVO = @IND_ATIVO", new { @IND_ATIVO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<GrupoUsuarioEntidade>("SELECT * FROM WEB_GRUPO_USUARIO WHERE IND_ATIVO=:IND_ATIVO", new { @IND_ATIVO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<GrupoUsuarioEntidade> Pesquisar(string NOM_GRUPO_USUARIO)
 		{
 			try

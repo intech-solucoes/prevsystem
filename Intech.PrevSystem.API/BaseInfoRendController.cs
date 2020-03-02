@@ -15,7 +15,7 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new HeaderInfoRendProxy().BuscarReferenciasPorCPF(Cpf));
+                return Json(new HeaderInfoRendProxy().BuscarReferenciasPorEmpresaMatricula(CdEmpresa, Matricula));
             }
             catch (Exception ex)
             {
@@ -29,7 +29,7 @@ namespace Intech.PrevSystem.API
         {
             try
             {
-                return Json(new HeaderInfoRendProxy().BuscarPorCpfReferencia(Cpf, referencia));
+                return Json(new HeaderInfoRendProxy().BuscarPorEmpresaMatriculaReferencia(CdEmpresa, Matricula, referencia));
             }
             catch (Exception ex)
             {

@@ -106,7 +106,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     IndiceAnoRetrasadoCDI,
                     IndiceAnoRetrasadoPOUPANCA,
 
-                    Referencia = $"{referencia.MesPorExtenso()} {referencia.Year}"
+                    Referencia = $"{referencia.ToString("MM/yyyy")}"
                 });
             }
             catch (Exception ex)

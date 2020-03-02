@@ -31,7 +31,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 string codEntid;
                 string seqRecebedor;
                 string grupoFamilia;
-                var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf);
+                var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
                 if (funcionario != null)
                 {

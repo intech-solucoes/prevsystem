@@ -23,16 +23,12 @@
   <ItemGroup>
     <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.11" />
     <PackageReference Include="FinancialFormulas" Version="1.3.1" />
+    <PackageReference Include="Intech.Lib.JWT" Version="1.1.2" />
+    <PackageReference Include="Intech.Lib.SMS" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Dapper\Intech.Lib.Dapper.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Email\Intech.Lib.Email.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.JWT\Intech.Lib.JWT.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.SMS\Intech.Lib.SMS.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Util\Intech.Lib.Util.csproj" />
-    <ProjectReference Include="..\..\..\Intech.Lib\Intech.Lib.Web\Intech.Lib.Web.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj" />

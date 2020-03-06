@@ -2,6 +2,11 @@
   "NomeTabela": "CE_NATUREZA",
   "ColunasExtras": [
     {
+      "Nome": "DatasCredito",
+      "Tipo": "List<DateTime>",
+      "AceitaNulo": false
+    },
+    {
       "Nome": "Carencias",
       "Tipo": "List<CarenciasDisponiveisEntidade>",
       "AceitaNulo": false
@@ -22,8 +27,8 @@
       "AceitaNulo": false
     },
     {
-      "Nome": "DatasCredito",
-      "Tipo": "List<DateTime>",
+      "Nome": "Concessao",
+      "Tipo": "ConcessaoEntidade",
       "AceitaNulo": false
     }
   ],

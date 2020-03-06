@@ -55,11 +55,12 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PERCENTUAL_DESCONTO { get; set; }
 		public string ID_TEMP_VINC { get; set; }
 		public string PERMITE_CONCESSAO_WEB { get; set; }
+		[Write(false)] public List<DateTime> DatasCredito { get; set; }
 		[Write(false)] public List<CarenciasDisponiveisEntidade> Carencias { get; set; }
 		[Write(false)] public decimal MargemConsignavel { get; set; }
 		[Write(false)] public decimal TaxaMargemConsignavel { get; set; }
 		[Write(false)] public decimal TaxaJuros { get; set; }
-		[Write(false)] public List<DateTime> DatasCredito { get; set; }
+		[Write(false)] public ConcessaoEntidade Concessao { get; set; }
         
     }
 }

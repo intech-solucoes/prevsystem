@@ -16,5 +16,10 @@ namespace Intech.PrevSystem.Entidades
 
         public DateTime DataCota { get; set; }
         public decimal ValorCota { get; set; }
+
+        public decimal ValorSaldoAtualizado { get; set; }
+
+        public DateTime DataCotaAtualizacao { get; set; }
+        public decimal ValorCotaAtualizacao { get; set; }
     }
 }

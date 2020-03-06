@@ -29,5 +29,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return indice;
         }
+
+        public IndiceValoresEntidade BuscarUltimoPorCodigoData(string COD_IND)
+        {
+
+            var valorindice = new IndiceValoresProxy().BuscarUltimoPorCodigo(COD_IND).FirstOrDefault();
+
+            return valorindice;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Entidades
 {
-    public class Concessao
+    public class ConcessaoEntidade
     {
         /// <summary>
         /// id do objeto

@@ -1,4 +1,4 @@
-#region Usings
+﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
@@ -18,7 +18,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT TOP 1 *  FROM CS_SALARIO_BASE WHERE CD_FUNDACAO = @CD_FUNDACAO   AND CD_EMPRESA = @CD_EMPRESA   AND NUM_MATRICULA = @NUM_MATRICULA ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
+					return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT TOP 1 *   FROM CS_SALARIO_BASE  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND CD_EMPRESA = @CD_EMPRESA    AND NUM_MATRICULA = @NUM_MATRICULA  ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
 				else if(AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<SalarioBaseEntidade>("SELECT * FROM CS_SALARIO_BASE WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_EMPRESA=:CD_EMPRESA AND NUM_MATRICULA=:NUM_MATRICULA AND ROWNUM <= 1  ORDER BY DT_BASE DESC", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
 				else

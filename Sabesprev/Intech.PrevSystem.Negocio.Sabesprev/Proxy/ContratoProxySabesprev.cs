@@ -86,7 +86,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev.Proxy
             return contrato;
         }
 
-        public string Contratar(FuncionarioEntidade funcionario, ContratoDisponivel contrato, Concessao concessao, SaldoDevedorEntidade saldoDevedor, string num_gr_fam, int sqRecebedor)
+        public string Contratar(FuncionarioEntidade funcionario, ContratoDisponivel contrato, ConcessaoEntidade concessao, SaldoDevedorEntidade saldoDevedor, string num_gr_fam, int sqRecebedor)
         {
             using (var transaction = new TransactionScope())
             {

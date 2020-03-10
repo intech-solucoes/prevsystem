@@ -278,13 +278,13 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             this.Carencia = Carencia;
         }
 
-        public List<ContratoDisponivel> BuscarContratosDisponiveis(FuncionarioEntidade funcionario, Concessao concessao, string cdPlano, decimal codModalidade, decimal codNatureza, DateTime dataCredito, decimal valorSolicitado, decimal mesesDeCarencia = 0, decimal quantidadeParcelas = 0)
+        public List<ContratoDisponivel> BuscarContratosDisponiveis(FuncionarioEntidade funcionario, ConcessaoEntidade concessao, string cdPlano, decimal codModalidade, decimal codNatureza, DateTime dataCredito, decimal valorSolicitado, decimal mesesDeCarencia = 0, decimal quantidadeParcelas = 0)
         {
             //buscar dados dos parametros p/ verificar se a pessoa possui contratos maximo
             var param = new ParametrosProxy();
             var parametros = param.Buscar();
 
-            //Concessao c = p.Concessao;
+            //ConcessaoEntidade c = p.ConcessaoEntidade;
 
             var NaturProxy = new NaturezaProxy();
             var natureza = NaturProxy.BuscarPorCdNatur(codNatureza);
@@ -541,7 +541,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return contratos.OrderBy(x => x.Prazo).ToList();
         }
 
-        private bool VerificarDisponibilidadeGlobal(Concessao concessao, string motivoGlobal, decimal valorPrestacao, decimal valorLiquido, decimal valorSolicitado, ref string motivo)
+        private bool VerificarDisponibilidadeGlobal(ConcessaoEntidade concessao, string motivoGlobal, decimal valorPrestacao, decimal valorLiquido, decimal valorSolicitado, ref string motivo)
         {
             if ((concessao.ValorLimite >= 0) & (valorSolicitado.Arredonda(2) > concessao.TetoMaximo.Arredonda(2)))
                 motivo += "Valor Solicitado excede o teto máximo estipulado\n";

@@ -11,7 +11,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 {
     public class ConcessaoSabesprev
     {
-        public static Concessao ObtemConcessao(string numMatricula, string fundacao, string empresa, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao, bool pensionista, int? seqRecebedor = null)
+        public static ConcessaoEntidade ObtemConcessao(string numMatricula, string fundacao, string empresa, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao, bool pensionista, int? seqRecebedor = null)
         {
             var funcionario = new FuncionarioProxy().BuscarPorMatricula(numMatricula);
             var dados = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
@@ -76,7 +76,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             }
 
             //Criando o objeto para controlar a concessao
-            var concessao = new Concessao();
+            var concessao = new ConcessaoEntidade();
             
             var parametros = new ParametrosProxy().Buscar();
             var margemPlanoProxy = new MargensPlanoProxy();
@@ -223,7 +223,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return concessao;
         }
 
-        private static decimal ObtemMargemConsignavel(FuncionarioEntidade funcionario, PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, DateTime dtSolicitacao, string categoria, Concessao concessao, int? seqRecebedorTemp)
+        private static decimal ObtemMargemConsignavel(FuncionarioEntidade funcionario, PlanoVinculadoEntidade plano, string fundacao, string empresa, string inscricao, string matricula, DateTime dtSolicitacao, string categoria, ConcessaoEntidade concessao, int? seqRecebedorTemp)
         {
             switch (categoria)
             {
@@ -241,7 +241,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
 
         }
 
-        private static decimal ObtemMediaSalario(PlanoVinculadoEntidade planoVinculado, string categoria, string fundacao, string empresa, string inscricao, DateTime dtSolicitacao, Concessao concessao)
+        private static decimal ObtemMediaSalario(PlanoVinculadoEntidade planoVinculado, string categoria, string fundacao, string empresa, string inscricao, DateTime dtSolicitacao, ConcessaoEntidade concessao)
         {
             var cadastroRubrica = new CadastroRubricasProxy().BuscarPorFundacaoInscricaoEmpresa(fundacao, inscricao, empresa);
             decimal w_media_salario = 0;
@@ -346,7 +346,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return w_media_salario / 3;
         }
         
-        private static DateTime ObterDataSaldoEmCotas(Concessao concessao, string categoria)
+        private static DateTime ObterDataSaldoEmCotas(ConcessaoEntidade concessao, string categoria)
         {
             switch (categoria)
             {
@@ -425,7 +425,7 @@ namespace Intech.PrevSystem.Negocio.Sabesprev
             return fator;
         }
 
-        private static decimal ObtemSaldoReservaPoupanca(Concessao concessao, PlanoVinculadoEntidade plano, string cdEmpresa, string numInscricao)
+        private static decimal ObtemSaldoReservaPoupanca(ConcessaoEntidade concessao, PlanoVinculadoEntidade plano, string cdEmpresa, string numInscricao)
         {
             var fichaFinanceiraProxy = new FichaFinanceiraProxySabesprev();
 

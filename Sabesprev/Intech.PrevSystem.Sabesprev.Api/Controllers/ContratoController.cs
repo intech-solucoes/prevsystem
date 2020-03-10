@@ -259,7 +259,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var feriados = new FeriadoProxy().BuscarDatas().ToList();
                 var dataCredito = DateTime.Today.AddDiaUtil(2, feriados);
 
-                var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.Concessao, dados.CD_PLANO, dados.CD_MODAL, dados.CD_NATUR, dataCredito, dados.ValorSolicitado);
+                var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.ConcessaoEntidade, dados.CD_PLANO, dados.CD_MODAL, dados.CD_NATUR, dataCredito, dados.ValorSolicitado);
 
                 if (contratosDisponiveis.Count == 0)
                     throw new Exception("Não existem parcelas disponíveis para simulação/contratação");
@@ -475,7 +475,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 return Json(new
                 {
-                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor, GrupoFamilia, SeqRecebedor)
+                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.ConcessaoEntidade, dados.SaldoDevedor, GrupoFamilia, SeqRecebedor)
                 });
             }
             catch (Exception ex)
@@ -505,7 +505,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         public decimal CD_MODAL { get; set; }
         public decimal CD_NATUR { get; set; }
         public decimal ValorSolicitado { get; set; }
-        public Concessao Concessao { get; set; }
+        public ConcessaoEntidade ConcessaoEntidade { get; set; }
     }
 
     public class ParametrosContrato
@@ -514,7 +514,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         public string TokenDigitado { get; set; }
         public string CD_PLANO { get; set; }
         public ContratoDisponivel Contrato { get; set; }
-        public Concessao Concessao { get; set; }
+        public ConcessaoEntidade ConcessaoEntidade { get; set; }
         public SaldoDevedorEntidade SaldoDevedor { get; set; }
     }
 

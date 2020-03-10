@@ -40,10 +40,10 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     nomeArquivo = "BD";
                     break;
                 case "0002":
-                    nomeArquivo = "REFORCO";
+                    nomeArquivo = "MAIS";
                     break;
                 case "0003":
-                    nomeArquivo = "MAIS";
+                    nomeArquivo = "REFORCO";
                     break;
             }
 

@@ -10,6 +10,8 @@ namespace Intech.PrevSystem.Entidades
         public decimal QuantidadeCotasPatrocinadora { get; set; }
         public decimal QuantidadeCotasTotal => QuantidadeCotasParticipante + QuantidadeCotasPatrocinadora;
 
+        public decimal TotalAposentadoriaComplementar { get; set; }
+
         public decimal ValorParticipante { get; set; }
         public decimal ValorPatrocinadora { get; set; }
         public decimal ValorTotal => ValorParticipante + ValorPatrocinadora;

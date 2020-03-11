@@ -14,6 +14,7 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_TITULO { get; set; }
 		public string IND_ATIVO { get; set; }
 		[Write(false)] public string CD_PLANO { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
         
     }
 }

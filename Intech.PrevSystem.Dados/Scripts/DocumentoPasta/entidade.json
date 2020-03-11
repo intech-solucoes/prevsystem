@@ -1,3 +1,11 @@
-﻿{
-    "nomeTabela": "WEB_DOCUMENTO_PASTA"
+{
+  "NomeTabela": "WEB_DOCUMENTO_PASTA",
+  "ColunasExtras": [
+    {
+      "Nome": "NOM_GRUPO_USUARIO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
 }

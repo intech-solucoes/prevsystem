@@ -12,6 +12,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? OID_DOCUMENTO_PASTA_PAI { get; set; }
 		public string NOM_PASTA { get; set; }
 		public decimal? OID_GRUPO_USUARIO { get; set; }
+		[Write(false)] public string NOM_GRUPO_USUARIO { get; set; }
         
     }
 }

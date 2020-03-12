@@ -10,7 +10,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
     {
         public FuncionarioDados BuscarDadosPorCodEntid(string codEntid)
         {
+            var tipoFunc = "";
+
+            DateTime dataAtivoFacultativoAnterior = new DateTime(2014, 02, 05);
             var funcionario = new FuncionarioDados();
+
+            var salarioBase = new SalarioBaseEntidade();
+            var valorRgps = new IndiceValoresEntidade();
 
             funcionario.Funcionario = base.BuscarPorCodEntid(codEntid);
             funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
@@ -19,6 +25,39 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+
+
+            if (funcionario.Funcionario.CD_PLANO != "0001")
+            {
+                tipoFunc = "AF";
+            }
+            else
+            {
+                if (funcionario.IND_AFA_JUDICIAL == "S")
+                {
+                    tipoFunc = "AFA";
+                }
+                else 
+                {
+                    if ( (funcionario.Funcionario.CD_SIT_PLANO == "03" || funcionario.Funcionario.CD_SIT_PLANO == "07" || funcionario.Funcionario.CD_SIT_PLANO == "09" || 
+                          funcionario.Funcionario.CD_SIT_PLANO == "13" || funcionario.Funcionario.CD_SIT_PLANO == "14" || funcionario.Funcionario.CD_SIT_PLANO == "15") && 
+                          (funcionario.Funcionario.DT_ADMISSAO < dataAtivoFacultativoAnterior)) {
+                        tipoFunc = "AFA";
+                    }  
+                    else
+                    {
+                        valorRgps = new IndiceProxy().BuscarUltimoPorCodigoData("RGPS");
+                        salarioBase = new SalarioBaseProxy().BuscarUltimoPorFundacaoEmpresaMatricula(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.CD_EMPRESA, funcionario.Funcionario.NUM_MATRICULA);
+
+                        if (salarioBase.VL_SALARIO > valorRgps.VALOR_IND)
+                        {
+                            tipoFunc = "A";
+                        }
+                    }  
+                }
+            }
+
+            funcionario.TIPO = tipoFunc;
 
             return funcionario;
         }

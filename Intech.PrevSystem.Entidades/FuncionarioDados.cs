@@ -17,6 +17,8 @@ namespace Intech.PrevSystem.Entidades
         public string CEP { get; set; }
         public string DS_ESTADO_CIVIL { get; set; }
         public string CNPJ_EMPRESA { get; set; }
+        public string TIPO { get; set; }
+        public string IND_AFA_JUDICIAL { get; set; }
     }
 
 }

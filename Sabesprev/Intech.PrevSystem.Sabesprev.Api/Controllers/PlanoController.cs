@@ -64,25 +64,25 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var IndiceSBM = indiceProxy.BuscarPorCodIndiceData("COTA_SBM", referencia);
                 var IndiceREFORCO = indiceProxy.BuscarPorCodIndiceData("COTA_REFORCO", referencia);
 
-                var IndiceAnoAnteriorBD = indiceProxy.BuscarPorCodIndiceData("COTA_BD", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
-                var IndiceAnoAnteriorSBM = indiceProxy.BuscarPorCodIndiceData("COTA_SBM", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
-                var IndiceAnoAnteriorREFORCO = indiceProxy.BuscarPorCodIndiceData("COTA_REFORCO", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorBD = indiceProxy.BuscarPorCodIndiceData("COTA_BD", referencia.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorSBM = indiceProxy.BuscarPorCodIndiceData("COTA_SBM", referencia.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorREFORCO = indiceProxy.BuscarPorCodIndiceData("COTA_REFORCO", referencia.AddYears(-1).UltimoDiaDoAno());
 
-                var IndiceAnoRetrasadoBD = indiceProxy.BuscarPorCodIndiceData("COTA_BD", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
-                var IndiceAnoRetrasadoSBM = indiceProxy.BuscarPorCodIndiceData("COTA_SBM", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
-                var IndiceAnoRetrasadoREFORCO = indiceProxy.BuscarPorCodIndiceData("COTA_REFORCO", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoBD = indiceProxy.BuscarPorCodIndiceData("COTA_BD", referencia.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoSBM = indiceProxy.BuscarPorCodIndiceData("COTA_SBM", referencia.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoREFORCO = indiceProxy.BuscarPorCodIndiceData("COTA_REFORCO", referencia.AddYears(-2).UltimoDiaDoAno());
 
                 // Indicadores
                 var IndiceCDI = indiceProxy.BuscarPorCodIndiceData("CDI", referencia);
                 var IndicePOUPANCA = indiceProxy.BuscarPorCodIndiceData("POUPANCA", referencia);
 
-                var IndiceAnoAnteriorMETA = indiceProxy.BuscarPorCodIndiceData("META_GER", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
-                var IndiceAnoAnteriorCDI = indiceProxy.BuscarPorCodIndiceData("CDI", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
-                var IndiceAnoAnteriorPOUPANCA = indiceProxy.BuscarPorCodIndiceData("POUPANCA", DateTime.Today.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorMETA = indiceProxy.BuscarPorCodIndiceData("META_GER", referencia.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorCDI = indiceProxy.BuscarPorCodIndiceData("CDI", referencia.AddYears(-1).UltimoDiaDoAno());
+                var IndiceAnoAnteriorPOUPANCA = indiceProxy.BuscarPorCodIndiceData("POUPANCA", referencia.AddYears(-1).UltimoDiaDoAno());
 
-                var IndiceAnoRetrasadoMETA = indiceProxy.BuscarPorCodIndiceData("META_GER", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
-                var IndiceAnoRetrasadoCDI = indiceProxy.BuscarPorCodIndiceData("CDI", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
-                var IndiceAnoRetrasadoPOUPANCA = indiceProxy.BuscarPorCodIndiceData("POUPANCA", DateTime.Today.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoMETA = indiceProxy.BuscarPorCodIndiceData("META_GER", referencia.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoCDI = indiceProxy.BuscarPorCodIndiceData("CDI", referencia.AddYears(-2).UltimoDiaDoAno());
+                var IndiceAnoRetrasadoPOUPANCA = indiceProxy.BuscarPorCodIndiceData("POUPANCA", referencia.AddYears(-2).UltimoDiaDoAno());
 
                 return Json(new
                 {

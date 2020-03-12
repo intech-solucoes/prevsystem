@@ -11,5 +11,18 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
     [Route(RotasApi.DadosPessoais)]
     public class DadosPessoaisController : BaseDadosPessoaisController
     {
+        [HttpGet]
+        [Authorize("Bearer")]
+        public IActionResult Buscar()
+        {
+            try
+            {
+                return Json(new DadosPessoaisProxy().BuscarPorCodEntid(CodEntid));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

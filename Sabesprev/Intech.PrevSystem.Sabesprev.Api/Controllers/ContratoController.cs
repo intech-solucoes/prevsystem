@@ -475,7 +475,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 return Json(new
                 {
-                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.ConcessaoEntidade, dados.SaldoDevedor, GrupoFamilia, SeqRecebedor)
+                    AnoNumContrato = new ContratoProxySabesprev().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor, GrupoFamilia, SeqRecebedor)
                 });
             }
             catch (Exception ex)
@@ -514,7 +514,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
         public string TokenDigitado { get; set; }
         public string CD_PLANO { get; set; }
         public ContratoDisponivel Contrato { get; set; }
-        public ConcessaoEntidade ConcessaoEntidade { get; set; }
+        public ConcessaoEntidade Concessao { get; set; }
         public SaldoDevedorEntidade SaldoDevedor { get; set; }
     }
 

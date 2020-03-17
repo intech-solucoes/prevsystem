@@ -25,6 +25,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
 
             if (funcionario.Funcionario.CD_PLANO != "0001")
@@ -73,6 +74,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
             return funcionario;
         }
@@ -89,6 +91,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
             return funcionario;
         }
@@ -105,6 +108,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
             return funcionario;
         }
@@ -121,6 +125,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
             return funcionario;
         }

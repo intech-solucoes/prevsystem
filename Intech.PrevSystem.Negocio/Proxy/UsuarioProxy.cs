@@ -1,6 +1,7 @@
 #region Usings
 using Intech.Lib.Email;
 using Intech.Lib.Util.Seguranca;
+using Intech.Lib.Util.Validacoes;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
@@ -152,6 +153,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if (dadosPessoais.DT_NASCIMENTO != dataNascimento)
                     throw ExceptionDadosInvalidos;
 
+                if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
+                    throw new Exception("Você não possúi um e-mail cadastrado. Por favor, entre em contato com a Preves.");
+
                 var senha = GerarSenha(usarSenhaComplexa);
 
                 var senhaEncriptada = Criptografia.Encriptar(senha);
@@ -197,6 +201,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 foreach (var email in emails)
                 {
+                    if (!Validador.ValidarEmail(email))
+                        throw new Exception("E-mail em formato inválido!");
+
                     EnvioEmail.Enviar(emailConfig, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
                 }
 

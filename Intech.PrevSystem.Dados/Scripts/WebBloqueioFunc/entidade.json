@@ -1,23 +1,18 @@
 {
-  "NomeTabela": "TB_EMPRESA",
+  "NomeTabela": "WEB_BLOQUEIO_FUNC",
   "ColunasExtras": [
     {
-      "Nome": "NOME_ENTID",
+      "Nome": "DES_FUNCIONALIDADE",
       "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "CPF_CGC",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "Planos",
-      "Tipo": "List<PlanoEntidade>",
       "AceitaNulo": false
     },
     {
       "Nome": "SIGLA_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_PLANO",
       "Tipo": "string",
       "AceitaNulo": false
     }

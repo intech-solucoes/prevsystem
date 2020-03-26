@@ -64,5 +64,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<EmpresaEntidade> BuscarTodasComSiglaEntid()
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,  	EE_ENTIDADE.SIGLA_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID", new {  });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.SIGLA_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID", new {  });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
     }
 }

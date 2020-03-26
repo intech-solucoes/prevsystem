@@ -13,6 +13,10 @@ namespace Intech.PrevSystem.Entidades
 		public string DES_FUNCIONALIDADE { get; set; }
 		public string IND_ATIVO { get; set; }
 		public string IND_USA_PROTOCOLO { get; set; }
+		[Write(false)] public string SIGLA_ENTID { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
+		[Write(false)] public string NUM_MATRICULA { get; set; }
+		[Write(false)] public DateTime? DTA_INICIO { get; set; }
         
     }
 }

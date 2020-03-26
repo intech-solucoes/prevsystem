@@ -1,5 +1,26 @@
 {
   "NomeTabela": "WEB_FUNCIONALIDADE",
-  "ColunasExtras": [],
+  "ColunasExtras": [
+    {
+      "Nome": "SIGLA_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DS_PLANO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "NUM_MATRICULA",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "DTA_INICIO",
+      "Tipo": "DateTime",
+      "AceitaNulo": true
+    }
+  ],
   "Imports": []
 }

@@ -30,6 +30,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual EmpresaEntidade BuscarPorCodigoComSiglaEntid(string CD_EMPRESA)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,  	EE_ENTIDADE.SIGLA_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID  WHERE TB_EMPRESA.CD_EMPRESA = @CD_EMPRESA", new { CD_EMPRESA });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.SIGLA_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_EMPRESA=:CD_EMPRESA", new { CD_EMPRESA });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual IEnumerable<EmpresaEntidade> BuscarPorFundacao(string CD_FUNDACAO)
 		{
 			try

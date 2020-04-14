@@ -30,8 +30,8 @@ namespace Intech.PrevSystem.Entidades
         public decimal ValorCarregamentoEmpresa { get; set; }
         public decimal ValorCarregamentoTotal => ValorCarregamentoParticipante + ValorCarregamentoEmpresa;
 
-        public decimal ValorTotalParticipante => ValorAposentadoriaParticipante + ValorSobrevivenciaParticipante + ValorCarregamentoParticipante;
-        public decimal ValorTotalEmpresa => ValorAposentadoriaEmpresa + ValorSobrevivenciaEmpresa + ValorCarregamentoEmpresa;
+        public decimal ValorTotalParticipante => ValorAposentadoriaParticipante + ValorSobrevivenciaParticipante + ValorCarregamentoParticipante + ValorBeneficioRiscoParticipante;
+        public decimal ValorTotalEmpresa => ValorAposentadoriaEmpresa + ValorSobrevivenciaEmpresa + ValorCarregamentoEmpresa + ValorBeneficioRiscoEmpresa;
         public decimal ValorTotal => ValorTotalParticipante + ValorTotalEmpresa;
     }
 }

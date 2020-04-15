@@ -3,6 +3,7 @@ using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
@@ -27,8 +28,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
             funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
+            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.NUM_INSCRICAO).FirstOrDefault();
 
-            if (funcionario.Funcionario.CD_PLANO != "0001")
+            if (plano.CD_PLANO != "0001")
             {
                 tipoFunc = "AF";
             }

@@ -1,3 +1,11 @@
-﻿{
-    "nomeTabela": "TB_PLANOS"
+{
+  "NomeTabela": "TB_PLANOS",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
 }

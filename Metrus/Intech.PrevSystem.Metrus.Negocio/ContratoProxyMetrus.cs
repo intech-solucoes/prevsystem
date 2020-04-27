@@ -91,7 +91,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             return listaContratos;
         }
 
-        public string Contratar(FuncionarioEntidade funcionario, ContratoDisponivel contrato, Concessao concessao, SaldoDevedorEntidade saldoDevedor)
+        public string Contratar(FuncionarioEntidade funcionario, ContratoDisponivel contrato, ConcessaoEntidade concessao, SaldoDevedorEntidade saldoDevedor)
         {
             var contratosAnterioresWebProxy = new ContratosAnterioresWebProxy();
             var contratosWeb = new ContratoWebProxy();

@@ -279,7 +279,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             this.Carencia = Carencia;
         }
 
-        public List<ContratoDisponivel> BuscarContratosDisponiveis(FuncionarioEntidade funcionario, Concessao concessao, string codPlano, decimal codModalidade, decimal codNatureza, DateTime dataCredito, decimal valorSolicitado, decimal mesesDeCarencia, decimal quantidadeParcelas = 0)
+        public List<ContratoDisponivel> BuscarContratosDisponiveis(FuncionarioEntidade funcionario, ConcessaoEntidade concessao, string codPlano, decimal codModalidade, decimal codNatureza, DateTime dataCredito, decimal valorSolicitado, decimal mesesDeCarencia, decimal quantidadeParcelas = 0)
         {
             //buscar dados dos parametros p/ verificar se a pessoa possui contratos maximo
             var param = new ParametrosProxy();
@@ -544,7 +544,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             return contratos.OrderBy(x => x.Prazo).ToList();
         }
 
-        private bool VerificarDisponibilidadeGlobal(Concessao concessao, string motivoGlobal, decimal valorPrestacao, decimal valorLiquido, decimal valorSolicitado, ref string motivo)
+        private bool VerificarDisponibilidadeGlobal(ConcessaoEntidade concessao, string motivoGlobal, decimal valorPrestacao, decimal valorLiquido, decimal valorSolicitado, ref string motivo)
         {
             if ((concessao.ValorLimite >= 0) & (valorSolicitado.Arredonda(2) > concessao.TetoMaximo.Arredonda(2)))
                 motivo += "Valor Solicitado excede o teto máximo estipulado\n";

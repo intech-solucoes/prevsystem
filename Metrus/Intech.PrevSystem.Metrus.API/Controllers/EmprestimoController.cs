@@ -257,7 +257,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         public DateTime DataCredito { get; set; }
         public decimal ValorSolicitado { get; set; }
         public decimal Carencia { get; set; }
-        public Concessao Concessao { get; set; }
+        public ConcessaoEntidade Concessao { get; set; }
     }
 
     public class ParametrosContrato
@@ -265,7 +265,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         public string CodEntid { get; set; }
         public string CdPlano { get; set; }
         public ContratoDisponivel Contrato { get; set; }
-        public Concessao Concessao { get; set; }
+        public ConcessaoEntidade Concessao { get; set; }
         public SaldoDevedorEntidade SaldoDevedor { get; set; }
     }
 }

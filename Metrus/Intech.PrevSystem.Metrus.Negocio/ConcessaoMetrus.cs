@@ -12,7 +12,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
 {
     public class ConcessaoMetrus
     {
-        public static Concessao ObtemConcessao(FuncionarioEntidade funcionario, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao)
+        public static ConcessaoEntidade ObtemConcessao(FuncionarioEntidade funcionario, string cdPlano, decimal cdNatur, decimal cdModal, DateTime dtCredito, DateTime dtSolicitacao)
         {
             var dados = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.COD_ENTID.ToString());
             string empresa = funcionario.CD_EMPRESA;
@@ -76,7 +76,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             var margCalcProxy = new MargensCalculadasProxy();
 
             //Criando o objeto para controlar a concessao
-            var concessao = new Concessao();
+            var concessao = new ConcessaoEntidade();
 
             try
             {
@@ -310,9 +310,9 @@ namespace Intech.PrevSystem.Metrus.Negocio
             return concessao;
         }
 
-        public static Concessao CriaConcessao(decimal origem, MargensEntidade margem, decimal valorMargemCalculada)
+        public static ConcessaoEntidade CriaConcessao(decimal origem, MargensEntidade margem, decimal valorMargemCalculada)
         {
-            Concessao c = new Concessao();
+            var c = new ConcessaoEntidade();
             decimal taxaRedutoraPrest;
             decimal txRedutoraReservaPoup = 100;
 

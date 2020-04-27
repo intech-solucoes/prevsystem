@@ -68,7 +68,16 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                         var processo = new ProcessoBeneficioProxy().BuscarAtivoPorFundacaoEmpresaMatriculaPlano(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, plano.CD_PLANO);
                         var histRendas = new HistRendasProxy().BuscarPorFundacaoEmpresaPlanoAnoNumEspecie(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, processo.ANO_PROCESSO, processo.NUM_PROCESSO, processo.CD_ESPECIE);
 
-                        if (histRendas.CD_OPCAO_RECEB != "01")
+                        if (histRendas.CD_OPCAO_RECEB == "04")
+                        {
+                            var histSaldo = new HistSaldoProxy().BuscarPorFundacaoEmpresaPlanoEspecieNumAnoProcesso(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, processo.CD_ESPECIE, processo.NUM_PROCESSO, processo.ANO_PROCESSO);
+                            
+                            var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, plano.cd_perfil_invest.ToString());
+                            var indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP).VALORES.First();
+
+                            saldoTotalParticipante = histSaldo.First().SALDO_ATUAL.Value * indice.VALOR_IND;
+                        }
+                        else if (histRendas.CD_OPCAO_RECEB != "01")
                         {
                             saldoBasicaParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "1");
                             saldoSuplementarParticipante = fichaFinanceiraProxy.BuscarSaldoPorFundacaoEmpresaPlanoInscricaoFundo(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, funcionario.NUM_INSCRICAO, "11");

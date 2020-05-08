@@ -1,0 +1,6 @@
+{
+  "NomeTabela": "TB_SEXO",
+  "ChavePrimaria": "CD_SEXO",
+  "ColunasExtras": [],
+  "Imports": []
+}

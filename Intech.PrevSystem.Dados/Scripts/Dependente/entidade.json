@@ -1,10 +1,16 @@
-﻿{
-    "nomeTabela": "CS_DEPENDENTE",
-    "colunasExtras": [
-        {
-            "nome": "DS_GRAU_PARENTESCO",
-            "tipo": "string",
-            "aceitaNulo": true
-        }
-    ]
+{
+  "NomeTabela": "CS_DEPENDENTE",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_GRAU_PARENTESCO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "IND_OPERACAO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
 }

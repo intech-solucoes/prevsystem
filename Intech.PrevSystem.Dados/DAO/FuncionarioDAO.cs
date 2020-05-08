@@ -13,6 +13,23 @@ namespace Intech.PrevSystem.Dados.DAO
     public abstract class FuncionarioDAO : BaseDAO<FuncionarioEntidade>
     {
         
+		public virtual FuncionarioEntidade BuscarNomePorCdFundacaoCdEmpresaNumMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE.NOME_ENTID FROM CS_FUNCIONARIO FN 	INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = FN.COD_ENTID WHERE FN.CD_FUNDACAO = @CD_FUNDACAO     AND FN.CD_EMPRESA = @CD_EMPRESA   AND FN.NUM_MATRICULA = @NUM_MATRICULA", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FuncionarioEntidade>("SELECT EE.NOME_ENTID FROM CS_FUNCIONARIO  FN  INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=FN.COD_ENTID WHERE FN.CD_FUNDACAO=:CD_FUNDACAO AND FN.CD_EMPRESA=:CD_EMPRESA AND FN.NUM_MATRICULA=:NUM_MATRICULA", new { CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual FuncionarioEntidade BuscarPorCodEntid(string COD_ENTID)
 		{
 			try

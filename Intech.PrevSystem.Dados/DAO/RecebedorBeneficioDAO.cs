@@ -64,6 +64,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual IEnumerable<RecebedorBeneficioEntidade> BuscarPorFundacaoEmpresaInscricaoLista(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<RecebedorBeneficioEntidade>("SELECT RB.*  FROM GB_RECEBEDOR_BENEFICIO RB      INNER JOIN GB_PROCESSOS_BENEFICIO PB ON PB.CD_FUNDACAO = RB.CD_FUNDACAO          AND PB.NUM_INSCRICAO = RB.NUM_INSCRICAO      INNER JOIN GB_ESPECIE_BENEFICIO EB ON EB.CD_ESPECIE = PB.CD_ESPECIE  WHERE PB.DT_TERMINO >= GETDATE()    AND RB.CD_FUNDACAO = @CD_FUNDACAO    AND RB.CD_EMPRESA = @CD_EMPRESA    AND RB.NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, NUM_INSCRICAO });
+				else if(AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<RecebedorBeneficioEntidade>("SELECT RB.* FROM GB_RECEBEDOR_BENEFICIO  RB  INNER  JOIN GB_PROCESSOS_BENEFICIO   PB  ON PB.CD_FUNDACAO=RB.CD_FUNDACAO AND PB.NUM_INSCRICAO=RB.NUM_INSCRICAO INNER  JOIN GB_ESPECIE_BENEFICIO   EB  ON EB.CD_ESPECIE=PB.CD_ESPECIE WHERE PB.DT_TERMINO>=SYSDATE AND RB.CD_FUNDACAO=:CD_FUNDACAO AND RB.CD_EMPRESA=:CD_EMPRESA AND RB.NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, NUM_INSCRICAO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual RecebedorBeneficioEntidade BuscarPorFundacaoEmpresaInscricaoSeqRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string SEQ_RECEBEDOR)
 		{
 			try

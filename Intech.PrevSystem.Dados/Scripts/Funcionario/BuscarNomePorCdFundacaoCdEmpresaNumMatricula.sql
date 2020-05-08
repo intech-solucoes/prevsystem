@@ -1,0 +1,15 @@
+﻿/*Config
+    Retorno
+        -FuncionarioEntidade
+    Parametros
+        -CD_FUNDACAO:string
+        -CD_EMPRESA:string
+        -NUM_MATRICULA:string
+*/
+
+SELECT EE.NOME_ENTID
+FROM CS_FUNCIONARIO FN
+	INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = FN.COD_ENTID
+WHERE FN.CD_FUNDACAO = @CD_FUNDACAO  
+  AND FN.CD_EMPRESA = @CD_EMPRESA
+  AND FN.NUM_MATRICULA = @NUM_MATRICULA

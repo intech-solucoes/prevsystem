@@ -12,6 +12,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var prestacoes = base.BuscarPorFundacaoContrato(CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO).ToList();
             var prestacoesPagas = prestacoes.Where(x => x.DT_PAGTO != null).ToList();
             var qntPagas = prestacoesPagas.Count;
+
+            var inadimplentes = prestacoes.Where(x => x.CD_ORIGEM_REC == 50).ToList();
+            var valorInadimplentes = inadimplentes.Sum(x => x.VL_PRESTACAO);
+
             var valorPagas = prestacoesPagas.Sum(x => x.VL_RECEBIDO);
             var totalPrestacoes = prestacoes.Sum(x => x.VL_PRESTACAO);
 
@@ -19,8 +23,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
             {
                 PrestacoesPagas = qntPagas,
                 ValorPrestacoesPagas = valorPagas,
-                PrestacoesInadimplentes = 0,
-                ValorPrestacoesInadimplentes = 0,
+                PrestacoesInadimplentes = inadimplentes.Count,
+                ValorPrestacoesInadimplentes = valorInadimplentes,
                 PrestacoesAPagar = prestacoes.Count - prestacoesPagas.Count,
                 ValorPrestacoesAPagar = totalPrestacoes - valorPagas,
                 Prestacoes = prestacoes

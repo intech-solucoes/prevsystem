@@ -75,7 +75,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                             var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, plano.cd_perfil_invest.ToString());
                             var indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP).VALORES.First();
 
-                            saldoTotalParticipante = histSaldo.First().SALDO_ATUAL.Value * indice.VALOR_IND;
+                            saldoTotalParticipante = (histSaldo.First().SALDO_ATUAL.Value * indice.VALOR_IND).Arredonda(2);
                         }
                         else if (histRendas.CD_OPCAO_RECEB != "01")
                         {

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Dados", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Negocio", "..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj", "{23B3621B-E3E3-4554-962C-4155EDB9E04B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intech.PrevSystem.Metrus", "Intech.PrevSystem.Metrus\Intech.PrevSystem.Metrus.csproj", "{E59D59BA-316F-44D6-BD56-67DB59667430}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{11d947ce-05e2-41db-8687-640404e96ef0}*SharedItemsImports = 13
@@ -43,13 +45,16 @@ Global
 		{23B3621B-E3E3-4554-962C-4155EDB9E04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23B3621B-E3E3-4554-962C-4155EDB9E04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23B3621B-E3E3-4554-962C-4155EDB9E04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59D59BA-316F-44D6-BD56-67DB59667430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59D59BA-316F-44D6-BD56-67DB59667430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59D59BA-316F-44D6-BD56-67DB59667430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59D59BA-316F-44D6-BD56-67DB59667430}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11D947CE-05E2-41DB-8687-640404E96EF0} = {BB1DD041-0A7D-4EA2-9065-9FE9210CA00A}
-		{EB3A7BF4-56C9-4F10-9B01-227B39DE50AD} = {BB1DD041-0A7D-4EA2-9065-9FE9210CA00A}
 		{99B1C9A3-91EC-4564-A844-76E4330C2FAD} = {BB1DD041-0A7D-4EA2-9065-9FE9210CA00A}
 		{D44B45DD-A2B1-457D-A775-BE6020869AC1} = {BB1DD041-0A7D-4EA2-9065-9FE9210CA00A}
 		{23B3621B-E3E3-4554-962C-4155EDB9E04B} = {BB1DD041-0A7D-4EA2-9065-9FE9210CA00A}

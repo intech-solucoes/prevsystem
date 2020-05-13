@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_MODALIDADE")]
-    public class ModalidadeEntidade
-    {
+	[Table("CE_MODALIDADE")]
+	public class ModalidadeEntidade
+	{
 		public decimal CD_MODAL { get; set; }
 		public string DS_MODAL { get; set; }
 		public string CREDITO_UNICO { get; set; }
@@ -45,8 +45,8 @@ namespace Intech.PrevSystem.Entidades
 		public string INCLUIR_OUTROS_DEBITOS { get; set; }
 		public string COBRAR_PA_CONCESSAO { get; set; }
 		public string TIPO_JUROS_MORA { get; set; }
-		public string BASE_CALC_ANTECIPACAO { get; set; }
 		public string JUROS_CONTRATO_ANTEC { get; set; }
+		public string BASE_CALC_ANTECIPACAO { get; set; }
 		public string EXIGE_FIADOR_OCASIAO { get; set; }
 		public string ALT_VL_MARGEM { get; set; }
 		public string DIF_DIAS { get; set; }
@@ -55,17 +55,16 @@ namespace Intech.PrevSystem.Entidades
 		public string RECEBER_PRESTACAO_PARCIAL { get; set; }
 		public string SALDO_REFORMA { get; set; }
 		public string REC_PRESTACAO_PARCIAL_MES { get; set; }
+		public string REF_MODALIDADES { get; set; }
 		public string TIPO_DEBITOS { get; set; }
 		public string RECEBE_VL_PARCIAL_AMENOR { get; set; }
 		public string ENCARGOS_PREST_REAL { get; set; }
 		public string COBRAR_PM_CONCESSAO { get; set; }
-		public string REF_MODALIDADES { get; set; }
 		public string PREST_ORIG_REC_REFORMA { get; set; }
 		public string PREST_ORIG_REC_QUIT_MANUAL { get; set; }
 		public string AVALISTA { get; set; }
 		public decimal? TMP_VINC_AVALISTA { get; set; }
 		public string BLOQUEIO_COBRANCA { get; set; }
 		[Write(false)] public List<NaturezaEntidade> Naturezas { get; set; }
-        
-    }
+	}
 }

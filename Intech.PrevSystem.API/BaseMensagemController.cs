@@ -92,7 +92,19 @@ namespace Intech.PrevSystem.API
                     foreach (var destinatario in listaDestinatarios)
                     {
                         var dadosDestinatario = funcionarioProxy.BuscarDadosPorCodEntid(destinatario.COD_ENTID.ToString());
-                        EnviarEmail(dadosDestinatario, mensagem);
+
+                        if (string.IsNullOrEmpty(dadosDestinatario.DadosPessoais.EMAIL_AUX))
+                            throw new Exception("Não existe email cadastrado para seu usuário contacte o administrador do sistema.");
+
+                        try
+                        {
+                            var emailConfig = AppSettings.Get().Email;
+                            EnvioEmail.Enviar(emailConfig, dadosDestinatario.DadosPessoais.EMAIL_AUX, mensagem.TXT_TITULO, mensagem.TXT_CORPO);
+                        }
+                        catch (Exception e)
+                        {
+                            throw new Exception("Erro ao enviar o token por email. Contacte o administrador do sistema." + e.Message);
+                        }
                     }
                 }
 
@@ -103,22 +115,6 @@ namespace Intech.PrevSystem.API
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
-        }
-
-        public void EnviarEmail(FuncionarioDados destinatario, MensagemEntidade mensagem)
-        {
-            if (string.IsNullOrEmpty(destinatario.DadosPessoais.EMAIL_AUX))
-                throw new Exception("Não existe email cadastrado para seu usuário contacte o administrador do sistema.");
-
-            try
-            {
-                var emailConfig = AppSettings.Get().Email;
-                EnvioEmail.Enviar(emailConfig, destinatario.DadosPessoais.EMAIL_AUX, mensagem.TXT_TITULO, mensagem.TXT_CORPO);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Erro ao enviar o token por email. Contacte o administrador do sistema." + e.Message);
             }
         }
     }

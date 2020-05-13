@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_INDICE")]
-    public class IndiceEntidade
-    {
+	[Table("TB_INDICE")]
+	public class IndiceEntidade
+	{
 		public string COD_IND { get; set; }
 		public string DESC_IND { get; set; }
 		public string PERIODIC { get; set; }
@@ -19,7 +19,6 @@ namespace Intech.PrevSystem.Entidades
 		public string COD_CETIP { get; set; }
 		public string COD_CUSTOD { get; set; }
 		public string COD_SPC { get; set; }
-		public List<IndiceValoresEntidade> VALORES { get; set; }
-        
-    }
+		[Write(false)] public List<IndiceValoresEntidade> VALORES { get; set; }
+	}
 }

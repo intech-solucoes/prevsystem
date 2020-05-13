@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("WEB_MENSAGEM")]
-    public class MensagemEntidade
-    {
+	[Table("WEB_MENSAGEM")]
+	public class MensagemEntidade
+	{
 		[Key]
 		public decimal OID_MENSAGEM { get; set; }
 		public string TXT_TITULO { get; set; }
@@ -27,6 +27,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string DS_PLANO { get; set; }
 		[Write(false)] public string DS_SIT_PLANO { get; set; }
 		[Write(false)] public string NUM_MATRICULA { get; set; }
-        
-    }
+	}
 }

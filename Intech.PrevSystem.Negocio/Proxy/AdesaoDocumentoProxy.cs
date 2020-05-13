@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class AdesaoDocumentoProxy : AdesaoDocumentoDAO
-    {
-    }
+	public class AdesaoDocumentoProxy : AdesaoDocumentoDAO
+	{
+	}
 }

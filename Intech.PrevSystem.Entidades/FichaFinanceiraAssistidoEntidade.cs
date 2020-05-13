@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_FICHA_FINANC_ASSISTIDO")]
-    public class FichaFinanceiraAssistidoEntidade
-    {
+	[Table("GB_FICHA_FINANC_ASSISTIDO")]
+	public class FichaFinanceiraAssistidoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -22,7 +22,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VALOR_CT { get; set; }
 		public decimal? PRAZO { get; set; }
 		public string CD_TIPO_FOLHA { get; set; }
-		public string GB__CD_FUNDACAO { get; set; }
 		public decimal? NUM_PRESTACAO { get; set; }
 		public decimal? TOT_PRESTACAO { get; set; }
 		public decimal? VL_BASE_CALC { get; set; }
@@ -38,6 +37,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public decimal? VAL_LIQUIDO { get; set; }
 		[Write(false)] public string DS_TIPO_FOLHA { get; set; }
 		[Write(false)] public string DS_PLANO { get; set; }
-        
-    }
+	}
 }

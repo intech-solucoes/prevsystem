@@ -1,25 +1,22 @@
-﻿#region Usings
-using Dapper;
+﻿using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-#endregion
+using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
-{   
-    public abstract class EmpresaDAO : BaseDAO<EmpresaEntidade>
-    {
-        
+{
+	public abstract class EmpresaDAO : BaseDAO<EmpresaEntidade>
+	{
 		public virtual EmpresaEntidade BuscarPorCodigo(string CD_EMPRESA)
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
 					return Conexao.QuerySingleOrDefault<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID  WHERE TB_EMPRESA.CD_EMPRESA = @CD_EMPRESA", new { CD_EMPRESA });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
+				else if (AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_EMPRESA=:CD_EMPRESA", new { CD_EMPRESA });
 				else
 					throw new Exception("Provider não suportado!");
@@ -30,14 +27,14 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual IEnumerable<EmpresaEntidade> BuscarPorFundacao(string CD_FUNDACAO)
+		public virtual List<EmpresaEntidade> BuscarPorFundacao(string CD_FUNDACAO)
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID  WHERE TB_EMPRESA.CD_FUNDACAO = @CD_FUNDACAO", new { CD_FUNDACAO });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_FUNDACAO=:CD_FUNDACAO", new { CD_FUNDACAO });
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID  WHERE TB_EMPRESA.CD_FUNDACAO = @CD_FUNDACAO", new { CD_FUNDACAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID WHERE TB_EMPRESA.CD_FUNDACAO=:CD_FUNDACAO", new { CD_FUNDACAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -47,14 +44,14 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual IEnumerable<EmpresaEntidade> BuscarTodas()
+		public virtual List<EmpresaEntidade> BuscarTodas()
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID", new {  });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID", new {  });
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*,      EE_ENTIDADE.NOME_ENTID,      EE_ENTIDADE.CPF_CGC  FROM TB_EMPRESA  INNER JOIN EE_ENTIDADE ON EE_ENTIDADE.COD_ENTID = TB_EMPRESA.COD_ENTID", new {  }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<EmpresaEntidade>("SELECT TB_EMPRESA.*, EE_ENTIDADE.NOME_ENTID, EE_ENTIDADE.CPF_CGC FROM TB_EMPRESA INNER  JOIN EE_ENTIDADE  ON EE_ENTIDADE.COD_ENTID=TB_EMPRESA.COD_ENTID", new {  }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -64,5 +61,5 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-    }
+	}
 }

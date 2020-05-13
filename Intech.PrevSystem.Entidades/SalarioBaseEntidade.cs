@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_SALARIO_BASE")]
-    public class SalarioBaseEntidade
-    {
+	[Table("CS_SALARIO_BASE")]
+	public class SalarioBaseEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string NUM_MATRICULA { get; set; }
@@ -17,6 +17,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_SALARIO_NAOINCORP_13 { get; set; }
 		public decimal? VL_SALARIO_PROPORCIONAL { get; set; }
 		public string IND_NAOINCORPORAVEL { get; set; }
-        
-    }
+	}
 }

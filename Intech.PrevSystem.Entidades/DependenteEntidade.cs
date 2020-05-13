@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_DEPENDENTE")]
-    public class DependenteEntidade
-    {
+	[Table("CS_DEPENDENTE")]
+	public class DependenteEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public decimal NUM_SEQ_DEP { get; set; }
@@ -64,6 +64,5 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_TIPO_CORRESP { get; set; }
 		public string CX_POSTAL { get; set; }
 		[Write(false)] public string DS_GRAU_PARENTESCO { get; set; }
-        
-    }
+	}
 }

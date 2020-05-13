@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TBG_ARQUIVO_UPLOAD")]
-    public class ArquivoUploadEntidade
-    {
+	[Table("TBG_ARQUIVO_UPLOAD")]
+	public class ArquivoUploadEntidade
+	{
 		[Key]
 		public decimal OID_ARQUIVO_UPLOAD { get; set; }
 		public string NOM_ARQUIVO_ORIGINAL { get; set; }
@@ -19,6 +19,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? OID_MODULO { get; set; }
 		public decimal? OID_SISTEMA { get; set; }
 		public decimal IND_STATUS { get; set; }
-        
-    }
+	}
 }

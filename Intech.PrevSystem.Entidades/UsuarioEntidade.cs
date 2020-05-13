@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("WEB_USUARIO")]
-    public class UsuarioEntidade
-    {
+	[Table("WEB_USUARIO")]
+	public class UsuarioEntidade
+	{
 		[Key]
 		public decimal OID_USUARIO { get; set; }
 		public string NOM_LOGIN { get; set; }
@@ -23,6 +23,5 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_EMPRESA { get; set; }
 		public decimal? SEQ_RECEBEDOR { get; set; }
 		public string IND_PRIMEIRO_ACESSO { get; set; }
-        
-    }
+	}
 }

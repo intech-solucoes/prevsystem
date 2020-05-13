@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class CarenciasDisponiveisProxy : CarenciasDisponiveisDAO
-    {
-    }
+	public class CarenciasDisponiveisProxy : CarenciasDisponiveisDAO
+	{
+	}
 }

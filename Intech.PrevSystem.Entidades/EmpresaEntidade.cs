@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_EMPRESA")]
-    public class EmpresaEntidade
-    {
+	[Table("TB_EMPRESA")]
+	public class EmpresaEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public int COD_ENTID { get; set; }
@@ -35,6 +35,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOME_ENTID { get; set; }
 		[Write(false)] public string CPF_CGC { get; set; }
 		[Write(false)] public List<PlanoEntidade> Planos { get; set; }
-        
-    }
+	}
 }

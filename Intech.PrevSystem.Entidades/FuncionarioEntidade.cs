@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_FUNCIONARIO")]
-    public class FuncionarioEntidade
-    {
+	[Table("CS_FUNCIONARIO")]
+	public class FuncionarioEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public int COD_ENTID { get; set; }
@@ -49,6 +49,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_APOSENT { get; set; }
 		public string CD_APOSENT_SUJ { get; set; }
 		public string EMAIL_FUNC { get; set; }
+		public string CK_INADIPLENTE { get; set; }
 		public string EXTRATO_IMPRESSO { get; set; }
 		public DateTime? DT_VINCULO_FUNDACAO { get; set; }
 		public string IND_ELEGIBILIDADE { get; set; }
@@ -63,6 +64,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string PENSIONISTA { get; set; }
 		[Write(false)] public string CD_PLANO { get; set; }
 		[Write(false)] public string CD_SIT_PLANO { get; set; }
-        
-    }
+	}
 }

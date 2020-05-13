@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_EMPRESA_PLANOS")]
-    public class EmpresaPlanosEntidade
-    {
+	[Table("TB_EMPRESA_PLANOS")]
+	public class EmpresaPlanosEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -130,6 +130,6 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_COMP_BENEF_ANT_PLANO { get; set; }
 		public string IND_REAJ_DIF { get; set; }
 		public string MES_REAJUSTE_CD { get; set; }
-        
-    }
+		public string CALC_SEM_CONTRIB { get; set; }
+	}
 }

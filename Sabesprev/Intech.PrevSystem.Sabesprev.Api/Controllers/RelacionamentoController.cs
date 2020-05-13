@@ -24,7 +24,12 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
             try
             {
                 var emailConfig = Config.GetSection("Email").Get<ConfigEmail>();
-                EnvioEmail.Enviar(emailConfig, emailConfig.EmailRelacionamento, $"Sabesprev Mobile - {relacionamentoEntidade.Assunto}", $"Mensagem de <b>{relacionamentoEntidade.Email}</b>:<br/><br/>{relacionamentoEntidade.Mensagem}");
+                EnvioEmail.Enviar(
+                    emailConfig, 
+                    emailConfig.EmailRelacionamento, 
+                    $"Sabesprev Mobile - {relacionamentoEntidade.Assunto}", 
+                    $"Mensagem de <b>{relacionamentoEntidade.Email}</b>:<br/><br/>{relacionamentoEntidade.Mensagem}");
+
                 return Ok();
             }
             catch(Exception ex)

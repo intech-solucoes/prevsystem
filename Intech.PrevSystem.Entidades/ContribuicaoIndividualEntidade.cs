@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_CONTRIB_INDIVIDUAIS")]
-    public class ContribuicaoIndividualEntidade
-    {
+	[Table("CS_CONTRIB_INDIVIDUAIS")]
+	public class ContribuicaoIndividualEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public string CD_PLANO { get; set; }
@@ -23,6 +23,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_VALOR { get; set; }
 		public DateTime? DT_INICIO { get; set; }
 		public DateTime? DT_FIM { get; set; }
-        
-    }
+	}
 }

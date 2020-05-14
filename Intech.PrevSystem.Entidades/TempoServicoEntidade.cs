@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_TEMPO_SERVICO")]
-    public class TempoServicoEntidade
-    {
+	[Table("CS_TEMPO_SERVICO")]
+	public class TempoServicoEntidade
+	{
 		public int COD_ENTID { get; set; }
 		public int NUM_SEQ_EMP { get; set; }
 		public int? CD_EMPREGADOR { get; set; }
@@ -18,6 +18,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal QTDE_ANOS { get; set; }
 		public decimal QTDE_MESES { get; set; }
 		public decimal QTDE_DIAS { get; set; }
-        
-    }
+	}
 }

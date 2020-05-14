@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_DIRF")]
-    public class DirfEntidade
-    {
+	[Table("TB_DIRF")]
+	public class DirfEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_SISTEMA { get; set; }
 		public string CPF_RESPONSAVEL { get; set; }
@@ -29,6 +29,5 @@ namespace Intech.PrevSystem.Entidades
 		public string PL_SAUDE_COLET { get; set; }
 		public string DECL_SIT_ESP { get; set; }
 		public DateTime? DT_EVENTO { get; set; }
-        
-    }
+	}
 }

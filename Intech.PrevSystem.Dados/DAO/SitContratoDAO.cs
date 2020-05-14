@@ -1,26 +1,23 @@
-#region Usings
-using Dapper;
+﻿using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-#endregion
+using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
-{   
-    public abstract class SitContratoDAO : BaseDAO<SitContratoEntidade>
-    {
-        
-		public virtual IEnumerable<SitContratoEntidade> Buscar()
+{
+	public abstract class SitContratoDAO : BaseDAO<SitContratoEntidade>
+	{
+		public virtual List<SitContratoEntidade> Buscar()
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<SitContratoEntidade>("SELECT * FROM CE_SITUACAO_CONTRATO", new {  });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<SitContratoEntidade>("SELECT * FROM CE_SITUACAO_CONTRATO", new {  });
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<SitContratoEntidade>("SELECT *  FROM CE_SITUACAO_CONTRATO", new {  }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<SitContratoEntidade>("SELECT * FROM CE_SITUACAO_CONTRATO", new {  }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -30,5 +27,5 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-    }
+	}
 }

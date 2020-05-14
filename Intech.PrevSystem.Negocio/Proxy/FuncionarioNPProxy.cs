@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class FuncionarioNPProxy : FuncionarioNPDAO
-    {
-    }
+	public class FuncionarioNPProxy : FuncionarioNPDAO
+	{
+	}
 }

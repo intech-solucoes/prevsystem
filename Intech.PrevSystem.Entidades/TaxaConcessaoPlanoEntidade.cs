@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_TAXAS_CONCESSAO_PLANO")]
-    public class TaxaConcessaoPlanoEntidade
-    {
+	[Table("CE_TAXAS_CONCESSAO_PLANO")]
+	public class TaxaConcessaoPlanoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -23,6 +23,5 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_ACUMULADO { get; set; }
 		public decimal? IND_MESES_DEFAZAGEM { get; set; }
 		public decimal? IND_MESES_ACUMULADO { get; set; }
-        
-    }
+	}
 }

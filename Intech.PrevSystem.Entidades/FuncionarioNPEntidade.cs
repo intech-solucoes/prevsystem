@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CS_FUNCIONARIO_NP")]
-    public class FuncionarioNPEntidade
-    {
+	[Table("CS_FUNCIONARIO_NP")]
+	public class FuncionarioNPEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string NUM_MATRICULA { get; set; }
@@ -60,6 +60,5 @@ namespace Intech.PrevSystem.Entidades
 		public string FAX_TRAB { get; set; }
 		public string RAMAL_TRAB { get; set; }
 		public DateTime? DT_SOLICITACAO { get; set; }
-        
-    }
+	}
 }

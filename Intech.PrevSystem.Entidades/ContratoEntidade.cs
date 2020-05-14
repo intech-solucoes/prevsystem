@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_CONTRATOS")]
-    public class ContratoEntidade
-    {
+	[Table("CE_CONTRATOS")]
+	public class ContratoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public decimal ANO_CONTRATO { get; set; }
 		public int NUM_CONTRATO { get; set; }
@@ -122,6 +122,9 @@ namespace Intech.PrevSystem.Entidades
 		public string OBSERVACAO2 { get; set; }
 		public string ID_IOF_CF { get; set; }
 		public string STATUS_IOF_CF { get; set; }
+		public string PERMITE_SUSPENSAO { get; set; }
+		public DateTime? DT_SUSPENSAO { get; set; }
+		public string USUARIO_SUSP { get; set; }
 		[Write(false)] public string DES_NUM_CONTRATO { get; set; }
 		[Write(false)] public string DES_PARCELAS { get; set; }
 		[Write(false)] public decimal? NUM_SALDO_DEVEDOR { get; set; }
@@ -129,6 +132,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public ModalidadeEntidade Modalidade { get; set; }
 		[Write(false)] public SaldoDevedorEntidade SaldoDevedor { get; set; }
 		[Write(false)] public string DS_SITUACAO { get; set; }
-        
-    }
+	}
 }

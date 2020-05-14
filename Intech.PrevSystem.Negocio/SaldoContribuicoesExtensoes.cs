@@ -23,7 +23,7 @@ namespace Intech.PrevSystem.Entidades
 
             if (plano.UTILIZA_PERFIL == "S")
             {
-                var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(cdFundacao, cdEmpresa, cdPlano, planoVinculado.cd_perfil_invest.ToString());
+                var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(cdFundacao, cdEmpresa, cdPlano, planoVinculado.CD_PERFIL_INVEST.ToString());
                 indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP);
             }
             else

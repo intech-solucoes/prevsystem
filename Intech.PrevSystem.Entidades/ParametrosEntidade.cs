@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_PARAMETROS")]
-    public class ParametrosEntidade
-    {
+	[Table("CE_PARAMETROS")]
+	public class ParametrosEntidade
+	{
 		public string VERSAO { get; set; }
 		public string TIPO_CONTABILIZACAO { get; set; }
 		public string TIPO_LANC_CONTABIL { get; set; }
@@ -130,6 +130,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PRAZO_SUSP { get; set; }
 		public decimal? QTD_SUSP { get; set; }
 		public decimal? QTD_PAGAS { get; set; }
-        
-    }
+	}
 }

@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_CONTRATOS_WEB")]
-    public class ContratoWebEntidade
-    {
+	[Table("CE_CONTRATOS_WEB")]
+	public class ContratoWebEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public decimal ANO_CONTRATO { get; set; }
 		public int NUM_CONTRATO { get; set; }
@@ -106,7 +106,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_ADM_PRORATA { get; set; }
 		public decimal? VL_IOF_COMPL_QUIT { get; set; }
 		public DateTime? DT_ADITIVO { get; set; }
-		public int? PRAZO_ADITIVO { get; set; }
+		public decimal? PRAZO_ADITIVO { get; set; }
 		public decimal? TARIFA_BANCARIA { get; set; }
 		public decimal? VL_ADITIVO_CONCESSAO { get; set; }
 		public decimal? VL_ADITIVO_PRESTACAO { get; set; }
@@ -118,7 +118,7 @@ namespace Intech.PrevSystem.Entidades
 		public string CONTRATO_MIGRADO { get; set; }
 		public string RECIBO_ELETRONICO { get; set; }
 		public string IP_ORIGEM { get; set; }
-		public decimal? ST_CONTRATO { get; set; }
+		public string ST_CONTRATO { get; set; }
 		public string CD_FUNDACAO_EF { get; set; }
 		public decimal? ANO_CONTRATO_EF { get; set; }
 		public int? NUM_CONTRATO_EF { get; set; }
@@ -126,6 +126,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? ADE_NUMERO { get; set; }
 		public decimal? VALOR_ECONSIG_ANT { get; set; }
 		public string ALT_DADOS_BANCARIO { get; set; }
-        
-    }
+	}
 }

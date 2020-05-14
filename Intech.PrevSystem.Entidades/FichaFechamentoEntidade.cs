@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CC_FICHA_FECHAMENTO")]
-    public class FichaFechamentoEntidade
-    {
+	[Table("CC_FICHA_FECHAMENTO")]
+	public class FichaFechamentoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -25,6 +25,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? QTE_COTA_ACUM { get; set; }
 		public decimal? VL_ACUMULADO { get; set; }
 		public DateTime? DT_FECHAMENTO { get; set; }
-        
-    }
+	}
 }

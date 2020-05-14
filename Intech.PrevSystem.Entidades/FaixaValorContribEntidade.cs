@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_FAIXA_VALOR_CONTRIB")]
-    public class FaixaValorContribEntidade
-    {
+	[Table("TB_FAIXA_VALOR_CONTRIB")]
+	public class FaixaValorContribEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_PLANO { get; set; }
 		public string CD_TIPO_CONTRIBUICAO { get; set; }
@@ -21,6 +21,5 @@ namespace Intech.PrevSystem.Entidades
 		public string PERC_FUNDADOR { get; set; }
 		public decimal? VL_PERC_MIN { get; set; }
 		public decimal? VL_PERC_MAX { get; set; }
-        
-    }
+	}
 }

@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_CRONOG_PROC")]
-    public class CronogProcEntidade
-    {
+	[Table("GB_CRONOG_PROC")]
+	public class CronogProcEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_TIPO_FOLHA { get; set; }
 		public DateTime DT_REFERENCIA { get; set; }
@@ -23,15 +23,14 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_COMPETENCIA { get; set; }
 		public DateTime? DT_REPROCESSAMENTO { get; set; }
 		public DateTime? DT_FECHAMENTO { get; set; }
-		public DateTime? DT_REL_PROCESSO { get; set; }
 		public DateTime? DT_RETROATIVIDADE { get; set; }
 		public string ABONO_ANUAL { get; set; }
 		public decimal? PERC_ABONO_ANUAL { get; set; }
 		public DateTime? DT_INTEGR_CONTAB { get; set; }
 		public DateTime? DT_INTEGR_FINANC { get; set; }
 		public DateTime? DT_INTEGR_COTAS { get; set; }
+		public DateTime? DT_REL_PROCESSO { get; set; }
 		public decimal? VL_PERC_ADIANT { get; set; }
 		public string ID_PREVIA { get; set; }
-        
-    }
+	}
 }

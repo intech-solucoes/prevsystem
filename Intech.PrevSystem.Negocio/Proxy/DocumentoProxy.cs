@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class DocumentoProxy : DocumentoDAO
-    {
-    }
+	public class DocumentoProxy : DocumentoDAO
+	{
+	}
 }

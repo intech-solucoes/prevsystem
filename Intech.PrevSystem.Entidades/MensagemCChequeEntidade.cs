@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_MENSAGEM_CCHEQUE")]
-    public class MensagemCChequeEntidade
-    {
+	[Table("GB_MENSAGEM_CCHEQUE")]
+	public class MensagemCChequeEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_TIPO_FOLHA { get; set; }
 		public DateTime DT_REFERENCIA { get; set; }
@@ -15,6 +15,7 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_PLANO { get; set; }
 		public string CD_ESPECIE { get; set; }
 		public int? SEQ_RECEBEDOR { get; set; }
+		public string MENSAGEM { get; set; }
 		public string MENSAGEM_2 { get; set; }
 		public string MENSAGEM_3 { get; set; }
 		public string CD_RUBRICA { get; set; }
@@ -26,7 +27,5 @@ namespace Intech.PrevSystem.Entidades
 		public string MENSAGEM_9 { get; set; }
 		public string MENSAGEM_10 { get; set; }
 		public string MENSAGEM_11 { get; set; }
-		public string MENSAGEM { get; set; }
-        
-    }
+	}
 }

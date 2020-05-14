@@ -10,20 +10,26 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class ContratoProxy : ContratoDAO
     {
-        public override IEnumerable<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string CD_SITUACAO)
+        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoPlanoInscricaoSituacao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, CD_SITUACAO).ToList();
+            var retorno = new List<ContratoEntidade>();
 
             foreach(var contrato in listaContratos)
-                yield return BuscarDetalhesContratos(CD_FUNDACAO, contrato);
+                retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
+
+            return retorno;
         }
 
-        public override IEnumerable<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string grupoFamilia, string CD_SITUACAO)
+        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string grupoFamilia, string CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, grupoFamilia, CD_SITUACAO).ToList();
+            var retorno = new List<ContratoEntidade>();
 
             foreach (var contrato in listaContratos)
-                yield return BuscarDetalhesContratos(CD_FUNDACAO, contrato);
+                retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
+
+            return retorno;
         }
 
         public override ContratoEntidade BuscarPorFundacaoAnoNumContrato(string CD_FUNDACAO, string ANO_CONTRATO, string NUM_CONTRATO)

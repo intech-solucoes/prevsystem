@@ -1,26 +1,23 @@
-﻿#region Usings
-using Dapper;
+﻿using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-#endregion
+using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
-{   
-    public abstract class ContribuicaoIndividualDAO : BaseDAO<ContribuicaoIndividualEntidade>
-    {
-        
-		public virtual IEnumerable<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
+{
+	public abstract class ContribuicaoIndividualDAO : BaseDAO<ContribuicaoIndividualEntidade>
+	{
+		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO });
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -30,14 +27,14 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual IEnumerable<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricaoTipo(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_TIPO_CONTRIBUICAO)
+		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricaoTipo(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_TIPO_CONTRIBUICAO)
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND CD_TIPO_CONTRIBUICAO = @CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_TIPO_CONTRIBUICAO=:CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO });
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND CD_TIPO_CONTRIBUICAO = @CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_TIPO_CONTRIBUICAO=:CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -51,9 +48,9 @@ namespace Intech.PrevSystem.Dados.DAO
 		{
 			try
 			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
 					return Conexao.QuerySingleOrDefault<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND CD_PLANO = @CD_PLANO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND CD_TIPO_CONTRIBUICAO = @CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
+				else if (AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.QuerySingleOrDefault<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_PLANO=:CD_PLANO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_TIPO_CONTRIBUICAO=:CD_TIPO_CONTRIBUICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, CD_TIPO_CONTRIBUICAO });
 				else
 					throw new Exception("Provider não suportado!");
@@ -64,5 +61,5 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-    }
+	}
 }

@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class SalarioBaseProxy : SalarioBaseDAO
-    {
-    }
+	public class SalarioBaseProxy : SalarioBaseDAO
+	{
+	}
 }

@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_BANCO_AG")]
-    public class BancoAgEntidade
-    {
+	[Table("TB_BANCO_AG")]
+	public class BancoAgEntidade
+	{
 		public string COD_BANCO { get; set; }
 		public string COD_AGENC { get; set; }
 		public string DESC_BCO_AG { get; set; }
@@ -16,6 +16,5 @@ namespace Intech.PrevSystem.Entidades
 		public int? COD_ENTID { get; set; }
 		public string GERENTE_AG { get; set; }
 		public string CEP_AG { get; set; }
-        
-    }
+	}
 }

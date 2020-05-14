@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_HIST_SALDO")]
-    public class HistSaldoEntidade
-    {
+	[Table("GB_HIST_SALDO")]
+	public class HistSaldoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -25,6 +25,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VALOR_COTAS_RISCO { get; set; }
 		public decimal? SALDO_ANT_RISCO { get; set; }
 		public decimal? SALDO_ATUAL_RISCO { get; set; }
-        
-    }
+	}
 }

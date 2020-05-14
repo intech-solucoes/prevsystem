@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("DR_PARAMETROS_RESGATE")]
-    public class ParametrosResgateEntidade
-    {
+	[Table("DR_PARAMETROS_RESGATE")]
+	public class ParametrosResgateEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_PLANO { get; set; }
 		public string CD_TIPO_CONTRIBUICAO { get; set; }
@@ -44,6 +44,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? MESES_CAR_ULT_CONTRIB_PART { get; set; }
 		public decimal? MESES_CAR_ULT_CONTRIB_EMP { get; set; }
 		public string DESC_IRRF_EMPRESTIMO { get; set; }
-        
-    }
+	}
 }

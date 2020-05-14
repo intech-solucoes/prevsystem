@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class EmpresaProxy : EmpresaDAO
-    {
-    }
+	public class EmpresaProxy : EmpresaDAO
+	{
+	}
 }

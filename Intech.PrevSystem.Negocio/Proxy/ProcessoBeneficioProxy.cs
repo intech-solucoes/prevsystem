@@ -9,7 +9,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class ProcessoBeneficioProxy : ProcessoBeneficioDAO
     {
-        public override IEnumerable<ProcessoBeneficioEntidade> BuscarPorFundacaoEmpresaInscricaoPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string CD_PLANO)
+        public override List<ProcessoBeneficioEntidade> BuscarPorFundacaoEmpresaInscricaoPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string CD_PLANO)
         {
             var processos = base.BuscarPorFundacaoEmpresaInscricaoPlano(CD_FUNDACAO, CD_EMPRESA, NUM_INSCRICAO, CD_PLANO);
 
@@ -37,9 +37,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return processos;
         }
 
-        public IEnumerable<ProcessoBeneficioEntidade> BuscarPorFundacaoEmpresaMatriculaPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, bool pensionista)
+        public List<ProcessoBeneficioEntidade> BuscarPorFundacaoEmpresaMatriculaPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, bool pensionista)
         {
-            IEnumerable<ProcessoBeneficioEntidade> processos;
+            List<ProcessoBeneficioEntidade> processos;
 
             if(pensionista)
                 processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoPensionista(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);

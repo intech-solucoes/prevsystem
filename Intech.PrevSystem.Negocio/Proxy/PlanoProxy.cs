@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class PlanoProxy : PlanoDAO
-    {
-    }
+	public class PlanoProxy : PlanoDAO
+	{
+	}
 }

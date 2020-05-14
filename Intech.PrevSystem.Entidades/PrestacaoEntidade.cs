@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_PRESTACOES")]
-    public class PrestacaoEntidade
-    {
+	[Table("CE_PRESTACOES")]
+	public class PrestacaoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public decimal ANO_CONTRATO { get; set; }
 		public int NUM_CONTRATO { get; set; }
@@ -58,7 +58,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_SALDO_MEDIO { get; set; }
 		public DateTime? DT_ENVIO_NOT_COBRANCA { get; set; }
 		public int? NUM_NOT_COBRANCA_ENVIADA { get; set; }
+		public decimal? VL_DESC_ADM { get; set; }
 		[Write(false)] public string DES_VL_RECEBIDO { get; set; }
-        
-    }
+	}
 }

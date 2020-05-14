@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_HEADER_INFO_REND")]
-    public class HeaderInfoRendEntidade
-    {
+	[Table("TB_HEADER_INFO_REND")]
+	public class HeaderInfoRendEntidade
+	{
 		[Key]
 		public decimal OID_HEADER_INFO_REND { get; set; }
 		public string CD_EMPRESA { get; set; }
@@ -22,6 +22,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOM_EMPRESA { get; set; }
 		[Write(false)] public string CNPJ_EMPRESA { get; set; }
 		[Write(false)] public List<InfoRendGrupoEntidade> Grupos { get; set; }
-        
-    }
+	}
 }

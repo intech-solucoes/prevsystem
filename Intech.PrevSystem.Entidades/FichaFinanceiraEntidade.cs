@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CC_FICHA_FINANCEIRA")]
-    public class FichaFinanceiraEntidade
-    {
+	[Table("CC_FICHA_FINANCEIRA")]
+	public class FichaFinanceiraEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public string CD_PLANO { get; set; }
@@ -39,7 +39,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? ANO_PP_PR_TX_PAR { get; set; }
 		public int? SEQ_PP_PR_TX_EMP { get; set; }
 		public decimal? ANO_PP_PR_TX_EMP { get; set; }
-		public decimal? cd_perfil_invest { get; set; }
+		public decimal? CD_PERFIL_INVEST { get; set; }
 		public string COD_VINC { get; set; }
 		public string ORIG_VINC { get; set; }
 		public decimal? BENEF_RISCO_PARTICIPANTE { get; set; }
@@ -49,6 +49,7 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DATA_ALTERACAO { get; set; }
 		public string OBS { get; set; }
 		public string CALC_RESERVA { get; set; }
+		public string TIPO_IRRF { get; set; }
 		public string CONTRIB_CANCELADA { get; set; }
 		[Write(false)] public string DS_TIPO_CONTRIBUICAO { get; set; }
 		[Write(false)] public decimal? TOTAL_CONTRIB { get; set; }
@@ -59,6 +60,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string COD_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public string DS_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public decimal? VALOR_IND { get; set; }
-        
-    }
+	}
 }

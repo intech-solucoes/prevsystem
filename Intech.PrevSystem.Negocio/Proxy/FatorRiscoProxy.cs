@@ -1,12 +1,8 @@
-#region Usings
-using Intech.PrevSystem.Dados.DAO;
-using System.Linq;
-using Intech.PrevSystem.Entidades;
-#endregion
+﻿using Intech.PrevSystem.Dados.DAO;
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class FatorRiscoProxy : FatorRiscoDAO
-    {
-    }
+	public class FatorRiscoProxy : FatorRiscoDAO
+	{
+	}
 }

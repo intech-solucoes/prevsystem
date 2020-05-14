@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_RUBRICA")]
-    public class RubricaEntidade
-    {
+	[Table("TB_RUBRICA")]
+	public class RubricaEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_RUBRICA { get; set; }
@@ -29,6 +29,5 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_PLANO { get; set; }
 		public string CK_MEDIA_SAL_EMPRESTIMO { get; set; }
 		public string RUB_COBR_SIAPE { get; set; }
-        
-    }
+	}
 }

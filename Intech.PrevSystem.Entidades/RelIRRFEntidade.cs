@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_REL_IRRF")]
-    public class RelIRRFEntidade
-    {
+	[Table("CE_REL_IRRF")]
+	public class RelIRRFEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public int SEQUENCIA { get; set; }
 		public DateTime DT_REF { get; set; }
@@ -29,6 +29,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? CD_NATUREZA { get; set; }
 		public string NUM_MATRICULA { get; set; }
 		public string CONTRATOS_PAGOS { get; set; }
-        
-    }
+	}
 }

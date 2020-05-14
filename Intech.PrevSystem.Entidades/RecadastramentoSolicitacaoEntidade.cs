@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("REC_SOLICITACAO")]
-    public class RecadastramentoSolicitacaoEntidade
-    {
+	[Table("REC_SOLICITACAO")]
+	public class RecadastramentoSolicitacaoEntidade
+	{
 		[Key]
 		public decimal OID_SOLICITACAO { get; set; }
 		public DateTime DTA_SOLICITACAO { get; set; }
@@ -19,6 +19,5 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_RECUSADA { get; set; }
 		public string TXT_MOTIVO { get; set; }
 		public string CD_PLANO { get; set; }
-        
-    }
+	}
 }

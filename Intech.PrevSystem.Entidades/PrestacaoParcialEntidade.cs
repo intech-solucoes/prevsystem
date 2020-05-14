@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_PRESTACOES_PARCIAIS")]
-    public class PrestacaoParcialEntidade
-    {
+	[Table("CE_PRESTACOES_PARCIAIS")]
+	public class PrestacaoParcialEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public decimal ANO_CONTRATO { get; set; }
 		public int NUM_CONTRATO { get; set; }
@@ -33,6 +33,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_DESCONTO { get; set; }
 		public decimal? VL_CORR_PREST_ATRASO { get; set; }
 		public decimal? VL_TX_ADM { get; set; }
-        
-    }
+	}
 }

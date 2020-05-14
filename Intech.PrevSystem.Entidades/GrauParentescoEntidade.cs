@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_GRAU_PARENTESCO")]
-    public class GrauParentescoEntidade
-    {
+	[Table("TB_GRAU_PARENTESCO")]
+	public class GrauParentescoEntidade
+	{
 		[Key]
 		public string CD_GRAU_PARENTESCO { get; set; }
 		public string DS_GRAU_PARENTESCO { get; set; }
@@ -22,6 +22,5 @@ namespace Intech.PrevSystem.Entidades
 		public string CK_VALIDO { get; set; }
 		public string CK_PADRAO_ASSISTENCIAL { get; set; }
 		public string CK_PADRAO_PREVIDENCIAL { get; set; }
-        
-    }
+	}
 }

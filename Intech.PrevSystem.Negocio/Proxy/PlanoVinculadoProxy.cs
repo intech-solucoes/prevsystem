@@ -11,7 +11,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class PlanoVinculadoProxy : PlanoVinculadoDAO
     {
-        public override IEnumerable<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
+        public override List<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
         {
             var planos = base.BuscarPorFundacaoEmpresaMatricula(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA).ToList();
 

@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TB_PERFIL_INVEST")]
-    public class PerfilInvestEntidade
-    {
+	[Table("TB_PERFIL_INVEST")]
+	public class PerfilInvestEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public decimal CD_PERFIL_INVEST { get; set; }
 		public string DS_PERFIL_INVEST { get; set; }
@@ -23,6 +23,5 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_GESTOR { get; set; }
 		public string CD_FUNDO { get; set; }
 		[Write(false)] public List<TaxaEvolPerfilEntidade> TaxasProjetadas { get; set; }
-        
-    }
+	}
 }

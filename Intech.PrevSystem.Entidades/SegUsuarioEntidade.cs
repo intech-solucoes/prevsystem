@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("SEG_USUARIO")]
-    public class SegUsuarioEntidade
-    {
+	[Table("SEG_USUARIO")]
+	public class SegUsuarioEntidade
+	{
 		[Key]
 		public decimal OID_USUARIO { get; set; }
 		public string NOM_LOGIN { get; set; }
@@ -23,6 +23,5 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DTA_CRIACAO { get; set; }
 		public string NOM_USUARIO_ATUALIZACAO { get; set; }
 		public DateTime? DTA_ATUALIZACAO { get; set; }
-        
-    }
+	}
 }

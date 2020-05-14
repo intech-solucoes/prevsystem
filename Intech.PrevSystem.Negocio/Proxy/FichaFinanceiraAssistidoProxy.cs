@@ -10,7 +10,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class FichaFinanceiraAssistidoProxy : FichaFinanceiraAssistidoDAO
     {
-        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
+        public override List<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
         {
             var datas = base.BuscarDatas(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO).ToList();
 
@@ -26,7 +26,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
-        public override IEnumerable<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO)
+        public override List<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO)
         {
             var datas = base.BuscarDatasPorRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO).ToList();
 

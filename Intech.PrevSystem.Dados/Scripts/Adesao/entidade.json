@@ -20,16 +20,6 @@
       "Nome": "Documentos",
       "Tipo": "List<AdesaoDocumentoEntidade>",
       "AceitaNulo": false
-    },
-    {
-      "Nome": "IPV4",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "IPV6",
-      "Tipo": "string",
-      "AceitaNulo": false
     }
   ],
   "Imports": []

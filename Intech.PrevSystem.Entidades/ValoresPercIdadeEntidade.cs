@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("DR_VALORES_PERC_IDADE")]
-    public class ValoresPercIdadeEntidade
-    {
+	[Table("DR_VALORES_PERC_IDADE")]
+	public class ValoresPercIdadeEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_TIPO_RESGATE { get; set; }
 		public string CD_PLANO { get; set; }
@@ -16,6 +16,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal ANOS_PATROC { get; set; }
 		public decimal QTD_CONTRIB { get; set; }
 		public decimal PERCENTUAL { get; set; }
-        
-    }
+	}
 }

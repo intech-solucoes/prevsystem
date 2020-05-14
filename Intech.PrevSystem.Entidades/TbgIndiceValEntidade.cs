@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("TBG_INDICE_VAL")]
-    public class TbgIndiceValEntidade
-    {
+	[Table("TBG_INDICE_VAL")]
+	public class TbgIndiceValEntidade
+	{
 		[Key]
 		public decimal OID_INDICE_VAL { get; set; }
 		public decimal OID_INDICE { get; set; }
@@ -22,6 +22,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal VLR_VAR_TRIMESTRE { get; set; }
 		public decimal VLR_VAR_12MESES { get; set; }
 		public decimal VLR_VAR_36MESES { get; set; }
-        
-    }
+	}
 }

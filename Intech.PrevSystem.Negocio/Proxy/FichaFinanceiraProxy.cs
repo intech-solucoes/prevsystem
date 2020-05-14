@@ -12,7 +12,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class FichaFinanceiraProxy : FichaFinanceiraDAO
     {
-        public override IEnumerable<FichaFinanceiraEntidade> BuscarResumoAnosPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+        public override List<FichaFinanceiraEntidade> BuscarResumoAnosPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
         {
             var fichaFinanceira = base.BuscarResumoAnosPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO).ToList();
 
@@ -111,7 +111,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         /// <param name="NUM_INSCRICAO"></param>
         /// <param name="ANO_REF"></param>
         /// <returns></returns>
-        public override IEnumerable<FichaFinanceiraEntidade> BuscarResumoMesesPorFundacaoPlanoInscricaoAno(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF)
+        public override List<FichaFinanceiraEntidade> BuscarResumoMesesPorFundacaoPlanoInscricaoAno(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF)
         {
             var fichaFinanceira = base.BuscarResumoMesesPorFundacaoPlanoInscricaoAno(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF).ToList();
 
@@ -191,7 +191,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return resumo;
         }
 
-        public override IEnumerable<FichaFinanceiraEntidade> BuscarTiposPorFundacaoPlanoInscricaoAnoMes(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF, string MES_REF)
+        public override List<FichaFinanceiraEntidade> BuscarTiposPorFundacaoPlanoInscricaoAnoMes(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF, string MES_REF)
         {
             var fichaFinanceira = base.BuscarTiposPorFundacaoPlanoInscricaoAnoMes(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF, MES_REF);
 
@@ -305,7 +305,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
-        public override IEnumerable<FichaFinanceiraEntidade> BuscarInformePorFundacaoInscricaoAno(string CD_FUNDACAO, string NUM_INSCRICAO, string ANO)
+        public override List<FichaFinanceiraEntidade> BuscarInformePorFundacaoInscricaoAno(string CD_FUNDACAO, string NUM_INSCRICAO, string ANO)
         {
             var informe = base.BuscarInformePorFundacaoInscricaoAno(CD_FUNDACAO, NUM_INSCRICAO, ANO);
             var listaRetorno = new List<FichaFinanceiraEntidade>();

@@ -1,12 +1,12 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_MARGENS_CALCULADAS")]
-    public class MargensCalculadasEntidade
-    {
+	[Table("CE_MARGENS_CALCULADAS")]
+	public class MargensCalculadasEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public int? CD_ORIGEM { get; set; }
@@ -15,6 +15,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_MARGEM { get; set; }
 		public int? NUM_SEQ_GR_FAMIL { get; set; }
 		public string CD_PLANO { get; set; }
-        
-    }
+	}
 }

@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_HIST_RENDAS")]
-    public class HistRendasEntidade
-    {
+	[Table("GB_HIST_RENDAS")]
+	public class HistRendasEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -39,6 +39,5 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_SAL_BENEF_JUDICIAL { get; set; }
 		public decimal? PERC_RESERVA { get; set; }
 		public decimal? VL_IND_COTA { get; set; }
-        
-    }
+	}
 }

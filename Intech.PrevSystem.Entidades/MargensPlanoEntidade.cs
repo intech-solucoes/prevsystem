@@ -4,9 +4,9 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("CE_MARGENS_PLANO")]
-    public class MargensPlanoEntidade
-    {
+	[Table("CE_MARGENS_PLANO")]
+	public class MargensPlanoEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }
 		public string CD_PLANO { get; set; }
@@ -119,6 +119,6 @@ namespace Intech.PrevSystem.Entidades
 		public string TMP_VINC_PATROC { get; set; }
 		public decimal? QTD_MESES_VINC { get; set; }
 		public string ID_INSS { get; set; }
-        
-    }
+		public decimal? CD_FUNDO_RESERVA { get; set; }
+	}
 }

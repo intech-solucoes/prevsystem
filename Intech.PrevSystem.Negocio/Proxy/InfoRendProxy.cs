@@ -10,7 +10,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class InfoRendProxy : InfoRendDAO
     {
-        public override IEnumerable<InfoRendEntidade> BuscarPorOidHeader(decimal OID_HEADER_INFO_REND)
+        public override List<InfoRendEntidade> BuscarPorOidHeader(decimal OID_HEADER_INFO_REND)
         {
             var lista = base.BuscarPorOidHeader(OID_HEADER_INFO_REND).ToList();
 

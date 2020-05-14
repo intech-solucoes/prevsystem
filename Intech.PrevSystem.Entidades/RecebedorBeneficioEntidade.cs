@@ -4,18 +4,20 @@ using Dapper.Contrib.Extensions;
 
 namespace Intech.PrevSystem.Entidades
 {
-    [Table("GB_RECEBEDOR_BENEFICIO")]
-    public class RecebedorBeneficioEntidade
-    {
+	[Table("GB_RECEBEDOR_BENEFICIO")]
+	public class RecebedorBeneficioEntidade
+	{
 		public string CD_FUNDACAO { get; set; }
 		public int SEQ_RECEBEDOR { get; set; }
 		public string CD_FORMA_PAG { get; set; }
 		public string CD_SITUACAO { get; set; }
 		public string CD_MOT_SITUACAO { get; set; }
 		public string CD_TIPO_RECEBEDOR { get; set; }
+		public string CD_EMPRESA { get; set; }
 		public string NUM_INSCRICAO { get; set; }
 		public decimal? NUM_SEQ_GR_FAMIL { get; set; }
 		public string TIPO_CALC_CONTRIB { get; set; }
+		public string CD_QUALID_RECEB { get; set; }
 		public string DESC_ASSOCIACAO { get; set; }
 		public string CD_TIPO_RETENCAO { get; set; }
 		public string CD_MOT_ISENCAO { get; set; }
@@ -35,7 +37,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? QTD_DEP_IRRF { get; set; }
 		public decimal? PERC_CONTRIB_ASSIST { get; set; }
 		public string CD_SEGURADORA { get; set; }
-		public string CD_EMPRESA { get; set; }
 		public string PAGA_CONTRIB_PATRONAL { get; set; }
 		public decimal? PERC_CONTRIB_PATRONAL { get; set; }
 		public string DESC_ANUIDADE { get; set; }
@@ -47,11 +48,11 @@ namespace Intech.PrevSystem.Entidades
 		public string PIS { get; set; }
 		public string SEXO { get; set; }
 		public string CD_ESTADO_CIVIL { get; set; }
-		public string CD_QUALID_RECEB { get; set; }
 		public int? CREDOR_IRRF_JUDICIAL { get; set; }
 		public string NUM_MATRICULA_EXTERNA { get; set; }
 		public string NUM_PROCESSO_PREV { get; set; }
 		public string ABATE_IDOSO_IRRF { get; set; }
+		public int? RECEB_NUM_SEQ_DEP { get; set; }
 		public decimal? PERC_ISENCAO_IRRF { get; set; }
 		public string MSG_INFORME { get; set; }
 		public decimal? VAL_INSS_LIQ { get; set; }
@@ -70,6 +71,6 @@ namespace Intech.PrevSystem.Entidades
 		public string ENVIA_CC_MAIL { get; set; }
 		public string IND_CONTRIB_DED_IRRF { get; set; }
 		public DateTime? DATA_INCLUSAO { get; set; }
-        
-    }
+		public int? TIPO_CID { get; set; }
+	}
 }

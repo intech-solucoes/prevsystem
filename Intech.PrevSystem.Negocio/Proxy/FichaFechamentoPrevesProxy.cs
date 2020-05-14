@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class FichaFechamentoPrevesProxy : FichaFechamentoPrevesDAO
-    {
-    }
+	public class FichaFechamentoPrevesProxy : FichaFechamentoPrevesDAO
+	{
+	}
 }

@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-	public class EstadoCivilProxy : EstadoCivilDAO
+	public class GrauInstrucaoProxy : GrauInstrucaoDAO
 	{
 	}
 }

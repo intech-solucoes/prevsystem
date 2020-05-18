@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class GrauParentescoProxy : GrauParentescoDAO
-    {
-    }
+	public class GrauParentescoProxy : GrauParentescoDAO
+	{
+	}
 }

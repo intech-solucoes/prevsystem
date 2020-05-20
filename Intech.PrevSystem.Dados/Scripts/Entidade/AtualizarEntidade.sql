@@ -2,7 +2,7 @@
     Retorno
         -void
     Parametros
-        -COD_ENTID:string
+        -COD_ENTID:int
         -NOME_ENTID:string
         -CPF_CGC:string
         -END_ENTID:string

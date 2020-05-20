@@ -3,12 +3,14 @@ using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class EntidadeDAO : BaseDAO<EntidadeEntidade>
 	{
-		public virtual void AtualizarEntidade(string COD_ENTID, string NOME_ENTID, string CPF_CGC, string END_ENTID, string NR_END_ENTID, string COMP_END_ENTID, string BAIRRO_ENTID, string CID_ENTID, string UF_ENTID, string CEP_ENTID, string NUM_BANCO, string NUM_AGENCIA, string NUM_CONTA)
+		public virtual void AtualizarEntidade(int COD_ENTID, string NOME_ENTID, string CPF_CGC, string END_ENTID, string NR_END_ENTID, string COMP_END_ENTID, string BAIRRO_ENTID, string CID_ENTID, string UF_ENTID, string CEP_ENTID, string NUM_BANCO, string NUM_AGENCIA, string NUM_CONTA)
 		{
 			try
 			{

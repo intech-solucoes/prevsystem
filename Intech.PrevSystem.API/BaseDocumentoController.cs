@@ -121,31 +121,36 @@ namespace Intech.PrevSystem.API
         [Authorize("Bearer")]
         public IActionResult Deletar(decimal OID_DOCUMENTO)
         {
-            try
+            if (OID_DOCUMENTO != 0)
             {
-                var arquivoUploadProxy = new ArquivoUploadProxy();
-                var documentoProxy = new DocumentoProxy();
-                var documentoPlanoProxy = new DocumentoPlanoProxy();
-                var documento = documentoProxy.BuscarPorChave(OID_DOCUMENTO);
+                try
+                {
+                    var arquivoUploadProxy = new ArquivoUploadProxy();
+                    var documentoProxy = new DocumentoProxy();
+                    var documentoPlanoProxy = new DocumentoPlanoProxy();
+                    var documento = documentoProxy.BuscarPorChave(OID_DOCUMENTO);
 
-                documentoPlanoProxy.DeletarPorOidDocumento(documento.OID_DOCUMENTO);
+                    documentoPlanoProxy.DeletarPorOidDocumento(documento.OID_DOCUMENTO);
 
-                documentoProxy.Deletar(documento);
+                    documentoProxy.Deletar(documento);
 
-                var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
-                arquivoUploadProxy.Deletar(arquivoUpload);
+                    var arquivoUpload = arquivoUploadProxy.BuscarPorChave(documento.OID_ARQUIVO_UPLOAD);
+                    arquivoUploadProxy.Deletar(arquivoUpload);
 
-                //var webRootPath = HostingEnvironment.WebRootPath;
-                var arquivo = Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
+                    //var webRootPath = HostingEnvironment.WebRootPath;
+                    var arquivo = Path.Combine(BaseUploadController.DiretorioUpload, arquivoUpload.NOM_ARQUIVO_LOCAL);
 
-                System.IO.File.Delete(arquivo);
+                    System.IO.File.Delete(arquivo);
 
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            else
                 return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
 
         [HttpPost("criarPasta")]

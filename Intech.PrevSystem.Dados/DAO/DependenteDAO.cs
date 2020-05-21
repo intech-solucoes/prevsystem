@@ -78,6 +78,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual void ExcluirDependente(string CD_FUNDACAO, string NUM_INSCRICAO, decimal NUM_SEQ_DEP)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					Conexao.Execute("DELETE FROM CS_DEPENDENTE   WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO =@NUM_INSCRICAO    AND NUM_SEQ_DEP = @NUM_SEQ_DEP", new { CD_FUNDACAO, NUM_INSCRICAO, NUM_SEQ_DEP });
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					Conexao.Execute("DELETE FROM CS_DEPENDENTE WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND NUM_SEQ_DEP=:NUM_SEQ_DEP", new { CD_FUNDACAO, NUM_INSCRICAO, NUM_SEQ_DEP });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual void IncluirDependente(string CD_FUNDACAO, string NUM_INSCRICAO, decimal NUM_SEQ_DEP, string NOME_DEP, string CD_GRAU_PARENTESCO, string SEXO_DEP, DateTime DT_NASC_DEP, string ABATIMENTO_IRRF, DateTime DT_VALIDADE_DEP, string CD_MOT_PERDA_VALIDADE, DateTime DT_INCLUSAO_DEP, string PLANO_ASSISTENCIAL, string PLANO_PREVIDENCIAL, DateTime? DT_INIC_IRRF, DateTime? DT_TERM_IRRF, string PECULIO, string NUM_PROTOCOLO, string CPF, string IDENTIDADE, string ORGAO_EXP, DateTime? DT_EXPEDICAO, string CD_PLANO, string CD_NACIONALIDADE, string CD_ESTADO_CIVIL, string NATURALIDADE, string UF_NATURALIDADE, string EMAIL_DEP, string FONE_CELULAR, string NUM_BANCO, string NUM_CONTA, string NUM_AGENCIA, string END_DEP, string COMP_END_DEP, string BAIRRO_DEP, string CID_DEP, string UF_DEP, string CD_PAIS, string FONE_DEP, string CEP_DEP)
 		{
 			try

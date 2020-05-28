@@ -1,0 +1,25 @@
+﻿{
+  "nomeTabela": "WEB_DOC_ATU_CADASTRAL",
+  "colunasExtras": [
+    {
+      "nome": "NOME_ENTID",
+      "tipo": "string",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "NOM_ARQUIVO_ORIGINAL",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "NOM_ARQUIVO_LOCAL",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DTA_UPLOAD",
+      "tipo": "DateTime",
+      "aceitaNulo": true
+    }
+  ]
+}

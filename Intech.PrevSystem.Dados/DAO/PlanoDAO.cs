@@ -30,23 +30,6 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual IEnumerable<PlanoEntidade> BuscarPlanoPorInscricaoCdCategoria(string NUM_INSCRICAO)
-		{
-			try
-			{
-				if(AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<PlanoEntidade>("SELECT CA.CD_CATEGORIA, DS_CATEGORIA, P.*      FROM GB_PROCESSOS_BENEFICIO PB  	    JOIN TB_PLANOS P ON PB.CD_PLANO = P.CD_PLANO AND NUM_INSCRICAO = @NUM_INSCRICAO  		INNER JOIN CS_PLANOS_VINC PV ON (PB.NUM_INSCRICAO = PV.NUM_INSCRICAO AND PB.CD_PLANO = PV.CD_PLANO)  		INNER JOIN TB_SIT_PLANO ST ON (PV.CD_SIT_PLANO = ST.CD_SIT_PLANO)  		INNER JOIN TB_CATEGORIA CA ON (ST.CD_CATEGORIA = CA.CD_CATEGORIA)", new { NUM_INSCRICAO });
-				else if(AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<PlanoEntidade>("SELECT CA.CD_CATEGORIA, DS_CATEGORIA, P.* FROM GB_PROCESSOS_BENEFICIO  PB   JOIN TB_PLANOS   P  ON PB.CD_PLANO=P.CD_PLANO AND NUM_INSCRICAO=:NUM_INSCRICAO INNER  JOIN CS_PLANOS_VINC   PV  ON (PB.NUM_INSCRICAO=PV.NUM_INSCRICAO AND PB.CD_PLANO=PV.CD_PLANO) INNER  JOIN TB_SIT_PLANO   ST  ON (PV.CD_SIT_PLANO=ST.CD_SIT_PLANO) INNER  JOIN TB_CATEGORIA   CA  ON (ST.CD_CATEGORIA=CA.CD_CATEGORIA)", new { NUM_INSCRICAO });
-				else
-					throw new Exception("Provider não suportado!");
-			}
-			finally
-			{
-				Conexao.Close();
-			}
-		}
-
 		public virtual PlanoEntidade BuscarPorCodigo(string CD_PLANO)
 		{
 			try

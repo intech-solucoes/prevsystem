@@ -5,6 +5,11 @@
       "Nome": "DS_ESPECIE",
       "Tipo": "string",
       "AceitaNulo": true
+    },
+    {
+      "Nome": "CD_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": true
     }
   ],
   "Imports": []

@@ -308,7 +308,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         "<br/>" +
                        $"<div style='font - size: 10px; color: #000000;'>CPF: <b>{dados.DadosPessoais.CPF_CGC}</b></div>" +
                         "</div>";
-                    EnvioEmail.Enviar(emailConfig, emailDestino, $"Empréstimo – Concessão Web – Comprovante dados bancários - {dados.DadosPessoais.NOME_ENTID}", corpo, file.OpenReadStream(), fileName);
+                    var arquivo = new KeyValuePair<string, Stream>(fileName, file.OpenReadStream() );
+                    EnvioEmail.Enviar(emailConfig, emailDestino, $"Empréstimo – Concessão Web – Comprovante dados bancários - {dados.DadosPessoais.NOME_ENTID}", corpo, arquivo);
 
                     return Json($"Dados Bancários enviados com sucesso.");
                 }
@@ -362,7 +363,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     "Este contrato é válido para Empréstimos pessoais vinculados aos planos Sabesprev Mais e Benefícios Básico.<br/>" +
                     "<br/>" +
                     "Fundação Sabesp de Seguridade Social - Sabesprev";
-                EnvioEmail.Enviar(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, pdf, filename);
+                var anexo = new KeyValuePair<string, Stream>( filename, pdf );
+                EnvioEmail.Enviar(emailConfig, email, "Sabesprev - Contrato de Abertura de Crédito", corpo, anexo);
 
 
 

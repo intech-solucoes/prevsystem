@@ -35,5 +35,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOME_ENTID { get; set; }
 		[Write(false)] public string CPF_CGC { get; set; }
 		[Write(false)] public List<PlanoEntidade> Planos { get; set; }
+		[Write(false)] public string SIGLA_ENTID { get; set; }
 	}
 }

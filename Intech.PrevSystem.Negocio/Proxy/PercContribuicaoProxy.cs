@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class PercContribuicaoProxy : PercContribuicaoDAO
-    {
-    }
+	public class PercContribuicaoProxy : PercContribuicaoDAO
+	{
+	}
 }

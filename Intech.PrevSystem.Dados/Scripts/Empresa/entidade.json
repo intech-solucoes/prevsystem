@@ -1,20 +1,26 @@
-﻿{
-    "nomeTabela": "TB_EMPRESA",
-    "colunasExtras": [
-        {
-            "nome": "NOME_ENTID",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "CPF_CGC",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Planos",
-            "tipo": "List<PlanoEntidade>",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "TB_EMPRESA",
+  "ColunasExtras": [
+    {
+      "Nome": "NOME_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CPF_CGC",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "Planos",
+      "Tipo": "List<PlanoEntidade>",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "SIGLA_ENTID",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ],
+  "Imports": []
 }

@@ -32,9 +32,9 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? RENOVACAO_MAX_PERC { get; set; }
 		public string SITUACAO { get; set; }
 		public decimal? CD_CATEGORIA { get; set; }
+		public string ID_CONVENIO { get; set; }
 		public decimal? VL_FATOR_CALCULO { get; set; }
 		public string CONSIDERAR_LIMITE_EMPRESTIMO { get; set; }
-		public string ID_CONVENIO { get; set; }
 		public string CATEGORIA_ATIVO { get; set; }
 		public string CATEGORIA_ASSISTIDO { get; set; }
 		public string CATEGORIA_AUTOPATROCINADO { get; set; }
@@ -53,6 +53,8 @@ namespace Intech.PrevSystem.Entidades
 		public string AUTORIZACAO_ESPECIAL { get; set; }
 		public string PERMITE_REFORMA { get; set; }
 		public decimal? PERCENTUAL_DESCONTO { get; set; }
+		public string ID_TEMP_VINC { get; set; }
+		public string PERMITE_CONCESSAO_WEB { get; set; }
 		[Write(false)] public List<DateTime> DatasCredito { get; set; }
 		[Write(false)] public List<CarenciasDisponiveisEntidade> Carencias { get; set; }
 		[Write(false)] public decimal MargemConsignavel { get; set; }

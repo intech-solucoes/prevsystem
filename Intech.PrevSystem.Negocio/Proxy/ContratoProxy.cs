@@ -1,4 +1,5 @@
 ﻿#region Usings
+using Intech.Lib.Web.API;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using System;
@@ -30,6 +31,26 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
 
             return retorno;
+        }
+
+        public override List<ContratoEntidade> BuscarPorFundacaoInscricaoGrupoFamiliaNotSituacao(string CD_FUNDACAO, string NUM_INSCRICAO, string NUM_SEQ_GR_FAMIL)
+        {
+            var listaContratos = base.BuscarPorFundacaoInscricaoGrupoFamiliaNotSituacao(CD_FUNDACAO, NUM_INSCRICAO, NUM_SEQ_GR_FAMIL);
+            var retorno = new List<ContratoEntidade>();
+
+            foreach (var contrato in listaContratos)
+                retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
+
+            return retorno;
+        }
+
+        public override ContratoEntidade BuscarDetalhePorFundacaoInscricaoAnoNumeroSeqFamilia(string CD_FUNDACAO, string NUM_INSCRICAO, string ANO_CONTRATO, string NUM_CONTRATO, string NUM_SEQ_GR_FAMIL)
+        {
+            var contrato = base.BuscarDetalhePorFundacaoInscricaoAnoNumeroSeqFamilia(CD_FUNDACAO, NUM_INSCRICAO, ANO_CONTRATO, NUM_CONTRATO, NUM_SEQ_GR_FAMIL);
+
+            contrato = BuscarDetalhesContratos(CD_FUNDACAO, contrato);
+
+            return contrato;
         }
 
         public override ContratoEntidade BuscarPorFundacaoAnoNumContrato(string CD_FUNDACAO, string ANO_CONTRATO, string NUM_CONTRATO)

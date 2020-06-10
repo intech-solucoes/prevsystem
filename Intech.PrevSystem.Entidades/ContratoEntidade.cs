@@ -132,5 +132,12 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public ModalidadeEntidade Modalidade { get; set; }
 		[Write(false)] public SaldoDevedorEntidade SaldoDevedor { get; set; }
 		[Write(false)] public string DS_SITUACAO { get; set; }
+		[Write(false)] public string NOME_PARTICIPANTE { get; set; }
+		[Write(false)] public string CPF_PARTICIPANTE { get; set; }
+		[Write(false)] public string NOME_PENSIONISTA { get; set; }
+		[Write(false)] public string CPF_PENSIONISTA { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
+		[Write(false)] public string DS_NATUR { get; set; }
+		[Write(false)] public string DS_MODAL { get; set; }
 	}
 }

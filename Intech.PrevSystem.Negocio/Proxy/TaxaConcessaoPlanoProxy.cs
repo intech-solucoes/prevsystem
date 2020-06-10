@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class TaxaConcessaoPlanoProxy : TaxaConcessaoPlanoDAO
-    {
-    }
+	public class TaxaConcessaoPlanoProxy : TaxaConcessaoPlanoDAO
+	{
+	}
 }

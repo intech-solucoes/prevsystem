@@ -131,5 +131,63 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return funcionario;
         }
+
+        public override long Inserir(FuncionarioEntidade entidade)
+        {
+            base.Insert(
+                 entidade.CD_FUNDACAO
+                ,entidade.NUM_INSCRICAO
+                ,entidade.COD_ENTID
+                ,entidade.CD_EMPRESA
+                ,entidade.NUM_MATRICULA
+                ,entidade.CD_CARGO
+                ,entidade.CD_FUNCAO
+                ,entidade.CD_LOTACAO
+                ,entidade.CD_NIVEL_SALARIAL
+                ,entidade.DT_ADMISSAO
+                ,entidade.CD_SIT_EMPRESA
+                ,entidade.DT_SITUACAO_EMPRESA
+                ,entidade.CD_MOTIVO_DEMISSAO
+                ,entidade.DT_DEMISSAO
+                ,entidade.AUTO_MANTENEDOR
+                ,entidade.FONE_TRAB
+                ,entidade.FAX_TRAB
+                ,entidade.RAMAL_TRAB
+                ,entidade.AGENDA
+                ,entidade.CD_LOCALIDADE
+                ,entidade.CD_OCUPACAO
+                ,entidade.ORGAO_EXT
+                ,entidade.SETOR_EXT
+                ,entidade.CONTATO_EXT
+                ,entidade.FONE_EXT
+                ,entidade.RAMAL_EXT
+                ,entidade.CD_EMP_NEW
+                ,entidade.NUM_PROTOCOLO
+                ,entidade.DT_RECADASTRO
+                ,entidade.COD_VINC
+                ,entidade.COD_CERTA
+                ,entidade.COD_ORIGEM
+                ,entidade.COD_PAG
+                ,entidade.VL_REND_BASE
+                ,entidade.DT_INF_PPE
+                ,entidade.TEMP_SERV
+                ,entidade.VL_BASE
+                ,entidade.CD_SEQ_CPF
+                ,entidade.NUM_MATRICULA_SIAPE
+                ,entidade.DT_APOSENT
+                ,entidade.CD_APOSENT_SUJ
+                ,entidade.EMAIL_FUNC
+                ,entidade.CK_INADIPLENTE
+                ,entidade.EXTRATO_IMPRESSO
+                ,entidade.DT_VINCULO_FUNDACAO
+                ,entidade.IND_ELEGIBILIDADE
+                ,entidade.DT_TERMO
+                ,entidade.IND_PART_RATIFICADO
+                ,entidade.PERC_PECULIO
+                , entidade.AGENDA2
+            );
+
+            return 0;
+        }
     }
 }

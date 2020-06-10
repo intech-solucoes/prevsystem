@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class FuncionalidadeProxy : FuncionalidadeDAO
-    {
-    }
+	public class FuncionalidadeProxy : FuncionalidadeDAO
+	{
+	}
 }

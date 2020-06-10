@@ -3,7 +3,7 @@
     Retorno
         -DocumentoEntidade
     Parametros
-        -OID_DOCUMENTO_PASTA:decimal
+        -OID_DOCUMENTO_PASTA:decimal?
 */
 
 SELECT *

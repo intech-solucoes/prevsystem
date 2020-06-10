@@ -132,7 +132,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 var categoria = new CategoriaProxy().BuscarPorCdCategoria(plano.CD_CATEGORIA);
                 var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(plano.CD_SIT_PLANO);
 
-                if (categoria.PERMITE_EMPRESTIMO == "N" || sitPlano.permite_emprestimo_em == "N")
+                if (categoria.PERMITE_EMPRESTIMO == "N" || sitPlano.PERMITE_EMPRESTIMO_EM == "N")
                     throw new Exception("Simulação de empréstimo não permitida, visto sua situação junto ao plano. Dúvidas, contate nosso call center 0800 55 1827");
 
                 var bloqueios = new BloqueioProxy().BuscarBloqueioEmprestimoPorCodEntid(CodEntid).ToList();

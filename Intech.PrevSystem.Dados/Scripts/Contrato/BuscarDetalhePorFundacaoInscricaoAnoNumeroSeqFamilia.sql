@@ -1,6 +1,6 @@
 ﻿/*Config
     Retorno
-        -dynamic
+        -ContratoEntidade
     Parametros
         -CD_FUNDACAO:string
         -NUM_INSCRICAO:string

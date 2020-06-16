@@ -397,6 +397,13 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             }
         }
 
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public IActionResult BuscarCpf([FromQuery(Name = "cpf")] string cpf)
+        {
+            return Json(cpf);
+        }
+
         [HttpGet("[action]/{cpf}")]
         [AllowAnonymous]
         public IActionResult BuscarPorCpf(string cpf)

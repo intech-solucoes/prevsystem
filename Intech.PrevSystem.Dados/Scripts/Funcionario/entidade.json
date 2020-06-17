@@ -35,6 +35,11 @@
       "Nome": "CD_SIT_PLANO",
       "Tipo": "string",
       "AceitaNulo": false
+    },
+    {
+      "Nome": "CK_INADIPLENTE",
+      "Tipo": "string",
+      "AceitaNulo": false
     }
   ],
   "Imports": []

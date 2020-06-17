@@ -1,0 +1,21 @@
+{
+  "NomeTabela": "WEB_RECAD_PUBLICO_ALVO",
+  "ColunasExtras": [
+    {
+      "Nome": "DTA_TERMINO",
+      "Tipo": "DateTime",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CD_TIPO_RECEBEDOR",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CD_ESPECIE_INSS",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
+}

@@ -1,3 +1,10 @@
 ﻿{
-  "nomeTabela": "TB_SIT_PLANO"
+  "nomeTabela": "TB_SIT_PLANO",
+  "ColunasExtras": [
+      {
+          "Nome": "altera_salario_em",
+          "Tipo": "string",
+          "AceitaNulo": true
+      }
+  ]
 }

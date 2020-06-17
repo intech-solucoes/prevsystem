@@ -23,5 +23,6 @@ namespace Intech.PrevSystem.Entidades
 		public string PERMITE_EMPRESTIMO_EM { get; set; }
 		public string EXP_RUB_FOLHA_PGTO { get; set; }
 		public string AUX_DOENCA { get; set; }
+		[Write(false)] public string altera_salario_em { get; set; }
 	}
 }

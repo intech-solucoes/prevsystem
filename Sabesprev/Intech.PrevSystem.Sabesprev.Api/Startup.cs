@@ -93,7 +93,6 @@ namespace Intech.PrevSystem.Sabesprev.Api
             }
 
             //app.UseHttpsRedirection();
-            app.UseMvc();
 
             app.UseCors(cors =>
             {
@@ -101,6 +100,8 @@ namespace Intech.PrevSystem.Sabesprev.Api
                 cors.AllowAnyOrigin();
                 cors.AllowAnyMethod();
             });
+
+            app.UseMvc();
         }
     }
 }

@@ -5,6 +5,11 @@
             "nome": "DS_GRAU_PARENTESCO",
             "tipo": "string",
             "aceitaNulo": true
+        },
+        {
+            "Nome": "IND_OPERACAO",
+            "Tipo": "string",
+            "AceitaNulo": true
         }
     ]
 }

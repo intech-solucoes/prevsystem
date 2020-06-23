@@ -87,5 +87,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return 0;
         }
+
+        public void AtualizarDadosPessoais(DadosPessoaisEntidade dadosPessoais)
+        {
+            base.AtualizarDadosPessoais(dadosPessoais.COD_ENTID, dadosPessoais.CD_NACIONALIDADE, dadosPessoais.CD_GRAU_INSTRUCAO, dadosPessoais.CD_ESTADO_CIVIL, dadosPessoais.SEXO,
+                    dadosPessoais.NATURALIDADE, dadosPessoais.UF_NATURALIDADE, dadosPessoais.DT_NASCIMENTO, dadosPessoais.NU_IDENT, dadosPessoais.ORG_EMIS_IDENT, dadosPessoais.DT_EMIS_IDENT,
+                    dadosPessoais.UF_EMIS_IDENT, dadosPessoais.NU_CTPS, dadosPessoais.SERIE_CTPS, dadosPessoais.UF_EMIS_CTPS, dadosPessoais.COD_BANCO_COB, dadosPessoais.COD_AGENC_COB,
+                    dadosPessoais.CD_TIPO_COB, dadosPessoais.NUM_CONTA_COB, dadosPessoais.NOME_PAI, dadosPessoais.NOME_MAE, dadosPessoais.NOME_CONJUGE, dadosPessoais.CPF_CONJUGE, dadosPessoais.EMAIL_AUX, dadosPessoais.FONE_CELULAR);
+        }
     }
 }

@@ -117,5 +117,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return 0;
         }
+
+        public void AtualizarEntidade(EntidadeEntidade entidade)
+        {
+            base.AtualizarEntidade(entidade.COD_ENTID, entidade.NOME_ENTID, entidade.CPF_CGC, entidade.END_ENTID, entidade.NR_END_ENTID, entidade.COMP_END_ENTID,
+                    entidade.BAIRRO_ENTID, entidade.CID_ENTID, entidade.UF_ENTID, entidade.CEP_ENTID, entidade.NUM_BANCO, entidade.NUM_AGENCIA, entidade.NUM_CONTA);
+        }
     }
 }

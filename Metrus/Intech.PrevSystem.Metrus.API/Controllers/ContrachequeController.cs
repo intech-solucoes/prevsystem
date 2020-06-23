@@ -54,7 +54,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 dataReferencia = dataReferencia.AddMonths(1);
 
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
-                var fichaFinanceira = new FichaFinanceiraAssistidoProxy().Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, "1");
+                var fichaFinanceira = new FichaFinanceiraAssistidoProxy()
+                    .Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA, cdPlano, dataReferencia, "1");
 
                 return Json(fichaFinanceira);
             }

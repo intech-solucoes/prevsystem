@@ -9,7 +9,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
     {
         public dynamic BuscarResumoPorFundacaoContrato(string CD_FUNDACAO, decimal ANO_CONTRATO, decimal NUM_CONTRATO)
         {
-            var prestacoes = base.BuscarPorFundacaoContrato(CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO).ToList();
+            var prestacoes = base.BuscarPorFundacaoContrato(CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO)
+                .Where(x => x.TIPO != "S")
+                .ToList();
             var prestacoesPagas = prestacoes.Where(x => x.DT_PAGTO != null).ToList();
             var qntPagas = prestacoesPagas.Count;
 

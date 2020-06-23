@@ -84,7 +84,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                     resultadoSimulacoes.Add(resultadoSimulacao);
                 }
 
-                var resultado = resultadoSimulacoes.First(x => x.CodigoPerfil == plano.cd_perfil_invest);
+                var resultado = resultadoSimulacoes.First(x => x.CodigoPerfil == plano.CD_PERFIL_INVEST);
 
                 return Json(new
                 {

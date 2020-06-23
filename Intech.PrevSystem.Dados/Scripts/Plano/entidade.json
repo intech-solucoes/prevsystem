@@ -1,3 +1,15 @@
 ﻿{
-    "nomeTabela": "TB_PLANOS"
+  "nomeTabela": "TB_PLANOS",
+  "ColunasExtras": [
+    {
+      "Nome": "DS_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "CD_ESPECIE",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ]
 }

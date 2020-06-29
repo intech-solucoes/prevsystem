@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class BancoAgProxy : BancoAgDAO
-    {
-    }
+	public class BancoAgProxy : BancoAgDAO
+	{
+	}
 }

@@ -10,6 +10,23 @@ namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class BancoAgDAO : BaseDAO<BancoAgEntidade>
 	{
+		public virtual List<BancoAgEntidade> BuscarAgenciasCodBanco(string COD_BANCO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<BancoAgEntidade>("SELECT *  FROM  TB_BANCO_AG  WHERE COD_BANCO = @COD_BANCO    AND COD_AGENC <> '00000'", new { COD_BANCO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<BancoAgEntidade>("SELECT * FROM TB_BANCO_AG WHERE COD_BANCO=:COD_BANCO AND COD_AGENC<>'00000'", new { COD_BANCO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual List<BancoAgEntidade> BuscarBancos()
 		{
 			try

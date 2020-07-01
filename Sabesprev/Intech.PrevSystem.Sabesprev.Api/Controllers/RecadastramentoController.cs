@@ -386,7 +386,7 @@ $"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "rlandert@sabesprev.com.br"//"viniciusvives@gmail.com"//
+                        "documentos@sabesprev.com.br"//"viniciusvives@gmail.com"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);
@@ -621,12 +621,12 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                 var lista = new GrauParentescoProxy().BuscarOrderAlfabetica().ToList<GrauParentescoEntidade>();
                 if (irrf == true)
                 {
-                    var filtro = new[] { "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "40" };
+                    var filtro = new[] { "02", "03", "04", "06", "07", "09", "10", "12", "40", "41", "42" };
                     return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
                 }
                 if (irrf == false)
                 {
-                    var filtro = new[] { "02", "03", "04", "05", "06", "07", "08", "09", "12" };
+                    var filtro = new[] { "02", "03", "04", "06", "07", "09", "12", "41", "42" };
                     return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
                 }
                 return Json(lista);

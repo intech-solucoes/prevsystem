@@ -81,6 +81,11 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 if (file.Length > 0)
                 {
                     string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var extension = fileName.Split(".").Last()?.ToUpper();
+                    if (extension != "TIF" && extension != "JPG" && extension != "BMP" && extension != "PNG" && extension != "PDF") {
+                        // TIF, JPG, BMP, PNG e PDF
+                        return BadRequest("Arquivo inválido. Por favor utilizar arquivos das seguintes extensões: TIF, JPG, BMP, PNG e PDF.");
+                    }
                     string fullPath = Path.Combine("Upload", fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
@@ -121,7 +126,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     recad.IND_SITUACAO_RECAD = "SOL";
                     recad.NOM_USUARIO_ACAO = Dados.Participante.NOME_ENTID;
 
-                    new WebRecadPublicoAlvoProxy().AtualizarUsuarioAcao(recad.OID_RECAD_CAMPANHA, recad.IND_SITUACAO_RECAD, recad.NOM_USUARIO_ACAO);
+                    var atualizar = new WebRecadPublicoAlvoProxy().AtualizarUsuarioAcao(recad.OID_RECAD_PUBLICO_ALVO, recad.IND_SITUACAO_RECAD, recad.NOM_USUARIO_ACAO);
                     //new WebRecadPublicoAlvoProxy().Atualizar(recad);
 
                     var refEspecieINSS = new EspecieINSSProxy().BuscarPorCdEspecieINSS(Dados.Participante.CD_ESPECIE_INSS);
@@ -155,31 +160,31 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     dadosInsert.COD_PROTOCOLO = dataAtual.ToString("yyyyMMddHHmmss") + recad.SEQ_RECEBEDOR;
                     dadosInsert.DTA_RECUSA = null;
                     dadosInsert.TXT_MOTIVO_RECUSA = null;
-                    dadosInsert.NOM_PESSOA = Dados.Participante.NOME_ENTID.ToUpper() != dadosAntigos.NOME_ENTID.ToUpper() ? Dados.Participante.NOME_ENTID.ToUpper() : null;
-                    dadosInsert.DTA_NASCIMENTO = Dados.Participante.DT_NASCIMENTO != dadosAntigos.DT_NASCIMENTO ? DateTime.Parse(Dados.Participante.DT_NASCIMENTO) : (DateTime?)null;
+                    dadosInsert.NOM_PESSOA = Dados.Participante.NOME_ENTID?.ToUpper() != dadosAntigos.NOME_ENTID?.ToUpper() ? Dados.Participante.NOME_ENTID?.ToUpper() : null;
+                    dadosInsert.DTA_NASCIMENTO = Dados.Participante.DT_NASCIMENTO != dadosAntigos.DT_NASCIMENTO ? DateTime.ParseExact(Dados.Participante.DT_NASCIMENTO, "MM/dd/yyyy", null) : (DateTime?)null;
                     dadosInsert.COD_CPF = Dados.Participante.CPF_CGC.LimparMascara() != dadosAntigos.CPF_CGC.LimparMascara() ? Dados.Participante.CPF_CGC.LimparMascara() : null;
                     dadosInsert.COD_RG = Dados.Participante.NU_IDENT != dadosAntigos.NU_IDENT ? Dados.Participante.NU_IDENT : null;
-                    dadosInsert.DES_ORGAO_EXPEDIDOR = Dados.Participante.ORG_EMIS_IDENT.ToUpper() != dadosAntigos.ORG_EMIS_IDENT.ToUpper() ? Dados.Participante.ORG_EMIS_IDENT.ToUpper() : null;
-                    dadosInsert.DTA_EXPEDICAO_RG = Dados.Participante.DT_EMIS_IDENT != dadosAntigos.DT_EMIS_IDENT ? DateTime.Parse(Dados.Participante.DT_EMIS_IDENT) : (DateTime?)null;
+                    dadosInsert.DES_ORGAO_EXPEDIDOR = Dados.Participante.ORG_EMIS_IDENT?.ToUpper() != dadosAntigos.ORG_EMIS_IDENT?.ToUpper() ? Dados.Participante.ORG_EMIS_IDENT?.ToUpper() : null;
+                    dadosInsert.DTA_EXPEDICAO_RG = Dados.Participante.DT_EMIS_IDENT != dadosAntigos.DT_EMIS_IDENT ? DateTime.ParseExact(Dados.Participante.DT_EMIS_IDENT, "MM/dd/yyyy", null) : (DateTime?)null;
                     dadosInsert.DTA_ADMISSAO = null;
-                    dadosInsert.DES_NATURALIDADE = Dados.Participante.NATURALIDADE.ToUpper() != dadosAntigos.NATURALIDADE.ToUpper() ? Dados.Participante.NATURALIDADE.ToUpper() : null;
+                    dadosInsert.DES_NATURALIDADE = Dados.Participante.NATURALIDADE?.ToUpper() != dadosAntigos.NATURALIDADE?.ToUpper() ? Dados.Participante.NATURALIDADE?.ToUpper() : null;
                     dadosInsert.COD_UF_NATURALIDADE = Dados.Participante.UF_NATURALIDADE != dadosAntigos.UF_NATURALIDADE ? Dados.Participante.UF_NATURALIDADE : null;
                     dadosInsert.DES_UF_NATURALIDADE = ufNaturalidade;
                     dadosInsert.COD_NACIONALIDADE = null;
                     dadosInsert.DES_NACIONALIDADE = null;
-                    dadosInsert.NOM_MAE = Dados.Participante.NOME_MAE.ToUpper() != dadosAntigos.NOME_MAE.ToUpper() ? Dados.Participante.NOME_MAE.ToUpper() : null;
-                    dadosInsert.NOM_PAI = Dados.Participante.NOME_PAI.ToUpper() != dadosAntigos.NOME_PAI.ToUpper() ? Dados.Participante.NOME_PAI.ToUpper() : null;
+                    dadosInsert.NOM_MAE = Dados.Participante.NOME_MAE?.ToUpper() != dadosAntigos.NOME_MAE?.ToUpper() ? Dados.Participante.NOME_MAE?.ToUpper() : null;
+                    dadosInsert.NOM_PAI = Dados.Participante.NOME_PAI?.ToUpper() != dadosAntigos.NOME_PAI?.ToUpper() ? Dados.Participante.NOME_PAI?.ToUpper() : null;
                     dadosInsert.COD_ESTADO_CIVIL = Dados.Participante.CD_ESTADO_CIVIL != dadosAntigos.CD_ESTADO_CIVIL ? Dados.Participante.CD_ESTADO_CIVIL : null;
                     dadosInsert.DES_ESTADO_CIVIL = estadoCivil;
-                    dadosInsert.NOM_CONJUGE = Dados.Participante.NOME_CONJUGE.ToUpper() != dadosAntigos.NOME_CONJUGE.ToUpper() ? Dados.Participante.NOME_CONJUGE.ToUpper() : null;
+                    dadosInsert.NOM_CONJUGE = Dados.Participante.NOME_CONJUGE?.ToUpper() != dadosAntigos.NOME_CONJUGE?.ToUpper() ? Dados.Participante.NOME_CONJUGE?.ToUpper() : null;
                     dadosInsert.COD_CPF_CONJUGE = Dados.Participante.CPF_CONJUGE.LimparMascara() != dadosAntigos.CPF_CONJUGE.LimparMascara() ? Dados.Participante.CPF_CONJUGE.LimparMascara() : null;
                     dadosInsert.DTA_NASC_CONJUGE = null;
                     dadosInsert.COD_CEP = Dados.Participante.CEP_ENTID.LimparMascara() != dadosAntigos.CEP_ENTID.LimparMascara() ? Dados.Participante.CEP_ENTID.LimparMascara() : null;
-                    dadosInsert.DES_END_LOGRADOURO = Dados.Participante.END_ENTID.ToUpper() != dadosAntigos.END_ENTID.ToUpper() ? Dados.Participante.END_ENTID.ToUpper() : null;
-                    dadosInsert.DES_END_NUMERO = Dados.Participante.NR_END_ENTID.ToUpper() != dadosAntigos.NR_END_ENTID.ToUpper() ? Dados.Participante.NR_END_ENTID.ToUpper() : null;
-                    dadosInsert.DES_END_COMPLEMENTO = Dados.Participante.COMP_END_ENTID.ToUpper() != dadosAntigos.COMP_END_ENTID.ToUpper() ? Dados.Participante.COMP_END_ENTID.ToUpper() : null;
-                    dadosInsert.DES_END_BAIRRO = Dados.Participante.BAIRRO_ENTID.ToUpper() != dadosAntigos.BAIRRO_ENTID.ToUpper() ? Dados.Participante.BAIRRO_ENTID.ToUpper() : null;
-                    dadosInsert.DES_END_CIDADE = Dados.Participante.CID_ENTID.ToUpper() != dadosAntigos.CID_ENTID.ToUpper() ? Dados.Participante.CID_ENTID.ToUpper() : null;
+                    dadosInsert.DES_END_LOGRADOURO = Dados.Participante.END_ENTID?.ToUpper() != dadosAntigos.END_ENTID?.ToUpper() ? Dados.Participante.END_ENTID?.ToUpper() : null;
+                    dadosInsert.DES_END_NUMERO = Dados.Participante.NR_END_ENTID?.ToUpper() != dadosAntigos.NR_END_ENTID?.ToUpper() ? Dados.Participante.NR_END_ENTID?.ToUpper() : null;
+                    dadosInsert.DES_END_COMPLEMENTO = Dados.Participante.COMP_END_ENTID?.ToUpper() != dadosAntigos.COMP_END_ENTID?.ToUpper() ? Dados.Participante.COMP_END_ENTID?.ToUpper() : null;
+                    dadosInsert.DES_END_BAIRRO = Dados.Participante.BAIRRO_ENTID?.ToUpper() != dadosAntigos.BAIRRO_ENTID?.ToUpper() ? Dados.Participante.BAIRRO_ENTID?.ToUpper() : null;
+                    dadosInsert.DES_END_CIDADE = Dados.Participante.CID_ENTID?.ToUpper() != dadosAntigos.CID_ENTID?.ToUpper() ? Dados.Participante.CID_ENTID?.ToUpper() : null;
                     dadosInsert.COD_END_UF = Dados.Participante.UF_ENTID != dadosAntigos.UF_ENTID ? Dados.Participante.UF_ENTID : null;
                     dadosInsert.DES_END_UF = ufEndereco;
                     dadosInsert.COD_PAIS = Dados.Participante.CD_PAIS != dadosAntigos.CD_PAIS ? Dados.Participante.CD_PAIS : null;
@@ -272,7 +277,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                             depInsert.OID_RECAD_DADOS = oid_recad_dados;
                             depInsert.COD_PLANO = dep.CD_PLANO;
                             depInsert.NUM_SEQ_DEP = dep.NUM_SEQ_DEP;
-                            depInsert.NOM_DEPENDENTE = dep.NOME_DEP.ToUpper();
+                            depInsert.NOM_DEPENDENTE = dep.NOME_DEP?.ToUpper();
                             depInsert.COD_GRAU_PARENTESCO = dep.CD_GRAU_PARENTESCO;
                             depInsert.DES_GRAU_PARENTESCO = new GrauParentescoProxy().BuscarPorCodigo(dep.CD_GRAU_PARENTESCO).DS_GRAU_PARENTESCO;
                             depInsert.DTA_NASCIMENTO = dep.DT_NASC_DEP;
@@ -307,7 +312,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                             var depInsert = new WebRecadDepedenteIREntidade();
                             depInsert.OID_RECAD_DADOS = oid_recad_dados;
                             depInsert.NUM_SEQ_DEP = dep.NUM_SEQ_DEP;
-                            depInsert.NOM_DEPENDENTE = dep.NOME_DEP.ToUpper();
+                            depInsert.NOM_DEPENDENTE = dep.NOME_DEP?.ToUpper();
                             depInsert.COD_GRAU_PARENTESCO = dep.CD_GRAU_PARENTESCO;
                             depInsert.DES_GRAU_PARENTESCO = new GrauParentescoProxy().BuscarPorCodigo(dep.CD_GRAU_PARENTESCO).DS_GRAU_PARENTESCO;
                             depInsert.DTA_NASCIMENTO = dep.DT_NASC_DEP;
@@ -377,16 +382,19 @@ $" Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento �
                     };
                     Enviar(emailConfig, destinatario, $"Sabesprev - {campanha.NOM_CAMPANHA} - {Dados.Participante.NOME_ENTID}", msgParticipante);
 
+                    var planos = "";
+                    Dados.Participante.Planos.ForEach(p => planos = " / " + p.DS_PLANO);
+
                     var msgFundacao =
 $"Portal SABESPREV<br/><br/>" +
 $"Documento: <b>Recadastramento de Assistidos e Pensionistas - Web</b><br/>" +
 $"Data de envio: <b>{dataAtual}</b><br/>" +
 $"Nome do participante / solicitante: <b>{Dados.Participante.NOME_ENTID}<b><br/>" +
-$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}</b><br/>" +
+$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}${planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "documentos@sabesprev.com.br"//"viniciusvives@gmail.com"//
+                        "viniciusvives@gmail.com"//"documentos@sabesprev.com.br"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);
@@ -406,13 +414,6 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                     });
                 }
             }
-        }
-
-        [HttpGet("[action]")]
-        [AllowAnonymous]
-        public IActionResult BuscarCpf([FromQuery(Name = "cpf")] string cpf)
-        {
-            return Json(cpf);
         }
 
         [HttpGet("[action]/{cpf}")]
@@ -487,7 +488,6 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                         info.CPF_CONJUGE = conjuge.First().CPF;
                         info.NOME_CONJUGE = conjuge.First().NOME_DEP;
                     }
-                    //return Json(conjuge);
                 }
 
                 return Json(new
@@ -612,24 +612,47 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             }
         }
 
-        [HttpGet("[action]/{irrf}")]
+        [HttpGet("[action]")]
         [AllowAnonymous]
-        public IActionResult BuscarListaGrauParentesco(bool? irrf)
+        public IActionResult BuscarListaGrauParentesco()
         {
             try
             {
                 var lista = new GrauParentescoProxy().BuscarOrderAlfabetica().ToList<GrauParentescoEntidade>();
-                if (irrf == true)
-                {
-                    var filtro = new[] { "02", "03", "04", "06", "07", "09", "10", "12", "40", "41", "42" };
-                    return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
-                }
-                if (irrf == false)
-                {
-                    var filtro = new[] { "02", "03", "04", "06", "07", "09", "12", "41", "42" };
-                    return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
-                }
-                return Json(lista);
+                var filtro = new[] { "02", "03", "04", "06", "07", "09", "12", "41", "42" };
+                return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public IActionResult BuscarListaGrauParentescoPlanoReforco()
+        {
+            try
+            {
+                var lista = new GrauParentescoProxy().BuscarOrderAlfabetica().ToList<GrauParentescoEntidade>();
+                var filtro = new[] { "32", "28", "3", "2", "18", "40", "47", "24", "9", "23", "7", "42", "21", "15", "19", "6", "22", "4", "5", "41", "17", "0", "16", "30", "29", "13", "27", "31", "12", "36", "20", "26", "35" };
+                return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]")]
+        [AllowAnonymous]
+        public IActionResult BuscarListaGrauParentescoIRRF()
+        {
+            try
+            {
+                var lista = new GrauParentescoProxy().BuscarOrderAlfabetica().ToList<GrauParentescoEntidade>();
+                var filtro = new[] { "02", "03", "04", "06", "07", "09", "10", "12", "40", "41", "42" };
+                return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
             }
             catch (Exception ex)
             {

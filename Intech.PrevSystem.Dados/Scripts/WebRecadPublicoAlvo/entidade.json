@@ -15,6 +15,11 @@
       "Nome": "CD_ESPECIE_INSS",
       "Tipo": "string",
       "AceitaNulo": true
+    },
+    {
+      "Nome": "TEXTO_RECAD",
+      "Tipo": "string",
+      "AceitaNulo": true
     }
   ],
   "Imports": []

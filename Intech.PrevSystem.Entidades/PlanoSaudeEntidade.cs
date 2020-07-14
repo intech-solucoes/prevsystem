@@ -15,5 +15,6 @@ namespace Intech.PrevSystem.Entidades
 		public string NOME { get; set; }
 		public string GRAU_PARENT { get; set; }
 		public decimal? VALOR { get; set; }
+		public decimal ANO_CALENDARIO { get; set; }
 	}
 }

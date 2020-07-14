@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Intech.Lib.Email" Version="1.1.1" />
-    <PackageReference Include="Intech.Lib.Web" Version="1.1.1" />
+    <PackageReference Include="Intech.Lib.Web" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>

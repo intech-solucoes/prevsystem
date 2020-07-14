@@ -43,6 +43,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 }
                 else
                 {
+                    var saldoEmCotas = 0M;
+                    var indicePerfil = 0M;
                     var saldoTotalParticipante = 0M;
                     var saldoTotalPatrocinadora = 0M;
                     SaldoContribuicoesEntidade saldoBasicaParticipante = new SaldoContribuicoesEntidade();
@@ -72,10 +74,13 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                         {
                             var histSaldo = new HistSaldoProxy().BuscarPorFundacaoEmpresaPlanoEspecieNumAnoProcesso(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, processo.CD_ESPECIE, processo.NUM_PROCESSO, processo.ANO_PROCESSO);
                             
-                            var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, plano.cd_perfil_invest.ToString());
+                            var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, plano.CD_PLANO, plano.CD_PERFIL_INVEST.ToString());
                             var indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP).VALORES.First();
 
-                            saldoTotalParticipante = (histSaldo.First().SALDO_ATUAL.Value * indice.VALOR_IND).Arredonda(2);
+                            saldoEmCotas = processo.SALDO_ATUAL.Value.Arredonda(7);
+                            indicePerfil = indice.VALOR_IND.Arredonda(7);
+
+                            saldoTotalParticipante = (saldoEmCotas * indicePerfil).Arredonda(2);
                         }
                         else if (histRendas.CD_OPCAO_RECEB != "01")
                         {
@@ -113,6 +118,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                         saldoSuplementarParticipante,
                         saldoBasicaPatrocinadora,
                         saldoSuplementarPatrocinadora,
+                        saldoEmCotas,
+                        indicePerfil,
                         saldoTotal,
                         contribuicoesBasicasParticipante = new
                         {

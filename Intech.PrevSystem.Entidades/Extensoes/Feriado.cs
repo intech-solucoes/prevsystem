@@ -16,6 +16,16 @@ namespace Intech.PrevSystem.Entidades.Extensoes
             Anterior
         };
 
+        public static DateTime UltimaDataUtilDoMes(this DateTime data, IEnumerable<FeriadoEntidade> feriados)
+        {
+            DateTime dtTemp = new DateTime(data.Year, data.Month, data.UltimoDiaDoMes().Day);
+
+            if (!dtTemp.EhDiaUtil(feriados.Select(x => x.DT_FERIADO)))
+                return BuscarDataUtil(dtTemp, feriados, Direcao.Anterior, null);
+            else
+                return dtTemp;
+        }
+
         public static int UltimoDiaUtilDoMes(this DateTime data, IEnumerable<FeriadoEntidade> feriados)
         {
             DateTime dtTemp = new DateTime(data.Year, data.Month, data.UltimoDiaDoMes().Day);

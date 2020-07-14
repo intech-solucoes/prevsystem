@@ -17,7 +17,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
             var categoria = new CategoriaProxy().BuscarPorCdCategoria(planos[0].CD_CATEGORIA);
             var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(planos[0].CD_SIT_PLANO);
 
-            if (planos.Count == 0 || categoria.PERMITE_EMPRESTIMO == "N" || sitPlano.permite_emprestimo_em == "N")
+            if (planos.Count == 0 || categoria.PERMITE_EMPRESTIMO == "N" || sitPlano.PERMITE_EMPRESTIMO_EM == "N")
                 throw new Exception("Participante não elegível à concessão de empréstimo. Dúvidas entrar em contato com a central de relacionamento pelo telefone 0800 16 05 95");
 
             var contrato = new ContratoProxyMetrus().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, "3").FirstOrDefault();

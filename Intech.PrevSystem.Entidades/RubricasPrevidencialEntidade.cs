@@ -52,10 +52,9 @@ namespace Intech.PrevSystem.Entidades
 		public string COMPOE_RENDA_COMPL { get; set; }
 		public string CD_RUB_RCOMPL_ADIANT { get; set; }
 		public string CD_RUB_RCOMPL_ABONO { get; set; }
-		public string DESC_CONTRIB_ASSISTENCIAL { get; set; }
 		public string COMPOE_LIQ_DESC { get; set; }
-		public string RUB_DESC_MARGEM { get; set; }
-		public string ID_RUB_EMPRESTIMO { get; set; }
+		public string INCID_FAT_RED { get; set; }
+		public string INCID_DESC_MARGEM { get; set; }
 		public string PROVISAO_CONTAB_CONTPAT { get; set; }
 		public string INCID_DESC_MARGEM_FOLHA { get; set; }
 		public string INCID_COMP_SALARIAL { get; set; }
@@ -68,16 +67,14 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_RUB_PROPORCIONAL { get; set; }
 		public string CD_RUB_RETROATIVO { get; set; }
 		public string CD_RUB_DEPARA { get; set; }
+		public string RUB_DESC_MARGEM { get; set; }
+		public string DESC_CONTRIB_ASSISTENCIAL { get; set; }
+		public string ID_RUB_EMPRESTIMO { get; set; }
 		public string INCID_MASSA_FIXA { get; set; }
 		public string INCID_SRB { get; set; }
 		public string INCID_INSS { get; set; }
 		public string INCID_ABONO_ANUAL { get; set; }
 		public string INCID_ADIANT_ABONO_ANUAL { get; set; }
-		public string INCID_COTA { get; set; }
-		public string ID_CALCULO_AUTOMATICO { get; set; }
-		public decimal? CD_CALCULO { get; set; }
-		public string RESGATE_COTAS { get; set; }
-		public string AQUISICAO_COTAS { get; set; }
 		public string REGRA_DESCONTO { get; set; }
 		public string ID_RUB_AUTORIZADA { get; set; }
 		public string CD_TIPO_FOLHA_CONV { get; set; }
@@ -88,6 +85,11 @@ namespace Intech.PrevSystem.Entidades
 		public string RUB_CONSIG_VOLUNT { get; set; }
 		public decimal? CD_RUBRICA_CF { get; set; }
 		public string ID_RUB_PA { get; set; }
+		public string INCID_COTA { get; set; }
+		public string ID_CALCULO_AUTOMATICO { get; set; }
+		public decimal? CD_CALCULO { get; set; }
+		public string RESGATE_COTAS { get; set; }
+		public string AQUISICAO_COTAS { get; set; }
 		public string PRIORID_CALCULO { get; set; }
 		public string ID_RUB_IRJU { get; set; }
 		public string RUB_NCOMP_QTD_PARC { get; set; }

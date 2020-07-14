@@ -27,6 +27,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? SALDO_ANTERIOR { get; set; }
 		public string TIPO_CALCULO { get; set; }
 		public string CD_SITUACAO { get; set; }
+		public string CD_CARGO { get; set; }
+		public string CD_NIVEL_SALARIAL { get; set; }
 		public decimal? VL_PERC_RESGATE { get; set; }
 		public decimal? VL_PARC_RESGATE { get; set; }
 		public decimal? VL_FATOR_REDUTOR { get; set; }
@@ -36,8 +38,6 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_INI_REVISAO { get; set; }
 		public decimal? FATOR_VINCULACAO { get; set; }
 		public decimal? FATOR_ALIQUOTA { get; set; }
-		public string CD_CARGO { get; set; }
-		public string CD_NIVEL_SALARIAL { get; set; }
 		public string CD_OPCAO_RECEB_RENDA { get; set; }
 		public string CD_OPCAO_RECEB_BP { get; set; }
 		public string CD_OPCAO_RECEB_BAV { get; set; }
@@ -80,8 +80,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VAL_CUST_FUNDO { get; set; }
 		public decimal? SALDO_ANT_RISCO { get; set; }
 		public decimal? SALDO_ATUAL_RISCO { get; set; }
-		public decimal? SALDO_INIC_RISCO { get; set; }
 		public decimal? PERC_SALDO_RISCO { get; set; }
+		public decimal? SALDO_INIC_RISCO { get; set; }
 		[Write(false)] public string DS_ESPECIE { get; set; }
 		[Write(false)] public string DS_SITUACAO { get; set; }
 		[Write(false)] public DateTime? DT_REQUERIMENTO { get; set; }

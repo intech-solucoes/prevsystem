@@ -1,0 +1,6 @@
+{
+  "NomeTabela": "TB_PAIS",
+  "ChavePrimaria": "CD_PAIS",
+  "ColunasExtras": [],
+  "Imports": []
+}

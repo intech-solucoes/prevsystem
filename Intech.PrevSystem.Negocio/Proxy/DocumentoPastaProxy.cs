@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class DocumentoPastaProxy : DocumentoPastaDAO
-    {
-    }
+	public class DocumentoPastaProxy : DocumentoPastaDAO
+	{
+	}
 }

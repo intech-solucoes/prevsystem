@@ -10,10 +10,11 @@ namespace Intech.PrevSystem.Entidades
 		[Key]
 		public decimal OID_DOCUMENTO { get; set; }
 		public decimal OID_ARQUIVO_UPLOAD { get; set; }
+		public decimal? OID_DOCUMENTO_PASTA { get; set; }
 		public string TXT_TITULO { get; set; }
 		public string IND_ATIVO { get; set; }
-		public decimal NUM_ORDEM { get; set; }
-		public decimal? OID_DOCUMENTO_PASTA { get; set; }
+		public DateTime DTA_INCLUSAO { get; set; }
 		[Write(false)] public string CD_PLANO { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
 	}
 }

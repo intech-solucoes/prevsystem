@@ -6,8 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper.Contrib" Version="2.0.30" />
-    <PackageReference Include="Intech.Lib.Dapper" Version="1.1.2" />
+    <PackageReference Include="Intech.Lib.Dapper" Version="1.1.3" />
+    <PackageReference Include="Intech.Lib.Web" Version="1.2.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.70" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>

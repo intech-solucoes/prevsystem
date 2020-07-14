@@ -95,18 +95,18 @@ namespace Intech.PrevSystem.Negocio.Proxy
             else
                 rubricas = base.Metrus_BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
 
+
             if (!string.IsNullOrEmpty(CD_ESPECIE))
                 rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();
 
             var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
             var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
 
-            foreach (var rubrica in descontos)
-                rubrica.VALOR_MC *= -1;
+            var descontosSem9999 = descontos.Where(x => x.CD_RUBRICA != "9999").ToList();
 
             var bruto = proventos.Sum(x => x.VALOR_MC);
-            var valDescontos = descontos.Sum(x => x.VALOR_MC);
-            var liquido = bruto - Math.Abs(valDescontos.Value);
+            var valDescontos = descontosSem9999.Sum(x => x.VALOR_MC);
+            var liquido = bruto - valDescontos;
 
             return new Contracheque
             {

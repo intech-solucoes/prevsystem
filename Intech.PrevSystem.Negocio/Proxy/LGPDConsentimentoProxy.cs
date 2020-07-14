@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class LGPDConsentimentoProxy : LGPDConsentimentoDAO
-    {
-    }
+	public class LGPDConsentimentoProxy : LGPDConsentimentoDAO
+	{
+	}
 }

@@ -61,5 +61,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<NaturezaEntidade> BuscarPorPlanoModalidade(string CD_PLANO, decimal CD_MODAL)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<NaturezaEntidade>("SELECT *  FROM CE_NATUREZA  INNER JOIN CE_GRUPO_NATUREZA ON CE_GRUPO_NATUREZA.CD_GRUPO = CE_NATUREZA.CD_GRUPO  WHERE CE_GRUPO_NATUREZA.CD_PLANO = @CD_PLANO  AND CE_GRUPO_NATUREZA.CD_MODAL = @CD_MODAL  AND CE_NATUREZA.PERMITE_CONCESSAO_WEB = 'S'  ORDER BY CE_NATUREZA.PRAZO_MAX", new { CD_PLANO, CD_MODAL }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<NaturezaEntidade>("SELECT * FROM CE_NATUREZA INNER  JOIN CE_GRUPO_NATUREZA  ON CE_GRUPO_NATUREZA.CD_GRUPO=CE_NATUREZA.CD_GRUPO WHERE CE_GRUPO_NATUREZA.CD_PLANO=:CD_PLANO AND CE_GRUPO_NATUREZA.CD_MODAL=:CD_MODAL AND CE_NATUREZA.PERMITE_CONCESSAO_WEB='S' ORDER BY CE_NATUREZA.PRAZO_MAX", new { CD_PLANO, CD_MODAL }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 	}
 }

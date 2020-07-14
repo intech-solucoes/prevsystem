@@ -1,41 +1,76 @@
 {
   "NomeTabela": "CE_CONTRATOS",
-  "ColunasExtras": [
-    {
-      "Nome": "DES_NUM_CONTRATO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "DES_PARCELAS",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "NUM_SALDO_DEVEDOR",
-      "Tipo": "decimal",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "Prestacoes",
-      "Tipo": "List<PrestacaoEntidade>",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "Modalidade",
-      "Tipo": "ModalidadeEntidade",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "SaldoDevedor",
-      "Tipo": "SaldoDevedorEntidade",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "DS_SITUACAO",
-      "Tipo": "string",
-      "AceitaNulo": true
-    }
-  ],
+    "ColunasExtras": [
+        {
+            "Nome": "DES_NUM_CONTRATO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DES_PARCELAS",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "NUM_SALDO_DEVEDOR",
+            "Tipo": "decimal",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "Prestacoes",
+            "Tipo": "List<PrestacaoEntidade>",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "Modalidade",
+            "Tipo": "ModalidadeEntidade",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "SaldoDevedor",
+            "Tipo": "SaldoDevedorEntidade",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_SITUACAO",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "NOME_PARTICIPANTE",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "CPF_PARTICIPANTE",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "NOME_PENSIONISTA",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "CPF_PENSIONISTA",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_PLANO",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_NATUR",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_MODAL",
+            "Tipo": "string",
+            "AceitaNulo": true
+        }
+    ],
   "Imports": []
 }

@@ -37,7 +37,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
                 if (plano.UTILIZA_PERFIL == "S")
                 {
-                    var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, cdPlano, planoVinculado.cd_perfil_invest.ToString());
+                    var perfil = new PerfilInvestIndiceProxy().BuscarPorFundacaoEmpresaPlanoPerfilInvest(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, cdPlano, planoVinculado.CD_PERFIL_INVEST.ToString());
                     indice = new IndiceProxy().BuscarUltimoPorCodigo(perfil.CD_CT_RP);
                 }
                 else

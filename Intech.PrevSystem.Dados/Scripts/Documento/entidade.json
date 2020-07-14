@@ -1,10 +1,16 @@
-﻿{
-    "nomeTabela": "WEB_DOCUMENTO",
-    "colunasExtras": [
-        {
-            "nome": "CD_PLANO",
-            "tipo": "string",
-            "aceitaNulo": false
-        }
-    ]
+{
+  "NomeTabela": "WEB_DOCUMENTO",
+  "ColunasExtras": [
+    {
+      "Nome": "CD_PLANO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    },
+    {
+      "Nome": "DS_PLANO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
 }

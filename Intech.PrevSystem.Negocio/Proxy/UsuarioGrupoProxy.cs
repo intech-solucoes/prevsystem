@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class UsuarioGrupoProxy : UsuarioGrupoDAO
-    {
-    }
+	public class UsuarioGrupoProxy : UsuarioGrupoDAO
+	{
+	}
 }

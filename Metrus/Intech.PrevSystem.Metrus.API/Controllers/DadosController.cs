@@ -19,6 +19,49 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class DadosController : Controller
     {
+        [HttpGet("buscarCodEntidPorCpf/{cpf}")]
+        public ActionResult BuscarPorCpf(string cpf)
+        {
+            try
+            {
+                var dados = new FuncionarioProxy().BuscarPorCpf(cpf).First();
+
+                return Ok(new
+                {
+                    dados.CPF_CGC,
+                    dados.NUM_MATRICULA,
+                    dados.NUM_INSCRICAO,
+                    dados.COD_ENTID,
+                    dados.CD_EMPRESA
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpGet("buscarCodEntidPorEmpresaMatricula/{empresa}/{matricula}")]
+        public ActionResult BuscarPorCpf(string empresa, string matricula)
+        {
+            try
+            {
+                var dados = new FuncionarioProxy().BuscarPorMatriculaEmpresa(matricula, empresa);
+
+                return Ok(new
+                {
+                    dados.CPF_CGC,
+                    dados.NUM_MATRICULA,
+                    dados.NUM_INSCRICAO,
+                    dados.COD_ENTID,
+                    dados.CD_EMPRESA
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("porCodEntid/{codEntid}")]
         public ActionResult GetPorCodEntid(string codEntid)
         {

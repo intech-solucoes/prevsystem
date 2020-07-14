@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class WebRelacionamentoProxy : WebRelacionamentoDAO
-    {
-    }
+	public class WebRelacionamentoProxy : WebRelacionamentoDAO
+	{
+	}
 }

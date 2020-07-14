@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class TaxaEvolPerfilProxy : TaxaEvolPerfilDAO
-    {
-    }
+	public class TaxaEvolPerfilProxy : TaxaEvolPerfilDAO
+	{
+	}
 }

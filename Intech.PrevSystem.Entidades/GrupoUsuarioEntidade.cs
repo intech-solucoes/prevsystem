@@ -10,7 +10,6 @@ namespace Intech.PrevSystem.Entidades
 		[Key]
 		public decimal OID_GRUPO_USUARIO { get; set; }
 		public string NOM_GRUPO_USUARIO { get; set; }
-		public string IND_ADMINISTRADOR { get; set; }
 		public string IND_ATIVO { get; set; }
 	}
 }

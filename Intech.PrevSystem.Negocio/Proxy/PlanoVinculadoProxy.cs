@@ -58,6 +58,32 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return plano;
         }
 
+        public PlanoVinculadoEntidade BuscarPorFundacaoEmpresaMatriculaPlanoComSalario2(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, int? seqRecebedor)
+        {
+            var plano = BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+
+            decimal origem;
+            switch (plano.CD_CATEGORIA)
+            {
+                case DMN_CATEGORIA.ATIVO:
+                case DMN_CATEGORIA.AUTOPATROCINIO:
+                case DMN_CATEGORIA.EM_LICENCA: //Ativos, Autopatrocinados ou Em licença
+                case DMN_CATEGORIA.DIFERIDO: //Assistidos ou Diferidos
+                    origem = 1;
+                    break;
+                case DMN_CATEGORIA.ASSISTIDO:
+                    origem = 4;
+                    break;
+                case DMN_CATEGORIA.DESLIGADO: //Desligados
+                default:
+                    throw new Exception("Concessão de empréstimo não permitida para usuários na situação Desligado");
+            }
+
+            plano.UltimoSalario = BuscarUltimoSalario2(CD_EMPRESA, NUM_MATRICULA, origem, plano, seqRecebedor: seqRecebedor);
+
+            return plano;
+        }
+
         public decimal BuscarUltimoSalario(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano, bool abatePensao = true, int? seqRecebedor = null)
         {
             var dataAtual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
@@ -80,6 +106,59 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 case DMN_CATEGORIA.ASSISTIDO:      //Assistidos
                     return ObtemSalarioDosAssistidos(cdEmpresa, matricula, plano, seqRecebedor);
                 case DMN_CATEGORIA.DESLIGADO:       //Desligados
+                default:
+                    return 0;
+            }
+        }
+
+        public decimal BuscarUltimoSalario2(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano, bool abatePensao = true, int? seqRecebedor = null)
+        {
+            var dataAtual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
+            var dataAnterior = new DateTime(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month, 01);
+
+            var rubricasAdicionais = new RubricasAdicionaisProxy().BuscarPorFundacaoEmpresaMatriculaOrigemReferencia(plano.CD_FUNDACAO, cdEmpresa, matricula, origem, dataAtual, dataAnterior);
+
+            var valorPensao = rubricasAdicionais.Where(x => x.CD_RUBRICA == "761").Sum(x => x.VL_RUBRICA).Value;
+
+            switch (plano.CD_CATEGORIA)
+            {
+                case DMN_CATEGORIA.ATIVO:
+                    var salario = ObtemSalarioAtivo(plano).Value;
+                    return abatePensao ? salario - valorPensao : salario;
+                case DMN_CATEGORIA.AUTOPATROCINIO:
+                case DMN_CATEGORIA.EM_LICENCA:       //Ativos, Autopatrocinados ou Em licença
+                case DMN_CATEGORIA.DIFERIDO:
+                    return 0;
+                //return p.ObtemUltimoSRCFichaFinanceira() - valorPensao;//Buscar entrada mais recente da ficha financeira 
+                case DMN_CATEGORIA.ASSISTIDO:      //Assistidos
+                    return ObtemSalarioDosAssistidos(cdEmpresa, matricula, plano, seqRecebedor);
+                case DMN_CATEGORIA.DESLIGADO:       //Desligados
+                default:
+                    return 0;
+            }
+        }
+
+        private decimal? ObtemSalarioAtivo(PlanoVinculadoEntidade plano)
+        {
+            var fichaFinanceira = new FichaFinanceiraProxy().BuscarPorFundacaoPlanoInscricao(plano.CD_FUNDACAO, plano.CD_PLANO, plano.NUM_INSCRICAO).ToList();
+
+            switch (plano.CD_PLANO)
+            {
+                case "0002":
+                    return fichaFinanceira
+                        .Where(x => x.CD_TIPO_CONTRIBUICAO == "07")
+                        .OrderByDescending(x => x.ANO_COMP)
+                        .ThenByDescending(x => x.MES_COMP)
+                        .ToList()
+                        .FirstOrDefault()
+                        .SRC;
+                case "0001":
+                    return fichaFinanceira.Where(x => x.CD_TIPO_CONTRIBUICAO == "07")
+                        .OrderByDescending(x => x.ANO_COMP)
+                        .ThenByDescending(x => x.MES_COMP)
+                        .ToList()
+                        .FirstOrDefault()
+                        .SRC;
                 default:
                     return 0;
             }
@@ -171,6 +250,50 @@ namespace Intech.PrevSystem.Negocio.Proxy
             } while (i < 12); //while evita loop infinito na logica
 
             return total;
+        }
+
+        public override long Inserir(PlanoVinculadoEntidade entidade)
+        {
+            base.Insert(
+                 entidade.CD_FUNDACAO
+                ,entidade.NUM_INSCRICAO
+                ,entidade.CD_PLANO
+                ,entidade.DT_INSC_PLANO
+                ,entidade.CD_SIT_PLANO
+                ,entidade.DT_SITUACAO_ATUAL
+                ,entidade.CD_MOTIVO_DESLIG
+                ,entidade.DT_DESLIG_PLANO
+                ,entidade.FUNDADOR
+                ,entidade.PERC_TAXA_MAXIMA
+                ,entidade.GRUPO
+                ,entidade.DT_PRIMEIRA_CONTRIB
+                ,entidade.DT_VENC_CARENCIA
+                ,entidade.CD_SIT_INSCRICAO
+                ,entidade.TIPO_IRRF
+                ,entidade.IDADE_RECEB_BENEF
+                ,entidade.CD_TIPO_COBRANCA
+                ,entidade.NUM_BANCO
+                ,entidade.NUM_AGENCIA
+                ,entidade.NUM_CONTA
+                ,entidade.DIA_VENC
+                ,entidade.CD_GRUPO
+                ,entidade.CD_PERFIL_INVEST
+                ,entidade.NUM_PROTOCOLO
+                ,entidade.VITALICIO
+                ,entidade.VL_PERC_VITALICIO
+                ,entidade.LEI_108
+                ,entidade.SALDO_PROJ
+                ,entidade.PECULIO_INV
+                ,entidade.PECULIO_MORTE
+                ,entidade.INTEGRALIZA_SALDO
+                ,entidade.CK_EXTRATO_CST
+                ,entidade.DT_EMISSAO_CERTIFICADO
+                ,entidade.TIPO_IRRF_CANC
+                ,entidade.IND_OPTANTE_MAXIMA_BASICA
+                ,entidade.IND_AFA_JUDICIAL
+            );
+
+            return 0;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class NacionalidadeProxy : NacionalidadeDAO
-    {
-    }
+	public class NacionalidadeProxy : NacionalidadeDAO
+	{
+	}
 }

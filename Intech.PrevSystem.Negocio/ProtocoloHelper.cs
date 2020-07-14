@@ -84,6 +84,12 @@ namespace Intech.PrevSystem.Negocio
 
             return listaTransacao;
         }
+
+        public static string BuscarProtocolo(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_MATRICULA, decimal NUM_FUNCIONALIDADE)
+        {
+            var protocolo = new ProtocoloProxy().BuscarAbertasPorFundacaoEmpresaPlanoMatriculaFuncionalidade(CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_MATRICULA, NUM_FUNCIONALIDADE);
+            return protocolo.COD_IDENTIFICADOR;
+        }
     }
 
     public class ItemTransacao

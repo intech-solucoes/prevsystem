@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class ProtocoloProxy : ProtocoloDAO
-    {
-    }
+	public class ProtocoloProxy : ProtocoloDAO
+	{
+	}
 }

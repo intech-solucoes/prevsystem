@@ -72,9 +72,14 @@
             "aceitaNulo": false
         },
         {
-            "nome": "VL_BENEF_SALDADO_INICIAL",
-            "tipo": "decimal",
-            "aceitaNulo": false
+          "nome": "VL_BENEF_SALDADO_INICIAL",
+          "tipo": "decimal",
+          "aceitaNulo": false
+        },
+        {
+          "nome": "GRUPO_RECADASTRAMENTO",
+          "tipo": "string",
+          "aceitaNulo":  true
         }
     ]
 }

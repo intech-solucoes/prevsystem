@@ -27,5 +27,22 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<PaisEntidade> BuscarTodos()
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<PaisEntidade>("SELECT * FROM TB_PAIS", new {  }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<PaisEntidade>("SELECT * FROM TB_PAIS", new {  }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 	}
 }

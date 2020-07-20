@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class ContribuicaoIndividualProxy : ContribuicaoIndividualDAO
-    {
-    }
+	public class ContribuicaoIndividualProxy : ContribuicaoIndividualDAO
+	{
+	}
 }

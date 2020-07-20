@@ -27,6 +27,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricaoDataAtualTipoFixo(string CD_FUNDACAO, string NUM_INSCRICAO, DateTime DATA_ATUAL)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND CD_TIPO_CONTRIBUICAO IN ('09','15')    AND (DT_FIM IS NULL OR DT_FIM >= @DATA_ATUAL)", new { CD_FUNDACAO, NUM_INSCRICAO, DATA_ATUAL }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_TIPO_CONTRIBUICAO IN ('09', '15') AND (DT_FIM IS NULL  OR DT_FIM>=:DATA_ATUAL)", new { CD_FUNDACAO, NUM_INSCRICAO, DATA_ATUAL }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricaoTipo(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_TIPO_CONTRIBUICAO)
 		{
 			try

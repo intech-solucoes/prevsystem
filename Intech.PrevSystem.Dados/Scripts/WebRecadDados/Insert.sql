@@ -3,18 +3,18 @@
         -long
     Parametros
 		-OID_RECAD_PUBLICO_ALVO:decimal
-		-DTA_SOLICITACAO:DateTime
+		-DTA_SOLICITACAO:DateTime?
 		-DES_ORIGEM:string
 		-COD_PROTOCOLO:string
-		-DTA_RECUSA:DateTime
+		-DTA_RECUSA:DateTime?
 		-TXT_MOTIVO_RECUSA:string
 		-NOM_PESSOA:string
-		-DTA_NASCIMENTO:DateTime
+		-DTA_NASCIMENTO:DateTime?
 		-COD_CPF:string
 		-COD_RG:string
 		-DES_ORGAO_EXPEDIDOR:string
-		-DTA_EXPEDICAO_RG:DateTime
-		-DTA_ADMISSAO:DateTime
+		-DTA_EXPEDICAO_RG:DateTime?
+		-DTA_ADMISSAO:DateTime?
 		-DES_NATURALIDADE:string
 		-COD_UF_NATURALIDADE:string
 		-DES_UF_NATURALIDADE:string
@@ -26,7 +26,7 @@
 		-DES_ESTADO_CIVIL:string
 		-NOM_CONJUGE:string
 		-COD_CPF_CONJUGE:string
-		-DTA_NASC_CONJUGE:DateTime
+		-DTA_NASC_CONJUGE:DateTime?
 		-COD_CEP:string
 		-DES_END_LOGRADOURO:string
 		-DES_END_NUMERO:string

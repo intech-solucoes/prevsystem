@@ -16,7 +16,7 @@ namespace Intech.PrevSystem.Negocio
         }
 
         public static string Criar(decimal OID_FUNCIONALIDADE, string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_MATRICULA, decimal? SEQ_RECEBEDOR, string conteudo,
-                                   string TXT_USUARIO_SOLICITACAO, string TXT_USUARIO_EFETIVACAO, string TXT_IPV4, string TXT_IPV4_EXTERNO, string TXT_IPV6, string TXT_DISPOSITIVO, string TXT_ORIGEM)
+                                   string TXT_USUARIO_SOLICITACAO, string TXT_USUARIO_EFETIVACAO, string TXT_IPV4, string TXT_IPV4_EXTERNO, string TXT_IPV6, string TXT_DISPOSITIVO, string TXT_ORIGEM, string COD_IDENTIFICADOR=null)
         {
             var proxyProtocolo = new ProtocoloProxy();
 
@@ -29,7 +29,8 @@ namespace Intech.PrevSystem.Negocio
                 conteudo2 = conteudo.Substring(4000);
             }
 
-            var protocolo = NUM_MATRICULA.TrimStart('0') + DateTime.Now.ToString("ddMMyyyyhhmmss");
+            var protocolo = COD_IDENTIFICADOR != null ? COD_IDENTIFICADOR :
+                NUM_MATRICULA.TrimStart('0') + DateTime.Now.ToString("ddMMyyyyhhmmss");
 
             var protocoloEntidade = new ProtocoloEntidade
             {
@@ -49,7 +50,6 @@ namespace Intech.PrevSystem.Negocio
                 TXT_IPV6 = TXT_IPV6,
                 TXT_DISPOSITIVO = TXT_DISPOSITIVO,
                 TXT_ORIGEM = TXT_ORIGEM,
-                TXT_IPV4_EXTERNO = TXT_IPV4_EXTERNO
             };
             var oidProtocolo = proxyProtocolo.Inserir(protocoloEntidade);
             var protocoloInserido = proxyProtocolo.BuscarPorChave(oidProtocolo);

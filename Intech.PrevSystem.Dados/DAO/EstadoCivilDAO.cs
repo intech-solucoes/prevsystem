@@ -32,9 +32,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<EstadoCivilEntidade>("SELECT *   FROM CS_ESTADO_CIVIL  ORDER BY DS_ESTADO_CIVIL", new {  }).ToList();
+					return Conexao.Query<EstadoCivilEntidade>("SELECT *   FROM CS_ESTADO_CIVIL  WHERE CD_ESTADO_CIVIL > 0  ORDER BY DS_ESTADO_CIVIL", new {  }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<EstadoCivilEntidade>("SELECT * FROM CS_ESTADO_CIVIL ORDER BY DS_ESTADO_CIVIL", new {  }).ToList();
+					return Conexao.Query<EstadoCivilEntidade>("SELECT * FROM CS_ESTADO_CIVIL WHERE CD_ESTADO_CIVIL>0 ORDER BY DS_ESTADO_CIVIL", new {  }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}

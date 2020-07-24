@@ -393,7 +393,7 @@ $"Portal SABESPREV<br/><br/>" +
 $"Documento: <b>Recadastramento de Assistidos e Pensionistas - Web</b><br/>" +
 $"Data de envio: <b>{dataAtual}</b><br/>" +
 $"Nome do participante / solicitante: <b>{Dados.Participante.NOME_ENTID}<b><br/>" +
-$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}${planos}</b><br/>" +
+$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}{planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
@@ -745,11 +745,12 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                     throw new Exception("Favor configurar o usuário e senha de E-mail da API para envio de TOKEN via E-mail.");
                 }
 
+                var titulo = "Código para concluir o recadastramento Sabesprev";
                 var mensagem = $"SABESPREV: Para validar a operação de recadastramento, insira o código a seguir e clique em 'Concluir Recadastramento'.<br/>" +
                     $"<br/>" +
                     $"<h3>{token}</h3>";
                 var destinatario = new List<string>() { alvoEnvio };
-                Enviar(config, destinatario, "Token para concluir o recadastramento Sabesprev", mensagem);
+                Enviar(config, destinatario, titulo, mensagem);
             }
             catch (Exception ex)
             {
@@ -767,7 +768,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
 
                 if (dados == null)
                 {
-                    throw new Exception("Erro ao ccarregar os dados do participante.");
+                    throw new Exception("Erro ao carregar os dados do participante.");
                 }
 
                 if (config == null || string.IsNullOrEmpty(config.Usuario) || string.IsNullOrEmpty(config.Senha))

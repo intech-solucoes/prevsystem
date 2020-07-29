@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-	public class IndiceValoresProxy : IndiceValoresDAO
+	public class WebFatorAtuarialProxy : WebFatorAtuarialDAO
 	{
 	}
 }

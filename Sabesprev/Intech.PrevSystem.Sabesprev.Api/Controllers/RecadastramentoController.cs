@@ -397,7 +397,7 @@ $"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}{planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//"viniciusvives@gmail.com"//
+                        "viniciusvives@gmail.com"//rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);
@@ -405,7 +405,11 @@ $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     transaction.Complete();
 
                     var msgFinal = $"O seu recadastramento recebeu o número de protocolo <b>{dadosInsert.COD_PROTOCOLO}</b> e está em análise pela Sabesprev!<br/><br/>" +
+$"Para acompanhar o andamento do seu recadastramento, acesse a área restrita > <b>Previdenciário > Autoatendimento > 16 - Recadastramento de Assistidos -Situação.</b><br/><br/>" +
 $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é uma exigência legal que garante a manutenção de seu benefício!";
+
+                    /*var msgFinal = $"O seu recadastramento recebeu o número de protocolo <b>{dadosInsert.COD_PROTOCOLO}</b> e está em análise pela Sabesprev!<br/><br/>" +
+$"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é uma exigência legal que garante a manutenção de seu benefício!";*/
                     return Json(msgFinal);
                 }
                 catch (Exception ex)

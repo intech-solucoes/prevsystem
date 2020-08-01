@@ -133,13 +133,13 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                     var especieINSS = refEspecieINSS != null ? refEspecieINSS.DS_ESPECIE_INSS : null;
 
-                    var pais = new PaisProxy().BuscarPorCdPais(Dados.Participante.CD_PAIS).DS_PAIS;
+                    var pais = !String.IsNullOrEmpty(Dados.Participante.CD_PAIS) ? new PaisProxy().BuscarPorCdPais(Dados.Participante.CD_PAIS).DS_PAIS : null;
 
-                    var ufEndereco = new UFProxy().BuscarPorCdUF(Dados.Participante.UF_ENTID).DS_UNID_FED;
+                    var ufEndereco = !String.IsNullOrEmpty(Dados.Participante.UF_ENTID) ? new UFProxy().BuscarPorCdUF(Dados.Participante.UF_ENTID).DS_UNID_FED : null;
 
-                    var ufNaturalidade = new UFProxy().BuscarPorCdUF(Dados.Participante.UF_NATURALIDADE).DS_UNID_FED;
+                    var ufNaturalidade = !String.IsNullOrEmpty(Dados.Participante.UF_NATURALIDADE) ? new UFProxy().BuscarPorCdUF(Dados.Participante.UF_NATURALIDADE).DS_UNID_FED : null;
 
-                    var estadoCivil = new EstadoCivilProxy().BuscarPorCodigo(Dados.Participante.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
+                    var estadoCivil = !String.IsNullOrEmpty(Dados.Participante.CD_ESTADO_CIVIL) ? new EstadoCivilProxy().BuscarPorCodigo(Dados.Participante.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL : null;
 
                     var dadosAntigos = new WebRecadPublicoAlvoProxy().BuscarDadosPorCdFundacaoSeqRecebedor(recad.CD_FUNDACAO, recad.SEQ_RECEBEDOR).FirstOrDefault();
 
@@ -153,6 +153,9 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                         }
                     }
 
+                    DateTime? dta_nasc = DateTime.ParseExact(Dados.Participante.DT_NASCIMENTO, "dd/MM/yyyy", null);
+                    DateTime? dta_ex = DateTime.ParseExact(Dados.Participante.DT_EMIS_IDENT, "dd/MM/yyyy", null);
+
                     var dadosInsert = new WebRecadDadosEntidade();
                     dadosInsert.OID_RECAD_PUBLICO_ALVO = recad.OID_RECAD_PUBLICO_ALVO;
                     dadosInsert.DTA_SOLICITACAO = dataAtual;
@@ -161,21 +164,21 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     dadosInsert.DTA_RECUSA = null;
                     dadosInsert.TXT_MOTIVO_RECUSA = null;
                     dadosInsert.NOM_PESSOA = Dados.Participante.NOME_ENTID?.ToUpper() != dadosAntigos.NOME_ENTID?.ToUpper() ? Dados.Participante.NOME_ENTID?.ToUpper() : null;
-                    dadosInsert.DTA_NASCIMENTO = Dados.Participante.DT_NASCIMENTO != dadosAntigos.DT_NASCIMENTO ? DateTime.ParseExact(Dados.Participante.DT_NASCIMENTO, "MM/dd/yyyy", null) : (DateTime?)null;
+                    dadosInsert.DTA_NASCIMENTO = dta_nasc.ToString() != dadosAntigos.DT_NASCIMENTO ? dta_nasc : null;
                     dadosInsert.COD_CPF = Dados.Participante.CPF_CGC.LimparMascara() != dadosAntigos.CPF_CGC.LimparMascara() ? Dados.Participante.CPF_CGC.LimparMascara() : null;
                     dadosInsert.COD_RG = Dados.Participante.NU_IDENT != dadosAntigos.NU_IDENT ? Dados.Participante.NU_IDENT : null;
                     dadosInsert.DES_ORGAO_EXPEDIDOR = Dados.Participante.ORG_EMIS_IDENT?.ToUpper() != dadosAntigos.ORG_EMIS_IDENT?.ToUpper() ? Dados.Participante.ORG_EMIS_IDENT?.ToUpper() : null;
-                    dadosInsert.DTA_EXPEDICAO_RG = Dados.Participante.DT_EMIS_IDENT != dadosAntigos.DT_EMIS_IDENT ? DateTime.ParseExact(Dados.Participante.DT_EMIS_IDENT, "MM/dd/yyyy", null) : (DateTime?)null;
+                    dadosInsert.DTA_EXPEDICAO_RG = dta_ex.ToString() != dadosAntigos.DT_EMIS_IDENT ? dta_ex : null;
                     dadosInsert.DTA_ADMISSAO = null;
                     dadosInsert.DES_NATURALIDADE = Dados.Participante.NATURALIDADE?.ToUpper() != dadosAntigos.NATURALIDADE?.ToUpper() ? Dados.Participante.NATURALIDADE?.ToUpper() : null;
                     dadosInsert.COD_UF_NATURALIDADE = Dados.Participante.UF_NATURALIDADE != dadosAntigos.UF_NATURALIDADE ? Dados.Participante.UF_NATURALIDADE : null;
-                    dadosInsert.DES_UF_NATURALIDADE = ufNaturalidade;
+                    dadosInsert.DES_UF_NATURALIDADE = Dados.Participante.UF_NATURALIDADE != dadosAntigos.UF_NATURALIDADE ? ufNaturalidade : null;
                     dadosInsert.COD_NACIONALIDADE = null;
                     dadosInsert.DES_NACIONALIDADE = null;
                     dadosInsert.NOM_MAE = Dados.Participante.NOME_MAE?.ToUpper() != dadosAntigos.NOME_MAE?.ToUpper() ? Dados.Participante.NOME_MAE?.ToUpper() : null;
                     dadosInsert.NOM_PAI = Dados.Participante.NOME_PAI?.ToUpper() != dadosAntigos.NOME_PAI?.ToUpper() ? Dados.Participante.NOME_PAI?.ToUpper() : null;
                     dadosInsert.COD_ESTADO_CIVIL = Dados.Participante.CD_ESTADO_CIVIL != dadosAntigos.CD_ESTADO_CIVIL ? Dados.Participante.CD_ESTADO_CIVIL : null;
-                    dadosInsert.DES_ESTADO_CIVIL = estadoCivil;
+                    dadosInsert.DES_ESTADO_CIVIL = Dados.Participante.CD_ESTADO_CIVIL != dadosAntigos.CD_ESTADO_CIVIL ? estadoCivil : null;
                     dadosInsert.NOM_CONJUGE = Dados.Participante.NOME_CONJUGE?.ToUpper() != dadosAntigos.NOME_CONJUGE?.ToUpper() ? Dados.Participante.NOME_CONJUGE?.ToUpper() : null;
                     dadosInsert.COD_CPF_CONJUGE = Dados.Participante.CPF_CONJUGE.LimparMascara() != dadosAntigos.CPF_CONJUGE.LimparMascara() ? Dados.Participante.CPF_CONJUGE.LimparMascara() : null;
                     dadosInsert.DTA_NASC_CONJUGE = null;
@@ -186,9 +189,9 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     dadosInsert.DES_END_BAIRRO = Dados.Participante.BAIRRO_ENTID?.ToUpper() != dadosAntigos.BAIRRO_ENTID?.ToUpper() ? Dados.Participante.BAIRRO_ENTID?.ToUpper() : null;
                     dadosInsert.DES_END_CIDADE = Dados.Participante.CID_ENTID?.ToUpper() != dadosAntigos.CID_ENTID?.ToUpper() ? Dados.Participante.CID_ENTID?.ToUpper() : null;
                     dadosInsert.COD_END_UF = Dados.Participante.UF_ENTID != dadosAntigos.UF_ENTID ? Dados.Participante.UF_ENTID : null;
-                    dadosInsert.DES_END_UF = ufEndereco;
+                    dadosInsert.DES_END_UF = Dados.Participante.UF_ENTID != dadosAntigos.UF_ENTID ? ufEndereco : null;
                     dadosInsert.COD_PAIS = Dados.Participante.CD_PAIS != dadosAntigos.CD_PAIS ? Dados.Participante.CD_PAIS : null;
-                    dadosInsert.DES_PAIS = pais;
+                    dadosInsert.DES_PAIS = Dados.Participante.CD_PAIS != dadosAntigos.CD_PAIS ? pais : null;
                     dadosInsert.COD_EMAIL = Dados.Participante.EMAIL_AUX != dadosAntigos.EMAIL_AUX ? Dados.Participante.EMAIL_AUX : null;
                     dadosInsert.COD_TELEFONE_FIXO = Dados.Participante.FONE_ENTID != dadosAntigos.FONE_ENTID ? Dados.Participante.FONE_ENTID : null;
                     dadosInsert.COD_TELEFONE_CELULAR = Dados.Participante.FONE_CELULAR != dadosAntigos.FONE_CELULAR ? Dados.Participante.FONE_CELULAR : null;
@@ -203,7 +206,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     dadosInsert.COD_CONTA_CORRENTE = Dados.Participante.NUM_CONTA != dadosAntigos.NUM_CONTA ? Dados.Participante.NUM_CONTA : null;
                     dadosInsert.COD_DV_CONTA_CORRENTE = null;
                     dadosInsert.COD_ESPECIE_INSS = Dados.Participante.CD_ESPECIE_INSS != dadosAntigos.CD_ESPECIE_INSS ? Dados.Participante.CD_ESPECIE_INSS : null;
-                    dadosInsert.DES_ESPECIE_INSS = especieINSS;
+                    dadosInsert.DES_ESPECIE_INSS = Dados.Participante.CD_ESPECIE_INSS != dadosAntigos.CD_ESPECIE_INSS ? especieINSS : null;
                     dadosInsert.COD_BENEF_INSS = Dados.Participante.NUM_PROCESSO_PREV != dadosAntigos.NUM_PROCESSO_PREV ? Dados.Participante.NUM_PROCESSO_PREV : null;
                     dadosInsert.IND_PPE = Dados.Participante.POLIT_EXP != dadosAntigos.POLIT_EXP ? Dados.Participante.POLIT_EXP : null;
                     dadosInsert.IND_PPE_FAMILIAR = null;
@@ -214,15 +217,15 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
     dadosInsert.DTA_SOLICITACAO,
     dadosInsert.DES_ORIGEM,
     dadosInsert.COD_PROTOCOLO,
-    dadosInsert.DTA_RECUSA ?? DateTime.Now,
+    dadosInsert.DTA_RECUSA,
     dadosInsert.TXT_MOTIVO_RECUSA,
     dadosInsert.NOM_PESSOA,
-    dadosInsert.DTA_NASCIMENTO ?? DateTime.Now,
+    dadosInsert.DTA_NASCIMENTO,
     dadosInsert.COD_CPF,
     dadosInsert.COD_RG,
     dadosInsert.DES_ORGAO_EXPEDIDOR,
-    dadosInsert.DTA_EXPEDICAO_RG ?? DateTime.Now,
-    dadosInsert.DTA_ADMISSAO ?? DateTime.Now,
+    dadosInsert.DTA_EXPEDICAO_RG,
+    dadosInsert.DTA_ADMISSAO,
     dadosInsert.DES_NATURALIDADE,
     dadosInsert.COD_UF_NATURALIDADE,
     dadosInsert.DES_UF_NATURALIDADE,
@@ -234,7 +237,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
     dadosInsert.DES_ESTADO_CIVIL,
     dadosInsert.NOM_CONJUGE,
     dadosInsert.COD_CPF_CONJUGE,
-    dadosInsert.DTA_NASC_CONJUGE ?? DateTime.Now,
+    dadosInsert.DTA_NASC_CONJUGE,
     dadosInsert.COD_CEP,
     dadosInsert.DES_END_LOGRADOURO,
     dadosInsert.DES_END_NUMERO,
@@ -295,7 +298,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                                 depInsert.NOM_DEPENDENTE,
                                 depInsert.COD_GRAU_PARENTESCO,
                                 depInsert.DES_GRAU_PARENTESCO,
-                                depInsert.DTA_NASCIMENTO ?? DateTime.Now,
+                                depInsert.DTA_NASCIMENTO,
                                 depInsert.COD_SEXO,
                                 depInsert.DES_SEXO,
                                 depInsert.COD_CPF,
@@ -330,9 +333,9 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                                 depInsert.NOM_DEPENDENTE,
                                 depInsert.COD_GRAU_PARENTESCO,
                                 depInsert.DES_GRAU_PARENTESCO,
-                                depInsert.DTA_NASCIMENTO ?? DateTime.Now,
-                                depInsert.DTA_INICIO_IRRF ?? DateTime.Now,
-                                DateTime.Now,
+                                depInsert.DTA_NASCIMENTO,
+                                depInsert.DTA_INICIO_IRRF,
+                                depInsert.DTA_TERMINO_IRRF,
                                 depInsert.COD_SEXO,
                                 depInsert.DES_SEXO,
                                 depInsert.COD_CPF,
@@ -390,11 +393,11 @@ $"Portal SABESPREV<br/><br/>" +
 $"Documento: <b>Recadastramento de Assistidos e Pensionistas - Web</b><br/>" +
 $"Data de envio: <b>{dataAtual}</b><br/>" +
 $"Nome do participante / solicitante: <b>{Dados.Participante.NOME_ENTID}<b><br/>" +
-$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}${planos}</b><br/>" +
+$"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}{planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "viniciusvives@gmail.com"//"documentos@sabesprev.com.br"//
+                        "viniciusvives@gmail.com"//rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);
@@ -402,7 +405,11 @@ $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     transaction.Complete();
 
                     var msgFinal = $"O seu recadastramento recebeu o número de protocolo <b>{dadosInsert.COD_PROTOCOLO}</b> e está em análise pela Sabesprev!<br/><br/>" +
+$"Para acompanhar o andamento do seu recadastramento, acesse a área restrita > <b>Previdenciário > Autoatendimento > 16 - Recadastramento de Assistidos -Situação.</b><br/><br/>" +
 $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é uma exigência legal que garante a manutenção de seu benefício!";
+
+                    /*var msgFinal = $"O seu recadastramento recebeu o número de protocolo <b>{dadosInsert.COD_PROTOCOLO}</b> e está em análise pela Sabesprev!<br/><br/>" +
+$"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é uma exigência legal que garante a manutenção de seu benefício!";*/
                     return Json(msgFinal);
                 }
                 catch (Exception ex)
@@ -742,11 +749,12 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                     throw new Exception("Favor configurar o usuário e senha de E-mail da API para envio de TOKEN via E-mail.");
                 }
 
+                var titulo = "Código para concluir o recadastramento Sabesprev";
                 var mensagem = $"SABESPREV: Para validar a operação de recadastramento, insira o código a seguir e clique em 'Concluir Recadastramento'.<br/>" +
                     $"<br/>" +
                     $"<h3>{token}</h3>";
                 var destinatario = new List<string>() { alvoEnvio };
-                Enviar(config, destinatario, "Token para concluir o recadastramento Sabesprev", mensagem);
+                Enviar(config, destinatario, titulo, mensagem);
             }
             catch (Exception ex)
             {
@@ -764,7 +772,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
 
                 if (dados == null)
                 {
-                    throw new Exception("Erro ao ccarregar os dados do participante.");
+                    throw new Exception("Erro ao carregar os dados do participante.");
                 }
 
                 if (config == null || string.IsNullOrEmpty(config.Usuario) || string.IsNullOrEmpty(config.Senha))
@@ -774,7 +782,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
 
                 var mensagem = $"Para validar a operacao de recadastramento, insira o codigo a seguir e clique em 'Concluir Recadastramento': {token}";
                 var retorno = new EnvioSMS()
-                    .EnviarHumanAPI(alvoEnvio, config.Usuario, config.Senha, "SABESPREV", mensagem, dados.NUM_MATRICULA, dados.NUM_INSCRICAO,
+                    .EnviarHumanAPI(alvoEnvio.LimparMascara(), config.Usuario, config.Senha, "SABESPREV", mensagem, dados.NUM_MATRICULA, dados.NUM_INSCRICAO,
                         new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                         {
                             try

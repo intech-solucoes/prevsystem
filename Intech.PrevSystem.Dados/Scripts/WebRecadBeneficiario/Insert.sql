@@ -8,7 +8,7 @@
 		-NOM_DEPENDENTE: string
 		-COD_GRAU_PARENTESCO: string
 		-DES_GRAU_PARENTESCO: string
-		-DTA_NASCIMENTO: DateTime
+		-DTA_NASCIMENTO: DateTime?
 		-COD_SEXO: string
 		-DES_SEXO: string
 		-COD_CPF: string

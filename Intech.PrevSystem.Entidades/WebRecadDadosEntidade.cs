@@ -11,6 +11,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal OID_RECAD_DADOS { get; set; }
 		public decimal OID_RECAD_PUBLICO_ALVO { get; set; }
 		public DateTime DTA_SOLICITACAO { get; set; }
+		public string COD_PROTOCOLO { get; set; }
 		public string DES_ORIGEM { get; set; }
 		public DateTime? DTA_RECUSA { get; set; }
 		public string TXT_MOTIVO_RECUSA { get; set; }
@@ -62,6 +63,5 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_PPE { get; set; }
 		public string IND_PPE_FAMILIAR { get; set; }
 		public string IND_FATCA { get; set; }
-		public string COD_PROTOCOLO { get; set; }
 	}
 }

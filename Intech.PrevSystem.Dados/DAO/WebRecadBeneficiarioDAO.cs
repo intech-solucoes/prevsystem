@@ -10,7 +10,7 @@ namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class WebRecadBeneficiarioDAO : BaseDAO<WebRecadBeneficiarioEntidade>
 	{
-		public virtual long Insert( decimal OID_RECAD_DADOS,  string COD_PLANO,  decimal NUM_SEQ_DEP,  string NOM_DEPENDENTE,  string COD_GRAU_PARENTESCO,  string DES_GRAU_PARENTESCO,  DateTime DTA_NASCIMENTO,  string COD_SEXO,  string DES_SEXO,  string COD_CPF,  decimal COD_PERC_RATEIO,  string IND_OPERACAO)
+		public virtual long Insert( decimal OID_RECAD_DADOS,  string COD_PLANO,  decimal NUM_SEQ_DEP,  string NOM_DEPENDENTE,  string COD_GRAU_PARENTESCO,  string DES_GRAU_PARENTESCO,  DateTime? DTA_NASCIMENTO,  string COD_SEXO,  string DES_SEXO,  string COD_CPF,  decimal COD_PERC_RATEIO,  string IND_OPERACAO)
 		{
 			try
 			{

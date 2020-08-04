@@ -78,7 +78,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual List<WebRecadPublicoAlvoEntidade> BuscarPorCpfDataAtual(string CPF, DateTime DATA_ATUAL)
+		public virtual List<WebRecadPublicoAlvoEntidade> BuscarPorCpfDataAtualAssistido(string CPF, DateTime DATA_ATUAL)
 		{
 			try
 			{
@@ -86,6 +86,40 @@ namespace Intech.PrevSystem.Dados.DAO
 					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.DTA_TERMINO, RB.CD_TIPO_RECEBEDOR    FROM WEB_RECAD_PUBLICO_ALVO PA      INNER JOIN GB_RECEBEDOR_BENEFICIO RB ON RB.CD_FUNDACAO = PA.CD_FUNDACAO        AND RB.SEQ_RECEBEDOR = PA.SEQ_RECEBEDOR      INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = RB.COD_ENTID      INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA  WHERE EE.CPF_CGC = @CPF    AND CA.DTA_INICIO <= @DATA_ATUAL    AND CA.DTA_TERMINO >= @DATA_ATUAL    AND CA.IND_ATIVO = 'SIM'    ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
 					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.DTA_TERMINO, RB.CD_TIPO_RECEBEDOR FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN GB_RECEBEDOR_BENEFICIO   RB  ON RB.CD_FUNDACAO=PA.CD_FUNDACAO AND RB.SEQ_RECEBEDOR=PA.SEQ_RECEBEDOR INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=RB.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual List<WebRecadPublicoAlvoEntidade> BuscarPorCpfDataAtualAtivo(string CPF, DateTime DATA_ATUAL)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*   FROM WEB_RECAD_PUBLICO_ALVO PA     INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = PA.CD_FUNDACAO 		AND FN.NUM_INSCRICAO = PA.NUM_INSCRICAO     INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = FN.COD_ENTID     INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC = @CPF   AND CA.DTA_INICIO <= @DATA_ATUAL   AND CA.DTA_TERMINO >= @DATA_ATUAL   AND CA.IND_ATIVO = 'SIM'", new { CPF, DATA_ATUAL }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.* FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=PA.CD_FUNDACAO AND FN.NUM_INSCRICAO=PA.NUM_INSCRICAO INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=FN.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM'", new { CPF, DATA_ATUAL }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
+		public virtual List<WebRecadPublicoAlvoEntidade> BuscarPorInscricao(string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT *   FROM WEB_RECAD_PUBLICO_ALVO PA WHERE NUM_INSCRICAO = @NUM_INSCRICAO", new { NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT * FROM WEB_RECAD_PUBLICO_ALVO  PA  WHERE NUM_INSCRICAO=:NUM_INSCRICAO", new { NUM_INSCRICAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}

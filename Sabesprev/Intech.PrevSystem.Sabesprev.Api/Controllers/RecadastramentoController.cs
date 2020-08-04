@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -122,7 +122,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 {
                     var dataAtual = DateTime.Now;
 
-                    var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtual(Dados.CPF_Original.LimparMascara(), dataAtual).FirstOrDefault();
+                    var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(Dados.CPF_Original.LimparMascara(), dataAtual).FirstOrDefault();
                     recad.IND_SITUACAO_RECAD = "SOL";
                     recad.NOM_USUARIO_ACAO = Dados.Participante.NOME_ENTID;
 
@@ -430,7 +430,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             try
             {
                 var dataAtual = DateTime.Now;
-                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtual(cpf.LimparMascara(), dataAtual).FirstOrDefault();
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual).FirstOrDefault();
                 var msg = "";
                 if (recad == null)
                 {
@@ -470,7 +470,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             try
             {
                 var dataAtual = DateTime.Now;
-                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtual(cpf.LimparMascara(), dataAtual).FirstOrDefault();
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual).FirstOrDefault();
 
                 var info = new WebRecadPublicoAlvoProxy().BuscarDadosPorCdFundacaoSeqRecebedor(recad.CD_FUNDACAO, recad.SEQ_RECEBEDOR).FirstOrDefault();
 
@@ -530,7 +530,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             try
             {
                 var dataAtual = DateTime.Now;
-                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtual(cpf.LimparMascara(), dataAtual).FirstOrDefault();
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual).FirstOrDefault();
                 var ListaDependentesIR = recad.CD_TIPO_RECEBEDOR == "A" ?
                     new DependenteProxy().BuscarPorFundacaoInscricaoIRAssistido(recad.CD_FUNDACAO, recad.NUM_INSCRICAO, dataAtual) :
                     new DependenteProxy().BuscarPorFundacaoSeqRecebedorIRPensionista(recad.CD_FUNDACAO, recad.SEQ_RECEBEDOR, dataAtual);

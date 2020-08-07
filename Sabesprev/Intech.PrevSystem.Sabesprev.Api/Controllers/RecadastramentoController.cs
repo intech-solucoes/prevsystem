@@ -303,7 +303,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                                 depInsert.DES_SEXO,
                                 depInsert.COD_CPF,
                                 depInsert.COD_PERC_RATEIO ?? 0,
-                                depInsert.IND_OPERACAO
+                                depInsert.IND_OPERACAO,
+                                "SIM"
                             );
                         });
                     }
@@ -339,7 +340,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                                 depInsert.COD_SEXO,
                                 depInsert.DES_SEXO,
                                 depInsert.COD_CPF,
-                                depInsert.IND_OPERACAO
+                                depInsert.IND_OPERACAO,
+                                "SIM"
                             );
                         });
                     }
@@ -381,7 +383,7 @@ $"O seu recadastramento recebeu o número de protocolo <b>{dadosInsert.COD_PROTO
 $" Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é uma exigência legal que garante a manutenção de seu benefício!";
                     // email para o participante
                     List<string> destinatario = new List<string>() {
-                        Dados.Participante.EMAIL_AUX
+                        Dados.Participante.EMAIL_AUX.Trim(' ')
                     };
                     Enviar(emailConfig, destinatario, $"Sabesprev - {campanha.NOM_CAMPANHA} - {Dados.Participante.NOME_ENTID}", msgParticipante);
 
@@ -753,7 +755,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
                 var mensagem = $"SABESPREV: Para validar a operação de recadastramento, insira o código a seguir e clique em 'Concluir Recadastramento'.<br/>" +
                     $"<br/>" +
                     $"<h3>{token}</h3>";
-                var destinatario = new List<string>() { alvoEnvio };
+                var destinatario = new List<string>() { alvoEnvio.Trim(' ') };
                 Enviar(config, destinatario, titulo, mensagem);
             }
             catch (Exception ex)

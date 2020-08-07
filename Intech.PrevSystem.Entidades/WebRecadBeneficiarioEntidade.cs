@@ -21,5 +21,6 @@ namespace Intech.PrevSystem.Entidades
 		public string COD_CPF { get; set; }
 		public decimal? COD_PERC_RATEIO { get; set; }
 		public string IND_OPERACAO { get; set; }
+		public string IND_VALIDO { get; set; }
 	}
 }

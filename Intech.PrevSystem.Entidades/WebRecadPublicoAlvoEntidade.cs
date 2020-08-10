@@ -20,5 +20,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string CD_TIPO_RECEBEDOR { get; set; }
 		[Write(false)] public string CD_ESPECIE_INSS { get; set; }
 		[Write(false)] public string TEXTO_RECAD { get; set; }
+		[Write(false)] public string GRUPO_RECADASTRAMENTO { get; set; }
 	}
 }

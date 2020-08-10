@@ -770,7 +770,11 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             {
                 var config = AppSettings.Get().SMS;
 
-                var dados = new FuncionarioProxy().BuscarPorCpf(cpf).FirstOrDefault();
+                var dataAtual = DateTime.Now;
+
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf, dataAtual).FirstOrDefault();
+
+                var dados = new WebRecadPublicoAlvoProxy().BuscarDadosPorCdFundacaoSeqRecebedor(recad.CD_FUNDACAO, recad.SEQ_RECEBEDOR).FirstOrDefault();
 
                 if (dados == null)
                 {

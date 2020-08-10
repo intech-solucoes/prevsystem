@@ -20,6 +20,11 @@
       "Nome": "TEXTO_RECAD",
       "Tipo": "string",
       "AceitaNulo": true
+    },
+    {
+      "nome": "GRUPO_RECADASTRAMENTO",
+      "tipo": "string",
+      "aceitaNulo": true
     }
   ],
   "Imports": []

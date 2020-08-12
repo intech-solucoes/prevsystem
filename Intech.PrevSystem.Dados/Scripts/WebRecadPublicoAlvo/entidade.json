@@ -25,6 +25,11 @@
       "nome": "GRUPO_RECADASTRAMENTO",
       "tipo": "string",
       "aceitaNulo": true
+    },
+    {
+      "nome": "NUM_MATRICULA",
+      "tipo": "string",
+      "aceitaNulo": true
     }
   ],
   "Imports": []

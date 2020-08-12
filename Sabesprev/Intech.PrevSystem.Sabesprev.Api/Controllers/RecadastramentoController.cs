@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -122,7 +122,7 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                 {
                     var dataAtual = DateTime.Now;
 
-                    var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(Dados.CPF_Original.LimparMascara(), dataAtual).FirstOrDefault();
+                    var recad = new WebRecadPublicoAlvoProxy().BuscarPorOidDataAtual(Dados.OID_RECAD_PUBLICO_ALVO_Original, dataAtual);
                     recad.IND_SITUACAO_RECAD = "SOL";
                     recad.NOM_USUARIO_ACAO = Dados.Participante.NOME_ENTID;
 
@@ -399,7 +399,7 @@ $"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}{planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "viniciusvives@gmail.com"//rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//
+                        "viniciusvives@gmail.com"//"rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//"daniel.ghazaleh@intech.com.br"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);
@@ -432,32 +432,32 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             try
             {
                 var dataAtual = DateTime.Now;
-                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual).FirstOrDefault();
-                var msg = "";
-                if (recad == null)
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual);
+                if (recad == null || recad.Count == 0)
                 {
-                    msg = "Não há recadastramento previsto para você. Para mais informações, favor entrar em contato com a Sabesprev através dos diversos canais de atendimento disponíveis.";
+                    recad.First().OID_RECAD_PUBLICO_ALVO = 0;
+                    recad.First().TEXTO_RECAD = "Não há recadastramento previsto para você. Para mais informações, favor entrar em contato com a Sabesprev através dos diversos canais de atendimento disponíveis.";
                 }
                 else
                 {
-                    if (recad.IND_SITUACAO_RECAD == "SOL")
+                    recad.ForEach(r =>
                     {
-                        msg = "Já existe um recadastramento solicitado por você. O mesmo encontra-se em análise pela Sabesprev e em breve você será informado. Caso o recadastramento informado anteriormente esteja incorreto, você pode solicitar um novo. Deseja solicitar um novo recadastramento?";
-                    }
-                    if (recad.IND_SITUACAO_RECAD == "EFE")
-                    {
-                        msg = $"O seu recadastramento já foi solicitado e efetivado pela Sabesprev em {recad.DTA_EFETIVACAO}. Agradecemos pela sua colaboração.";
-                    }
-                    if (recad.IND_SITUACAO_RECAD == "AGU" || recad.IND_SITUACAO_RECAD == "REC")
-                    {
-                        msg = "";
-                    }
+                        if (r.IND_SITUACAO_RECAD == "SOL")
+                        {
+                            r.TEXTO_RECAD = "Já existe um recadastramento solicitado por você. O mesmo encontra-se em análise pela Sabesprev e em breve você será informado. Caso o recadastramento informado anteriormente esteja incorreto, você pode solicitar um novo. Deseja solicitar um novo recadastramento?";
+                        }
+                        if (r.IND_SITUACAO_RECAD == "EFE")
+                        {
+                            r.TEXTO_RECAD = $"O seu recadastramento já foi solicitado e efetivado pela Sabesprev em {r.DTA_EFETIVACAO}. Agradecemos pela sua colaboração.";
+                        }
+                        if (r.IND_SITUACAO_RECAD == "AGU" || r.IND_SITUACAO_RECAD == "REC")
+                        {
+                            r.TEXTO_RECAD = "";
+                        }
+                        
+                    });
                 }
-                return Json(new
-                {
-                    msg = msg,
-                    recad = recad
-                });
+                return Json(recad);
             }
             catch (Exception ex)
             {
@@ -465,14 +465,14 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             }
         }
 
-        [HttpGet("[action]/{cpf}")]
+        [HttpGet("[action]/{oid}")]
         [AllowAnonymous]
-        public IActionResult BuscarDadosPorCpf(string cpf)
+        public IActionResult BuscarDadosPorOid(string oid)
         {
             try
             {
                 var dataAtual = DateTime.Now;
-                var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual).FirstOrDefault();
+                var recad = new WebRecadPublicoAlvoProxy().BuscarPorOidDataAtual(oid, dataAtual);
 
                 var info = new WebRecadPublicoAlvoProxy().BuscarDadosPorCdFundacaoSeqRecebedor(recad.CD_FUNDACAO, recad.SEQ_RECEBEDOR).FirstOrDefault();
 
@@ -817,6 +817,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
         public List<DependenteEntidade> ListaDependentesIR { get; set; }
         public List<long> ListaArquivo { get; set; }
         public string CPF_Original { get; set; }
+        public string OID_RECAD_PUBLICO_ALVO_Original { get; set; }
     }
     public class FileUploadViewModel
     {

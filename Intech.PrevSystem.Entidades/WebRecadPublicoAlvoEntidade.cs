@@ -21,5 +21,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string CD_ESPECIE_INSS { get; set; }
 		[Write(false)] public string TEXTO_RECAD { get; set; }
 		[Write(false)] public string GRUPO_RECADASTRAMENTO { get; set; }
+		[Write(false)] public string NUM_MATRICULA { get; set; }
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class ContratoWebProxy : ContratoWebDAO
-    {
-    }
+	public class ContratoWebProxy : ContratoWebDAO
+	{
+	}
 }

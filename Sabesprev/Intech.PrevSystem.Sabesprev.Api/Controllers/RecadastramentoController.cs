@@ -80,13 +80,17 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
 
                 if (file.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();
+
                     string fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var extension = fileName.Split(".").Last()?.ToUpper();
+
+                    var nomeGravacao = guid + "." + extension;
                     if (extension != "TIF" && extension != "JPG" && extension != "BMP" && extension != "PNG" && extension != "PDF") {
                         // TIF, JPG, BMP, PNG e PDF
                         return BadRequest("Arquivo inválido. Por favor utilizar arquivos das seguintes extensões: TIF, JPG, BMP, PNG e PDF.");
                     }
-                    string fullPath = Path.Combine("Upload", fileName);
+                    string fullPath = Path.Combine("Upload", nomeGravacao);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
@@ -95,12 +99,12 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                     var f = new ArquivoUploadEntidade();
                     f.DTA_UPLOAD = DateTime.Now;
                     f.IND_STATUS = 2;
-                    f.NOM_ARQUIVO_LOCAL = fileName;
-                    f.NOM_ARQUIVO_ORIGINAL = Guid.NewGuid().ToString();
+                    f.NOM_ARQUIVO_LOCAL = nomeGravacao;
+                    f.NOM_ARQUIVO_ORIGINAL = fileName;
                     f.NOM_DIRETORIO_LOCAL = "Upload";
                     //oid = new ArquivoUploadProxy().Inserir(f);
                     new ArquivoUploadProxy().Insert(f.DTA_UPLOAD, f.IND_STATUS, f.NOM_ARQUIVO_LOCAL, f.NOM_ARQUIVO_ORIGINAL, f.NOM_DIRETORIO_LOCAL);
-                    var a = new ArquivoUploadProxy().BuscarPorNome(f.NOM_ARQUIVO_ORIGINAL).LastOrDefault();
+                    var a = new ArquivoUploadProxy().BuscarPorNome(f.NOM_ARQUIVO_LOCAL).LastOrDefault();
                     oid = a != null ? a.OID_ARQUIVO_UPLOAD : 0;
                 }
 
@@ -355,8 +359,8 @@ namespace Intech.PrevSystem.Sabesprev.Api.Controllers
                             var arquivoDados = new ArquivoUploadProxy().BuscarPorCodigo(arquivoId);
                             var arquivoInsert = new WebRecadDocumentoEntidade();
                             arquivoInsert.OID_RECAD_DADOS = oid_recad_dados;
-                            arquivoInsert.TXT_TITULO = arquivoDados.NOM_ARQUIVO_LOCAL;
-                            arquivoInsert.TXT_NOME_FISICO = arquivoDados.NOM_ARQUIVO_ORIGINAL;
+                            arquivoInsert.TXT_TITULO = arquivoDados.NOM_ARQUIVO_ORIGINAL;
+                            arquivoInsert.TXT_NOME_FISICO = arquivoDados.NOM_ARQUIVO_LOCAL;
                             new WebRecadDocumentoProxy().Insert(arquivoInsert.OID_RECAD_DADOS, arquivoInsert.TXT_TITULO, arquivoInsert.TXT_NOME_FISICO);
                             //new WebRecadDocumentoProxy().Inserir(arquivoInsert);
 
@@ -399,7 +403,7 @@ $"Matrícula: <b>{Dados.Participante.NUM_MATRICULA}{planos}</b><br/>" +
 $"Protocolo: <b>{dadosInsert.COD_PROTOCOLO}</b><br/>" +
 $"CPF: <b>{Dados.Participante.CPF_CGC}</b>";
                     destinatario = new List<string>() {
-                        "viniciusvives@gmail.com"//"rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//"daniel.ghazaleh@intech.com.br"//
+                        "rlandert@sabesprev.com.br"//"documentos@sabesprev.com.br"//"viniciusvives@gmail.com"//"daniel.ghazaleh@intech.com.br"//
                     };
                     // email para a fundacao
                     Enviar(emailConfig, destinatario, $"{campanha.NOM_CAMPANHA} - Recadastramento de Assistidos e Pensionistas Web - {Dados.Participante.NOME_ENTID}", msgFundacao, arquivos, docNames);

@@ -44,14 +44,14 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual List<ArquivoUploadEntidade> BuscarPorNome(string NOM_ARQUIVO_ORIGINAL)
+		public virtual List<ArquivoUploadEntidade> BuscarPorNome(string NOM_ARQUIVO_LOCAL)
 		{
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<ArquivoUploadEntidade>("SELECT * FROM TBG_ARQUIVO_UPLOAD  WHERE      NOM_ARQUIVO_ORIGINAL = @NOM_ARQUIVO_ORIGINAL", new { NOM_ARQUIVO_ORIGINAL }).ToList();
+					return Conexao.Query<ArquivoUploadEntidade>("SELECT * FROM TBG_ARQUIVO_UPLOAD  WHERE      NOM_ARQUIVO_LOCAL = @NOM_ARQUIVO_LOCAL", new { NOM_ARQUIVO_LOCAL }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<ArquivoUploadEntidade>("SELECT * FROM TBG_ARQUIVO_UPLOAD WHERE NOM_ARQUIVO_ORIGINAL=:NOM_ARQUIVO_ORIGINAL", new { NOM_ARQUIVO_ORIGINAL }).ToList();
+					return Conexao.Query<ArquivoUploadEntidade>("SELECT * FROM TBG_ARQUIVO_UPLOAD WHERE NOM_ARQUIVO_LOCAL=:NOM_ARQUIVO_LOCAL", new { NOM_ARQUIVO_LOCAL }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}

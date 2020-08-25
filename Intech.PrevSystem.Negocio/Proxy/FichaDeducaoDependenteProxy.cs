@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class FichaDeducaoDependenteProxy : FichaDeducaoDependenteDAO
-    {
-    }
+	public class FichaDeducaoDependenteProxy : FichaDeducaoDependenteDAO
+	{
+	}
 }

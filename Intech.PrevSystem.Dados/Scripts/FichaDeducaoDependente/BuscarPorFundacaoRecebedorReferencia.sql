@@ -1,4 +1,5 @@
 ﻿/*Config
+    RetornaLista
     Retorno
         -FichaDeducaoDependenteEntidade
     Parametros

@@ -27,5 +27,6 @@
         public const string Dashboard = "api/dashboard";
         public const string SalarioBase = "api/salarioBase";
         public const string FichaFechamento = "api/fichaFechamento";
+        public const string Funcionalidade = "api/funcionalidade";
     }
 }

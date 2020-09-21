@@ -22,5 +22,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string TEXTO_RECAD { get; set; }
 		[Write(false)] public string GRUPO_RECADASTRAMENTO { get; set; }
 		[Write(false)] public string NUM_MATRICULA { get; set; }
+		[Write(false)] public string PRAZO_RECADASTRAMENTO { get; set; }
 	}
 }

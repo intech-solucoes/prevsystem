@@ -437,28 +437,35 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             {
                 var dataAtual = DateTime.Now;
                 var recad = new WebRecadPublicoAlvoProxy().BuscarPorCpfDataAtualAssistido(cpf.LimparMascara(), dataAtual);
-                if (recad == null || recad.Count == 0)
+                if (recad.FirstOrDefault() == null || recad.Count == 0)
                 {
-                    recad.First().OID_RECAD_PUBLICO_ALVO = 0;
-                    recad.First().TEXTO_RECAD = "Não há recadastramento previsto para você. Para mais informações, favor entrar em contato com a Sabesprev através dos diversos canais de atendimento disponíveis.";
+                    recad.Add(new WebRecadPublicoAlvoEntidade());
+                    recad[0].OID_RECAD_PUBLICO_ALVO = 0;
+                    recad[0].TEXTO_RECAD = "Não há recadastramento previsto para você. Para mais informações, favor entrar em contato com a Sabesprev através dos diversos canais de atendimento disponíveis.";
                 }
                 else
                 {
                     recad.ForEach(r =>
                     {
-                        if (r.IND_SITUACAO_RECAD == "SOL")
+                        if (r.PRAZO_RECADASTRAMENTO == "N")
                         {
-                            r.TEXTO_RECAD = "Já existe um recadastramento solicitado por você. O mesmo encontra-se em análise pela Sabesprev e em breve você será informado. Caso o recadastramento informado anteriormente esteja incorreto, você pode solicitar um novo. Deseja solicitar um novo recadastramento?";
+                            r.TEXTO_RECAD = $"O prazo para o recadastramento encerrou-se em {r.DTA_TERMINO.ToString("dd/MM/yyyy")}. Aguarde informações por meio de sms ou email, ou veja as informações em nosso portal.";
                         }
-                        if (r.IND_SITUACAO_RECAD == "EFE")
+                        else
                         {
-                            r.TEXTO_RECAD = $"O seu recadastramento já foi solicitado e efetivado pela Sabesprev em {r.DTA_EFETIVACAO}. Agradecemos pela sua colaboração.";
+                            if (r.IND_SITUACAO_RECAD == "SOL")
+                            {
+                                r.TEXTO_RECAD = "Já existe um recadastramento solicitado por você. O mesmo encontra-se em análise pela Sabesprev e em breve você será informado. Caso o recadastramento informado anteriormente esteja incorreto, você pode solicitar um novo. Deseja solicitar um novo recadastramento?";
+                            }
+                            if (r.IND_SITUACAO_RECAD == "EFE")
+                            {
+                                r.TEXTO_RECAD = $"O seu recadastramento já foi solicitado e efetivado pela Sabesprev em {r.DTA_EFETIVACAO}. Agradecemos pela sua colaboração.";
+                            }
+                            if (r.IND_SITUACAO_RECAD == "AGU" || r.IND_SITUACAO_RECAD == "REC")
+                            {
+                                r.TEXTO_RECAD = "";
+                            }
                         }
-                        if (r.IND_SITUACAO_RECAD == "AGU" || r.IND_SITUACAO_RECAD == "REC")
-                        {
-                            r.TEXTO_RECAD = "";
-                        }
-                        
                     });
                 }
                 return Json(recad);
@@ -648,7 +655,7 @@ $"Obrigado por realizar o seu recadastramento na Sabesprev! O recadastramento é
             try
             {
                 var lista = new GrauParentescoProxy().BuscarOrderAlfabetica().ToList<GrauParentescoEntidade>();
-                var filtro = new[] { "32", "28", "3", "2", "18", "40", "47", "24", "9", "23", "7", "42", "21", "15", "19", "6", "22", "4", "5", "41", "17", "0", "16", "30", "29", "13", "27", "31", "12", "36", "20", "26", "35" };
+                var filtro = new[] { "32", "28", "03", "02", "18", "40", "47", "24", "09", "23", "07", "42", "21", "15", "19", "06", "22", "04", "05", "41", "17", "00", "16", "30", "29", "13", "27", "31", "12", "36", "20", "26", "35" };
                 return Json(lista.Where(x => filtro.Contains(x.CD_GRAU_PARENTESCO)));
             }
             catch (Exception ex)

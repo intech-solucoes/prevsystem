@@ -10,6 +10,26 @@
             "Nome": "IND_OPERACAO",
             "Tipo": "string",
             "AceitaNulo": true
+        },
+        {
+            "nome": "DS_EMPRESA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "NUM_MATRICULA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "IND_PLANO_FAMILIA",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "DS_MOT_PERDA_VALIDADE",
+            "tipo": "string",
+            "aceitaNulo": true
         }
     ]
 }

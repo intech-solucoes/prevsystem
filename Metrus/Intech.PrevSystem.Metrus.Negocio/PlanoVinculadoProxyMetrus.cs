@@ -12,7 +12,9 @@ namespace Intech.PrevSystem.Metrus.Negocio
     {
         public IEnumerable<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatriculaComModalidades(FuncionarioEntidade funcionario, bool abatePensao = true)
         {
-            var planos = base.BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA).ToList();
+            var planos = base.BuscarPorFundacaoEmpresaMatricula(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_MATRICULA)
+                .Where( x=> x.CD_CATEGORIA  != "2")
+                .ToList();
 
             var categoria = new CategoriaProxy().BuscarPorCdCategoria(planos[0].CD_CATEGORIA);
             var sitPlano = new SitPlanoProxy().BuscarPorCdSituacao(planos[0].CD_SIT_PLANO);

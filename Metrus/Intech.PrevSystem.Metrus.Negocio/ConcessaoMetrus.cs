@@ -298,7 +298,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
             if (usarMargemEconsig && plano.CD_CATEGORIA == DMN_CATEGORIA.ATIVO && empresa == "0001")
             {
-                concessao.DadosEConsig = new UtilEConsig().ObtemMargemConsignavelAsync(funcionario.NUM_MATRICULA, dados.CPF_CGC).Result;
+                concessao.DadosEConsig = new UtilEConsig().ObtemMargemConsignavelAsync(funcionario.NUM_MATRICULA, dados.CPF_CGC.LimparMascara()).Result;
                 concessao.DadosEConsig.ValorMargemLivre = Math.Min(concessao.DadosEConsig.ValorMargemLivre, concessao.MargemConsignavelCalculada);
             }
             else

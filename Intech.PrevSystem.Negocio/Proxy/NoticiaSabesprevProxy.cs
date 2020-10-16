@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class NoticiaSabesprevProxy : NoticiaSabesprevDAO
-    {
-    }
+	public class NoticiaSabesprevProxy : NoticiaSabesprevDAO
+	{
+	}
 }

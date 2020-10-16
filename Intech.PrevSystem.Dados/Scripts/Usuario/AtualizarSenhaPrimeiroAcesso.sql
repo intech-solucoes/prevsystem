@@ -1,0 +1,12 @@
+﻿/*Config
+    Retorno
+        -void
+    Parametros
+        -OID_USUARIO:decimal
+        -PWD_USUARIO:string
+        -IND_PRIMEIRO_ACESSO:string
+*/
+
+UPDATE WEB_USUARIO 
+SET PWD_USUARIO = @PWD_USUARIO, IND_PRIMEIRO_ACESSO = @IND_PRIMEIRO_ACESSO
+WHERE OID_USUARIO = @OID_USUARIO

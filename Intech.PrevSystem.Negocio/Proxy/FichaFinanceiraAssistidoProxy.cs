@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Intech.PrevSystem.Dados.DAO;
-using Intech.PrevSystem.Entidades; 
+using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Outros;
 #endregion
 
 namespace Intech.PrevSystem.Negocio.Proxy
@@ -42,10 +43,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
-        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+        public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
-        public dynamic BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
+        public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
 
@@ -67,11 +68,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var valDescontos = descontos.Sum(x => x.VALOR_MC);
             var liquido = bruto - Math.Abs(valDescontos.Value);
 
-            return new
+            return new ContrachequeEntidade
             {
                 Proventos = proventos,
                 Descontos = descontos,
-                Resumo = new
+                Resumo = new ContrachequeResumo
                 {
                     Competencia = DT_COMPETENCIA,
                     Bruto = bruto,
@@ -83,10 +84,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
-        public dynamic Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+        public ContrachequeEntidade Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
-        public dynamic Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
+        public ContrachequeEntidade Metrus_BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
 
@@ -108,7 +109,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var valDescontos = descontosSem9999.Sum(x => x.VALOR_MC);
             var liquido = bruto - valDescontos;
 
-            return new Contracheque
+            return new ContrachequeEntidade
             {
                 Proventos = proventos,
                 Descontos = descontos,
@@ -124,10 +125,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
-        public Contracheque BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
+        public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
-        public Contracheque BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
+        public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
                 
@@ -149,7 +150,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var valDescontos = descontos.Sum(x => x.VALOR_MC);
             var liquido = bruto - Math.Abs(valDescontos.Value);
             
-            return new Contracheque
+            return new ContrachequeEntidade
             {
                 Proventos = proventos,
                 Descontos = descontos,
@@ -268,25 +269,5 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 }
             };
         }
-    }
-
-    public class Contracheque
-    {
-        public List<FichaFinanceiraAssistidoEntidade> Rubricas { get; set; }
-        public List<FichaFinanceiraAssistidoEntidade> Proventos { get; set; }
-        public List<FichaFinanceiraAssistidoEntidade> Descontos { get; set; }
-        public List<FichaFinanceiraAssistidoEntidade> Outros { get; set; }
-        public ContrachequeResumo Resumo { get; set; }
-    }
-
-    public class ContrachequeResumo
-    {
-        public DateTime Referencia { get; set; }
-        public DateTime DataCredito { get; set; }
-        public decimal? Bruto { get; set; }
-        public decimal? Descontos { get; set; }
-        public decimal? Liquido { get; set; }
-        public string TipoFolha { get; set; }
-        public string DesTipoFolha { get; set; }
     }
 }

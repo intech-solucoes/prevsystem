@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-    public class RecebedorBeneficioProxy : RecebedorBeneficioDAO
-    {
-    }
+	public class RecebedorBeneficioProxy : RecebedorBeneficioDAO
+	{
+	}
 }

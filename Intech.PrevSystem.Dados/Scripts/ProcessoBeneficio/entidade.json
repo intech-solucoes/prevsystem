@@ -1,66 +1,76 @@
 {
-  "NomeTabela": "GB_PROCESSOS_BENEFICIO",
-  "ColunasExtras": [
-    {
-      "Nome": "DS_ESPECIE",
-      "Tipo": "string",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DS_SITUACAO",
-      "Tipo": "string",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DT_REQUERIMENTO",
-      "Tipo": "DateTime",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DT_AFASTAMENTO",
-      "Tipo": "DateTime",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DT_INICIO_PREV",
-      "Tipo": "DateTime",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DT_INICIO_FUND",
-      "Tipo": "DateTime",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "VL_PARCELA_MENSAL",
-      "Tipo": "decimal",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DS_OPCAO_RECEB",
-      "Tipo": "string",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DT_APOSENTADORIA",
-      "Tipo": "DateTime",
-      "AceitaNulo": true
-    },
-    {
-      "Nome": "DS_PROCESSO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "ESPECIE_ANO_NUM_PROCESSO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-        "Nome": "OPCAO_RECB_13",
-        "Tipo": "string",
-        "AceitaNulo": false
-    }
-  ],
-  "Imports": []
+    "NomeTabela": "GB_PROCESSOS_BENEFICIO",
+    "ColunasExtras": [
+        {
+            "Nome": "DS_ESPECIE",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_SITUACAO",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DT_REQUERIMENTO",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DT_AFASTAMENTO",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DT_INICIO_PREV",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DT_INICIO_FUND",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "VL_PARCELA_MENSAL",
+            "Tipo": "decimal",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_OPCAO_RECEB",
+            "Tipo": "string",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DT_APOSENTADORIA",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "DS_PROCESSO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "ESPECIE_ANO_NUM_PROCESSO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "OPCAO_RECB_13",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_TIPO_CALC_CD",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_TEMPO_EXAURIMENTO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        }
+    ],
+    "Imports": []
 }

@@ -19,6 +19,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
             funcionario.Empresa = new EmpresaProxy().BuscarPorCodigo(funcionario.Funcionario.CD_EMPRESA);
             funcionario.Entidade = new EntidadeProxy().BuscarPorCodEntid(codEntid);
+            funcionario.Usuario = new UsuarioProxy().BuscarPorCpf(funcionario.DadosPessoais.CPF_CGC.LimparMascara());
             funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";

@@ -1,4 +1,6 @@
 ﻿#region Usings
+using Intech.Lib.Web.API;
+using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +13,7 @@ namespace Intech.PrevSystem.API
     {
         [HttpGet]
         [Authorize("Bearer")]
+        [Retorno(nameof(EntidadeEntidade))]
         public IActionResult GetPorCodEntid(string codEntid)
         {
             try

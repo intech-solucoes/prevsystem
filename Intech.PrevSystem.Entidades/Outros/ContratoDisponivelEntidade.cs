@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Intech.PrevSystem.Entidades.Outros
 {
-    public class ContratoDisponivel
+    public class ContratoDisponivelEntidade
     {
         public decimal Oid { get; set; }
         public string Fundacao { get; set; }
@@ -75,9 +75,9 @@ namespace Intech.PrevSystem.Entidades.Outros
         public string FormaCredito { get; set; }
         public decimal Carencia { get; set; }
 
-        public ContratoDisponivel() { }
+        public ContratoDisponivelEntidade() { }
 
-        public ContratoDisponivel(
+        public ContratoDisponivelEntidade(
               decimal Oid
             , decimal SequenciaRubrica
             , decimal PrazoDisponivel

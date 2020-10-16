@@ -29,10 +29,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var usuarioExistente = BuscarPorLogin(cpf, senhaAntiga);
 
             if (usuarioExistente == null)
-                throw new Exception("Senha antiga incorreta!");
+                throw new Exception("Senha atual incorreta!");
 
-            usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
-            Atualizar(usuarioExistente);
+            AtualizarSenhaPrimeiroAcesso(usuarioExistente.OID_USUARIO, Criptografia.Encriptar(senhaNova), "N");
 
             return "Senha alterada com sucesso!";
         }
@@ -42,12 +41,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
             cpf = cpf.LimparMascara();
             var usuarioExistente = BuscarPorCpf(cpf);
 
-            usuarioExistente.PWD_USUARIO = Criptografia.Encriptar(senhaNova);
-            usuarioExistente.IND_PRIMEIRO_ACESSO = DMN_SN.NAO;
-
-            Atualizar(usuarioExistente);
+            AtualizarSenhaPrimeiroAcesso(usuarioExistente.OID_USUARIO, Criptografia.Encriptar(senhaNova), "N");
 
             return "Senha alterada com sucesso!";
+        }
+
+        public void Insert(UsuarioEntidade usuario)
+        {
+            base.Insert(usuario.NOM_LOGIN, usuario.PWD_USUARIO, usuario.IND_BLOQUEADO, usuario.NUM_TENTATIVA, usuario.DES_LOTACAO, usuario.IND_ADMINISTRADOR, usuario.IND_ATIVO, usuario.NOM_USUARIO_CRIACAO, usuario.DTA_CRIACAO, usuario.NOM_USUARIO_ATUALIZACAO, usuario.DTA_ATUALIZACAO, usuario.CD_EMPRESA, usuario.IND_PRIMEIRO_ACESSO, usuario.SEQ_RECEBEDOR);
         }
 
         public void CriarAcessoIntech(string cpf, string chave, string senha = "123")
@@ -91,8 +92,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 if (usuarioExistente != null)
                 {
-                    usuarioExistente.PWD_USUARIO = senhaEncriptada;
-                    Atualizar(usuarioExistente);
+                    AtualizarSenhaPrimeiroAcesso(usuarioExistente.OID_USUARIO, senhaEncriptada, "N");
                 }
                 else
                 {
@@ -110,10 +110,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         NOM_USUARIO_ATUALIZACAO = null,
                         NOM_USUARIO_CRIACAO = null,
                         NUM_TENTATIVA = 0,
-                        SEQ_RECEBEDOR = seqRecebedor
+                        SEQ_RECEBEDOR = seqRecebedor,
+                        IND_PRIMEIRO_ACESSO = "N"
                     };
 
-                    Inserir(novoUsuario);
+                    Insert(novoUsuario);
                 }
             }
         }
@@ -165,12 +166,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 if (usuarioExistente != null)
                 {
-                    usuarioExistente.PWD_USUARIO = senhaEncriptada;
-
-                    if (usarSenhaComplexa)
-                        usuarioExistente.IND_PRIMEIRO_ACESSO = "S";
-                    
-                    Atualizar(usuarioExistente);
+                    AtualizarSenhaPrimeiroAcesso(usuarioExistente.OID_USUARIO, senhaEncriptada, "S");
                 }
                 else
                 {
@@ -188,10 +184,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         NOM_USUARIO_ATUALIZACAO = null,
                         NOM_USUARIO_CRIACAO = null,
                         NUM_TENTATIVA = 0,
-                        SEQ_RECEBEDOR = seqRecebedor
+                        SEQ_RECEBEDOR = seqRecebedor,
+                        IND_PRIMEIRO_ACESSO = "S"
                     };
 
-                    Inserir(novoUsuario);
+                    Insert(novoUsuario);
                 }
 
                 // Envia e-mail com nova senha de acesso

@@ -32,6 +32,15 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return plano;
         }
 
+        public PlanoVinculadoEntidade BuscarPorFundacaoEmpresaMatriculaPlanoBeneficioNaoEncerrado(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
+        {
+            var plano = base.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+
+            plano.ProcessoBeneficio = new ProcessoBeneficioProxy().BuscarPorFundacaoEmpresaMatriculaPlanoNaoEncerrado(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, plano.CD_PLANO).FirstOrDefault();
+
+            return plano;
+        }
+
         public  PlanoVinculadoEntidade BuscarPorFundacaoEmpresaMatriculaPlanoComSalario(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, int? seqRecebedor)
         {
             var plano = BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);

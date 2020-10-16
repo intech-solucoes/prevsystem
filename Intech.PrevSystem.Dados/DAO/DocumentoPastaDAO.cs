@@ -10,6 +10,23 @@ namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class DocumentoPastaDAO : BaseDAO<DocumentoPastaEntidade>
 	{
+		public virtual DocumentoPastaEntidade BuscarPorOid(decimal OID_DOCUMENTO_PASTA)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DocumentoPastaEntidade>("SELECT *  FROM WEB_DOCUMENTO_PASTA  WHERE OID_DOCUMENTO_PASTA = @OID_DOCUMENTO_PASTA", new { OID_DOCUMENTO_PASTA });
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<DocumentoPastaEntidade>("SELECT * FROM WEB_DOCUMENTO_PASTA WHERE OID_DOCUMENTO_PASTA=:OID_DOCUMENTO_PASTA", new { OID_DOCUMENTO_PASTA });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual List<DocumentoPastaEntidade> BuscarPorOidPastaPaiComNomePastaPai(decimal? OID_DOCUMENTO_PASTA_PAI)
 		{
 			try

@@ -66,6 +66,28 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return processos;
         }
 
+        public List<ProcessoBeneficioEntidade> BuscarAtivosPorFundacaoEmpresaMatriculaPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, bool pensionista)
+        {
+            List<ProcessoBeneficioEntidade> processos;
+
+            if (pensionista)
+                processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoPensionista(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+            else
+                processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoFuncionario(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+
+
+            var situacoesBloqueadas = new string[] { "03", "04", "06", "07", "12", "20" };
+            processos = processos.Where(x => !situacoesBloqueadas.Contains(x.CD_SITUACAO)).ToList();
+
+            foreach (var processo in processos)
+            {
+                processo.DS_PROCESSO = $"{processo.DS_ESPECIE} - {processo.NUM_PROCESSO}/{processo.ANO_PROCESSO}";
+                processo.ESPECIE_ANO_NUM_PROCESSO = $"{processo.CD_ESPECIE}{processo.ANO_PROCESSO}{processo.NUM_PROCESSO}";
+            }
+
+            return processos;
+        }
+
         public ProcessoBeneficioEntidade BuscarAtivoPorFundacaoEmpresaMatriculaPlano(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
         {
             var listaProcessos = base.BuscarPorFundacaoEmpresaMatriculaPlano(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);

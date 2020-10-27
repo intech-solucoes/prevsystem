@@ -1,5 +1,6 @@
 #region Usings
 using Intech.Lib.Email;
+using Intech.Lib.SMS;
 using Intech.Lib.Util.Seguranca;
 using Intech.Lib.Util.Validacoes;
 using Intech.Lib.Web;
@@ -119,7 +120,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
         }
 
-        public string CriarAcesso(string cpf, DateTime dataNascimento)
+        public string CriarAcesso(string cpf, DateTime dataNascimento, bool enviarEmail = true, bool enviarSms = false)
         {
             cpf = cpf.LimparMascara();
 
@@ -192,19 +193,67 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 }
 
                 // Envia e-mail com nova senha de acesso
-                var emailConfig = AppSettings.Get().Email;
+                var config = AppSettings.Get();
 
-                var emails = dadosPessoais.EMAIL_AUX.Split(';');
-
-                foreach (var email in emails)
+                if (enviarEmail)
                 {
+                    var email = dadosPessoais.EMAIL_AUX.Split(';')[0];
+
+                    var showBegin = 1;
+
+                    var emailEscondido = "";
+
+                    for (var i = 0; i < email.Length; i++)
+                    {
+                        var indexArroba = email.IndexOf('@');
+                        if (i > showBegin && i < indexArroba)
+                            emailEscondido += "*";
+                        else
+                            emailEscondido += email[i];
+                    }
+
                     if (!Validador.ValidarEmail(email))
                         throw new Exception("E-mail em formato inválido!");
 
-                    EnvioEmail.Enviar(emailConfig, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
+                    
+                    return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }
 
-                return "Sua nova senha foi enviada para seu e-mail!";
+                if(enviarSms)
+                {
+                    if (config.SMS == null || string.IsNullOrEmpty(config.SMS.Usuario) || string.IsNullOrEmpty(config.SMS.Senha))
+                        throw new Exception("Favor configurar o usuário e senha para envio de TOKEN via SMS");
+
+                    var celularEscondido = "";
+                    var showBegin = 1;
+
+                    for (var i = 0; i < dadosPessoais.FONE_CELULAR.Length; i++)
+                    {
+                        if (i > showBegin && i < dadosPessoais.FONE_CELULAR.Length - 3)
+                            celularEscondido += "*";
+                        else
+                            celularEscondido += dadosPessoais.FONE_CELULAR[i];
+                    }
+
+                    var mensagem = $"Esta e sua nova senha da Area Restrita da {AppSettings.Get().Cliente}: {senha}";
+                    var retorno = new EnvioSMS()
+                        .EnviarHumanAPI(dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, "SABESPREV", mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                            new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
+                            {
+                                try
+                                {
+                                    var logSMSProxy = new LogSMSProxy();
+                                    logSMSProxy.Insert(args.Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
+                                }
+                                catch (Exception ex)
+                                {
+                                    throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
+                                }
+                            }));
+
+                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido}!";
+                }
             }
 
             throw ExceptionDadosInvalidos;
@@ -213,7 +262,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         private static string GerarSenha(bool senhaComplexa = false)
         {
             if (senhaComplexa)
-                return (String.Concat(gerarCharSpecial(), gerarLetraMaiscula(), gerarLetraMinuscula(), gerarCharSpecial())) + (new Random().Next(99).ToString());
+                return (string.Concat(gerarCharSpecial(), gerarLetraMaiscula(), gerarLetraMinuscula(), gerarCharSpecial())) + (new Random().Next(99).ToString());
             else
                 return new Random().Next(999999).ToString();
         }

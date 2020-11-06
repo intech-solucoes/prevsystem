@@ -27,6 +27,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             var plano = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.NUM_INSCRICAO).FirstOrDefault();
 
+            var tempoPlano = new Intervalo(DateTime.Today, plano.DT_INSC_PLANO, new CalculoAnosMesesDiasAlgoritmo1());
+
+            funcionario.DS_TEMPO_PLANO = $"{tempoPlano.Anos}a {tempoPlano.Meses}m {tempoPlano.Dias}d";
+
             //if (plano.CD_PLANO != "0001")
             //{
             //    tipoFunc = "AF";

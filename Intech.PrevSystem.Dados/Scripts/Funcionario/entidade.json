@@ -1,46 +1,51 @@
 {
   "NomeTabela": "CS_FUNCIONARIO",
-  "ColunasExtras": [
-    {
-      "Nome": "NOME_ENTID",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "DS_LOTACAO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "DS_CARGO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "CPF_CGC",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "PENSIONISTA",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "CD_PLANO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "CD_SIT_PLANO",
-      "Tipo": "string",
-      "AceitaNulo": false
-    },
-    {
-      "Nome": "CK_INADIPLENTE",
-      "Tipo": "string",
-      "AceitaNulo": false
-    }
-  ],
+    "ColunasExtras": [
+        {
+            "Nome": "NOME_ENTID",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_LOTACAO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_TEMPO_PLANO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "DS_CARGO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "CPF_CGC",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "PENSIONISTA",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "CD_PLANO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "CD_SIT_PLANO",
+            "Tipo": "string",
+            "AceitaNulo": false
+        },
+        {
+            "Nome": "CK_INADIPLENTE",
+            "Tipo": "string",
+            "AceitaNulo": false
+        }
+    ],
   "Imports": []
 }

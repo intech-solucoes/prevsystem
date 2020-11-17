@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class FichaFinanceiraDAO : BaseDAO<FichaFinanceiraEntidade>
 	{
+		public FichaFinanceiraDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<FichaFinanceiraEntidade> BuscarContribuicaoPorInscricao(string NUM_INSCRICAO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,44 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<FichaFinanceiraEntidade> BuscarContribuicoesDeficit(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT FF.CD_TIPO_CONTRIBUICAO,         TC.DS_TIPO_CONTRIBUICAO,         FF.*  FROM CC_FICHA_FINANCEIRA FF    INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO    INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = FF.CD_FUNDACAO AND FN.NUM_INSCRICAO = FF.NUM_INSCRICAO  WHERE FF.CD_FUNDACAO = @CD_FUNDACAO    AND FF.CD_PLANO = @CD_PLANO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.CD_TIPO_CONTRIBUICAO IN ('73','70','74','34','B4','B6','B5','B1','B2','B3','B7','B8','B9','C1','C5','C6','D5')  ORDER BY ANO_REF DESC, MES_REF DESC", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT FF.CD_TIPO_CONTRIBUICAO, TC.DS_TIPO_CONTRIBUICAO, FF.* FROM CC_FICHA_FINANCEIRA  FF  INNER  JOIN TB_TIPO_CONTRIBUICAO   TC  ON TC.CD_TIPO_CONTRIBUICAO=FF.CD_TIPO_CONTRIBUICAO INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=FF.CD_FUNDACAO AND FN.NUM_INSCRICAO=FF.NUM_INSCRICAO WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.CD_PLANO=:CD_PLANO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.CD_TIPO_CONTRIBUICAO IN ('73', '70', '74', '34', 'B4', 'B6', 'B5', 'B1', 'B2', 'B3', 'B7', 'B8', 'B9', 'C1', 'C5', 'C6', 'D5') ORDER BY ANO_REF DESC, MES_REF DESC", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<FichaFinanceiraEntidade> BuscarContribuicoesDeficitPorAno(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string ANO_REF)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT FF.CD_TIPO_CONTRIBUICAO,         TC.DS_TIPO_CONTRIBUICAO,         FF.*  FROM CC_FICHA_FINANCEIRA FF    INNER JOIN TB_TIPO_CONTRIBUICAO TC ON TC.CD_TIPO_CONTRIBUICAO = FF.CD_TIPO_CONTRIBUICAO    INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = FF.CD_FUNDACAO AND FN.NUM_INSCRICAO = FF.NUM_INSCRICAO  WHERE FF.CD_FUNDACAO = @CD_FUNDACAO    AND FF.CD_PLANO = @CD_PLANO    AND FF.NUM_INSCRICAO = @NUM_INSCRICAO    AND FF.ANO_REF = @ANO_REF    AND FF.CD_TIPO_CONTRIBUICAO IN ('73','70','74','34','B4','B6','B5','B1','B2','B3','B7','B8','B9','C1','C5','C6','D5')  ORDER BY ANO_REF DESC, MES_REF DESC", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraEntidade>("SELECT FF.CD_TIPO_CONTRIBUICAO, TC.DS_TIPO_CONTRIBUICAO, FF.* FROM CC_FICHA_FINANCEIRA  FF  INNER  JOIN TB_TIPO_CONTRIBUICAO   TC  ON TC.CD_TIPO_CONTRIBUICAO=FF.CD_TIPO_CONTRIBUICAO INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=FF.CD_FUNDACAO AND FN.NUM_INSCRICAO=FF.NUM_INSCRICAO WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.CD_PLANO=:CD_PLANO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.ANO_REF=:ANO_REF AND FF.CD_TIPO_CONTRIBUICAO IN ('73', '70', '74', '34', 'B4', 'B6', 'B5', 'B1', 'B2', 'B3', 'B7', 'B8', 'B9', 'C1', 'C5', 'C6', 'D5') ORDER BY ANO_REF DESC, MES_REF DESC", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, ANO_REF }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +152,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -125,7 +170,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -142,7 +188,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -159,7 +206,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -176,7 +224,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -193,7 +242,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -210,7 +260,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -227,7 +278,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -244,7 +296,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -261,7 +314,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -278,7 +332,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -295,7 +350,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -312,7 +368,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -329,7 +386,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -346,7 +404,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -363,7 +422,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -380,7 +440,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -397,7 +458,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -414,7 +476,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -431,7 +494,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -448,7 +512,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -465,7 +530,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

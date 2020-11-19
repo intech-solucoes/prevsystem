@@ -1,0 +1,10 @@
+﻿{
+    "nomeTabela": "AM_BOLETA",
+    "colunasExtras": [
+        {
+            "nome": "DS_PLANO",
+            "tipo": "string",
+            "aceitaNulo":  false
+        }
+    ]
+}

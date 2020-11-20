@@ -1,6 +1,12 @@
 {
   "NomeTabela": "TB_GRAU_PARENTESCO",
   "ChavePrimaria": "CD_GRAU_PARENTESCO",
-  "ColunasExtras": [],
+  "ColunasExtras": [
+    {
+      "Nome": "TIPO_HERDEIRO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ],
   "Imports": []
 }

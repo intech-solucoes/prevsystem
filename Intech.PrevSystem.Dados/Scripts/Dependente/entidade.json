@@ -30,6 +30,11 @@
             "nome": "DS_MOT_PERDA_VALIDADE",
             "tipo": "string",
             "aceitaNulo": true
+        },
+        {
+            "Nome": "IND_HERDEIRO",
+            "Tipo": "string",
+            "AceitaNulo": false
         }
     ]
 }

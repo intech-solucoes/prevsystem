@@ -69,5 +69,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NUM_MATRICULA { get; set; }
 		[Write(false)] public string IND_PLANO_FAMILIA { get; set; }
 		[Write(false)] public string DS_MOT_PERDA_VALIDADE { get; set; }
+		[Write(false)] public string IND_HERDEIRO { get; set; }
 	}
 }

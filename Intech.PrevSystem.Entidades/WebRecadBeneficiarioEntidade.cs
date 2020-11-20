@@ -22,5 +22,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? COD_PERC_RATEIO { get; set; }
 		public string IND_OPERACAO { get; set; }
 		public string IND_VALIDO { get; set; }
+		[Write(false)] public string IND_HERDEIRO { get; set; }
 	}
 }

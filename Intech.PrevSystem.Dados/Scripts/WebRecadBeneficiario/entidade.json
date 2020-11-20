@@ -1,5 +1,11 @@
 {
   "NomeTabela": "WEB_RECAD_BENEFICIARIO",
-  "ColunasExtras": [],
+  "ColunasExtras": [
+    {
+      "Nome": "IND_HERDEIRO",
+      "Tipo": "string",
+      "AceitaNulo": false
+    }
+  ],
   "Imports": []
 }

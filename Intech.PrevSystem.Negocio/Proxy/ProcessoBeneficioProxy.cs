@@ -73,10 +73,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             if (pensionista)
                 processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoPensionista(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
             else
-                processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoFuncionario(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
+                processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoNaoEncerrado(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
 
 
-            var situacoesBloqueadas = new string[] { "03", "04", "06", "07", "12", "20" };
+            var situacoesBloqueadas = new string[] { "03", "04", "12", "20" };
             processos = processos.Where(x => !situacoesBloqueadas.Contains(x.CD_SITUACAO)).ToList();
 
             foreach (var processo in processos)

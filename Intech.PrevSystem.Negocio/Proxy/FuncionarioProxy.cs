@@ -79,6 +79,12 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
             funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
 
+            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.NUM_INSCRICAO).FirstOrDefault();
+
+            var tempoPlano = new Intervalo(DateTime.Today, plano.DT_INSC_PLANO, new CalculoAnosMesesDiasAlgoritmo1());
+
+            funcionario.DS_TEMPO_PLANO = $"{tempoPlano.Anos}a {tempoPlano.Meses}m {tempoPlano.Dias}d";
+
             return funcionario;
         }
 

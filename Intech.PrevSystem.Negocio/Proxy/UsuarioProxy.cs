@@ -8,6 +8,8 @@ using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 #endregion
 
@@ -15,7 +17,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class UsuarioProxy : UsuarioDAO
     {
-        private Exception ExceptionDadosInvalidos => new Exception("Dados inválidos!");
+        private Exception ExceptionDadosInvalidos => new Exception("Dados invï¿½lidos!");
 
         public override UsuarioEntidade BuscarPorLogin(string NOM_LOGIN, string PWD_USUARIO)
         {
@@ -88,7 +90,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 var senhaEncriptada = Criptografia.Encriptar(senha);
 
-                // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
+                // Verifica se existe usuï¿½rio. Caso sim, atualiza a senha. Caso nï¿½o, cria novo usuï¿½rio.
                 var usuarioExistente = BuscarPorCpf(cpf);
 
                 if (usuarioExistente != null)
@@ -156,13 +158,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     throw ExceptionDadosInvalidos;
 
                 if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
-                    throw new Exception("Você não possúi um e-mail cadastrado. Por favor, entre em contato com a Preves.");
+                    throw new Exception("Vocï¿½ nï¿½o possï¿½i um e-mail cadastrado. Por favor, entre em contato com a Preves.");
 
                 var senha = GerarSenha(usarSenhaComplexa);
 
                 var senhaEncriptada = Criptografia.Encriptar(senha);
 
-                // Verifica se existe usuário. Caso sim, atualiza a senha. Caso não, cria novo usuário.
+                // Verifica se existe usuï¿½rio. Caso sim, atualiza a senha. Caso nï¿½o, cria novo usuï¿½rio.
                 var usuarioExistente = BuscarPorCpf(cpf);
 
                 if (usuarioExistente != null)
@@ -213,9 +215,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     }
 
                     if (!Validador.ValidarEmail(email))
-                        throw new Exception("E-mail em formato inválido!");
+                        throw new Exception("E-mail em formato invÃ¡lido!");
 
-                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da Área Restrita {AppSettings.Get().Cliente}: {senha}");
+                    var semAnexo = new List<KeyValuePair<string, Stream>>();
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta Ã© sua nova senha da Ã¡rea Restrita {AppSettings.Get().Cliente}: {senha}", semAnexo);
                     
                     return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }
@@ -223,7 +226,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if(enviarSms)
                 {
                     if (config.SMS == null || string.IsNullOrEmpty(config.SMS.Usuario) || string.IsNullOrEmpty(config.SMS.Senha))
-                        throw new Exception("Favor configurar o usuário e senha para envio de TOKEN via SMS");
+                        throw new Exception("Favor configurar o usuï¿½rio e senha para envio de TOKEN via SMS");
 
                     var celularEscondido = "";
                     var showBegin = 1;
@@ -252,7 +255,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                                 }
                             }));
 
-                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido}!";
+                    return $"Sua nova senha foi enviada via SMS para o nï¿½mero {celularEscondido}!";
                 }
             }
 

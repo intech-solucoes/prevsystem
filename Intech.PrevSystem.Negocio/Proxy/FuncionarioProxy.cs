@@ -78,6 +78,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
             funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
+            funcionario.CPF = funcionario.DadosPessoais.CPF_CGC.LimparMascara();
 
             var plano = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.NUM_INSCRICAO).FirstOrDefault();
 
@@ -101,6 +102,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
             funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
+            funcionario.CPF = funcionario.DadosPessoais.CPF_CGC.LimparMascara();
 
             return funcionario;
         }
@@ -118,6 +120,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
             funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
             funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
+            funcionario.CPF = funcionario.DadosPessoais.CPF_CGC.LimparMascara();
 
             return funcionario;
         }

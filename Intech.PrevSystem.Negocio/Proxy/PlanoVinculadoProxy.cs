@@ -120,6 +120,33 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
         }
 
+        public decimal BuscarUltimoSalario(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano, string cdTipoContrib, bool abatePensao = true, int? seqRecebedor = null)
+        {
+            var dataAtual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
+            var dataAnterior = new DateTime(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month, 01);
+
+            var rubricasAdicionais = new RubricasAdicionaisProxy().BuscarPorFundacaoEmpresaMatriculaOrigemReferencia(plano.CD_FUNDACAO, cdEmpresa, matricula, origem, dataAtual, dataAnterior);
+
+            var valorPensao = rubricasAdicionais.Where(x => x.CD_RUBRICA == "761").Sum(x => x.VL_RUBRICA).Value;
+
+            switch (plano.CD_CATEGORIA)
+            {
+                case DMN_CATEGORIA.ATIVO:
+                    var salario = ObtemSalarioAtivo(plano, cdTipoContrib).Value;
+                    return abatePensao ? salario - valorPensao : salario;
+                case DMN_CATEGORIA.AUTOPATROCINIO:
+                case DMN_CATEGORIA.EM_LICENCA:       //Ativos, Autopatrocinados ou Em licença
+                case DMN_CATEGORIA.DIFERIDO:
+                    return 0;
+                //return p.ObtemUltimoSRCFichaFinanceira() - valorPensao;//Buscar entrada mais recente da ficha financeira 
+                case DMN_CATEGORIA.ASSISTIDO:      //Assistidos
+                    return ObtemSalarioDosAssistidos(cdEmpresa, matricula, plano, seqRecebedor);
+                case DMN_CATEGORIA.DESLIGADO:       //Desligados
+                default:
+                    return 0;
+            }
+        }
+
         public decimal BuscarUltimoSalario2(string cdEmpresa, string matricula, decimal origem, PlanoVinculadoEntidade plano, bool abatePensao = true, int? seqRecebedor = null)
         {
             var dataAtual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 01);
@@ -163,6 +190,32 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         .SRC;
                 case "0001":
                     return fichaFinanceira.Where(x => x.CD_TIPO_CONTRIBUICAO == "07")
+                        .OrderByDescending(x => x.ANO_COMP)
+                        .ThenByDescending(x => x.MES_COMP)
+                        .ToList()
+                        .FirstOrDefault()
+                        .SRC;
+                default:
+                    return 0;
+            }
+        }
+
+        private decimal? ObtemSalarioAtivo(PlanoVinculadoEntidade plano, string cdTipoContrib)
+        {
+            var fichaFinanceira = new FichaFinanceiraProxy().BuscarPorFundacaoPlanoInscricao(plano.CD_FUNDACAO, plano.CD_PLANO, plano.NUM_INSCRICAO).ToList();
+
+            switch (plano.CD_PLANO)
+            {
+                case "0002":
+                    return fichaFinanceira
+                        .Where(x => x.CD_TIPO_CONTRIBUICAO == cdTipoContrib)
+                        .OrderByDescending(x => x.ANO_COMP)
+                        .ThenByDescending(x => x.MES_COMP)
+                        .ToList()
+                        .FirstOrDefault()
+                        .SRC;
+                case "0001":
+                    return fichaFinanceira.Where(x => x.CD_TIPO_CONTRIBUICAO == cdTipoContrib)
                         .OrderByDescending(x => x.ANO_COMP)
                         .ThenByDescending(x => x.MES_COMP)
                         .ToList()

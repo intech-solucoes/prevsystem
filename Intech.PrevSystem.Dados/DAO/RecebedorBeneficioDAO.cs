@@ -61,6 +61,23 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<RecebedorBeneficioEntidade> BuscarPorFundacaoEmpresaInscricaoSemJoins(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<RecebedorBeneficioEntidade>("SELECT RB.*  FROM GB_RECEBEDOR_BENEFICIO RB  WHERE RB.CD_FUNDACAO = @CD_FUNDACAO    AND RB.CD_EMPRESA = @CD_EMPRESA    AND RB.NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<RecebedorBeneficioEntidade>("SELECT RB.* FROM GB_RECEBEDOR_BENEFICIO  RB  WHERE RB.CD_FUNDACAO=:CD_FUNDACAO AND RB.CD_EMPRESA=:CD_EMPRESA AND RB.NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, CD_EMPRESA, NUM_INSCRICAO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				Conexao.Close();
+			}
+		}
+
 		public virtual RecebedorBeneficioEntidade BuscarPorFundacaoEmpresaInscricaoSeqRecebedor(string CD_FUNDACAO, string CD_EMPRESA, string NUM_INSCRICAO, string SEQ_RECEBEDOR)
 		{
 			try

@@ -16,10 +16,10 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_FUNCAO { get; set; }
 		public string CD_LOTACAO { get; set; }
 		public string CD_NIVEL_SALARIAL { get; set; }
+		public string CD_MOTIVO_DEMISSAO { get; set; }
 		public DateTime? DT_ADMISSAO { get; set; }
 		public string CD_SIT_EMPRESA { get; set; }
 		public DateTime? DT_SITUACAO_EMPRESA { get; set; }
-		public string CD_MOTIVO_DEMISSAO { get; set; }
 		public DateTime? DT_DEMISSAO { get; set; }
 		public string AUTO_MANTENEDOR { get; set; }
 		public string FONE_TRAB { get; set; }
@@ -56,6 +56,9 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_PART_RATIFICADO { get; set; }
 		public decimal? PERC_PECULIO { get; set; }
 		public string AGENDA2 { get; set; }
+		public string CK_INADIPLENTE { get; set; }
+		public DateTime? DT_TERMINO { get; set; }
+		public DateTime? DT_CARENCIA { get; set; }
 		[Write(false)] public string NOME_ENTID { get; set; }
 		[Write(false)] public string DS_LOTACAO { get; set; }
 		[Write(false)] public string DS_TEMPO_PLANO { get; set; }
@@ -64,6 +67,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string PENSIONISTA { get; set; }
 		[Write(false)] public string CD_PLANO { get; set; }
 		[Write(false)] public string CD_SIT_PLANO { get; set; }
-		[Write(false)] public string CK_INADIPLENTE { get; set; }
 	}
 }

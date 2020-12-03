@@ -2,7 +2,7 @@
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
-	public class CalendarioPagamentoProxy : CalendarioPagamentoDAO
+	public class FatAt83Proxy : FatAt83DAO
 	{
 	}
 }

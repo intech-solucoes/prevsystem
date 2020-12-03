@@ -11,6 +11,44 @@ namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class FichaFinanceiraAssistidoDAO : BaseDAO<FichaFinanceiraAssistidoEntidade>
 	{
+		public FichaFinanceiraAssistidoDAO (IDbTransaction tx = null) : base(tx) { }
+
+		public virtual List<FichaFinanceiraAssistidoEntidade> BuscarContribuicoesDeficit(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraAssistidoEntidade>("SELECT FF.*,         RP.DS_RUBRICA,         RP.RUBRICA_PROV_DESC  FROM GB_FICHA_FINANC_ASSISTIDO FF    INNER JOIN GB_PROCESSOS_BENEFICIO PB         ON PB.CD_FUNDACAO = FF.CD_FUNDACAO          AND PB.CD_EMPRESA  = FF.CD_EMPRESA          AND PB.CD_PLANO = FF.CD_PLANO          AND PB.CD_ESPECIE = FF.CD_ESPECIE          AND PB.ANO_PROCESSO = FF.ANO_PROCESSO          AND PB.NUM_PROCESSO = FF.NUM_PROCESSO    INNER JOIN GB_RUBRICAS_PREVIDENCIAL RP ON RP.CD_RUBRICA = FF.CD_RUBRICA    WHERE PB.CD_FUNDACAO = @CD_FUNDACAO    AND PB.NUM_INSCRICAO = @NUM_INSCRICAO    AND PB.CD_PLANO = @CD_PLANO    AND FF.CD_RUBRICA IN ('7403', '7402', '7400', '7401', '2076', '2077', '2074', '2075', '7404')  ORDER BY DT_REFERENCIA DESC;", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraAssistidoEntidade>("SELECT FF.*, RP.DS_RUBRICA, RP.RUBRICA_PROV_DESC FROM GB_FICHA_FINANC_ASSISTIDO  FF  INNER  JOIN GB_PROCESSOS_BENEFICIO   PB  ON PB.CD_FUNDACAO=FF.CD_FUNDACAO AND PB.CD_EMPRESA=FF.CD_EMPRESA AND PB.CD_PLANO=FF.CD_PLANO AND PB.CD_ESPECIE=FF.CD_ESPECIE AND PB.ANO_PROCESSO=FF.ANO_PROCESSO AND PB.NUM_PROCESSO=FF.NUM_PROCESSO INNER  JOIN GB_RUBRICAS_PREVIDENCIAL   RP  ON RP.CD_RUBRICA=FF.CD_RUBRICA WHERE PB.CD_FUNDACAO=:CD_FUNDACAO AND PB.NUM_INSCRICAO=:NUM_INSCRICAO AND PB.CD_PLANO=:CD_PLANO AND FF.CD_RUBRICA IN ('7403', '7402', '7400', '7401', '2076', '2077', '2074', '2075', '7404') ORDER BY DT_REFERENCIA DESC", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<FichaFinanceiraAssistidoEntidade> BuscarContribuicoesDeficitPorAno(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, DateTime @DT_REFERENCIA)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<FichaFinanceiraAssistidoEntidade>("SELECT FF.*,         RP.DS_RUBRICA,         RP.RUBRICA_PROV_DESC  FROM GB_FICHA_FINANC_ASSISTIDO FF    INNER JOIN GB_PROCESSOS_BENEFICIO PB         ON PB.CD_FUNDACAO = FF.CD_FUNDACAO          AND PB.CD_EMPRESA  = FF.CD_EMPRESA          AND PB.CD_PLANO = FF.CD_PLANO          AND PB.CD_ESPECIE = FF.CD_ESPECIE          AND PB.ANO_PROCESSO = FF.ANO_PROCESSO          AND PB.NUM_PROCESSO = FF.NUM_PROCESSO    INNER JOIN GB_RUBRICAS_PREVIDENCIAL RP ON RP.CD_RUBRICA = FF.CD_RUBRICA    WHERE PB.CD_FUNDACAO = @CD_FUNDACAO    AND PB.NUM_INSCRICAO = @NUM_INSCRICAO    AND PB.CD_PLANO = @CD_PLANO    AND FF.DT_REFERENCIA = @DT_REFERENCIA    AND FF.CD_RUBRICA IN ('7403', '7402', '7400', '7401', '2076', '2077', '2074', '2075', '7404')  ORDER BY DT_REFERENCIA;", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, @DT_REFERENCIA }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<FichaFinanceiraAssistidoEntidade>("SELECT FF.*, RP.DS_RUBRICA, RP.RUBRICA_PROV_DESC FROM GB_FICHA_FINANC_ASSISTIDO  FF  INNER  JOIN GB_PROCESSOS_BENEFICIO   PB  ON PB.CD_FUNDACAO=FF.CD_FUNDACAO AND PB.CD_EMPRESA=FF.CD_EMPRESA AND PB.CD_PLANO=FF.CD_PLANO AND PB.CD_ESPECIE=FF.CD_ESPECIE AND PB.ANO_PROCESSO=FF.ANO_PROCESSO AND PB.NUM_PROCESSO=FF.NUM_PROCESSO INNER  JOIN GB_RUBRICAS_PREVIDENCIAL   RP  ON RP.CD_RUBRICA=FF.CD_RUBRICA WHERE PB.CD_FUNDACAO=:CD_FUNDACAO AND PB.NUM_INSCRICAO=:NUM_INSCRICAO AND PB.CD_PLANO=:CD_PLANO AND FF.DT_REFERENCIA=:DT_REFERENCIA AND FF.CD_RUBRICA IN ('7403', '7402', '7400', '7401', '2076', '2077', '2074', '2075', '7404') ORDER BY DT_REFERENCIA", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, @DT_REFERENCIA }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
 		public virtual List<FichaFinanceiraAssistidoEntidade> BuscarDatas(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
 		{
 			try
@@ -24,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -41,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -58,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -75,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -92,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -109,7 +152,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -126,7 +170,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -143,7 +188,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -160,7 +206,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -177,7 +224,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -194,7 +242,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -211,7 +260,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -228,7 +278,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -245,7 +296,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -262,7 +314,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -279,7 +332,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -296,7 +350,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -313,7 +368,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -330,7 +386,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -347,7 +404,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -364,7 +422,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -381,7 +440,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -398,7 +458,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -415,7 +476,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -432,7 +494,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -449,7 +512,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -466,7 +530,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -483,7 +548,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -500,7 +566,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -517,7 +584,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -534,7 +602,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -551,7 +620,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -568,7 +638,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class ContribuicaoIndividualDAO : BaseDAO<ContribuicaoIndividualEntidade>
 	{
+		public ContribuicaoIndividualDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,26 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<ContribuicaoIndividualEntidade> BuscarPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT *   FROM CS_CONTRIB_INDIVIDUAIS  WHERE CD_FUNDACAO = @CD_FUNDACAO    AND CD_PLANO = @CD_PLANO    AND NUM_INSCRICAO = @NUM_INSCRICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContribuicaoIndividualEntidade>("SELECT * FROM CS_CONTRIB_INDIVIDUAIS WHERE CD_FUNDACAO=:CD_FUNDACAO AND CD_PLANO=:CD_PLANO AND NUM_INSCRICAO=:NUM_INSCRICAO", new { CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

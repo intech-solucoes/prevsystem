@@ -63,12 +63,13 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_RECONHECIMENTO { get; set; }
 		public string CD_TIPO_CORRESP { get; set; }
 		public string CX_POSTAL { get; set; }
+		public string EMAIL_DEP2 { get; set; }
 		[Write(false)] public string DS_GRAU_PARENTESCO { get; set; }
 		[Write(false)] public string IND_OPERACAO { get; set; }
 		[Write(false)] public string DS_EMPRESA { get; set; }
 		[Write(false)] public string NUM_MATRICULA { get; set; }
 		[Write(false)] public string IND_PLANO_FAMILIA { get; set; }
 		[Write(false)] public string DS_MOT_PERDA_VALIDADE { get; set; }
-		[Write(false)] public string IND_HERDEIRO { get; set; }
+		[Write(false)] public string TIPO_HERDEIRO { get; set; }
 	}
 }

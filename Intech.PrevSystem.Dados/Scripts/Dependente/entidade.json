@@ -32,7 +32,7 @@
             "aceitaNulo": true
         },
         {
-            "Nome": "IND_HERDEIRO",
+            "Nome": "TIPO_HERDEIRO",
             "Tipo": "string",
             "AceitaNulo": false
         }

@@ -45,6 +45,26 @@
       "Nome": "VALOR_IND",
       "Tipo": "decimal",
       "AceitaNulo": true
+    },
+    {
+      "Nome": "COTA_TOTAL",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "SALDO_COTA",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "SALDO_REAIS",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "RENTABILIDADE",
+      "Tipo": "decimal",
+      "AceitaNulo": true
     }
   ],
   "Imports": []

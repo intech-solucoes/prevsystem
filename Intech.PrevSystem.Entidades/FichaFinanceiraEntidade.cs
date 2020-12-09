@@ -59,5 +59,9 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string COD_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public string DS_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public decimal? VALOR_IND { get; set; }
+		[Write(false)] public decimal? COTA_TOTAL { get; set; }
+		[Write(false)] public decimal? SALDO_COTA { get; set; }
+		[Write(false)] public decimal? SALDO_REAIS { get; set; }
+		[Write(false)] public decimal? RENTABILIDADE { get; set; }
 	}
 }

@@ -1,4 +1,5 @@
 ﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Intech.PrevSystem.Dados.DAO;
@@ -36,6 +37,28 @@ namespace Intech.PrevSystem.Negocio.Proxy
             var valorindice = new IndiceValoresProxy().BuscarUltimoPorCodigo(COD_IND).FirstOrDefault();
 
             return valorindice;
+        }
+
+        public decimal BuscarValorEm(string codigo, DateTime data)
+        {
+            var indice = BuscarPorCodigo(codigo);
+
+            if (indice.PERIODIC == "MEN")
+            {
+                return indice.VALORES
+                    .OrderBy(x => x.DT_IND)
+                    .LastOrDefault(x => x.DT_IND.MenorOuIgualQueMesAno(data))
+                    .VALOR_IND;
+            }
+            else
+            {
+                return indice
+                    .VALORES
+                    .OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND <= data)
+                    .VALOR_IND;
+            }
+
+            return 0;
         }
     }
 }

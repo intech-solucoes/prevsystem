@@ -1,0 +1,15 @@
+﻿{
+    "nomeTabela": "TB_FAIXAS_IRRF",
+    "colunasExtras": [
+        {
+            "nome": "VALOR_ABATIMENTO_DEP",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "ABATIMENTO_ACIMA_65ANOS",
+            "tipo": "decimal",
+            "aceitaNulo": true
+        }
+    ]
+}

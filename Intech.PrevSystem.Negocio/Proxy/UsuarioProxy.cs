@@ -241,7 +241,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                     var mensagem = $"Esta e sua nova senha da Area Restrita da {AppSettings.Get().Cliente}: {senha}";
                     var retorno = new EnvioSMS()
-                        .EnviarHumanAPI(dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, "SABESPREV", mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                        .EnviarHumanAPI(dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, AppSettings.Get().Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
                             new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                             {
                                 try

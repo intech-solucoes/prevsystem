@@ -11,5 +11,6 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public IEnumerable<KeyValuePair<string, decimal>> ListaRentabilidadeAnual { get; set; }
         public IEnumerable<KeyValuePair<string, decimal>> ListaCrescimentoSalarialReal { get; set; }
         public IEnumerable<KeyValuePair<string, decimal>> ListaAntecipacaoSaldo { get; set; }
+        public IEnumerable<KeyValuePair<string, decimal>> ListaRendaMensalPrazoDeterminado { get; set; }
     }
 }

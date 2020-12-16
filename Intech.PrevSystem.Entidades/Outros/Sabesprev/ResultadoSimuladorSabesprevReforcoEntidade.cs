@@ -16,5 +16,7 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public int IdadePrazoDeterminadoInicio { get; set; }
         public int IdadePrazoDeterminadoFim { get; set; }
         public decimal ValorRentabilidade { get; set; }
+        public decimal RendaAtuarial { get; set; }
+        public string MensagemSimuladorDefault { get; set; }
     }
 }

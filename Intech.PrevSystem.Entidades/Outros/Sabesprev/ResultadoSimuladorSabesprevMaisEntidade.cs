@@ -23,5 +23,12 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public decimal ValorRentabilidade { get; set; }
         public List<dynamic> HistoricoRendaDefinida { get; set; }
         public List<dynamic> HistoricoPrazoDefinido { get; set; }
+        public string MensagemPrazoDeterminado { get; set; }
+        public string MensagemRendaDefinida { get; set; }
+        public string MensagemRendaDefinidaLimiteParcelas { get; set; }
+        public decimal RendaAtuarial { get; set; }
+        public string MensagemSimuladorDefault { get; set; }
+        public decimal ValorRendaDefinidaMinimo { get; set; }
+        public decimal ValorRendaDefinidaMaximo { get; set; }
     }
 }

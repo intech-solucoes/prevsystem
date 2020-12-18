@@ -35,6 +35,11 @@
       "nome": "PRAZO_RECADASTRAMENTO",
       "tipo": "string",
       "aceitaNulo": true
+    },
+    {
+      "nome": "NOM_CAMPANHA",
+      "tipo": "string",
+      "aceitaNulo": true
     }
   ],
   "Imports": []

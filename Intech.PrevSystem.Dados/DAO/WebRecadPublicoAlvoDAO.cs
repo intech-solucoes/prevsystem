@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class WebRecadPublicoAlvoDAO : BaseDAO<WebRecadPublicoAlvoEntidade>
 	{
+		public WebRecadPublicoAlvoDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual bool AtualizarUsuarioAcao( decimal OID_RECAD_PUBLICO_ALVO,  string IND_SITUACAO_RECAD,  string NOM_USUARIO_ACAO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -83,15 +90,16 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*,         CA.DTA_TERMINO,         RB.CD_TIPO_RECEBEDOR,         RB.NUM_MATRICULA,                  CASE            WHEN CA.DTA_INICIO <= @DATA_ATUAL            AND CA.DTA_TERMINO >= @DATA_ATUAL            AND CA.IND_ATIVO = 'SIM'              THEN 'S'            ELSE 'N'         END AS PRAZO_RECADASTRAMENTO,    	   'ASSISTIDO' AS 'GRUPO_RECADASTRAMENTO'    FROM WEB_RECAD_PUBLICO_ALVO PA      INNER JOIN GB_RECEBEDOR_BENEFICIO RB ON RB.CD_FUNDACAO = PA.CD_FUNDACAO        AND RB.SEQ_RECEBEDOR = PA.SEQ_RECEBEDOR      INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = RB.COD_ENTID      INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA  WHERE EE.CPF_CGC = @CPF    AND CA.IND_ATIVO = 'SIM'    ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*,         CA.NOM_CAMPANHA,         CA.DTA_TERMINO,         RB.CD_TIPO_RECEBEDOR,         RB.NUM_MATRICULA,                  CASE            WHEN CA.DTA_INICIO <= @DATA_ATUAL            AND CA.DTA_TERMINO >= @DATA_ATUAL            AND CA.IND_ATIVO = 'SIM'              THEN 'S'            ELSE 'N'         END AS PRAZO_RECADASTRAMENTO,    	   'ASSISTIDO' AS 'GRUPO_RECADASTRAMENTO'    FROM WEB_RECAD_PUBLICO_ALVO PA      INNER JOIN GB_RECEBEDOR_BENEFICIO RB ON RB.CD_FUNDACAO = PA.CD_FUNDACAO        AND RB.SEQ_RECEBEDOR = PA.SEQ_RECEBEDOR      INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = RB.COD_ENTID      INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA  WHERE EE.CPF_CGC = @CPF    AND CA.IND_ATIVO = 'SIM'    ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.DTA_TERMINO, RB.CD_TIPO_RECEBEDOR, RB.NUM_MATRICULA, CASE  WHEN CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' THEN 'S' ELSE 'N' END  AS PRAZO_RECADASTRAMENTO, 'ASSISTIDO' AS GRUPO_RECADASTRAMENTO FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN GB_RECEBEDOR_BENEFICIO   RB  ON RB.CD_FUNDACAO=PA.CD_FUNDACAO AND RB.SEQ_RECEBEDOR=PA.SEQ_RECEBEDOR INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=RB.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.IND_ATIVO='SIM' ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.NOM_CAMPANHA, CA.DTA_TERMINO, RB.CD_TIPO_RECEBEDOR, RB.NUM_MATRICULA, CASE  WHEN CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' THEN 'S' ELSE 'N' END  AS PRAZO_RECADASTRAMENTO, 'ASSISTIDO' AS GRUPO_RECADASTRAMENTO FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN GB_RECEBEDOR_BENEFICIO   RB  ON RB.CD_FUNDACAO=PA.CD_FUNDACAO AND RB.SEQ_RECEBEDOR=PA.SEQ_RECEBEDOR INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=RB.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.IND_ATIVO='SIM' ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -117,15 +126,16 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*,  	   CA.DTA_TERMINO,  	   FN.NUM_MATRICULA,           	   CASE            WHEN CA.DTA_INICIO <= @DATA_ATUAL            AND CA.DTA_TERMINO >= @DATA_ATUAL            AND CA.IND_ATIVO = 'SIM'              THEN 'S'            ELSE 'N'         END AS PRAZO_RECADASTRAMENTO,    	   'ATIVO' AS 'GRUPO_RECADASTRAMENTO'    FROM WEB_RECAD_PUBLICO_ALVO PA      INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = PA.CD_FUNDACAO  		AND FN.NUM_INSCRICAO = PA.NUM_INSCRICAO      INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = FN.COD_ENTID      INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA  WHERE EE.CPF_CGC = @CPF    AND CA.DTA_INICIO <= @DATA_ATUAL    AND CA.DTA_TERMINO >= @DATA_ATUAL    AND CA.IND_ATIVO = 'SIM'    ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*,         CA.NOM_CAMPANHA,  	   CA.DTA_TERMINO,  	   FN.NUM_MATRICULA,           	   CASE            WHEN CA.DTA_INICIO <= @DATA_ATUAL            AND CA.DTA_TERMINO >= @DATA_ATUAL            AND CA.IND_ATIVO = 'SIM'              THEN 'S'            ELSE 'N'         END AS PRAZO_RECADASTRAMENTO,    	   'ATIVO' AS 'GRUPO_RECADASTRAMENTO'    FROM WEB_RECAD_PUBLICO_ALVO PA      INNER JOIN CS_FUNCIONARIO FN ON FN.CD_FUNDACAO = PA.CD_FUNDACAO  		AND FN.NUM_INSCRICAO = PA.NUM_INSCRICAO      INNER JOIN EE_ENTIDADE EE ON EE.COD_ENTID = FN.COD_ENTID      INNER JOIN WEB_RECAD_CAMPANHA CA ON CA.OID_RECAD_CAMPANHA = PA.OID_RECAD_CAMPANHA  WHERE EE.CPF_CGC = @CPF    AND CA.DTA_INICIO <= @DATA_ATUAL    AND CA.DTA_TERMINO >= @DATA_ATUAL    AND CA.IND_ATIVO = 'SIM'    ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.DTA_TERMINO, FN.NUM_MATRICULA, CASE  WHEN CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' THEN 'S' ELSE 'N' END  AS PRAZO_RECADASTRAMENTO, 'ATIVO' AS GRUPO_RECADASTRAMENTO FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=PA.CD_FUNDACAO AND FN.NUM_INSCRICAO=PA.NUM_INSCRICAO INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=FN.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
+					return Conexao.Query<WebRecadPublicoAlvoEntidade>("SELECT PA.*, CA.NOM_CAMPANHA, CA.DTA_TERMINO, FN.NUM_MATRICULA, CASE  WHEN CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' THEN 'S' ELSE 'N' END  AS PRAZO_RECADASTRAMENTO, 'ATIVO' AS GRUPO_RECADASTRAMENTO FROM WEB_RECAD_PUBLICO_ALVO  PA  INNER  JOIN CS_FUNCIONARIO   FN  ON FN.CD_FUNDACAO=PA.CD_FUNDACAO AND FN.NUM_INSCRICAO=PA.NUM_INSCRICAO INNER  JOIN EE_ENTIDADE   EE  ON EE.COD_ENTID=FN.COD_ENTID INNER  JOIN WEB_RECAD_CAMPANHA   CA  ON CA.OID_RECAD_CAMPANHA=PA.OID_RECAD_CAMPANHA WHERE EE.CPF_CGC=:CPF AND CA.DTA_INICIO<=:DATA_ATUAL AND CA.DTA_TERMINO>=:DATA_ATUAL AND CA.IND_ATIVO='SIM' ORDER BY DTA_INICIO DESC", new { CPF, DATA_ATUAL }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -142,7 +152,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -159,7 +170,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -176,7 +188,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -193,7 +206,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

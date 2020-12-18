@@ -8,6 +8,7 @@
 */
 
 SELECT PA.*,
+       CA.NOM_CAMPANHA,
        CA.DTA_TERMINO,
        RB.CD_TIPO_RECEBEDOR,
        RB.NUM_MATRICULA,

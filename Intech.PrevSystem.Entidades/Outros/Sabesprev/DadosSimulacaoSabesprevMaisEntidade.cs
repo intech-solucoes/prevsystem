@@ -9,6 +9,7 @@
         public int IdadeAposentadoria;
         public decimal AntecipacaoSaldo;
         public decimal RendaMensal;
+        public decimal RendaMensalEmReais;
         public decimal Rentabilidade;
         public decimal CrescimentoSalarial;
     }

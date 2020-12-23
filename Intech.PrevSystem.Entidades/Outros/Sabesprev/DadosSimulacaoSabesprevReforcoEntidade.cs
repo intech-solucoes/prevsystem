@@ -10,5 +10,6 @@
         public int RendaMensalPrazoDeterminado { get; set; }
         public decimal Rentabilidade { get; set; }
         public decimal CrescimentoSalarialReal { get; set; }
+        public decimal RendaMensalEmReais { get; set; }
     }
 }

@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Intech.Lib.Email" Version="2.0.1" />
-    <PackageReference Include="Intech.Lib.SMS" Version="1.1.0" />
     <PackageReference Include="Intech.Lib.Web" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\Intech.Lib.SMS\Intech.Lib.SMS.csproj" />
     <ProjectReference Include="..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
   </ItemGroup>
 

@@ -240,19 +240,19 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     }
 
                     var mensagem = $"Esta e sua nova senha da Area Restrita da {AppSettings.Get().Cliente}: {senha}";
-                    var retorno = new EnvioSMS()
-                        .EnviarHumanAPI(dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, AppSettings.Get().Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                    var retorno = new SMS()
+                        .Enviar(Provedor.Maxxmobi, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, AppSettings.Get().Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
                             new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                             {
-                                try
-                                {
-                                    var logSMSProxy = new LogSMSProxy();
-                                    logSMSProxy.Insert(args.Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
-                                }
-                                catch (Exception ex)
-                                {
-                                    throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
-                                }
+                                //try
+                                //{
+                                //    var logSMSProxy = new LogSMSProxy();
+                                //    logSMSProxy.Insert(args.Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
+                                //}
                             }));
 
                     return $"Sua nova senha foi enviada via SMS para o n�mero {celularEscondido}!";

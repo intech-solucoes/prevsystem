@@ -4,13 +4,34 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class WebRecadBeneficiarioDAO : BaseDAO<WebRecadBeneficiarioEntidade>
 	{
-		public virtual long Insert( decimal OID_RECAD_DADOS,  string COD_PLANO,  decimal NUM_SEQ_DEP,  string NOM_DEPENDENTE,  string COD_GRAU_PARENTESCO,  string DES_GRAU_PARENTESCO,  DateTime? DTA_NASCIMENTO,  string COD_SEXO,  string DES_SEXO,  string COD_CPF,  decimal COD_PERC_RATEIO,  string IND_OPERACAO,  string IND_VALIDO,  string IND_HERDEIRO)
+		public WebRecadBeneficiarioDAO (IDbTransaction tx = null) : base(tx) { }
+
+		public virtual long Insert( decimal OID_RECAD_DADOS,  string COD_PLANO,  decimal NUM_SEQ_DEP,  string NOM_DEPENDENTE,  string COD_GRAU_PARENTESCO,  string DES_GRAU_PARENTESCO,  DateTime? DTA_NASCIMENTO,  string COD_SEXO,  string DES_SEXO,  string COD_CPF,  decimal COD_PERC_RATEIO,  string IND_OPERACAO,  string IND_VALIDO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<long>("INSERT INTO WEB_RECAD_BENEFICIARIO(  	OID_RECAD_DADOS,      COD_PLANO,      NUM_SEQ_DEP,      NOM_DEPENDENTE,      COD_GRAU_PARENTESCO,      DES_GRAU_PARENTESCO,      DTA_NASCIMENTO,      COD_SEXO,      DES_SEXO,      COD_CPF,      COD_PERC_RATEIO,      IND_OPERACAO,  	IND_VALIDO  )  VALUES(      @OID_RECAD_DADOS,      @COD_PLANO,      @NUM_SEQ_DEP,      @NOM_DEPENDENTE,      @COD_GRAU_PARENTESCO,      @DES_GRAU_PARENTESCO,      @DTA_NASCIMENTO,      @COD_SEXO,      @DES_SEXO,      @COD_CPF,      @COD_PERC_RATEIO,      @IND_OPERACAO,  	@IND_VALIDO  )", new { OID_RECAD_DADOS, COD_PLANO, NUM_SEQ_DEP, NOM_DEPENDENTE, COD_GRAU_PARENTESCO, DES_GRAU_PARENTESCO, DTA_NASCIMENTO, COD_SEXO, DES_SEXO, COD_CPF, COD_PERC_RATEIO, IND_OPERACAO, IND_VALIDO });
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<long>("INSERT INTO WEB_RECAD_BENEFICIARIO (OID_RECAD_BENEFICIARIO,OID_RECAD_DADOS, COD_PLANO, NUM_SEQ_DEP, NOM_DEPENDENTE, COD_GRAU_PARENTESCO, DES_GRAU_PARENTESCO, DTA_NASCIMENTO, COD_SEXO, DES_SEXO, COD_CPF, COD_PERC_RATEIO, IND_OPERACAO, IND_VALIDO) VALUES (S_WEB_RECAD_BENEFICIARIO.NEXTVAL,:OID_RECAD_DADOS, :COD_PLANO, :NUM_SEQ_DEP, :NOM_DEPENDENTE, :COD_GRAU_PARENTESCO, :DES_GRAU_PARENTESCO, :DTA_NASCIMENTO, :COD_SEXO, :DES_SEXO, :COD_CPF, :COD_PERC_RATEIO, :IND_OPERACAO, :IND_VALIDO)", new { OID_RECAD_DADOS, COD_PLANO, NUM_SEQ_DEP, NOM_DEPENDENTE, COD_GRAU_PARENTESCO, DES_GRAU_PARENTESCO, DTA_NASCIMENTO, COD_SEXO, DES_SEXO, COD_CPF, COD_PERC_RATEIO, IND_OPERACAO, IND_VALIDO });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual long InsertIndHerdeiro( decimal OID_RECAD_DADOS,  string COD_PLANO,  decimal NUM_SEQ_DEP,  string NOM_DEPENDENTE,  string COD_GRAU_PARENTESCO,  string DES_GRAU_PARENTESCO,  DateTime? DTA_NASCIMENTO,  string COD_SEXO,  string DES_SEXO,  string COD_CPF,  decimal COD_PERC_RATEIO,  string IND_OPERACAO,  string IND_VALIDO,  string IND_HERDEIRO)
 		{
 			try
 			{
@@ -23,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

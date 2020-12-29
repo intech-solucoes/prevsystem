@@ -64,6 +64,8 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_TIPO_CORRESP { get; set; }
 		public string CX_POSTAL { get; set; }
 		public string EMAIL_DEP2 { get; set; }
+		public decimal? PERC_PENSAO { get; set; }
+		public string IND_HERDEIRO { get; set; }
 		[Write(false)] public string DS_GRAU_PARENTESCO { get; set; }
 		[Write(false)] public string IND_OPERACAO { get; set; }
 		[Write(false)] public string DS_EMPRESA { get; set; }

@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class DependenteDAO : BaseDAO<DependenteEntidade>
 	{
+		public DependenteDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual void AtualizarDependente(string CD_FUNDACAO, string NUM_INSCRICAO, decimal NUM_SEQ_DEP, string NOME_DEP, string CD_GRAU_PARENTESCO, string SEXO_DEP, DateTime DT_NASC_DEP, string ABATIMENTO_IRRF, DateTime DT_VALIDADE_DEP, string CD_MOT_PERDA_VALIDADE, DateTime DT_INCLUSAO_DEP, DateTime? DT_INIC_IRRF, DateTime? DT_TERM_IRRF, string PECULIO, string NUM_PROTOCOLO, string CPF, string IDENTIDADE, string ORGAO_EXP, DateTime? DT_EXPEDICAO, string CD_PLANO, string CD_NACIONALIDADE, string CD_ESTADO_CIVIL, string NATURALIDADE, string UF_NATURALIDADE, string EMAIL_DEP, string FONE_CELULAR, string NUM_BANCO, string NUM_CONTA, string NUM_AGENCIA, string END_DEP, string COMP_END_DEP, string BAIRRO_DEP, string CID_DEP, string UF_DEP, string CD_PAIS, string FONE_DEP, string CEP_DEP)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -125,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -134,15 +144,16 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<DependenteEntidade>("SELECT DEP.CD_FUNDACAO,         DEP.NUM_INSCRICAO,         DEP.NUM_SEQ_DEP,         GP.DS_GRAU_PARENTESCO,         GP.CD_GRAU_PARENTESCO,         DEP.NOME_DEP,         DEP.DT_NASC_DEP,         DEP.SEXO_DEP,         DEP.CPF,         DEP.PERC_PECULIO,  	   DEP.CD_PLANO  FROM CS_DEPENDENTE DEP    INNER JOIN TB_GRAU_PARENTESCO GP ON GP.CD_GRAU_PARENTESCO = DEP.CD_GRAU_PARENTESCO  WHERE DEP.CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND PLANO_PREVIDENCIAL = 'S'  ORDER BY GP.TIPO_VALIDADE DESC", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
+					return Conexao.Query<DependenteEntidade>("SELECT DEP.CD_FUNDACAO,         DEP.NUM_INSCRICAO,         DEP.NUM_SEQ_DEP,         GP.DS_GRAU_PARENTESCO,         GP.CD_GRAU_PARENTESCO,         DEP.NOME_DEP,         DEP.DT_NASC_DEP,         DEP.SEXO_DEP,         DEP.CPF,         DEP.PERC_PECULIO,  	   DEP.DT_INCLUSAO_DEP,  	   DEP.CD_PLANO  FROM CS_DEPENDENTE DEP    INNER JOIN TB_GRAU_PARENTESCO GP ON GP.CD_GRAU_PARENTESCO = DEP.CD_GRAU_PARENTESCO  WHERE DEP.CD_FUNDACAO = @CD_FUNDACAO    AND NUM_INSCRICAO = @NUM_INSCRICAO    AND PLANO_PREVIDENCIAL = 'S'  ORDER BY GP.TIPO_VALIDADE DESC", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<DependenteEntidade>("SELECT DEP.CD_FUNDACAO, DEP.NUM_INSCRICAO, DEP.NUM_SEQ_DEP, GP.DS_GRAU_PARENTESCO, GP.CD_GRAU_PARENTESCO, DEP.NOME_DEP, DEP.DT_NASC_DEP, DEP.SEXO_DEP, DEP.CPF, DEP.PERC_PECULIO, DEP.CD_PLANO FROM CS_DEPENDENTE  DEP  INNER  JOIN TB_GRAU_PARENTESCO   GP  ON GP.CD_GRAU_PARENTESCO=DEP.CD_GRAU_PARENTESCO WHERE DEP.CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND PLANO_PREVIDENCIAL='S' ORDER BY GP.TIPO_VALIDADE DESC", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
+					return Conexao.Query<DependenteEntidade>("SELECT DEP.CD_FUNDACAO, DEP.NUM_INSCRICAO, DEP.NUM_SEQ_DEP, GP.DS_GRAU_PARENTESCO, GP.CD_GRAU_PARENTESCO, DEP.NOME_DEP, DEP.DT_NASC_DEP, DEP.SEXO_DEP, DEP.CPF, DEP.PERC_PECULIO, DEP.DT_INCLUSAO_DEP, DEP.CD_PLANO FROM CS_DEPENDENTE  DEP  INNER  JOIN TB_GRAU_PARENTESCO   GP  ON GP.CD_GRAU_PARENTESCO=DEP.CD_GRAU_PARENTESCO WHERE DEP.CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND PLANO_PREVIDENCIAL='S' ORDER BY GP.TIPO_VALIDADE DESC", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -159,7 +170,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -176,7 +188,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -193,7 +206,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -210,7 +224,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -227,7 +242,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -244,7 +260,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

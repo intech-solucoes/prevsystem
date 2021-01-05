@@ -1,0 +1,196 @@
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 11g                           */
+/* Created on:     02/04/2020 21:21:33                          */
+/*==============================================================*/
+
+/*
+DROP TABLE WEB_RECAD_CAMPANHA CASCADE CONSTRAINTS;
+DROP TABLE WEB_RECAD_DADOS CASCADE CONSTRAINTS;
+DROP TABLE WEB_RECAD_DEPENDENTE CASCADE CONSTRAINTS;
+DROP TABLE WEB_RECAD_DOCUMENTO CASCADE CONSTRAINTS;
+DROP TABLE WEB_RECAD_PUBLICO_ALVO CASCADE CONSTRAINTS;
+
+DROP SEQUENCE S_WEB_RECAD_CAMPANHA;
+DROP SEQUENCE S_WEB_RECAD_DADOS;
+DROP SEQUENCE S_WEB_RECAD_DEPENDENTE;
+DROP SEQUENCE S_WEB_RECAD_DOCUMENTO;
+DROP SEQUENCE S_WEB_RECAD_PUBLICO_ALVO;
+
+*/
+
+CREATE SEQUENCE S_WEB_RECAD_CAMPANHA;
+CREATE SEQUENCE S_WEB_RECAD_DADOS;
+CREATE SEQUENCE S_WEB_RECAD_DEPENDENTE;
+CREATE SEQUENCE S_WEB_RECAD_DOCUMENTO;
+CREATE SEQUENCE S_WEB_RECAD_PUBLICO_ALVO;
+
+/*==============================================================*/
+/* Table: WEB_RECAD_CAMPANHA                                    */
+/*==============================================================*/
+CREATE TABLE WEB_RECAD_CAMPANHA 
+(
+   OID_RECAD_CAMPANHA   NUMBER(10)           NOT NULL,
+   CD_FUNDACAO          VARCHAR2(2)          NOT NULL,
+   NOM_CAMPANHA         VARCHAR2(100)        NOT NULL,
+   DTA_INICIO           DATE                 NOT NULL,
+   DTA_TERMINO          DATE                 NOT NULL,
+   IND_ATIVO            VARCHAR2(3)          NOT NULL
+      CONSTRAINT CKC_IND_ATIVO_WEB_RECA CHECK (IND_ATIVO IN ('SIM','NAO') AND IND_ATIVO = UPPER(IND_ATIVO)),
+   CONSTRAINT WEB_RECAD_CAMPANHA_PK PRIMARY KEY (OID_RECAD_CAMPANHA)
+);
+
+/*==============================================================*/
+/* Index: WEB_RECAD_CAMPANHA_UK01                               */
+/*==============================================================*/
+CREATE UNIQUE INDEX WEB_RECAD_CAMPANHA_UK01 ON WEB_RECAD_CAMPANHA (
+   CD_FUNDACAO ASC,
+   NOM_CAMPANHA ASC
+);
+
+/*==============================================================*/
+/* Table: WEB_RECAD_DADOS                                       */
+/*==============================================================*/
+CREATE TABLE WEB_RECAD_DADOS 
+(
+   OID_RECAD_DADOS      NUMBER(10)           NOT NULL,
+   OID_RECAD_PUBLICO_ALVO NUMBER(10)           NOT NULL,
+   DTA_SOLICITACAO      DATE                 NOT NULL,
+   DES_ORIGEM           VARCHAR2(100)        NOT NULL,
+   DTA_RECUSA           DATE,
+   TXT_MOTIVO_RECUSA    VARCHAR2(4000),
+   NOM_PESSOA           VARCHAR2(100),
+   DTA_NASCIMENTO       DATE,
+   COD_CPF              VARCHAR2(11),
+   COD_RG               VARCHAR2(20),
+   DES_ORGAO_EXPEDIDOR  VARCHAR2(100),
+   DTA_EXPEDICAO_RG     DATE,
+   DTA_ADMISSAO         DATE,
+   DES_NATURALIDADE     VARCHAR2(100),
+   COD_UF_NATURALIDADE  VARCHAR2(2),
+   DES_UF_NATURALIDADE  VARCHAR2(100),
+   COD_NACIONALIDADE    VARCHAR2(20),
+   DES_NACIONALIDADE    VARCHAR2(100),
+   NOM_MAE              VARCHAR2(100),
+   NOM_PAI              VARCHAR2(100),
+   COD_ESTADO_CIVIL     VARCHAR2(20),
+   DES_ESTADO_CIVIL     VARCHAR2(100),
+   NOM_CONJUGE          VARCHAR2(100),
+   DTA_NASC_CONJUGE     DATE,
+   COD_CEP              VARCHAR2(8),
+   DES_END_LOGRADOURO   VARCHAR2(100),
+   DES_END_NUMERO       VARCHAR2(50),
+   DES_END_COMPLEMENTO  VARCHAR2(100),
+   DES_END_BAIRRO       VARCHAR2(100),
+   DES_END_CIDADE       VARCHAR2(100),
+   COD_END_UF           VARCHAR2(2),
+   DES_END_UF           VARCHAR2(100),
+   COD_PAIS             VARCHAR2(20),
+   DES_PAIS             VARCHAR2(100),
+   COD_EMAIL            VARCHAR2(100),
+   COD_TELEFONE_FIXO    VARCHAR2(20),
+   COD_TELEFONE_CELULAR VARCHAR2(20),
+   COD_CARGO            VARCHAR2(20),
+   DES_CARGO            VARCHAR2(100),
+   COD_SEXO             VARCHAR2(3),
+   DES_SEXO             VARCHAR2(20),
+   COD_BANCO            VARCHAR2(3),
+   DES_BANCO            VARCHAR2(100),
+   COD_AGENCIA          VARCHAR2(20),
+   COD_DV_AGENCIA       VARCHAR2(2),
+   COD_CONTA_CORRENTE   VARCHAR2(20),
+   COD_DV_CONTA_CORRENTE VARCHAR2(2),
+   COD_ESPECIE_INSS     VARCHAR2(2),
+   DES_ESPECIE_INSS     VARCHAR2(100),
+   COD_BENEF_INSS       VARCHAR2(50),
+   IND_PPE              VARCHAR2(3),
+   IND_PPE_FAMILIAR     VARCHAR2(3),
+   IND_FATCA            VARCHAR2(3),
+   CONSTRAINT WEB_RECAD_DADOS_PK PRIMARY KEY (OID_RECAD_DADOS)
+);
+
+/*==============================================================*/
+/* Index: WEB_RECAD_DADOS_UK01                                  */
+/*==============================================================*/
+CREATE UNIQUE INDEX WEB_RECAD_DADOS_UK01 ON WEB_RECAD_DADOS (
+   OID_RECAD_PUBLICO_ALVO ASC,
+   DTA_SOLICITACAO ASC
+);
+
+/*==============================================================*/
+/* Table: WEB_RECAD_DEPENDENTE                                  */
+/*==============================================================*/
+CREATE TABLE WEB_RECAD_DEPENDENTE 
+(
+   OID_RECAD_DEPENDENTE NUMBER(10)           NOT NULL,
+   OID_RECAD_DADOS      NUMBER(10)           NOT NULL,
+   COD_PLANO            VARCHAR2(4)          NOT NULL,
+   NUM_SEQ_DEP          NUMBER(10),
+   NOM_DEPENDENTE       VARCHAR2(100),
+   COD_GRAU_PARENTESCO  VARCHAR2(20),
+   DES_GRAU_PARENTESCO  VARCHAR2(100),
+   DTA_NASCIMENTO       DATE,
+   COD_SEXO             VARCHAR2(3),
+   DES_SEXO             VARCHAR2(100),
+   COD_CPF              VARCHAR2(11),
+   COD_PERC_RATEIO      NUMBER(15,8),
+   IND_BENEFICIARIO     VARCHAR2(3),
+   IND_OPERACAO         VARCHAR2(3)          NOT NULL
+      CONSTRAINT CKC_IND_OPERACAO_WEB_RECA CHECK (IND_OPERACAO IN ('INC','ALT','EXC')),
+   CONSTRAINT WEB_RECAD_DEPENDENTE_PK PRIMARY KEY (OID_RECAD_DEPENDENTE)
+);
+
+/*==============================================================*/
+/* Table: WEB_RECAD_DOCUMENTO                                   */
+/*==============================================================*/
+CREATE TABLE WEB_RECAD_DOCUMENTO 
+(
+   OID_RECAD_DOCUMENTO  NUMBER(10)           NOT NULL,
+   OID_RECAD_DADOS      NUMBER(10)           NOT NULL,
+   TXT_TITULO           VARCHAR2(100)        NOT NULL,
+   TXT_NOME_FISICO      VARCHAR2(100)        NOT NULL,
+   CONSTRAINT WEB_RECAD_DOCUMENTO_PK PRIMARY KEY (OID_RECAD_DOCUMENTO)
+);
+
+/*==============================================================*/
+/* Table: WEB_RECAD_PUBLICO_ALVO                                */
+/*==============================================================*/
+CREATE TABLE WEB_RECAD_PUBLICO_ALVO 
+(
+   OID_RECAD_PUBLICO_ALVO NUMBER(10)           NOT NULL,
+   OID_RECAD_CAMPANHA   NUMBER(10)           NOT NULL,
+   CD_FUNDACAO          VARCHAR2(2)          NOT NULL,
+   NUM_INSCRICAO        VARCHAR2(9)          NOT NULL,
+   SEQ_RECEBEDOR        NUMBER(10)           NOT NULL,
+   IND_SITUACAO_RECAD   VARCHAR2(3)          NOT NULL
+      CONSTRAINT CKC_IND_SITUACAO_RECA_WEB_RECA CHECK (IND_SITUACAO_RECAD IN ('AGU','SOL','EFE','REC','SUS')),
+   DTA_EFETIVACAO       DATE,
+   NOM_USUARIO_ACAO     VARCHAR2(100)        NOT NULL,
+   CONSTRAINT WEB_RECAD_PUBLICO_ALVO_PK PRIMARY KEY (OID_RECAD_PUBLICO_ALVO)
+);
+
+/*==============================================================*/
+/* Index: WEB_RECAD_PUBLICO_ALVO_UK01                           */
+/*==============================================================*/
+CREATE UNIQUE INDEX WEB_RECAD_PUBLICO_ALVO_UK01 ON WEB_RECAD_PUBLICO_ALVO (
+   OID_RECAD_CAMPANHA ASC,
+   CD_FUNDACAO ASC,
+   NUM_INSCRICAO ASC,
+   SEQ_RECEBEDOR ASC
+);
+
+ALTER TABLE WEB_RECAD_DADOS
+   ADD CONSTRAINT WEB_RECAD_DADOS_FK01 FOREIGN KEY (OID_RECAD_PUBLICO_ALVO)
+      REFERENCES WEB_RECAD_PUBLICO_ALVO (OID_RECAD_PUBLICO_ALVO);
+
+ALTER TABLE WEB_RECAD_DEPENDENTE
+   ADD CONSTRAINT WEB_RECAD_DEPENDENTE_FK01 FOREIGN KEY (OID_RECAD_DADOS)
+      REFERENCES WEB_RECAD_DADOS (OID_RECAD_DADOS);
+
+ALTER TABLE WEB_RECAD_DOCUMENTO
+   ADD CONSTRAINT WEB_RECAD_DOCUMENTO_FK01 FOREIGN KEY (OID_RECAD_DADOS)
+      REFERENCES WEB_RECAD_DADOS (OID_RECAD_DADOS);
+
+ALTER TABLE WEB_RECAD_PUBLICO_ALVO
+   ADD CONSTRAINT WEB_RECAD_PUBLICO_ALVO_FK01 FOREIGN KEY (OID_RECAD_CAMPANHA)
+      REFERENCES WEB_RECAD_CAMPANHA (OID_RECAD_CAMPANHA);
+

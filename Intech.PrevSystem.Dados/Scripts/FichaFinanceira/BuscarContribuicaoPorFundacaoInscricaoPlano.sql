@@ -19,5 +19,6 @@ WHERE FF.CD_FUNDACAO = @CD_FUNDACAO
                                         FROM CC_FICHA_FINANCEIRA FF2
                                         WHERE FF2.CD_FUNDACAO = FF.CD_FUNDACAO
                                           AND FF2.NUM_INSCRICAO = FF.NUM_INSCRICAO
-                                          AND FF2.CD_PLANO = FF.CD_PLANO)
+                                          AND FF2.CD_PLANO = FF.CD_PLANO
+										  AND FF2.MES_COMP <> 13)
 ORDER BY FF.CD_TIPO_CONTRIBUICAO

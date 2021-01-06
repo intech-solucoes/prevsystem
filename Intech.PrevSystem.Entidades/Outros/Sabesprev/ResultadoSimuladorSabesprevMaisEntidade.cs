@@ -17,6 +17,8 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public List<SaldoRestanteEntidade> SaldosRestantes { get; set; }
         public int IdadeRendaDefinidaInicio { get; set; }
         public int IdadeRendaDefinidaFim { get; set; }
+        public int IdadeRendaDefinidaFimMinimo { get; set; }
+        public int IdadeRendaDefinidaFimMax { get; set; }
         public int ParcelasMensaisRendaDefinida { get; set; }
         public decimal ValorRendaDefinida { get; set; }
         public decimal ValorInicial { get; set; }

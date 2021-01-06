@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class PlanoVinculadoDAO : BaseDAO<PlanoVinculadoEntidade>
 	{
+		public PlanoVinculadoDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<PlanoVinculadoEntidade> BuscarPorContratoTrabalho(int SQ_CONTRATO_TRABALHO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -125,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -142,7 +152,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -159,7 +170,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -168,15 +180,16 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<PlanoVinculadoEntidade>("SELECT TB_PERFIL_INVEST.DS_PERFIL_INVEST,          TB_CATEGORIA.CD_CATEGORIA,          TB_CATEGORIA.DS_CATEGORIA,          TB_SIT_PLANO.DS_SIT_PLANO,         TB_PLANOS.DS_PLANO,         TB_PLANOS.COD_CNPB,         CS_PLANOS_VINC.*,  	   CS_FUNCIONARIO.CD_EMPRESA  FROM   CS_PLANOS_VINC   INNER JOIN TB_PLANOS ON CS_PLANOS_VINC.CD_FUNDACAO = TB_PLANOS.CD_FUNDACAO                       AND CS_PLANOS_VINC.CD_PLANO = TB_PLANOS.CD_PLANO   INNER JOIN TB_SIT_PLANO ON CS_PLANOS_VINC.CD_SIT_PLANO = TB_SIT_PLANO.CD_SIT_PLANO   LEFT OUTER JOIN TB_PERFIL_INVEST ON CS_PLANOS_VINC.CD_PERFIL_INVEST = TB_PERFIL_INVEST.CD_PERFIL_INVEST   INNER JOIN CS_FUNCIONARIO ON CS_FUNCIONARIO.NUM_INSCRICAO = CS_PLANOS_VINC.NUM_INSCRICAO   INNER JOIN TB_CATEGORIA ON TB_CATEGORIA.CD_CATEGORIA = TB_SIT_PLANO.CD_CATEGORIA   WHERE  ( CS_FUNCIONARIO.CD_FUNDACAO = @CD_FUNDACAO )          AND ( CS_PLANOS_VINC.CD_FUNDACAO = @CD_FUNDACAO )          AND ( TB_PLANOS.CD_FUNDACAO = @CD_FUNDACAO )           AND ( CS_FUNCIONARIO.NUM_INSCRICAO = @NUM_INSCRICAO )  	   AND ( TB_CATEGORIA.CD_CATEGORIA <> 2)", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
+					return Conexao.Query<PlanoVinculadoEntidade>("SELECT TB_PERFIL_INVEST.DS_PERFIL_INVEST,          TB_CATEGORIA.CD_CATEGORIA,          TB_CATEGORIA.DS_CATEGORIA,          TB_SIT_PLANO.CD_SIT_PLANO,         TB_SIT_PLANO.DS_SIT_PLANO,         TB_PLANOS.DS_PLANO,         TB_PLANOS.COD_CNPB,         CS_PLANOS_VINC.*,  	   CS_FUNCIONARIO.CD_EMPRESA  FROM   CS_PLANOS_VINC   INNER JOIN TB_PLANOS ON CS_PLANOS_VINC.CD_FUNDACAO = TB_PLANOS.CD_FUNDACAO                       AND CS_PLANOS_VINC.CD_PLANO = TB_PLANOS.CD_PLANO   INNER JOIN TB_SIT_PLANO ON CS_PLANOS_VINC.CD_SIT_PLANO = TB_SIT_PLANO.CD_SIT_PLANO   LEFT OUTER JOIN TB_PERFIL_INVEST ON CS_PLANOS_VINC.CD_PERFIL_INVEST = TB_PERFIL_INVEST.CD_PERFIL_INVEST   INNER JOIN CS_FUNCIONARIO ON CS_FUNCIONARIO.NUM_INSCRICAO = CS_PLANOS_VINC.NUM_INSCRICAO   INNER JOIN TB_CATEGORIA ON TB_CATEGORIA.CD_CATEGORIA = TB_SIT_PLANO.CD_CATEGORIA   WHERE  ( CS_FUNCIONARIO.CD_FUNDACAO = @CD_FUNDACAO )          AND ( CS_PLANOS_VINC.CD_FUNDACAO = @CD_FUNDACAO )          AND ( TB_PLANOS.CD_FUNDACAO = @CD_FUNDACAO )           AND ( CS_FUNCIONARIO.NUM_INSCRICAO = @NUM_INSCRICAO )  	   AND ( TB_CATEGORIA.CD_CATEGORIA <> 2)", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<PlanoVinculadoEntidade>("SELECT TB_PERFIL_INVEST.DS_PERFIL_INVEST, TB_CATEGORIA.CD_CATEGORIA, TB_CATEGORIA.DS_CATEGORIA, TB_SIT_PLANO.DS_SIT_PLANO, TB_PLANOS.DS_PLANO, TB_PLANOS.COD_CNPB, CS_PLANOS_VINC.*, CS_FUNCIONARIO.CD_EMPRESA FROM CS_PLANOS_VINC INNER  JOIN TB_PLANOS  ON CS_PLANOS_VINC.CD_FUNDACAO=TB_PLANOS.CD_FUNDACAO AND CS_PLANOS_VINC.CD_PLANO=TB_PLANOS.CD_PLANO INNER  JOIN TB_SIT_PLANO  ON CS_PLANOS_VINC.CD_SIT_PLANO=TB_SIT_PLANO.CD_SIT_PLANO LEFT OUTER JOIN TB_PERFIL_INVEST  ON CS_PLANOS_VINC.CD_PERFIL_INVEST=TB_PERFIL_INVEST.CD_PERFIL_INVEST INNER  JOIN CS_FUNCIONARIO  ON CS_FUNCIONARIO.NUM_INSCRICAO=CS_PLANOS_VINC.NUM_INSCRICAO INNER  JOIN TB_CATEGORIA  ON TB_CATEGORIA.CD_CATEGORIA=TB_SIT_PLANO.CD_CATEGORIA WHERE (CS_FUNCIONARIO.CD_FUNDACAO=:CD_FUNDACAO) AND (CS_PLANOS_VINC.CD_FUNDACAO=:CD_FUNDACAO) AND (TB_PLANOS.CD_FUNDACAO=:CD_FUNDACAO) AND (CS_FUNCIONARIO.NUM_INSCRICAO=:NUM_INSCRICAO) AND (TB_CATEGORIA.CD_CATEGORIA<>2)", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
+					return Conexao.Query<PlanoVinculadoEntidade>("SELECT TB_PERFIL_INVEST.DS_PERFIL_INVEST, TB_CATEGORIA.CD_CATEGORIA, TB_CATEGORIA.DS_CATEGORIA, TB_SIT_PLANO.CD_SIT_PLANO, TB_SIT_PLANO.DS_SIT_PLANO, TB_PLANOS.DS_PLANO, TB_PLANOS.COD_CNPB, CS_PLANOS_VINC.*, CS_FUNCIONARIO.CD_EMPRESA FROM CS_PLANOS_VINC INNER  JOIN TB_PLANOS  ON CS_PLANOS_VINC.CD_FUNDACAO=TB_PLANOS.CD_FUNDACAO AND CS_PLANOS_VINC.CD_PLANO=TB_PLANOS.CD_PLANO INNER  JOIN TB_SIT_PLANO  ON CS_PLANOS_VINC.CD_SIT_PLANO=TB_SIT_PLANO.CD_SIT_PLANO LEFT OUTER JOIN TB_PERFIL_INVEST  ON CS_PLANOS_VINC.CD_PERFIL_INVEST=TB_PERFIL_INVEST.CD_PERFIL_INVEST INNER  JOIN CS_FUNCIONARIO  ON CS_FUNCIONARIO.NUM_INSCRICAO=CS_PLANOS_VINC.NUM_INSCRICAO INNER  JOIN TB_CATEGORIA  ON TB_CATEGORIA.CD_CATEGORIA=TB_SIT_PLANO.CD_CATEGORIA WHERE (CS_FUNCIONARIO.CD_FUNDACAO=:CD_FUNDACAO) AND (CS_PLANOS_VINC.CD_FUNDACAO=:CD_FUNDACAO) AND (TB_PLANOS.CD_FUNDACAO=:CD_FUNDACAO) AND (CS_FUNCIONARIO.NUM_INSCRICAO=:NUM_INSCRICAO) AND (TB_CATEGORIA.CD_CATEGORIA<>2)", new { CD_FUNDACAO, NUM_INSCRICAO }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -193,7 +206,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -210,7 +224,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -227,7 +242,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -244,7 +260,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -261,7 +278,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

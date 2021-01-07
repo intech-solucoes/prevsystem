@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class CronogProcDAO : BaseDAO<CronogProcEntidade>
 	{
+		public CronogProcDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual CronogProcEntidade BuscarPorFundacaoTipoFolhaReferencia(string CD_FUNDACAO, string CD_TIPO_FOLHA, DateTime DT_REFERENCIA)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

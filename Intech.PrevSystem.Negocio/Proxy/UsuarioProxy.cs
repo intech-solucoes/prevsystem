@@ -124,6 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string CriarAcesso(string cpf, DateTime dataNascimento, bool enviarEmail = true, bool enviarSms = false, Provedor provedor = Provedor.Zenvia)
         {
+            var Cliente = AppSettings.Get().Cliente;
             cpf = cpf.LimparMascara();
 
             var funcionarioProxy = new FuncionarioProxy();
@@ -158,7 +159,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     throw ExceptionDadosInvalidos;
 
                 if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
-                    throw new Exception("Voc� n�o poss�i um e-mail cadastrado. Por favor, entre em contato com a Preves.");
+                    throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {Cliente}.");
 
                 var senha = GerarSenha(usarSenhaComplexa);
 
@@ -218,7 +219,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         throw new Exception("E-mail em formato inválido!");
 
                     var semAnexo = new List<KeyValuePair<string, Stream>>();
-                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{AppSettings.Get().Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {AppSettings.Get().Cliente}: {senha}", semAnexo);
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: {senha}", semAnexo);
                     
                     return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }
@@ -239,23 +240,24 @@ namespace Intech.PrevSystem.Negocio.Proxy
                             celularEscondido += dadosPessoais.FONE_CELULAR[i];
                     }
 
-                    var mensagem = $"Esta e sua nova senha da Area Restrita da {AppSettings.Get().Cliente}: {senha}";
+                    var mensagem = $"Esta e sua nova senha da Area Restrita da {Cliente}: {senha}";
                     var retorno = new SMS()
-                        .Enviar(provedor, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, AppSettings.Get().Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                        .Enviar(provedor, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
                             new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                             {
-                                //try
-                                //{
-                                //    var logSMSProxy = new LogSMSProxy();
-                                //    logSMSProxy.Insert(args.Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
-                                //}
-                                //catch (Exception ex)
-                                //{
-                                //    throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
-                                //}
+                                try
+                                {
+                                    var logSMSProxy = new LogSMSProxy();
+                                    var Retorno = String.IsNullOrEmpty(args.Retorno) ? "Mensagem Enviada" : args.Retorno;
+                                    logSMSProxy.Insert(Retorno, args.NumTelefone, args.Matricula, args.Inscricao);
+                                }
+                                catch (Exception ex)
+                                {
+                                    throw new Exception($"Ocorreu erro ao gravar log de sms: Message: {ex.Message}, e StackTrace: {ex.StackTrace}");
+                                }
                             }));
 
-                    return $"Sua nova senha foi enviada via SMS para o n�mero {celularEscondido}!";
+                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido}!";
                 }
             }
 

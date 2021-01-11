@@ -42,6 +42,7 @@ namespace Intech.PrevSystem.Entidades
         public string POLIT_EXP { get; set; }
         public string NUM_PROCESSO_PREV { get; set; }
         public string CD_ESPECIE_INSS { get; set; }
+        public string NOME_FALECIDO { get; set; }
         public List<PlanoEntidade> Planos { get; set; }
     }
 }

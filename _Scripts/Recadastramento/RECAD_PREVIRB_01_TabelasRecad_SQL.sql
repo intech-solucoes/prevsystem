@@ -164,7 +164,7 @@ go
 /* Table: WEB_RECAD_BENEFICIARIO                               */
 /*==============================================================*/
 CREATE TABLE WEB_RECAD_BENEFICIARIO (
-   OID_RECAD_BENEFICIARIO NUMERIC(10)          ,
+   OID_RECAD_BENEFICIARIO NUMERIC(10)        IDENTITY,
    OID_RECAD_DADOS      NUMERIC(10)          NOT NULL,
    COD_PLANO            VARCHAR(4)           NOT NULL,
    NUM_SEQ_DEP          NUMERIC(10)          NOT NULL,

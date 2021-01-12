@@ -158,9 +158,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if (dadosPessoais.DT_NASCIMENTO != dataNascimento)
                     throw ExceptionDadosInvalidos;
 
-                if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
-                    throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {Cliente}.");
-
                 var senha = GerarSenha(usarSenhaComplexa);
 
                 var senhaEncriptada = Criptografia.Encriptar(senha);
@@ -200,6 +197,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 if (enviarEmail)
                 {
+                    if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
+                        throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {Cliente}.");
+
                     var email = dadosPessoais.EMAIL_AUX.Split(';')[0];
 
                     var showBegin = 1;

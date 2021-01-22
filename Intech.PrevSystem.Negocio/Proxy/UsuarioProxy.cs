@@ -219,7 +219,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         throw new Exception("E-mail em formato inválido!");
 
                     var semAnexo = new List<KeyValuePair<string, Stream>>();
-                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: {senha}", semAnexo);
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: \"{senha}\"", semAnexo);
                     
                     return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }

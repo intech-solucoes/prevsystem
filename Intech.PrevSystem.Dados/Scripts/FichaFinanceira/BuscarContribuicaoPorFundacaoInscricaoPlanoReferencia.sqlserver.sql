@@ -1,7 +1,7 @@
 ﻿/*Config
     RetornaLista
     Retorno
-        -dynamic
+        -Faelce_ExtratoCDEntidade
     Parametros
         -CD_FUNDACAO:string
         -NUM_INSCRICAO:string

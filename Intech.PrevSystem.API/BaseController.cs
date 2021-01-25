@@ -18,5 +18,6 @@ namespace Intech.PrevSystem.API
         public int SeqRecebedor => Convert.ToInt32(User.Claims.GetValue("SeqRecebedor"));
         public string GrupoFamilia => User.Claims.GetValue("GrupoFamilia");
         public bool Admin => Convert.ToBoolean(User.Claims.GetValue("Admin"));
+        public bool AdminEmUso => Convert.ToBoolean(User.Claims.GetValue("AdminEmUso"));
     }
 }

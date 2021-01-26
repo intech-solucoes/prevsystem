@@ -220,8 +220,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                     var semAnexo = new List<KeyValuePair<string, Stream>>();
                     
-                    var textoAdicional = usarSenhaComplexa ? "<br/><br/>OBS: As Aspas não fazem parte da senha de acesso." : "";
-                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: \"{senha}\"{textoAdicional}", semAnexo);
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: \"{senha}\"<br/><br/>OBS: As Aspas não fazem parte da senha de acesso.", semAnexo);
                     
                     return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }

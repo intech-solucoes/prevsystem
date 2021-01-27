@@ -5,6 +5,7 @@ namespace Intech.PrevSystem.Entidades
     public class LoginEntidade
     {
         public string Cpf { get; set; }
+        public string Inscricao { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
         public DateTime DataNascimento { get; set; }

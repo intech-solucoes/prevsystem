@@ -63,5 +63,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public decimal? SALDO_COTA { get; set; }
 		[Write(false)] public decimal? SALDO_REAIS { get; set; }
 		[Write(false)] public decimal? RENTABILIDADE { get; set; }
+		[Write(false)] public decimal? CONTRIB_PORTABILIDADE { get; set; }
+		[Write(false)] public decimal? QTD_COTA_RP_PORTABILIDADE { get; set; }
 	}
 }

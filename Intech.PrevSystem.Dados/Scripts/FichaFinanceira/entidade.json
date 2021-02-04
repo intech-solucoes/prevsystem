@@ -65,6 +65,16 @@
       "Nome": "RENTABILIDADE",
       "Tipo": "decimal",
       "AceitaNulo": true
+    },
+    {
+      "Nome": "CONTRIB_PORTABILIDADE",
+      "Tipo": "decimal",
+      "AceitaNulo": true
+    },
+    {
+      "Nome": "QTD_COTA_RP_PORTABILIDADE",
+      "Tipo": "decimal",
+      "AceitaNulo": true
     }
   ],
   "Imports": []

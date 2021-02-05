@@ -13,5 +13,6 @@ namespace Intech.PrevSystem.Entidades
         public string Chave { get; set; }
         public string SenhaAntiga { get; set; }
         public string SenhaNova { get; set; }
+        public string ConfirmarSenha { get; set; }
     }
 }

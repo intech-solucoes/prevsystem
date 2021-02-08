@@ -24,7 +24,7 @@ namespace Intech.PrevSystem.Entidades.Outros.Faelce
             QtCotaPatrocinadora = saldos.QTD_COTA_RP_EMPRESA ?? 0;
             QtCotaPortabilidade = saldos.QTD_COTA_RP_PORTABILIDADE ?? 0;
 
-            ContribParticipante = QtCotaPatrocinadora * Cota;
+            ContribParticipante = QtCotaParticipante * Cota;
             ContribPatrocinadora = QtCotaPatrocinadora * Cota;
             ContribPortabilidade = QtCotaPortabilidade * Cota;
 

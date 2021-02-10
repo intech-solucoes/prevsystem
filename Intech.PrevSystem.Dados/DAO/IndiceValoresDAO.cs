@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class IndiceValoresDAO : BaseDAO<IndiceValoresEntidade>
 	{
+		public IndiceValoresDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<IndiceValoresEntidade> BuscarCotaPorPlano(string CD_PLANO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -49,15 +54,16 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT *    FROM TB_IND_VALORES IV   WHERE IV.COD_IND = (SELECT IND_RESERVA_POUP                          FROM TB_EMPRESA_PLANOS                         WHERE CD_EMPRESA = @CD_EMPRESA                          AND CD_PLANO = @CD_PLANO)    AND IV.DT_IND >= @DT_REFERENCIA", new { CD_EMPRESA, CD_PLANO, DT_REFERENCIA }).ToList();
+					return Conexao.Query<IndiceValoresEntidade>("SELECT *    FROM TB_IND_VALORES IV   WHERE IV.COD_IND = (SELECT IND_RESERVA_POUP                          FROM TB_EMPRESA_PLANOS                         WHERE CD_EMPRESA = @CD_EMPRESA                          AND CD_PLANO = @CD_PLANO)    AND IV.DT_IND <= @DT_REFERENCIA  ORDER BY DT_IND DESC", new { CD_EMPRESA, CD_PLANO, DT_REFERENCIA }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES  IV  WHERE IV.COD_IND=(SELECT IND_RESERVA_POUP FROM TB_EMPRESA_PLANOS WHERE CD_EMPRESA=:CD_EMPRESA AND CD_PLANO=:CD_PLANO) AND IV.DT_IND=:DT_REFERENCIA ORDER BY DT_IND DESC", new { CD_EMPRESA, CD_PLANO, DT_REFERENCIA }).ToList();
+					return Conexao.Query<IndiceValoresEntidade>("SELECT * FROM TB_IND_VALORES  IV  WHERE IV.COD_IND=(SELECT IND_RESERVA_POUP FROM TB_EMPRESA_PLANOS WHERE CD_EMPRESA=:CD_EMPRESA AND CD_PLANO=:CD_PLANO) AND IV.DT_IND<=:DT_REFERENCIA ORDER BY DT_IND DESC", new { CD_EMPRESA, CD_PLANO, DT_REFERENCIA }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -125,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

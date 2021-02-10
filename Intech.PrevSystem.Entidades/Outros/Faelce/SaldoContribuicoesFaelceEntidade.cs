@@ -15,10 +15,11 @@ namespace Intech.PrevSystem.Entidades.Outros.Faelce
         public decimal ContribTotal { get; set; }
         public decimal QtCotaTotal { get; set; }
         public decimal Cota { get; set; }
+        public DateTime Referencia { get; set; }
 
-        public SaldoContribuicoesFaelceEntidade(FichaFinanceiraEntidade saldos, decimal cota)
+        public SaldoContribuicoesFaelceEntidade(FichaFinanceiraEntidade saldos, IndiceValoresEntidade cota)
         {
-            Cota = cota;
+            Cota = cota.VALOR_IND;
 
             QtCotaParticipante = saldos.QTD_COTA_RP_PARTICIPANTE ?? 0;
             QtCotaPatrocinadora = saldos.QTD_COTA_RP_EMPRESA ?? 0;
@@ -30,6 +31,8 @@ namespace Intech.PrevSystem.Entidades.Outros.Faelce
 
             ContribTotal = ContribParticipante + ContribPatrocinadora + ContribPortabilidade;
             QtCotaTotal = QtCotaParticipante + QtCotaPatrocinadora + QtCotaPortabilidade;
+
+            Referencia = cota.DT_IND;
         }
 
         /*public decimal GetContribTotal()

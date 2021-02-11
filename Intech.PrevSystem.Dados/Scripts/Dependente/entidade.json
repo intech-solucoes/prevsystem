@@ -35,6 +35,16 @@
             "Nome": "TIPO_HERDEIRO",
             "Tipo": "string",
             "AceitaNulo": false
+        },
+        {
+            "Nome": "DT_TERMINO_VALIDADE",
+            "Tipo": "DateTime",
+            "AceitaNulo": true
+        },
+        {
+            "Nome": "NUM_SEQ_GR_FAMIL",
+            "Tipo": "decimal",
+            "AceitaNulo": true
         }
     ]
 }

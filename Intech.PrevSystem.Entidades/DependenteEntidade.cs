@@ -66,6 +66,7 @@ namespace Intech.PrevSystem.Entidades
 		public string EMAIL_DEP2 { get; set; }
 		public decimal? PERC_PENSAO { get; set; }
 		public string IND_HERDEIRO { get; set; }
+		public DateTime? DT_ALTERACAO { get; set; }
 		[Write(false)] public string DS_GRAU_PARENTESCO { get; set; }
 		[Write(false)] public string IND_OPERACAO { get; set; }
 		[Write(false)] public string DS_EMPRESA { get; set; }
@@ -73,5 +74,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string IND_PLANO_FAMILIA { get; set; }
 		[Write(false)] public string DS_MOT_PERDA_VALIDADE { get; set; }
 		[Write(false)] public string TIPO_HERDEIRO { get; set; }
+		[Write(false)] public DateTime? DT_TERMINO_VALIDADE { get; set; }
+		[Write(false)] public decimal? NUM_SEQ_GR_FAMIL { get; set; }
 	}
 }

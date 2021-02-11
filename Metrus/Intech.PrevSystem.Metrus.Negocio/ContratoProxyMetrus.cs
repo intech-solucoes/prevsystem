@@ -22,6 +22,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 
                 if(contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                    contrato.SITUACAO_PGTO = "I";
+                else
+                    contrato.SITUACAO_PGTO = "A";
             });
 
             return listaContratos;
@@ -38,6 +43,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
                 if (contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                    contrato.SITUACAO_PGTO = "I";
+                else
+                    contrato.SITUACAO_PGTO = "A";
             });
 
             return listaContratos;
@@ -54,6 +64,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
                 if (contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                    contrato.SITUACAO_PGTO = "I";
+                else
+                    contrato.SITUACAO_PGTO = "A";
             });
 
             return listaContratos;
@@ -70,6 +85,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
                 if (contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                    contrato.SITUACAO_PGTO = "I";
+                else
+                    contrato.SITUACAO_PGTO = "A";
             });
 
             return listaContratos;
@@ -86,6 +106,11 @@ namespace Intech.PrevSystem.Metrus.Negocio
 
                 if (contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
+
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                    contrato.SITUACAO_PGTO = "I";
+                else
+                    contrato.SITUACAO_PGTO = "A";
             });
 
             return listaContratos;

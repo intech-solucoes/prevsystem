@@ -12,7 +12,6 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_GRAU_INSTRUCAO { get; set; }
 		public string CD_ESTADO_CIVIL { get; set; }
 		public string SEXO { get; set; }
-		public string CD_EMP_COB { get; set; }
 		public string NATURALIDADE { get; set; }
 		public string UF_NATURALIDADE { get; set; }
 		public DateTime DT_NASCIMENTO { get; set; }
@@ -31,6 +30,7 @@ namespace Intech.PrevSystem.Entidades
 		public string CD_PAIS { get; set; }
 		public string NR_DEP_COB { get; set; }
 		public decimal? QTD_DEPENDENTE { get; set; }
+		public string CD_EMP_COB { get; set; }
 		public string PS_DOENCA_CRONICA { get; set; }
 		public string EMAIL_AUX { get; set; }
 		public string FONE_CELULAR { get; set; }

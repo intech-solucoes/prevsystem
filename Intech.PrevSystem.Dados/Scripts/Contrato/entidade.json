@@ -1,75 +1,80 @@
 {
-  "NomeTabela": "CE_CONTRATOS",
-    "ColunasExtras": [
+  "nomeTabela": "CE_CONTRATOS",
+    "colunasExtras": [
         {
-            "Nome": "DES_NUM_CONTRATO",
-            "Tipo": "string",
-            "AceitaNulo": false
+            "nome": "DES_NUM_CONTRATO",
+            "tipo": "string",
+            "aceitaNulo": false
         },
         {
-            "Nome": "DES_PARCELAS",
-            "Tipo": "string",
-            "AceitaNulo": false
+            "nome": "DES_PARCELAS",
+            "tipo": "string",
+            "aceitaNulo": false
         },
         {
-            "Nome": "NUM_SALDO_DEVEDOR",
-            "Tipo": "decimal",
-            "AceitaNulo": true
+            "nome": "NUM_SALDO_DEVEDOR",
+            "tipo": "decimal",
+            "aceitaNulo": true
         },
         {
-            "Nome": "Prestacoes",
-            "Tipo": "List<PrestacaoEntidade>",
-            "AceitaNulo": false
+            "nome": "Prestacoes",
+            "tipo": "List<PrestacaoEntidade>",
+            "aceitaNulo": false
         },
         {
-            "Nome": "Modalidade",
-            "Tipo": "ModalidadeEntidade",
-            "AceitaNulo": false
+            "nome": "Modalidade",
+            "tipo": "ModalidadeEntidade",
+            "aceitaNulo": false
         },
         {
-            "Nome": "SaldoDevedor",
-            "Tipo": "SaldoDevedorEntidade",
-            "AceitaNulo": false
+            "nome": "SaldoDevedor",
+            "tipo": "SaldoDevedorEntidade",
+            "aceitaNulo": false
         },
         {
-            "Nome": "DS_SITUACAO",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "DS_SITUACAO",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "NOME_PARTICIPANTE",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "NOME_PARTICIPANTE",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "CPF_PARTICIPANTE",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "CPF_PARTICIPANTE",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "NOME_PENSIONISTA",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "NOME_PENSIONISTA",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "CPF_PENSIONISTA",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "CPF_PENSIONISTA",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "DS_PLANO",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "DS_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "DS_NATUR",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "DS_NATUR",
+            "tipo": "string",
+            "aceitaNulo": true
         },
         {
-            "Nome": "DS_MODAL",
-            "Tipo": "string",
-            "AceitaNulo": true
+            "nome": "DS_MODAL",
+            "tipo": "string",
+            "aceitaNulo": true
+        },
+        {
+            "nome": "SITUACAO_PGTO",
+            "tipo": "string",
+            "aceitaNulo": true
         }
     ],
   "Imports": []

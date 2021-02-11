@@ -22,6 +22,6 @@ namespace Intech.PrevSystem.Entidades
 		public string CK_VALIDO { get; set; }
 		public string CK_PADRAO_ASSISTENCIAL { get; set; }
 		public string CK_PADRAO_PREVIDENCIAL { get; set; }
-		[Write(false)] public string TIPO_HERDEIRO { get; set; }
+		public string TIPO_HERDEIRO { get; set; }
 	}
 }

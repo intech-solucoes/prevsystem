@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class DadosPessoaisDAO : BaseDAO<DadosPessoaisEntidade>
 	{
+		public DadosPessoaisDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual void AtualizarDadosPessoais(int COD_ENTID, string CD_NACIONALIDADE, string CD_GRAU_INSTRUCAO, string CD_ESTADO_CIVIL, string SEXO, string NATURALIDADE, string UF_NATURALIDADE, DateTime DT_NASCIMENTO, string NU_IDENT, string ORG_EMIS_IDENT, DateTime? DT_EMIS_IDENT, string UF_EMIS_IDENT, string NU_CTPS, string SERIE_CTPS, string UF_EMIS_CTPS, string COD_BANCO_COB, string COD_AGENC_COB, string CD_TIPO_COB, string NUM_CONTA_COB, string NOME_PAI, string NOME_MAE, string NOME_CONJUGE, string CPF_CONJUGE, string EMAIL_AUX, string FONE_CELULAR)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -125,7 +134,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

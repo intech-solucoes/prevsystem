@@ -14,7 +14,11 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var deps = new DependenteProxy().BuscarPorFundacaoInscricao("01", numInscricao).ToList();
+                var deps = new DependenteProxy().BuscarPorFundacaoInscricao("01", numInscricao)
+                    .Where(x => 
+                        x.PLANO_PREVIDENCIAL == "S" ||
+                        x.PLANO_ASSISTENCIAL == "S")
+                    .ToList();
 
                 return Ok(deps);
             }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2035
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Metrus.API", "Intech.PrevSystem.Metrus.API\Intech.PrevSystem.Metrus.API.csproj", "{1A3AA0E5-84C2-448E-BFB6-F0541E2750CA}"
 EndProject
@@ -17,11 +17,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Dados", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Negocio", "..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj", "{23B3621B-E3E3-4554-962C-4155EDB9E04B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intech.PrevSystem.Metrus", "Intech.PrevSystem.Metrus\Intech.PrevSystem.Metrus.csproj", "{E59D59BA-316F-44D6-BD56-67DB59667430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intech.PrevSystem.Metrus", "Intech.PrevSystem.Metrus\Intech.PrevSystem.Metrus.csproj", "{E59D59BA-316F-44D6-BD56-67DB59667430}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{11d947ce-05e2-41db-8687-640404e96ef0}*SharedItemsImports = 13
+		..\Intech.PrevSystem.API\Intech.PrevSystem.API.projitems*{1a3aa0e5-84c2-448e-bfb6-f0541e2750ca}*SharedItemsImports = 5
+		Intech.PrevSystem.Metrus.Negocio\Intech.PrevSystem.Metrus.Negocio.projitems*{1a3aa0e5-84c2-448e-bfb6-f0541e2750ca}*SharedItemsImports = 5
 		Intech.PrevSystem.Metrus.Negocio\Intech.PrevSystem.Metrus.Negocio.projitems*{eb3a7bf4-56c9-4f10-9b01-227b39de50ad}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

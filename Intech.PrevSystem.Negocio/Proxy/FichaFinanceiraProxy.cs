@@ -37,7 +37,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
             else if(CD_PLANO == "0003")
             {
-                listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
+                var fundoContrib4 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "4");
+                var fundoContrib6 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6");
+
+                listaFundos = fundoContrib4.Concat(fundoContrib6).ToList();
             }
             
             // Apura todas as contribuições
@@ -136,7 +139,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
             else if(CD_PLANO == "0003")
             {
-                listaFundos = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6").ToList();
+                var fundoContrib4 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "4");
+                var fundoContrib6 = new FundoContribProxy().BuscarPorFundacaoPlanoFundo(CD_FUNDACAO, CD_PLANO, "6");
+
+                listaFundos = fundoContrib4.Concat(fundoContrib6).ToList();
             }
 
             // Apura todas as contribuições

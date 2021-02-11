@@ -23,10 +23,12 @@ namespace Intech.PrevSystem.Entidades
 		public string PREST_SERV { get; set; }
 		public string PARTICIPANTE { get; set; }
 		public string RECEB_BENEF { get; set; }
+		public string CD_TIPO_CORRESP { get; set; }
 		public string PATROCINADORA { get; set; }
 		public string LOCATARIO { get; set; }
+		public string COD_CUSTOD { get; set; }
 		public string SEGURADORA { get; set; }
-		public string CD_TIPO_CORRESP { get; set; }
+		public string COD_CETIP { get; set; }
 		public string FISIC_JURID { get; set; }
 		public string CPF_CGC { get; set; }
 		public string ISS { get; set; }
@@ -46,26 +48,14 @@ namespace Intech.PrevSystem.Entidades
 		public string CX_POSTAL { get; set; }
 		public string NR_END_ENTID { get; set; }
 		public string COMP_END_ENTID { get; set; }
-		public string TP_CONTA { get; set; }
-		public string COD_CUSTOD { get; set; }
 		public string COD_ISIN { get; set; }
+		public string TP_CONTA { get; set; }
 		public string AUTONOMO { get; set; }
-		public string INSCRICAO_INSS { get; set; }
-		public string ISENTO_RETENCAO { get; set; }
 		public decimal? DEPENDENTE { get; set; }
+		public string ISENTO_RETENCAO { get; set; }
+		public string INSCRICAO_INSS { get; set; }
 		public string CBO { get; set; }
 		public string INSCRICAO_ISS { get; set; }
-		public string E_MAIL_CONTATO { get; set; }
-		public string SENHA { get; set; }
-		public string SENHA_ANT1 { get; set; }
-		public string SENHA_ANT2 { get; set; }
-		public string SENHA_ANT3 { get; set; }
-		public string SENHA_ANT4 { get; set; }
-		public string SENHA_ANT5 { get; set; }
-		public string BLOQUEADA { get; set; }
-		public decimal? NUM_TENTATIVAS { get; set; }
-		public DateTime? DT_EXPIRA { get; set; }
-		public decimal? NUM_PROX_SENHA_ALT { get; set; }
 		public string OBRIG_CONTR { get; set; }
 		public string EMIT_RESP { get; set; }
 		public string SEXO { get; set; }
@@ -89,6 +79,13 @@ namespace Intech.PrevSystem.Entidades
 		public string SIT_PAT_FINANCEIRA { get; set; }
 		public string SIT_PAT_RENDIMENTOS { get; set; }
 		public string PF_ENQUADRAMENTO { get; set; }
+		public string RECEBE_EMAIL { get; set; }
+		public string SENHA { get; set; }
+		public string SENHA_ANT1 { get; set; }
+		public string SENHA_ANT2 { get; set; }
+		public string SENHA_ANT3 { get; set; }
+		public string SENHA_ANT4 { get; set; }
+		public string SENHA_ANT5 { get; set; }
 		public string POLIT_EXP { get; set; }
 		public string TIPO_PPE { get; set; }
 		public string COD_OCORRENCIA { get; set; }
@@ -96,14 +93,18 @@ namespace Intech.PrevSystem.Entidades
 		public string NUM_CONTA_SAL { get; set; }
 		public string NUM_BANCO_SAL { get; set; }
 		public string NUM_AGENCIA_SAL { get; set; }
-		public string ATIVO { get; set; }
-		public string PLANO { get; set; }
-		public string CONSOLIDADO { get; set; }
-		public int? TP_REGIME_TRIBUTACAO { get; set; }
-		public string IND_TIPO_CONTA { get; set; }
 		public string AG_RISCO { get; set; }
 		public string COD_IMP_PATRIM { get; set; }
-		public string COD_CETIP { get; set; }
+		public string ATIVO { get; set; }
+		public int? TP_REGIME_TRIBUTACAO { get; set; }
+		public string IND_TIPO_CONTA { get; set; }
+		public string E_MAIL_CONTATO { get; set; }
+		public string BLOQUEADA { get; set; }
+		public decimal? NUM_TENTATIVAS { get; set; }
+		public DateTime? DT_EXPIRA { get; set; }
+		public decimal? NUM_PROX_SENHA_ALT { get; set; }
+		public string PLANO { get; set; }
+		public string CONSOLIDADO { get; set; }
 		public string RECEB_RESGATE { get; set; }
 		public string DEBITO_AUTO { get; set; }
 		public string AUTORIZA_DEB { get; set; }
@@ -111,6 +112,5 @@ namespace Intech.PrevSystem.Entidades
 		public string IND_FATCA { get; set; }
 		public string CD_PAIS_EFINANCEIRA { get; set; }
 		public string IND_DESONERA_CPRB { get; set; }
-		public string RECEBE_EMAIL { get; set; }
 	}
 }

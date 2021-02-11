@@ -1,4 +1,6 @@
 ﻿#region Usings
+using Dapper;
+using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Metrus.Negocio;
 using Intech.PrevSystem.Negocio.Proxy;
@@ -24,7 +26,26 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var dados = new FuncionarioProxy().BuscarPorCpf(cpf).First();
+                var dados = new FuncionarioProxy().BuscarPorCpf(cpf).FirstOrDefault();
+
+                if(dados == null)
+                {
+                    var recebedor = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
+
+                    if (recebedor == null)
+                        throw new Exception("Participante/Pensionista não encontrado!");
+
+                    var dadosPensionista = new DadosPessoaisProxy().BuscarPorCodEntid(recebedor.COD_ENTID.ToString());
+
+                    return Ok(new
+                    {
+                        dadosPensionista.CPF_CGC,
+                        recebedor.NUM_MATRICULA,
+                        recebedor.NUM_INSCRICAO,
+                        recebedor.COD_ENTID,
+                        recebedor.CD_EMPRESA
+                    });
+                }
 
                 return Ok(new
                 {
@@ -40,6 +61,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpGet("buscarCodEntidPorEmpresaMatricula/{empresa}/{matricula}")]
         public ActionResult BuscarPorCpf(string empresa, string matricula)
         {
@@ -141,6 +163,66 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost("[action]")]
+        public ActionResult BuscaAmpliada(Pesquisa pesquisa)
+        {
+            try
+            {
+                var conexao = BaseDAO.CriarConexao();
+
+                string empresa = null;
+                string matricula = null;
+
+                if (!string.IsNullOrEmpty(pesquisa.EmpresaMatricula))
+                {
+                    empresa = pesquisa.EmpresaMatricula.Substring(0, 4);
+                    matricula = pesquisa.EmpresaMatricula.Substring(4, 9);
+                }
+
+                var resultadoPesquisa = conexao.Query<ResultadoPesquisa>(
+                    "SELECT      ENT.COD_ENTID AS COD_ENTID,     FUNC.NUM_INSCRICAO AS INSCRICAO,     ENT.NOME_ENTID AS NOME,     DADOS.EMAIL_AUX AS EMAIL,     DADOS.DT_NASCIMENTO,     DADOS.FONE_CELULAR,     ENT.FONE_ENTID AS FONE_FIXO,     EMPRESA.CD_EMPRESA,     ENT_EMPRESA.NOME_ENTID AS NOME_EMPRESA,     ENT.CPF_CGC AS CPF FROM EE_ENTIDADE ENT INNER JOIN CS_FUNCIONARIO FUNC ON FUNC.COD_ENTID = ENT.COD_ENTID INNER JOIN CS_DADOS_PESSOAIS DADOS ON DADOS.COD_ENTID = ENT.COD_ENTID INNER JOIN TB_EMPRESA EMPRESA ON EMPRESA.CD_EMPRESA = FUNC.CD_EMPRESA INNER JOIN EE_ENTIDADE ENT_EMPRESA ON ENT_EMPRESA.COD_ENTID = EMPRESA.COD_ENTID WHERE (ENT.NOME_ENTID LIKE '%' || :NOME || '%' OR :NOME IS NULL)   AND (DADOS.EMAIL_AUX = :EMAIL OR :EMAIL IS NULL)   AND (DADOS.DT_NASCIMENTO = :DT_NASCIMENTO OR :DT_NASCIMENTO IS NULL)   AND (DADOS.FONE_CELULAR = :CELULAR OR :CELULAR IS NULL)   AND (ENT.FONE_ENTID = :FIXO OR :FIXO IS NULL)   AND (FUNC.CD_EMPRESA = :EMPRESA OR :EMPRESA IS NULL)   AND (FUNC.NUM_MATRICULA = :MATRICULA OR :MATRICULA IS NULL) ORDER BY COD_ENTID",
+                    new { 
+                        NOME = pesquisa.Nome,
+                        EMAIL = pesquisa.Email,
+                        DT_NASCIMENTO = pesquisa.DataNascimento,
+                        CELULAR = pesquisa.FoneCelular,
+                        FIXO = pesquisa.FoneFixo,
+                        EMPRESA = empresa,
+                        MATRICULA = matricula
+                    });
+
+                return Json(resultadoPesquisa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+
+    public class Pesquisa
+    {
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public DateTime? DataNascimento { get; set; }
+        public string FoneCelular { get; set; }
+        public string FoneFixo { get; set; }
+        public string EmpresaMatricula { get; set; }
+    }
+
+    public class ResultadoPesquisa
+    {
+        public string COD_ENTID { get; set; }
+        public string INSCRICAO { get; set; }
+        public string NOME { get; set; }
+        public string EMAIL { get; set; }
+        public DateTime DT_NASCIMENTO { get; set; }
+        public string FONE_CELULAR { get; set; }
+        public string FONE_FIXO { get; set; }
+        public string CD_EMPRESA { get; set; }
+        public string NOME_EMPRESA { get; set; }
+        public string CPF { get; set; }
     }
 
     public class GSMResult

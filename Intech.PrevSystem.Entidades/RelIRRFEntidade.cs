@@ -29,5 +29,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? CD_NATUREZA { get; set; }
 		public string NUM_MATRICULA { get; set; }
 		public string CONTRATOS_PAGOS { get; set; }
+		[Write(false)] public DateTime DT_REF_ANT { get; set; }
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace Intech.PrevSystem.Entidades.Outros
+﻿using System;
+
+namespace Intech.PrevSystem.Entidades.Outros
 {
     public class ExtratoEntidade
     {
@@ -15,5 +17,7 @@
         public decimal SaldoAtualizadoEmReais { get; set; }
         public decimal ValorIndice { get; set; }
         public string MesDes { get; set; }
+        public DateTime DataAtual { get; set; }
+        public decimal ValorAtual { get; set; }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "nomeTabela": "GB_MOV_RUBRICAS_CALC",
+  "colunasExtras": [
+    {
+      "nome": "DS_RUBRICA",
+      "tipo": "string"
+    },
+    {
+      "nome": "RUBRICA_PROV_DESC",
+      "tipo": "string"
+    },
+    {
+      "nome": "DS_TIPO_FOLHA",
+      "tipo": "string"
+    },
+    {
+      "nome": "DS_ESPECIE",
+      "tipo": "string"
+    }
+  ]
+}

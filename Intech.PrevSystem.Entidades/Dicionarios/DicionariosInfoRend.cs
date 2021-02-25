@@ -11,8 +11,8 @@ namespace Intech.PrevSystem.Entidades.Dicionarios
             new KeyValuePair<string, string>("3", "RENDIMENTOS TRIBUTÁVEIS, DEDUÇÕES E IMPOSTO RETIDO NA FONTE"),
             new KeyValuePair<string, string>("4", "RENDIMENTOS ISENTOS E NÃO TRIBUTÁVEIS"),
             new KeyValuePair<string, string>("5", "RENDIMENTOS SUJEITOS À TRIBUTAÇÃO EXCLUSIVA (RENDIMENTO LÍQUIDO)"),
-            new KeyValuePair<string, string>("6", "RENDIMENTOS RECEBIDOS ACUMULADAMENTE"),
-            new KeyValuePair<string, string>("7", "INFORMAÇÕES COMPLEMENTARES")
+            new KeyValuePair<string, string>("6", "INFORMAÇÕES COMPLEMENTARES"),
+            new KeyValuePair<string, string>("7", "RENDIMENTOS RECEBIDOS ACUMULADAMENTE")
         };
 
         public static List<KeyValuePair<string, string>> Linhas = new List<KeyValuePair<string, string>>
@@ -31,14 +31,15 @@ namespace Intech.PrevSystem.Entidades.Dicionarios
             new KeyValuePair<string, string>("407", "Outros"),
             new KeyValuePair<string, string>("501", "Décimo Terceiro Salário"),
             new KeyValuePair<string, string>("502", "Imposto sobre a renda retida na fonte sobre o 13º salário"),
-            new KeyValuePair<string, string>("503", "Outros"),
-            new KeyValuePair<string, string>("601", "Total dos rendimentos tributáveis (inclusive férias e décimo terceiro salário"),
-            new KeyValuePair<string, string>("602", "Exclusão: Despesas com a ação judicial"),
-            new KeyValuePair<string, string>("603", "Dedução: Contribuição previdenciária oficial"),
-            new KeyValuePair<string, string>("604", "Dedução: Pensão Alimentícia (preencher também o quadro 7)"),
-            new KeyValuePair<string, string>("605", "Imposto sobre a renda retido na fonte"),
-            new KeyValuePair<string, string>("606", "Rendimentos isentos de pensão, proventos de aposentadoria ou reforma por moléstia grave ou aposentadoria ou reforma por acidente de serviço"),
-            new KeyValuePair<string, string>("701", "Informações Complementares")
+            new KeyValuePair<string, string>("503", "Outros"),,
+            new KeyValuePair<string, string>("601", "Informações Complementares")
+            new KeyValuePair<string, string>("701", "Total dos rendimentos tributáveis (inclusive férias e décimo terceiro salário"),
+            new KeyValuePair<string, string>("702", "Exclusão: Despesas com a ação judicial"),
+            new KeyValuePair<string, string>("703", "Dedução: Contribuição previdenciária oficial"),
+            new KeyValuePair<string, string>("704", "Dedução: Pensão Alimentícia (preencher também o quadro 7)"),
+            new KeyValuePair<string, string>("705", "Imposto sobre a renda retido na fonte"),
+            new KeyValuePair<string, string>("706", "Rendimentos isentos de pensão, proventos de aposentadoria ou reforma por moléstia grave ou aposentadoria ou reforma por acidente de serviço"),
+            new KeyValuePair<string, string>("708", "Quantidade de meses")
         };
     }
 }

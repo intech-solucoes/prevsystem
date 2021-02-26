@@ -146,5 +146,41 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return informe;
         }
+        
+        public HeaderInfoRendEntidade BuscarPorOid(decimal referencia, decimal? seqRecebedor = null)
+        {
+            HeaderInfoRendEntidade informe;
+
+            informe = BuscarPorOidHeaderInfoHend(referencia).First();
+
+            informe.Grupos = new List<InfoRendGrupoEntidade>();
+
+            var infoRend = new InfoRendProxy().BuscarPorOidHeader(informe.OID_HEADER_INFO_REND).ToList();
+
+            infoRend
+                .GroupBy(x => new { x.COD_GRUPO, x.DES_GRUPO })
+                .ToList()
+                .ForEach(item =>
+                {
+                    var grupo = new InfoRendGrupoEntidade
+                    {
+                        COD_GRUPO = item.Key.COD_GRUPO,
+                        DES_GRUPO = item.Key.DES_GRUPO,
+                        Itens = item.ToList()
+                    };
+
+                    grupo.Itens.ForEach(grupoItem =>
+                    {
+                        if (!string.IsNullOrEmpty(grupoItem.TXT_QUADRO))
+                            grupoItem.DES_INFO_REND = grupoItem.TXT_QUADRO;
+                        else
+                            grupoItem.DES_INFO_REND = DicionariosInfoRend.Linhas.SingleOrDefault(x => x.Key == grupoItem.COD_LINHA).Value;
+                    });
+
+                    informe.Grupos.Add(grupo);
+                });
+
+            return informe;
+        }
     }
 }

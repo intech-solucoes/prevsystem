@@ -22,5 +22,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOM_EMPRESA { get; set; }
 		[Write(false)] public string CNPJ_EMPRESA { get; set; }
 		[Write(false)] public List<InfoRendGrupoEntidade> Grupos { get; set; }
+		[Write(false)] public string ANO_EXERCICIO_DESC_NATUREZA { get; set; }
 	}
 }

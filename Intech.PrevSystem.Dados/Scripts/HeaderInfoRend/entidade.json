@@ -20,6 +20,11 @@
             "nome": "Grupos",
             "tipo": "List<InfoRendGrupoEntidade>",
             "aceitaNulo": false
+        },
+        {
+            "nome": "ANO_EXERCICIO_DESC_NATUREZA",
+            "tipo": "string",
+            "aceitaNulo": true
         }
     ]
 }

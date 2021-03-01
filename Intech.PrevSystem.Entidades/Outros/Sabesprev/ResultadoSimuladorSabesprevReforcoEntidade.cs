@@ -26,5 +26,7 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public decimal ValorRendaDefinidaMaximo { get; set; }
         public string MensagemRendaDefinida { get; set; }
         public List<SaldoRestanteEntidade> SaldosRestantes { get; set; }
+        public int IdadeRendaDefinidaFimMinimo { get; set; }
+        public int IdadeRendaDefinidaFimMax { get; set; }
     }
 }

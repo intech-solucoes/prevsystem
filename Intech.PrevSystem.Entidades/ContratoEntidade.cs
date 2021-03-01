@@ -140,5 +140,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string DS_NATUR { get; set; }
 		[Write(false)] public string DS_MODAL { get; set; }
 		[Write(false)] public string SITUACAO_PGTO { get; set; }
-	}
+		[Write(false)] public List<SaldoDevedorEntidade> ListaSaldosDevedores { get; set; }
+    }
 }

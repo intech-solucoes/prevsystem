@@ -75,7 +75,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
             else
                 processos = base.BuscarPorFundacaoEmpresaMatriculaPlanoNaoEncerrado(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO);
 
-
             var situacoesBloqueadas = new string[] { "03", "04", "12", "20" };
             processos = processos.Where(x => !situacoesBloqueadas.Contains(x.CD_SITUACAO)).ToList();
 

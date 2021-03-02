@@ -27,8 +27,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? SALDO_ANTERIOR { get; set; }
 		public string TIPO_CALCULO { get; set; }
 		public string CD_SITUACAO { get; set; }
-		public string CD_CARGO { get; set; }
-		public string CD_NIVEL_SALARIAL { get; set; }
 		public decimal? VL_PERC_RESGATE { get; set; }
 		public decimal? VL_PARC_RESGATE { get; set; }
 		public decimal? VL_FATOR_REDUTOR { get; set; }
@@ -38,6 +36,15 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_INI_REVISAO { get; set; }
 		public decimal? FATOR_VINCULACAO { get; set; }
 		public decimal? FATOR_ALIQUOTA { get; set; }
+		public string CD_CARGO { get; set; }
+		public string CD_NIVEL_SALARIAL { get; set; }
+		public string PROC_REVISAO { get; set; }
+		public DateTime? DT_ULTIMA_REVISAO { get; set; }
+		public decimal? SALDO_RISCO { get; set; }
+		public DateTime? DT_PREV_PAGTO_SAQUE { get; set; }
+		public DateTime? DT_PAGTO_SAQUE { get; set; }
+		public string CD_CALC_REGRESSIVO { get; set; }
+		public decimal? VL_PMP { get; set; }
 		public string CD_OPCAO_RECEB_RENDA { get; set; }
 		public string CD_OPCAO_RECEB_BP { get; set; }
 		public string CD_OPCAO_RECEB_BAV { get; set; }
@@ -50,13 +57,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PRAZO_RECEB { get; set; }
 		public DateTime? DT_ULTIMO_PROCESSAMENTO { get; set; }
 		public decimal? CD_TIPO_CALC_CD { get; set; }
-		public string PROC_REVISAO { get; set; }
-		public DateTime? DT_ULTIMA_REVISAO { get; set; }
-		public decimal? SALDO_RISCO { get; set; }
-		public DateTime? DT_PREV_PAGTO_SAQUE { get; set; }
-		public DateTime? DT_PAGTO_SAQUE { get; set; }
-		public string CD_CALC_REGRESSIVO { get; set; }
-		public decimal? VL_PMP { get; set; }
 		public string CD_PLANO_SALARIAL { get; set; }
 		public string TIPO_PAGTO_TAXA { get; set; }
 		public string ID_COMP_LIQUID { get; set; }

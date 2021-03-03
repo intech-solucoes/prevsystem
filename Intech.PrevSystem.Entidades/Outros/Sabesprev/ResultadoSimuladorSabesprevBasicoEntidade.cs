@@ -14,7 +14,7 @@ namespace Intech.PrevSystem.Entidades.Outros.Sabesprev
         public List<SimulacaoSabesprevBasico> Simulacoes { get; set; }
         public decimal SalarioRealBeneficio { get; set; }
         public decimal BeneficioPrevidenciario { get; set; }
-        public int ServicoCreditado { get; set; }
+        public decimal ServicoCreditado { get; set; }
         public decimal BeneficioMensalExibir { get; set; }
         public decimal BeneficioMinimoExibir { get; set; }
         public decimal BeneficioMensal { get; set; }

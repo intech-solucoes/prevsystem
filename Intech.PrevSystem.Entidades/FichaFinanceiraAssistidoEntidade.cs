@@ -38,5 +38,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string DS_TIPO_FOLHA { get; set; }
 		[Write(false)] public string DS_PLANO { get; set; }
 		[Write(false)] public bool PREVIA { get; set; }
-    }
+	}
 }

@@ -45,9 +45,7 @@ namespace Intech.PrevSystem.Entidades.Outros
 
         public List<PrestacaoEntidade> Prestacoes { get; set; }
         public List<PrestacaoParcialEntidade> PrestacoesParciais { get; set; }
-        public List<TaxaEncargoPlanoEntidade> taxaEncargo { get; set; }
         public SaldoDevedorEntidade SaldoDevedor { get; set; }
-        public List<TaxaConcessaoPlanoEntidade> taxaConcessao { get; set; }
 
         public string CodigoPlano { get; set; }
 
@@ -74,6 +72,10 @@ namespace Intech.PrevSystem.Entidades.Outros
         public DateTime DataInscricao { get; set; }
         public string FormaCredito { get; set; }
         public decimal Carencia { get; set; }
+        public TaxaConcessaoPlanoEntidade TaxasConcessaoPlano { get; set; }
+        public TaxasConcessaoEntidade TaxaConcessao { get; set; }
+        public TaxaEncargoPlanoEntidade TaxasEncargoPlano { get; set; }
+        public TaxasEncargosEntidade TaxaEncargo { get; set; }
 
         public ContratoDisponivelEntidade() { }
 

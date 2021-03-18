@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -113,7 +113,6 @@ namespace Intech.PrevSystem.Entidades
 		public string ALTERA_DADOS_BANCARIOS_DEV { get; set; }
 		public decimal? VL_ADITIVO_CONCESSAO { get; set; }
 		public decimal? VL_ADITIVO_PRESTACAO { get; set; }
-		public int ID_PARAM { get; set; }
 		public string TIPO_FECHAMENTO_CE { get; set; }
 		public string GERAR_PR_EXP_MOV { get; set; }
 		public string ATUALIZA_PLANOS_CONTRATO { get; set; }

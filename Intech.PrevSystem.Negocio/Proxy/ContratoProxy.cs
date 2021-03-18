@@ -4,6 +4,7 @@ using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq; 
 #endregion
 
@@ -11,6 +12,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class ContratoProxy : ContratoDAO
     {
+        public ContratoProxy(IDbTransaction tx = null) : base(tx) { }
+
         public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoPlanoInscricaoSituacao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, CD_SITUACAO).ToList();

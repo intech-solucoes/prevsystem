@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class TaxasEncargosDAO : BaseDAO<TaxasEncargosEntidade>
 	{
+		public TaxasEncargosDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<TaxasEncargosEntidade> BuscarPorFundacaoEmpresaModalidadeNatureza(string CD_FUNDACAO, string CD_EMPRESA, decimal CD_MODAL, decimal CD_NATUR)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

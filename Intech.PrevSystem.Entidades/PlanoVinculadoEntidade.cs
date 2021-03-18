@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -21,7 +21,6 @@ namespace Intech.PrevSystem.Entidades
 		public DateTime? DT_PRIMEIRA_CONTRIB { get; set; }
 		public DateTime? DT_VENC_CARENCIA { get; set; }
 		public string CD_SIT_INSCRICAO { get; set; }
-		public DateTime? DT_TERMINO_PREST { get; set; }
 		public string TIPO_IRRF { get; set; }
 		public int? IDADE_RECEB_BENEF { get; set; }
 		public string CD_TIPO_COBRANCA { get; set; }

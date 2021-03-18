@@ -1,6 +1,7 @@
 ﻿#region Usings
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
@@ -11,6 +12,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class PlanoVinculadoProxy : PlanoVinculadoDAO
     {
+        public PlanoVinculadoProxy(IDbTransaction tx = null) : base(tx) { }
+
         public override List<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
         {
             var planos = base.BuscarPorFundacaoEmpresaMatricula(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA).ToList();

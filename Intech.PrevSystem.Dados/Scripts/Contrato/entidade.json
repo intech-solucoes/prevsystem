@@ -1,81 +1,84 @@
 {
   "nomeTabela": "CE_CONTRATOS",
-    "colunasExtras": [
-        {
-            "nome": "DES_NUM_CONTRATO",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DES_PARCELAS",
-            "tipo": "string",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "NUM_SALDO_DEVEDOR",
-            "tipo": "decimal",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "Prestacoes",
-            "tipo": "List<PrestacaoEntidade>",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Modalidade",
-            "tipo": "ModalidadeEntidade",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "SaldoDevedor",
-            "tipo": "SaldoDevedorEntidade",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "DS_SITUACAO",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "NOME_PARTICIPANTE",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "CPF_PARTICIPANTE",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "NOME_PENSIONISTA",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "CPF_PENSIONISTA",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_PLANO",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_NATUR",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_MODAL",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "SITUACAO_PGTO",
-            "tipo": "string",
-            "aceitaNulo": true
-        }
-    ],
-  "Imports": []
+  "colunasExtras": [
+    {
+      "nome": "DES_NUM_CONTRATO",
+      "tipo": "string",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "DES_PARCELAS",
+      "tipo": "string",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "NUM_SALDO_DEVEDOR",
+      "tipo": "decimal",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "Prestacoes",
+      "tipo": "List<PrestacaoEntidade>",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "Modalidade",
+      "tipo": "ModalidadeEntidade",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "SaldoDevedor",
+      "tipo": "SaldoDevedorEntidade",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "DS_SITUACAO",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "NOME_PARTICIPANTE",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "CPF_PARTICIPANTE",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "NOME_PENSIONISTA",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "CPF_PENSIONISTA",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_PLANO",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_NATUR",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_MODAL",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "SITUACAO_PGTO",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "ListaSaldosDevedores",
+      "tipo": "List<SaldoDevedorEntidade>"
+    }
+  ]
 }

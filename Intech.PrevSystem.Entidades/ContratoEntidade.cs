@@ -64,8 +64,8 @@ namespace Intech.PrevSystem.Entidades
 		public int? COD_CONVENIO { get; set; }
 		public string CD_FORMA_PAGTO { get; set; }
 		public decimal? VL_RESERVA_POUPANCA { get; set; }
-		public DateTime? DT_PREST_ATUALIZADA { get; set; }
 		public decimal? VL_CORRECAO_SALDO_QUITACAO { get; set; }
+		public DateTime? DT_PREST_ATUALIZADA { get; set; }
 		public decimal? VL_ACRESCIMO_QUITACAO { get; set; }
 		public decimal? TP_COBRANCA_PREST { get; set; }
 		public decimal? VL_TX_SEGURO_ESPECIAL { get; set; }
@@ -101,8 +101,8 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? VL_INSS { get; set; }
 		public decimal? VL_NOVOS_REC { get; set; }
 		public decimal? VL_IOF_NOVOS_REC { get; set; }
-		public decimal? VL_SALDO_DEV_NOV { get; set; }
 		public decimal? VL_IOF_COMPLEMENTAR { get; set; }
+		public decimal? VL_SALDO_DEV_NOV { get; set; }
 		public decimal? VL_IOF_COMPL_QUIT { get; set; }
 		public decimal? VL_ADM_PRORATA { get; set; }
 		public DateTime? DT_ADITIVO { get; set; }
@@ -141,5 +141,5 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string DS_MODAL { get; set; }
 		[Write(false)] public string SITUACAO_PGTO { get; set; }
 		[Write(false)] public List<SaldoDevedorEntidade> ListaSaldosDevedores { get; set; }
-    }
+	}
 }

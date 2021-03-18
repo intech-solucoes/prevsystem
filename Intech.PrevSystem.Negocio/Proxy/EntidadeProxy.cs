@@ -1,10 +1,13 @@
 ﻿using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
+using System.Data;
 
 namespace Intech.PrevSystem.Negocio.Proxy
 {
 	public class EntidadeProxy : EntidadeDAO
-	{
+    {
+        public EntidadeProxy(IDbTransaction tx = null) : base(tx) { }
+
         public override long Inserir(EntidadeEntidade entidade)
         {
             base.Insert(

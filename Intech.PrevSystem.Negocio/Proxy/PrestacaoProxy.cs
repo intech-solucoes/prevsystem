@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
@@ -7,6 +8,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class PrestacaoProxy : PrestacaoDAO
     {
+        public PrestacaoProxy(IDbTransaction tx = null) : base(tx) { }
+
         public dynamic BuscarResumoPorFundacaoContrato(string CD_FUNDACAO, decimal ANO_CONTRATO, decimal NUM_CONTRATO)
         {
             var prestacoes = base.BuscarPorFundacaoContrato(CD_FUNDACAO, ANO_CONTRATO, NUM_CONTRATO)

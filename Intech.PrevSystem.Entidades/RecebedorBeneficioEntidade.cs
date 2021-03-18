@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -34,9 +34,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PERC_RATEIO_INDIVIDUAL { get; set; }
 		public string COD_DESTINO_CH { get; set; }
 		public string NUM_INSCRICAO_RECEB { get; set; }
-		public decimal? QTD_DEP_IRRF { get; set; }
-		public decimal? PERC_CONTRIB_ASSIST { get; set; }
-		public string CD_SEGURADORA { get; set; }
 		public string PAGA_CONTRIB_PATRONAL { get; set; }
 		public decimal? PERC_CONTRIB_PATRONAL { get; set; }
 		public string DESC_ANUIDADE { get; set; }
@@ -48,8 +45,11 @@ namespace Intech.PrevSystem.Entidades
 		public string PIS { get; set; }
 		public string SEXO { get; set; }
 		public string CD_ESTADO_CIVIL { get; set; }
-		public int? CREDOR_IRRF_JUDICIAL { get; set; }
+		public decimal? QTD_DEP_IRRF { get; set; }
+		public decimal? PERC_CONTRIB_ASSIST { get; set; }
+		public string CD_SEGURADORA { get; set; }
 		public string NUM_MATRICULA_EXTERNA { get; set; }
+		public int? CREDOR_IRRF_JUDICIAL { get; set; }
 		public string NUM_PROCESSO_PREV { get; set; }
 		public string ABATE_IDOSO_IRRF { get; set; }
 		public decimal? PERC_ISENCAO_IRRF { get; set; }

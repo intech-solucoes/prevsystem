@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
+using Intech.PrevSystem.Entidades.Outros;
 
 namespace Intech.PrevSystem.Entidades
 {
@@ -27,5 +28,11 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_IPV6 { get; set; }
 		public string TXT_DISPOSITIVO { get; set; }
 		public string TXT_ORIGEM { get; set; }
+		public string TXT_IPV4_EXTERNO { get; set; }
+		[Write(false)] public string DES_FUNCIONALIDADE { get; set; }
+		[Write(false)] public string DES_SITUACAO { get; set; }
+		[Write(false)] public string NOME_ENTID { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
+		[Write(false)] public List<ItemTransacaoEntidade> ListaTransacao { get; set; }
 	}
 }

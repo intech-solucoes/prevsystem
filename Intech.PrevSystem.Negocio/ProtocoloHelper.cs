@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Entidades.Outros;
 using Intech.PrevSystem.Negocio.Proxy;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,7 @@ namespace Intech.PrevSystem.Negocio
             return protocoloInserido.COD_IDENTIFICADOR;
         }
 
-        public static string MontarConteudo(List<ItemTransacao> listaConteudo)
+        public static string MontarConteudo(List<ItemTransacaoEntidade> listaConteudo)
         {
             var sb = new StringBuilder();
 
@@ -69,17 +70,19 @@ namespace Intech.PrevSystem.Negocio
             return sb.ToString();
         }
 
-        public static List<ItemTransacao> BuscarConteudo(string transacao)
+        public static List<ItemTransacaoEntidade> BuscarConteudo(string transacao)
         {
-            var listaTransacao = new List<ItemTransacao>();
+            var listaTransacao = new List<ItemTransacaoEntidade>();
 
             if (listaTransacao != null && listaTransacao.Count > 0)
                 listaTransacao.Clear();
 
+            transacao = transacao.Replace("\\n", "\n").Replace("\\r", "\r");
+
             foreach (var linha in transacao.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var item = linha.Split('|');
-                listaTransacao.Add(new ItemTransacao(item[0], item[1]));
+                listaTransacao.Add(new ItemTransacaoEntidade(item[0], item[1]));
             }
 
             return listaTransacao;
@@ -92,17 +95,5 @@ namespace Intech.PrevSystem.Negocio
         }
     }
 
-    public class ItemTransacao
-    {
-        public string Titulo { get; set; }
-        public string Valor { get; set; }
-
-        public ItemTransacao() { }
-
-        public ItemTransacao(string titulo, string valor)
-        {
-            Titulo = titulo;
-            Valor = valor;
-        }
-    }
+    
 }

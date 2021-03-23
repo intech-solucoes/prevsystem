@@ -1,5 +1,25 @@
 {
-  "NomeTabela": "WEB_PROTOCOLO",
-  "ColunasExtras": [],
-  "Imports": []
+  "nomeTabela": "WEB_PROTOCOLO",
+  "colunasExtras": [
+    {
+      "nome": "DES_FUNCIONALIDADE",
+      "tipo": "string"
+    },
+    {
+      "nome": "DES_SITUACAO",
+      "tipo": "string"
+    },
+    {
+      "nome": "NOME_ENTID",
+      "tipo": "string"
+    },
+    {
+      "nome": "DS_PLANO",
+      "tipo": "string"
+    },
+    {
+      "nome": "ListaTransacao",
+      "tipo": "List<ItemTransacaoEntidade>"
+    }
+  ]
 }

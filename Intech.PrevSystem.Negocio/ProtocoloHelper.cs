@@ -30,32 +30,29 @@ namespace Intech.PrevSystem.Negocio
                 conteudo2 = conteudo.Substring(4000);
             }
 
-            var protocolo = COD_IDENTIFICADOR != null ? COD_IDENTIFICADOR :
-                NUM_MATRICULA.TrimStart('0') + DateTime.Now.ToString("ddMMyyyyhhmmss");
+            var protocolo = COD_IDENTIFICADOR ?? NUM_MATRICULA.TrimStart('0') + DateTime.Now.ToString("ddMMyyyyhhmmss");
 
-            var protocoloEntidade = new ProtocoloEntidade
-            {
-                OID_FUNCIONALIDADE = OID_FUNCIONALIDADE,
-                COD_IDENTIFICADOR = protocolo,
-                CD_FUNDACAO = CD_FUNDACAO,
-                CD_EMPRESA = CD_EMPRESA,
-                CD_PLANO = CD_PLANO,
-                NUM_MATRICULA = NUM_MATRICULA,
-                SEQ_RECEBEDOR = SEQ_RECEBEDOR,
-                DTA_SOLICITACAO = DateTime.Now,
-                TXT_TRANSACAO = conteudo1,
-                TXT_TRANSACAO2 = conteudo2,
-                TXT_USUARIO_SOLICITACAO = TXT_USUARIO_SOLICITACAO,
-                TXT_USUARIO_EFETIVACAO = TXT_USUARIO_EFETIVACAO,
-                TXT_IPV4 = TXT_IPV4,
-                TXT_IPV6 = TXT_IPV6,
-                TXT_DISPOSITIVO = TXT_DISPOSITIVO,
-                TXT_ORIGEM = TXT_ORIGEM,
-            };
-            var oidProtocolo = proxyProtocolo.Inserir(protocoloEntidade);
-            var protocoloInserido = proxyProtocolo.BuscarPorChave(oidProtocolo);
+            proxyProtocolo.Insert(
+                OID_FUNCIONALIDADE,
+                protocolo,
+                CD_FUNDACAO,
+                CD_EMPRESA,
+                CD_PLANO,
+                NUM_MATRICULA,
+                SEQ_RECEBEDOR,
+                DateTime.Now,
+                null,
+                null,
+                conteudo1,
+                conteudo2,
+                TXT_USUARIO_SOLICITACAO,
+                TXT_USUARIO_EFETIVACAO,
+                TXT_IPV4,
+                TXT_IPV6,
+                TXT_DISPOSITIVO,
+                TXT_ORIGEM);
 
-            return protocoloInserido.COD_IDENTIFICADOR;
+            return protocolo;
         }
 
         public static string MontarConteudo(List<ItemTransacaoEntidade> listaConteudo)
@@ -82,7 +79,9 @@ namespace Intech.PrevSystem.Negocio
             foreach (var linha in transacao.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var item = linha.Split('|');
-                listaTransacao.Add(new ItemTransacaoEntidade(item[0], item[1]));
+
+                if(item.Length > 1)
+                    listaTransacao.Add(new ItemTransacaoEntidade(item[0], item[1]));
             }
 
             return listaTransacao;

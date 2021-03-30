@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class LGPDConsentimentoDAO : BaseDAO<LGPDConsentimentoEntidade>
 	{
+		public LGPDConsentimentoDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<LGPDConsentimentoEntidade> BuscarPorCPF(string CPF)
 		{
 			try
@@ -23,7 +26,26 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<LGPDConsentimentoEntidade> BuscarPorCPFTextoOrigem(string CPF, string TXT_ORIGEM)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM", new { CPF, TXT_ORIGEM }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF AND TXT_ORIGEM=:TXT_ORIGEM", new { CPF, TXT_ORIGEM }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

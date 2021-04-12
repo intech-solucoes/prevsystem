@@ -20,6 +20,14 @@
     {
       "nome": "ListaTransacao",
       "tipo": "List<ItemTransacaoEntidade>"
+    },
+    {
+      "nome": "DS_DTA_SOLICITACAO",
+      "tipo": "string"
+    },
+    {
+      "nome": "DS_DTA_EFETIVACAO",
+      "tipo": "string"
     }
   ]
 }

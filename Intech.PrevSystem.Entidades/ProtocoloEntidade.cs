@@ -32,5 +32,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOME_ENTID { get; set; }
 		[Write(false)] public string DS_PLANO { get; set; }
 		[Write(false)] public List<ItemTransacaoEntidade> ListaTransacao { get; set; }
+		[Write(false)] public string DS_DTA_SOLICITACAO { get; set; }
+		[Write(false)] public string DS_DTA_EFETIVACAO { get; set; }
 	}
 }

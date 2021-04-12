@@ -41,7 +41,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 return Json(new ContratoProxyMetrus().BuscarPorFundacaoEmpresaInscricao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO));
             }
@@ -56,7 +57,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 return Json(new ContratoProxyMetrus().BuscarPorFundacaoEmpresaPlanoInscricao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, cdPlano, funcionario.NUM_INSCRICAO));
             }
@@ -71,7 +73,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 return Json(new ContratoProxyMetrus().BuscarPorFundacaoEmpresaInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, funcionario.NUM_INSCRICAO, situacao));
             }
@@ -86,7 +89,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 return Json(new ContratoProxyMetrus().BuscarPorFundacaoEmpresaPlanoInscricaoSituacao(funcionario.CD_FUNDACAO, funcionario.CD_EMPRESA, cdPlano, funcionario.NUM_INSCRICAO, situacao));
             }
@@ -105,7 +109,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 return Json(new PrestacaoProxy().BuscarResumoPorFundacaoContrato(funcionario.CD_FUNDACAO, anoContrato, numContrato));
             }
@@ -124,8 +129,9 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
-                
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
+
                 var planos = new PlanoVinculadoProxyMetrus().BuscarPorFundacaoEmpresaMatriculaComModalidades(funcionario);
 
                 // ------------
@@ -191,7 +197,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             try
             {
                 DateTime dtCredito = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
                 var concessao = ConcessaoMetrus.ObtemConcessao(funcionario, cdPlano, cdNatur, 1, dtCredito, DateTime.Now);
 
@@ -208,7 +215,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(dados.CodEntid).Funcionario;
                 var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.Concessao, dados.CdPlano, dados.CD_MODAL, dados.CD_NATUR, dados.DataCredito, dados.ValorSolicitado, dados.Carencia);
 
                 if (contratosDisponiveis.Count > 0)
@@ -230,7 +238,8 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             try
             {
                 throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
-                var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
+                var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(dados.CodEntid).Funcionario;
                 return Json(new
                 {
                     AnoNumContrato = new ContratoProxyMetrus().Contratar(funcionario, dados.Contrato, dados.Concessao, dados.SaldoDevedor)

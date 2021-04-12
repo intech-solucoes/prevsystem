@@ -26,35 +26,48 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         {
             try
             {
-                var dados = new FuncionarioProxy().BuscarPorCpf(cpf).FirstOrDefault();
+                var dados = new FuncionarioProxy().BuscarPorCpf(cpf);
+                var dadosRetorno = new List<dynamic>();
 
-                if(dados == null)
+                foreach (var func in dados)
                 {
-                    var recebedor = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
-
-                    if (recebedor == null)
-                        throw new Exception("Participante/Pensionista não encontrado!");
-
-                    var dadosPensionista = new DadosPessoaisProxy().BuscarPorCodEntid(recebedor.COD_ENTID.ToString());
-
-                    return Ok(new
+                    if (dados == null)
                     {
-                        dadosPensionista.CPF_CGC,
-                        recebedor.NUM_MATRICULA,
-                        recebedor.NUM_INSCRICAO,
-                        recebedor.COD_ENTID,
-                        recebedor.CD_EMPRESA
-                    });
+                        var recebedor = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
+                        var empresa = new EmpresaProxy().BuscarPorCodigo(recebedor.CD_EMPRESA);
+
+                        if (recebedor == null)
+                            throw new Exception("Participante/Pensionista não encontrado!");
+
+                        var dadosPensionista = new DadosPessoaisProxy().BuscarPorCodEntid(recebedor.COD_ENTID.ToString());
+
+                        dadosRetorno.Add(new
+                        {
+                            dadosPensionista.CPF_CGC,
+                            recebedor.NUM_MATRICULA,
+                            recebedor.NUM_INSCRICAO,
+                            recebedor.COD_ENTID,
+                            recebedor.CD_EMPRESA,
+                            empresa.NOME_ENTID
+                        });
+                    }
+                    else
+                    {
+                        var empresa = new EmpresaProxy().BuscarPorCodigo(func.CD_EMPRESA);
+
+                        dadosRetorno.Add(new
+                        {
+                            func.CPF_CGC,
+                            func.NUM_MATRICULA,
+                            func.NUM_INSCRICAO,
+                            func.COD_ENTID,
+                            func.CD_EMPRESA,
+                            empresa.NOME_ENTID
+                        });
+                    }
                 }
 
-                return Ok(new
-                {
-                    dados.CPF_CGC,
-                    dados.NUM_MATRICULA,
-                    dados.NUM_INSCRICAO,
-                    dados.COD_ENTID,
-                    dados.CD_EMPRESA
-                });
+                return Ok(dadosRetorno.Distinct());
             }
             catch (Exception ex)
             {

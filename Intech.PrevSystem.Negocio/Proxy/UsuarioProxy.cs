@@ -17,7 +17,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 {
     public class UsuarioProxy : UsuarioDAO
     {
-        private Exception ExceptionDadosInvalidos => new Exception("Dados inv�lidos!");
+        private Exception ExceptionDadosInvalidos => new Exception("Dados inválidos!");
 
         public override UsuarioEntidade BuscarPorLogin(string NOM_LOGIN, string PWD_USUARIO)
         {

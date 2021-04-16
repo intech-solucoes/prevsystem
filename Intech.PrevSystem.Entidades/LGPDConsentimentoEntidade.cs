@@ -17,5 +17,6 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_IPV6 { get; set; }
 		public string TXT_DISPOSITIVO { get; set; }
 		public string TXT_ORIGEM { get; set; }
+		public int? DIAS_EXPIRACAO { get; set; }
 	}
 }

@@ -1,4 +1,10 @@
 {
   "NomeTabela": "WEB_LGPD_CONSENTIMENTO",
-  "ColunasExtras": []
+  "ColunasExtras": [
+    {
+      "Nome": "DIAS_EXPIRACAO",
+      "Tipo": "int",
+      "AceitaNulo": true
+    }
+  ]
 }

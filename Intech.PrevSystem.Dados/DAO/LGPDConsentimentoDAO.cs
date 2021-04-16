@@ -49,6 +49,42 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<LGPDConsentimentoEntidade> BuscarPorCPFTextoOrigemDataExpiracao(string CPF, string TXT_ORIGEM, DateTime DataExpiracao)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM AND DTA_CONSENTIMENTO >= @DataExpiracao", new { CPF, TXT_ORIGEM, DataExpiracao }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = :=CPF AND TXT_ORIGEM = :=TXT_ORIGEM AND DTA_CONSENTIMENTO >= :=DataExpiracao", new { CPF, TXT_ORIGEM, DataExpiracao }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<LGPDConsentimentoEntidade> BuscarPorCPFDataExpiracao(string CPF, DateTime DataExpiracao)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *, DATEDIFF(DAY, @DataExpiracao, DTA_CONSENTIMENTO) AS 'DIAS_EXPIRACAO' FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF", new { CPF, DataExpiracao }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *, DATEDIFF(DAY, :=DataExpiracao, DTA_CONSENTIMENTO) AS 'DIAS_EXPIRACAO' FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = :=CPF", new { CPF, DataExpiracao }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
 		public virtual void Insert(string COD_IDENTIFICADOR, string CD_FUNDACAO, string COD_CPF, DateTime DTA_CONSENTIMENTO, string TXT_IPV4, string TXT_IPV6, string TXT_DISPOSITIVO, string TXT_ORIGEM)
 		{
 			try

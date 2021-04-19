@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
 
@@ -12,5 +12,6 @@ namespace Intech.PrevSystem.Entidades
 		public int NUM_CONTRATO { get; set; }
 		public string CD_PLANO { get; set; }
 		public DateTime? DATA_INSCRICAO { get; set; }
+		[Write(false)] public string DS_PLANO { get; set; }
 	}
 }

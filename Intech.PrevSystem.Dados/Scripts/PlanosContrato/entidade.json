@@ -1,5 +1,11 @@
 {
   "NomeTabela": "CE_PLANOS_CONTRATO",
-  "ColunasExtras": [],
+    "ColunasExtras": [
+        {
+            "nome": "DS_PLANO",
+            "tipo": "string",
+            "aceitaNulo": true
+        }
+    ],
   "Imports": []
 }

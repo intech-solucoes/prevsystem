@@ -1,7 +1,7 @@
 ﻿/*Config
     RetornaLista
     Retorno
-        -dynamic
+        -Faelce_ExtratoAssistidoCDEntidade
     Parametros
         -CD_FUNDACAO:string
         -CD_EMPRESA:string

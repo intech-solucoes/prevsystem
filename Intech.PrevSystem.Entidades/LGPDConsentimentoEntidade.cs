@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("WEB_LGPD_CONSENTIMENTO")]
@@ -17,6 +17,6 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_IPV6 { get; set; }
 		public string TXT_DISPOSITIVO { get; set; }
 		public string TXT_ORIGEM { get; set; }
-		public int? DIAS_EXPIRACAO { get; set; }
+		[Write(false)] public int? DIAS_EXPIRACAO { get; set; }
 	}
 }

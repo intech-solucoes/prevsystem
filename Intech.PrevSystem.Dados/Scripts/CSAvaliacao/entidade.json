@@ -1,0 +1,9 @@
+{
+  "nomeTabela": "CS_AVALIACAO",
+  "colunasExtras": [
+    {
+      "nome": "NUM_MATRICULA",
+      "tipo": "string"
+    }
+  ]
+}

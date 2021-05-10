@@ -4,12 +4,15 @@ using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Intech.PrevSystem.Dados.DAO
 {
 	public abstract class FichaFechamentoPrevesDAO : BaseDAO<FichaFechamentoPrevesEntidade>
 	{
+		public FichaFechamentoPrevesDAO (IDbTransaction tx = null) : base(tx) { }
+
 		public virtual List<FichaFechamentoPrevesEntidade> BuscarPorFundacaoEmpresaPlanoInscricaoTipo(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_INSCRICAO, string TIPO)
 		{
 			try
@@ -23,7 +26,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -40,7 +44,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -57,7 +62,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -74,7 +80,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -91,7 +98,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -108,7 +116,8 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 
@@ -117,15 +126,34 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT TOP 1 FF.*,                LO.DS_LOTACAO   FROM   CC_FICHA_FECHAMENTO_PREVES FF          INNER JOIN CS_FUNCIONARIO FUNC                  ON FUNC.NUM_INSCRICAO = FF.NUM_INSCRICAO          INNER JOIN TB_LOTACAO LO                  ON LO.CD_LOTACAO = FUNC.CD_LOTACAO                     AND LO.CD_EMPRESA = FUNC.CD_EMPRESA   WHERE  FF.CD_FUNDACAO = @CD_FUNDACAO         AND FF.CD_EMPRESA = @CD_EMPRESA         AND FF.CD_PLANO = @CD_PLANO         AND FF.NUM_INSCRICAO = @NUM_INSCRICAO         AND FF.IND_ANALITICO_SINTETICO = @TIPO         AND IND_PARTIC = @IND_PARTIC  ORDER  BY FF.CD_FUNDACAO,             FF.CD_EMPRESA,             FF.NUM_INSCRICAO,             FF.ANO_REF DESC,             FF.MES_REF DESC,             FF.ANO_COMP DESC,             FF.MES_COMP DESC,             FF.NUM_SEQ,             FF.IND_TIPO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
+					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT TOP 1 FF.*,                LO.DS_LOTACAO   FROM   CC_FICHA_FECHAMENTO_PREVES FF          INNER JOIN CS_FUNCIONARIO FUNC                  ON FUNC.NUM_INSCRICAO = FF.NUM_INSCRICAO          INNER JOIN TB_LOTACAO LO                  ON LO.CD_LOTACAO = FUNC.CD_LOTACAO                     AND LO.CD_EMPRESA = FUNC.CD_EMPRESA   WHERE  FF.CD_FUNDACAO = @CD_FUNDACAO         AND FF.CD_EMPRESA = @CD_EMPRESA         AND FF.CD_PLANO = @CD_PLANO         AND FF.NUM_INSCRICAO = @NUM_INSCRICAO         AND FF.IND_ANALITICO_SINTETICO = @TIPO         AND IND_PARTIC = @IND_PARTIC  	   AND IND_TIPO = 'CN'  ORDER  BY FF.CD_FUNDACAO,             FF.CD_EMPRESA,             FF.NUM_INSCRICAO,             FF.ANO_REF DESC,             FF.MES_REF DESC,             FF.ANO_COMP DESC,             FF.MES_COMP DESC,             FF.NUM_SEQ,             FF.IND_TIPO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT FF.*, LO.DS_LOTACAO FROM CC_FICHA_FECHAMENTO_PREVES  FF  INNER  JOIN CS_FUNCIONARIO   FUNC  ON FUNC.NUM_INSCRICAO=FF.NUM_INSCRICAO INNER  JOIN TB_LOTACAO   LO  ON LO.CD_LOTACAO=FUNC.CD_LOTACAO AND LO.CD_EMPRESA=FUNC.CD_EMPRESA WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.CD_EMPRESA=:CD_EMPRESA AND FF.CD_PLANO=:CD_PLANO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.IND_ANALITICO_SINTETICO=:TIPO AND IND_PARTIC=:IND_PARTIC AND ROWNUM <= 1  ORDER BY FF.CD_FUNDACAO, FF.CD_EMPRESA, FF.NUM_INSCRICAO, FF.ANO_REF DESC, FF.MES_REF DESC, FF.ANO_COMP DESC, FF.MES_COMP DESC, FF.NUM_SEQ, FF.IND_TIPO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
+					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT FF.*, LO.DS_LOTACAO FROM CC_FICHA_FECHAMENTO_PREVES  FF  INNER  JOIN CS_FUNCIONARIO   FUNC  ON FUNC.NUM_INSCRICAO=FF.NUM_INSCRICAO INNER  JOIN TB_LOTACAO   LO  ON LO.CD_LOTACAO=FUNC.CD_LOTACAO AND LO.CD_EMPRESA=FUNC.CD_EMPRESA WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.CD_EMPRESA=:CD_EMPRESA AND FF.CD_PLANO=:CD_PLANO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.IND_ANALITICO_SINTETICO=:TIPO AND IND_PARTIC=:IND_PARTIC AND IND_TIPO='CN' AND ROWNUM <= 1  ORDER BY FF.CD_FUNDACAO, FF.CD_EMPRESA, FF.NUM_INSCRICAO, FF.ANO_REF DESC, FF.MES_REF DESC, FF.ANO_COMP DESC, FF.MES_COMP DESC, FF.NUM_SEQ, FF.IND_TIPO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
 				else
 					throw new Exception("Provider não suportado!");
 			}
 			finally
 			{
-				Conexao.Close();
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual FichaFechamentoPrevesEntidade BuscarValoresPortados(string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_INSCRICAO, string TIPO, string IND_PARTIC)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT TOP 1 FF.*,                LO.DS_LOTACAO   FROM   CC_FICHA_FECHAMENTO_PREVES FF          INNER JOIN CS_FUNCIONARIO FUNC                  ON FUNC.NUM_INSCRICAO = FF.NUM_INSCRICAO          INNER JOIN TB_LOTACAO LO                  ON LO.CD_LOTACAO = FUNC.CD_LOTACAO                     AND LO.CD_EMPRESA = FUNC.CD_EMPRESA   WHERE  FF.CD_FUNDACAO = @CD_FUNDACAO         AND FF.CD_EMPRESA = @CD_EMPRESA         AND FF.CD_PLANO = @CD_PLANO         AND FF.NUM_INSCRICAO = @NUM_INSCRICAO         AND FF.IND_ANALITICO_SINTETICO = @TIPO         AND IND_PARTIC = @IND_PARTIC  	   AND IND_TIPO = 'PE'  ORDER  BY FF.CD_FUNDACAO,             FF.CD_EMPRESA,             FF.NUM_INSCRICAO,             FF.ANO_REF DESC,             FF.MES_REF DESC,             FF.ANO_COMP DESC,             FF.MES_COMP DESC,             FF.NUM_SEQ,             FF.IND_TIPO;", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.QuerySingleOrDefault<FichaFechamentoPrevesEntidade>("SELECT FF.*, LO.DS_LOTACAO FROM CC_FICHA_FECHAMENTO_PREVES  FF  INNER  JOIN CS_FUNCIONARIO   FUNC  ON FUNC.NUM_INSCRICAO=FF.NUM_INSCRICAO INNER  JOIN TB_LOTACAO   LO  ON LO.CD_LOTACAO=FUNC.CD_LOTACAO AND LO.CD_EMPRESA=FUNC.CD_EMPRESA WHERE FF.CD_FUNDACAO=:CD_FUNDACAO AND FF.CD_EMPRESA=:CD_EMPRESA AND FF.CD_PLANO=:CD_PLANO AND FF.NUM_INSCRICAO=:NUM_INSCRICAO AND FF.IND_ANALITICO_SINTETICO=:TIPO AND IND_PARTIC=:IND_PARTIC AND IND_TIPO='PE' AND ROWNUM <= 1  ORDER BY FF.CD_FUNDACAO, FF.CD_EMPRESA, FF.NUM_INSCRICAO, FF.ANO_REF DESC, FF.MES_REF DESC, FF.ANO_COMP DESC, FF.MES_COMP DESC, FF.NUM_SEQ, FF.IND_TIPO", new { CD_FUNDACAO, CD_EMPRESA, CD_PLANO, NUM_INSCRICAO, TIPO, IND_PARTIC });
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
 			}
 		}
 

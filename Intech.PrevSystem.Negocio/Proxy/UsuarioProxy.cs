@@ -124,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public string CriarAcesso(string cpf, DateTime dataNascimento, bool enviarEmail = true, bool enviarSms = false, Provedor provedor = Provedor.Zenvia)
         {
-            var Cliente = AppSettings.Get().Cliente;
+            var cliente = AppSettings.Get().Cliente;
             cpf = cpf.LimparMascara();
 
             var funcionarioProxy = new FuncionarioProxy();
@@ -198,7 +198,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 if (enviarEmail)
                 {
                     if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
-                        throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {Cliente}.");
+                        throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {cliente}.");
 
                     var email = dadosPessoais.EMAIL_AUX.Split(';')[0];
 
@@ -220,7 +220,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                     var semAnexo = new List<KeyValuePair<string, Stream>>();
                     
-                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{Cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {Cliente}: \"{senha}\"<br/><br/>OBS.: As Aspas não fazem parte da senha de acesso.", semAnexo);
+                    EnvioEmail.Enviar(config.Email, email.Trim(), $"{cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {cliente}: \"{senha}\"<br/><br/>OBS.: As Aspas não fazem parte da senha de acesso.", semAnexo);
                     
                     return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }
@@ -241,9 +241,9 @@ namespace Intech.PrevSystem.Negocio.Proxy
                             celularEscondido += dadosPessoais.FONE_CELULAR[i];
                     }
 
-                    var mensagem = $"Esta e sua nova senha da Area Restrita da {Cliente}: {senha}";
+                    var mensagem = $"Esta e sua nova senha da Area Restrita da {cliente}: {senha}";
                     var retorno = new SMS()
-                        .Enviar(provedor, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, Cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                        .Enviar(provedor, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
                             new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                             {
                                 try

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("CE_NATUREZA")]
@@ -32,9 +32,9 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? RENOVACAO_MAX_PERC { get; set; }
 		public string SITUACAO { get; set; }
 		public decimal? CD_CATEGORIA { get; set; }
-		public string ID_CONVENIO { get; set; }
 		public decimal? VL_FATOR_CALCULO { get; set; }
 		public string CONSIDERAR_LIMITE_EMPRESTIMO { get; set; }
+		public string ID_CONVENIO { get; set; }
 		public string CATEGORIA_ATIVO { get; set; }
 		public string CATEGORIA_ASSISTIDO { get; set; }
 		public string CATEGORIA_AUTOPATROCINADO { get; set; }

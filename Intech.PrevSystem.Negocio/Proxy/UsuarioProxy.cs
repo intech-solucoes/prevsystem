@@ -194,6 +194,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 // Envia e-mail com nova senha de acesso
                 var config = AppSettings.Get();
+                var celularEscondido = "";
+                var emailEscondido = "";
 
                 if (enviarEmail)
                 {
@@ -204,7 +206,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                     var showBegin = 1;
 
-                    var emailEscondido = "";
 
                     for (var i = 0; i < email.Length; i++)
                     {
@@ -221,16 +222,16 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     var semAnexo = new List<KeyValuePair<string, Stream>>();
                     
                     EnvioEmail.Enviar(config.Email, email.Trim(), $"{cliente} - Nova senha de acesso", $"Esta é sua nova senha da área Restrita {cliente}: \"{senha}\"<br/><br/>OBS.: As Aspas não fazem parte da senha de acesso.", semAnexo);
-                    
-                    return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
                 }
+
+#if !DEBUG
+
 
                 if(enviarSms)
                 {
                     if (config.SMS == null || string.IsNullOrEmpty(config.SMS.Usuario) || string.IsNullOrEmpty(config.SMS.Senha))
                         throw new Exception("Favor configurar o usu�rio e senha para envio de TOKEN via SMS");
 
-                    var celularEscondido = "";
                     var showBegin = 1;
 
                     for (var i = 0; i < dadosPessoais.FONE_CELULAR.Length; i++)
@@ -258,8 +259,16 @@ namespace Intech.PrevSystem.Negocio.Proxy
                                 }
                             }));
 
-                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido}!";
+                    
                 }
+# endif
+
+                if (enviarEmail && !enviarSms)
+                    return $"Sua nova senha foi enviada para o e-mail {emailEscondido}!";
+                else if (!enviarEmail && enviarSms)
+                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido}!";
+                else
+                    return $"Sua nova senha foi enviada via SMS para o número {celularEscondido} e para o e-mail {emailEscondido}!";
             }
 
             throw ExceptionDadosInvalidos;

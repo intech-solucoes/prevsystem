@@ -27,6 +27,7 @@ namespace Intech.PrevSystem.Entidades
 		public string TXT_IPV6 { get; set; }
 		public string TXT_DISPOSITIVO { get; set; }
 		public string TXT_ORIGEM { get; set; }
+		public string TXT_IPV4_EXTERNO { get; set; }
 		[Write(false)] public string DES_FUNCIONALIDADE { get; set; }
 		[Write(false)] public string DES_SITUACAO { get; set; }
 		[Write(false)] public string NOME_ENTID { get; set; }

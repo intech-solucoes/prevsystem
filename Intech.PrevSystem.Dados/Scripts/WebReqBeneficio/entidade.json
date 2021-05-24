@@ -1,0 +1,11 @@
+{
+  "NomeTabela": "WEB_REQ_BENEFICIO",
+  "ColunasExtras": [
+    {
+      "Nome": "TEXTO_REQ_BENEFICIO",
+      "Tipo": "string",
+      "AceitaNulo": true
+    }
+  ],
+  "Imports": []
+}

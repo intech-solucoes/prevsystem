@@ -157,6 +157,42 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<DependenteEntidade> BuscarPorFundacaoInscricaoPlanoDataAtualPeculio(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO, DateTime DT_ATUAL, string PECULIO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<DependenteEntidade>("SELECT *   FROM CS_DEPENDENTE  INNER JOIN TB_GRAU_PARENTESCO ON TB_GRAU_PARENTESCO.CD_GRAU_PARENTESCO = CS_DEPENDENTE.CD_GRAU_PARENTESCO  WHERE CD_FUNDACAO        = @CD_FUNDACAO    AND NUM_INSCRICAO      = @NUM_INSCRICAO    AND CD_PLANO           = @CD_PLANO    AND DT_VALIDADE_DEP    >= @DT_ATUAL    AND PECULIO            = @PECULIO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO, DT_ATUAL, PECULIO }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<DependenteEntidade>("SELECT * FROM CS_DEPENDENTE INNER  JOIN TB_GRAU_PARENTESCO  ON TB_GRAU_PARENTESCO.CD_GRAU_PARENTESCO=CS_DEPENDENTE.CD_GRAU_PARENTESCO WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_PLANO=:CD_PLANO AND DT_VALIDADE_DEP>=:DT_ATUAL AND PECULIO=:PECULIO", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO, DT_ATUAL, PECULIO }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<DependenteEntidade> BuscarPorFundacaoInscricaoPlanoDataAtualPlanoPrevidencial(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO, DateTime DT_ATUAL, string PLANO_PREVIDENCIAL)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<DependenteEntidade>("SELECT *   FROM CS_DEPENDENTE  INNER JOIN TB_GRAU_PARENTESCO ON TB_GRAU_PARENTESCO.CD_GRAU_PARENTESCO = CS_DEPENDENTE.CD_GRAU_PARENTESCO  WHERE CD_FUNDACAO        = @CD_FUNDACAO    AND NUM_INSCRICAO      = @NUM_INSCRICAO    AND CD_PLANO           = @CD_PLANO    AND DT_VALIDADE_DEP    >= @DT_ATUAL    AND PLANO_PREVIDENCIAL = @PLANO_PREVIDENCIAL", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO, DT_ATUAL, PLANO_PREVIDENCIAL }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<DependenteEntidade>("SELECT * FROM CS_DEPENDENTE INNER  JOIN TB_GRAU_PARENTESCO  ON TB_GRAU_PARENTESCO.CD_GRAU_PARENTESCO=CS_DEPENDENTE.CD_GRAU_PARENTESCO WHERE CD_FUNDACAO=:CD_FUNDACAO AND NUM_INSCRICAO=:NUM_INSCRICAO AND CD_PLANO=:CD_PLANO AND DT_VALIDADE_DEP>=:DT_ATUAL AND PLANO_PREVIDENCIAL=:PLANO_PREVIDENCIAL", new { CD_FUNDACAO, NUM_INSCRICAO, CD_PLANO, DT_ATUAL, PLANO_PREVIDENCIAL }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
 		public virtual List<DependenteEntidade> BuscarPorFundacaoInscricaoPlanoPlanoPrevidencialFixoOrderByGrauValidade(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_PLANO)
 		{
 			try

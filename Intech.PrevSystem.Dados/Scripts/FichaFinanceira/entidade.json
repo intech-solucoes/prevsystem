@@ -1,81 +1,95 @@
 {
-  "NomeTabela": "CC_FICHA_FINANCEIRA",
-  "ColunasExtras": [
+  "nomeTabela": "CC_FICHA_FINANCEIRA",
+  "colunasExtras": [
     {
-      "Nome": "DS_TIPO_CONTRIBUICAO",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "DS_TIPO_CONTRIBUICAO",
+      "tipo": "string",
+      "aceitaNulo": false
     },
     {
-      "Nome": "TOTAL_CONTRIB",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "TOTAL_CONTRIB",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "QTD_COTA",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "QTD_COTA",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "DES_MES_REF",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "DES_MES_REF",
+      "tipo": "string",
+      "aceitaNulo": false
     },
     {
-      "Nome": "CALC_MARGEM_CONSIG",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "COMPOE_SALDO_BENEFICIO",
+      "tipo": "string",
+      "aceitaNulo": false
     },
     {
-      "Nome": "COMPOE_SALDO_BENEFICIO",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "COD_AGRUPADOR_WEB",
+      "tipo": "string",
+      "aceitaNulo": false
     },
     {
-      "Nome": "COD_AGRUPADOR_WEB",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "DS_AGRUPADOR_WEB",
+      "tipo": "string",
+      "aceitaNulo": false
     },
     {
-      "Nome": "DS_AGRUPADOR_WEB",
-      "Tipo": "string",
-      "AceitaNulo": false
+      "nome": "VALOR_IND",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "VALOR_IND",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "COTA_TOTAL",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "COTA_TOTAL",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "SALDO_COTA",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "SALDO_COTA",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "SALDO_REAIS",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "SALDO_REAIS",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "RENTABILIDADE",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "RENTABILIDADE",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "CONTRIB_PORTABILIDADE",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "CONTRIB_PORTABILIDADE",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "QTD_COTA_RP_PORTABILIDADE",
+      "tipo": "decimal",
+      "aceitaNulo": true
     },
     {
-      "Nome": "QTD_COTA_RP_PORTABILIDADE",
-      "Tipo": "decimal",
-      "AceitaNulo": true
+      "nome": "NU_CONTA",
+      "tipo": "string"
+    },
+    {
+      "nome": "DataReferencia",
+      "tipo": "DateTime"
+    },
+    {
+      "nome": "DecimoTerceiro",
+      "tipo": "bool"
+    },
+    {
+      "nome": "DataCompetencia",
+      "tipo": "DateTime"
+    },
+    {
+      "nome": "CALC_MARGEM_CONSIG",
+      "tipo": "string"
     }
-  ],
-  "Imports": []
+  ]
 }

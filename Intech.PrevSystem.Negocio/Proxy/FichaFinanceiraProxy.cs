@@ -343,5 +343,59 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             return listaRetorno;
         }
+
+        public override List<FichaFinanceiraEntidade> BuscarPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+        {
+            var contribs = base.BuscarPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO);
+
+            foreach(var contrib in contribs)
+            {
+                ParseDatas(contrib);
+            }
+
+            return contribs;
+        }
+
+        public override List<FichaFinanceiraEntidade> BuscarUltimaPorFundacaoPlanoInscricao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO)
+        {
+            var contribs = base.BuscarUltimaPorFundacaoPlanoInscricao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO);
+
+            foreach(var contrib in contribs)
+            {
+                ParseDatas(contrib);
+            }
+
+            return contribs;
+        }
+
+        #region Métodos Auxiliares
+        private void ParseDatas(FichaFinanceiraEntidade contrib)
+        {
+            var mes = Convert.ToInt32(contrib.MES_REF);
+
+            if (mes == 13)
+            {
+                contrib.DataReferencia = new DateTime(Convert.ToInt32(contrib.ANO_REF), 12, 1);
+                contrib.DecimoTerceiro = true;
+            }
+            else
+            {
+                contrib.DataReferencia = new DateTime(Convert.ToInt32(contrib.ANO_REF), Convert.ToInt32(contrib.MES_REF), 1);
+            }
+
+            if (Convert.ToInt32(contrib.MES_COMP) == 13)
+            {
+                contrib.DataCompetencia = new DateTime(Convert.ToInt32(contrib.ANO_COMP), 12, 1);
+                contrib.DecimoTerceiro = true;
+            }
+            else
+            {
+                contrib.DataCompetencia = new DateTime(Convert.ToInt32(contrib.ANO_COMP), Convert.ToInt32(contrib.MES_COMP), 1);
+            }
+
+            contrib.DataReferencia = new DateTime(Convert.ToInt32(contrib.ANO_REF), Convert.ToInt32(contrib.MES_REF), 1);
+        }
+
+        #endregion
     }
 }

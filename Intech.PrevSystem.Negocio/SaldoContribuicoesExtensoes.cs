@@ -52,7 +52,13 @@ namespace Intech.PrevSystem.Entidades
 
             foreach(var contribuicao in contribuicoes)
             {
-                var dataReferencia = new DateTime(Convert.ToInt32(contribuicao.ANO_REF), Convert.ToInt32(contribuicao.MES_REF), 1);
+                var dataReferencia = new DateTime();
+
+                try
+                {
+                    dataReferencia = new DateTime(Convert.ToInt32(contribuicao.ANO_REF), Convert.ToInt32(contribuicao.MES_REF), 1);
+                } catch (Exception ex)
+                { }
 
                 if (dataReferencia <= dataCota)
                 {

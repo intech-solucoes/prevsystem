@@ -89,6 +89,29 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return funcionario;
         }
 
+        public FuncionarioDados BuscarDadosPorFundacaoEmpresaMatricula(string cdFundacao, string cdEmpresa, string matricula)
+        {
+            var funcionario = new FuncionarioDados();
+
+            funcionario.Funcionario = base.BuscarPorMatriculaEmpresa(matricula, cdEmpresa);
+            funcionario.DadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(funcionario.Funcionario.COD_ENTID.ToString());
+            funcionario.Empresa = new EmpresaProxy().BuscarPorCodigo(cdEmpresa);
+            funcionario.Entidade = new EntidadeProxy().BuscarPorCodEntid(funcionario.Funcionario.COD_ENTID.ToString());
+            funcionario.DS_ESTADO_CIVIL = new EstadoCivilProxy().BuscarPorCodigo(funcionario.DadosPessoais.CD_ESTADO_CIVIL).DS_ESTADO_CIVIL;
+            funcionario.NOME_EMPRESA = funcionario.Empresa.NOME_ENTID;
+            funcionario.IDADE = new Intervalo(DateTime.Now, funcionario.DadosPessoais.DT_NASCIMENTO, new CalculoAnosMesesDiasAlgoritmo2()).Anos.ToString() + " anos";
+            funcionario.SEXO = funcionario.DadosPessoais.SEXO == "M" ? "MASCULINO" : "FEMININO";
+            funcionario.CPF = funcionario.DadosPessoais.CPF_CGC.LimparMascara();
+
+            var plano = new PlanoVinculadoProxy().BuscarPorFundacaoInscricao(funcionario.Funcionario.CD_FUNDACAO, funcionario.Funcionario.NUM_INSCRICAO).FirstOrDefault();
+
+            var tempoPlano = new Intervalo(DateTime.Today, plano.DT_INSC_PLANO, new CalculoAnosMesesDiasAlgoritmo1());
+
+            funcionario.DS_TEMPO_PLANO = $"{tempoPlano.Anos}a {tempoPlano.Meses}m {tempoPlano.Dias}d";
+
+            return funcionario;
+        }
+
         public FuncionarioDados BuscarDadosPorCodEntidEmpresaLogin(string codEntid, string cdEmpresa, string NomLogin)
         {
             var funcionario = new FuncionarioDados();

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("TB_FAIXAS_IRRF")]
@@ -16,5 +16,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? PERIODO_CONTRIB { get; set; }
 		[Write(false)] public decimal? VALOR_ABATIMENTO_DEP { get; set; }
 		[Write(false)] public decimal? ABATIMENTO_ACIMA_65ANOS { get; set; }
+		[Write(false)] public decimal InicioPeriodoContribuicao { get; set; }
+		[Write(false)] public decimal FimPeriodoContribuicao { get; set; }
 	}
 }

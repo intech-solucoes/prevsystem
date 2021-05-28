@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("CC_FICHA_FINANCEIRA")]
@@ -54,7 +54,6 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public decimal? TOTAL_CONTRIB { get; set; }
 		[Write(false)] public decimal? QTD_COTA { get; set; }
 		[Write(false)] public string DES_MES_REF { get; set; }
-		[Write(false)] public string CALC_MARGEM_CONSIG { get; set; }
 		[Write(false)] public string COMPOE_SALDO_BENEFICIO { get; set; }
 		[Write(false)] public string COD_AGRUPADOR_WEB { get; set; }
 		[Write(false)] public string DS_AGRUPADOR_WEB { get; set; }
@@ -65,5 +64,10 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public decimal? RENTABILIDADE { get; set; }
 		[Write(false)] public decimal? CONTRIB_PORTABILIDADE { get; set; }
 		[Write(false)] public decimal? QTD_COTA_RP_PORTABILIDADE { get; set; }
+		[Write(false)] public string NU_CONTA { get; set; }
+		[Write(false)] public DateTime DataReferencia { get; set; }
+		[Write(false)] public bool DecimoTerceiro { get; set; }
+		[Write(false)] public DateTime DataCompetencia { get; set; }
+		[Write(false)] public string CALC_MARGEM_CONSIG { get; set; }
 	}
 }

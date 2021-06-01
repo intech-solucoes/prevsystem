@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;
@@ -18,9 +18,27 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF", new { CPF }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF", new { CPF }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
+		public virtual List<LGPDConsentimentoEntidade> BuscarPorCPFDataExpiracao(string CPF, DateTime DataExpiracao)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *, DATEDIFF(DAY, @DataExpiracao, DTA_CONSENTIMENTO) AS 'DIAS_EXPIRACAO'  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF", new { CPF, DataExpiracao }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<LGPDConsentimentoEntidade>("", new { CPF, DataExpiracao }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -36,9 +54,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM", new { CPF, TXT_ORIGEM }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM", new { CPF, TXT_ORIGEM }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF AND TXT_ORIGEM=:TXT_ORIGEM", new { CPF, TXT_ORIGEM }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF AND TXT_ORIGEM=:TXT_ORIGEM", new { CPF, TXT_ORIGEM }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -54,9 +72,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM AND DTA_CONSENTIMENTO >= @DataExpiracao", new { CPF, TXT_ORIGEM, DataExpiracao }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT *  FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF AND TXT_ORIGEM = @TXT_ORIGEM AND DTA_CONSENTIMENTO >= @DataExpiracao", new { CPF, TXT_ORIGEM, DataExpiracao }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF AND TXT_ORIGEM=:TXT_ORIGEM AND DTA_CONSENTIMENTO>=:DATAEXPIRACAO", new { CPF, TXT_ORIGEM, DataExpiracao }, Transaction).ToList();
+					return Conexao.Query<LGPDConsentimentoEntidade>("SELECT * FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF AND TXT_ORIGEM=:TXT_ORIGEM AND DTA_CONSENTIMENTO>=:DATAEXPIRACAO", new { CPF, TXT_ORIGEM, DataExpiracao }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -72,9 +90,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					Conexao.Execute("INSERT INTO WEB_LGPD_CONSENTIMENTO  (      COD_IDENTIFICADOR     ,CD_FUNDACAO     ,COD_CPF     ,DTA_CONSENTIMENTO     ,TXT_IPV4     ,TXT_IPV6     ,TXT_DISPOSITIVO     ,TXT_ORIGEM ) VALUES (     @COD_IDENTIFICADOR,     @CD_FUNDACAO,     @COD_CPF,     @DTA_CONSENTIMENTO,     @TXT_IPV4,     @TXT_IPV6,     @TXT_DISPOSITIVO,     @TXT_ORIGEM )", new { COD_IDENTIFICADOR, CD_FUNDACAO, COD_CPF, DTA_CONSENTIMENTO, TXT_IPV4, TXT_IPV6, TXT_DISPOSITIVO, TXT_ORIGEM }, Transaction);
+					Conexao.Execute("INSERT INTO WEB_LGPD_CONSENTIMENTO   (       COD_IDENTIFICADOR      ,CD_FUNDACAO      ,COD_CPF      ,DTA_CONSENTIMENTO      ,TXT_IPV4      ,TXT_IPV6      ,TXT_DISPOSITIVO      ,TXT_ORIGEM  ) VALUES (      @COD_IDENTIFICADOR,      @CD_FUNDACAO,      @COD_CPF,      @DTA_CONSENTIMENTO,      @TXT_IPV4,      @TXT_IPV6,      @TXT_DISPOSITIVO,      @TXT_ORIGEM  )", new { COD_IDENTIFICADOR, CD_FUNDACAO, COD_CPF, DTA_CONSENTIMENTO, TXT_IPV4, TXT_IPV6, TXT_DISPOSITIVO, TXT_ORIGEM });
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					Conexao.Execute("INSERT INTO WEB_LGPD_CONSENTIMENTO  (      OID_LGPD_CONSENTIMENTO     ,COD_IDENTIFICADOR     ,CD_FUNDACAO     ,COD_CPF     ,DTA_CONSENTIMENTO     ,TXT_IPV4     ,TXT_IPV6     ,TXT_DISPOSITIVO     ,TXT_ORIGEM ) VALUES (     S_WEB_LGPD_CONSENTIMENTO.NEXTVAL,     :COD_IDENTIFICADOR,     :CD_FUNDACAO,     :COD_CPF,     :DTA_CONSENTIMENTO,     :TXT_IPV4,     :TXT_IPV6,     :TXT_DISPOSITIVO,     :TXT_ORIGEM )", new { COD_IDENTIFICADOR, CD_FUNDACAO, COD_CPF, DTA_CONSENTIMENTO, TXT_IPV4, TXT_IPV6, TXT_DISPOSITIVO, TXT_ORIGEM }, Transaction);
+					Conexao.Execute("INSERT INTO WEB_LGPD_CONSENTIMENTO   (       OID_LGPD_CONSENTIMENTO      ,COD_IDENTIFICADOR      ,CD_FUNDACAO      ,COD_CPF      ,DTA_CONSENTIMENTO      ,TXT_IPV4      ,TXT_IPV6      ,TXT_DISPOSITIVO      ,TXT_ORIGEM  ) VALUES (      S_WEB_LGPD_CONSENTIMENTO.NEXTVAL,      :COD_IDENTIFICADOR,      :CD_FUNDACAO,      :COD_CPF,      :DTA_CONSENTIMENTO,      :TXT_IPV4,      :TXT_IPV6,      :TXT_DISPOSITIVO,      :TXT_ORIGEM  )", new { COD_IDENTIFICADOR, CD_FUNDACAO, COD_CPF, DTA_CONSENTIMENTO, TXT_IPV4, TXT_IPV6, TXT_DISPOSITIVO, TXT_ORIGEM });
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -90,9 +108,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO", new {  }, Transaction);
+					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO", new {  });
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO", new {  }, Transaction);
+					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO", new {  });
 				else
 					throw new Exception("Provider não suportado!");
 			}
@@ -108,9 +126,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF = @CPF", new { CPF }, Transaction);
+					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO  WHERE COD_CPF = @CPF", new { CPF });
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF }, Transaction);
+					Conexao.Execute("DELETE FROM WEB_LGPD_CONSENTIMENTO WHERE COD_CPF=:CPF", new { CPF });
 				else
 					throw new Exception("Provider não suportado!");
 			}

@@ -1,0 +1,17 @@
+﻿/*Config
+    RetornaLista
+    Retorno
+        -WebDescAutorizadoEntidade
+    Parametros
+        -CD_EMPRESA:string
+		-CD_PLANO:string
+		-IND_ATIVO:string
+*/
+
+SELECT DA.* 
+FROM WEB_DESC_AUTORIZADO DA
+    INNER JOIN WEB_DESC_AUTORIZADO_EM_PL EP ON EP.OID_DESC_AUTORIZADO = DA.OID_DESC_AUTORIZADO
+WHERE EP.CD_EMPRESA = @CD_EMPRESA
+  AND EP.CD_PLANO = @CD_PLANO
+  AND IND_ATIVO = @IND_ATIVO
+ORDER BY NUM_ORDEM

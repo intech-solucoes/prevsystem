@@ -49,6 +49,24 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
+		public virtual List<BancoAgEntidade> BuscarBancosConcat()
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<BancoAgEntidade>("SELECT COD_BANCO, ('' + COD_BANCO + ' - ' + DESC_BCO_AG) AS DESC_BCO_AG  FROM TB_BANCO_AG  WHERE COD_AGENC = '00000'  ORDER BY COD_BANCO", new {  }).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<BancoAgEntidade>("SELECT COD_BANCO, ('' || COD_BANCO || ' - ' || DESC_BCO_AG) AS DESC_BCO_AG FROM TB_BANCO_AG WHERE COD_AGENC='00000' ORDER BY COD_BANCO", new {  }).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
+
 		public virtual BancoAgEntidade BuscarPorCodBancoCodAgencia(string COD_BANCO, string COD_AGENC)
 		{
 			try

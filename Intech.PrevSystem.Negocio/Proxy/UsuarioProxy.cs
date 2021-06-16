@@ -54,6 +54,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
             base.Insert(usuario.NOM_LOGIN, usuario.PWD_USUARIO, usuario.IND_BLOQUEADO, usuario.NUM_TENTATIVA, usuario.DES_LOTACAO, usuario.IND_ADMINISTRADOR, usuario.IND_ATIVO, usuario.NOM_USUARIO_CRIACAO, usuario.DTA_CRIACAO, usuario.NOM_USUARIO_ATUALIZACAO, usuario.DTA_ATUALIZACAO, usuario.CD_EMPRESA, usuario.IND_PRIMEIRO_ACESSO, usuario.SEQ_RECEBEDOR);
         }
 
+        public void FSF_InsertNaoParticipante(UsuarioEntidade usuario)
+        {
+            base.FSF_InsertNaoParticipante(usuario.NOM_LOGIN, usuario.PWD_USUARIO, usuario.IND_BLOQUEADO, usuario.NUM_TENTATIVA, usuario.DES_LOTACAO, usuario.IND_ADMINISTRADOR, usuario.IND_ATIVO, usuario.NOM_USUARIO_CRIACAO, usuario.DTA_CRIACAO, usuario.NOM_USUARIO_ATUALIZACAO, usuario.DTA_ATUALIZACAO, usuario.CD_EMPRESA, usuario.IND_PRIMEIRO_ACESSO, usuario.SEQ_RECEBEDOR, usuario.IND_NAO_PARTICIPANTE);
+        }
+
         public void CriarAcessoIntech(string cpf, string chave, string senha = "123")
         {
             cpf = cpf.LimparMascara();
@@ -65,23 +70,39 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             string codEntid;
             decimal seqRecebedor;
+            string cdEmpresa;
+            FuncionarioNPEntidade funcionarioNP = null;
+
             var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
             if (funcionario != null)
             {
                 codEntid = funcionario.COD_ENTID.ToString();
                 seqRecebedor = 0;
+                cdEmpresa = funcionario.CD_EMPRESA;
             }
             else
             {
                 var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).First();
 
-                if (recebedorBeneficio == null)
-                    throw ExceptionDadosInvalidos;
+                if (recebedorBeneficio != null)
+                {
+                    codEntid = recebedorBeneficio.COD_ENTID.ToString();
+                    funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
+                    seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
+                    cdEmpresa = funcionario.CD_EMPRESA;
+                }
+                else
+                {
+                    funcionarioNP = new FuncionarioNPProxy().BuscarPorCpf(cpf).FirstOrDefault();
 
-                codEntid = recebedorBeneficio.COD_ENTID.ToString();
-                funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
-                seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
+                    if (funcionarioNP == null)
+                        throw ExceptionDadosInvalidos;
+
+                    codEntid = "0";
+                    cdEmpresa = funcionarioNP.CD_EMPRESA;
+                    seqRecebedor = 0;
+                }
             }
 
             if (codEntid != null)
@@ -103,7 +124,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     {
                         NOM_LOGIN = cpf,
                         PWD_USUARIO = senhaEncriptada,
-                        CD_EMPRESA = funcionario.CD_EMPRESA,
+                        CD_EMPRESA = cdEmpresa,
                         DES_LOTACAO = null,
                         DTA_ATUALIZACAO = DateTime.Now,
                         DTA_CRIACAO = DateTime.Now,
@@ -114,7 +135,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         NOM_USUARIO_CRIACAO = null,
                         NUM_TENTATIVA = 0,
                         SEQ_RECEBEDOR = seqRecebedor,
-                        IND_PRIMEIRO_ACESSO = "N"
+                        IND_PRIMEIRO_ACESSO = "N",
+                        IND_NAO_PARTICIPANTE = funcionarioNP != null ? "S" : "N"
                     };
 
                     Insert(novoUsuario);
@@ -131,32 +153,67 @@ namespace Intech.PrevSystem.Negocio.Proxy
             
             string codEntid;
             decimal seqRecebedor;
+            string cdEmpresa;
+            DateTime dataNascimentCorreta;
+            string emails;
+            string celular;
+            FuncionarioNPEntidade funcionarioNP = null;
+
             var funcionario = funcionarioProxy.BuscarPrimeiroPorCpf(cpf).FirstOrDefault();
 
             if (funcionario != null)
             {
                 codEntid = funcionario.COD_ENTID.ToString();
                 seqRecebedor = 0;
+                cdEmpresa = funcionario.CD_EMPRESA;
+
+                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
+                dataNascimentCorreta = dadosPessoais.DT_NASCIMENTO;
+                emails = dadosPessoais.EMAIL_AUX;
+                celular = dadosPessoais.FONE_CELULAR;
             }
             else
             {
-                var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).First();
+                var recebedorBeneficio = new RecebedorBeneficioProxy().BuscarPensionistaPorCpf(cpf).FirstOrDefault();
 
-                if (recebedorBeneficio == null)
-                    throw ExceptionDadosInvalidos;
+                if (recebedorBeneficio != null)
+                {
+                    codEntid = recebedorBeneficio.COD_ENTID.ToString();
+                    funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
+                    seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
+                    cdEmpresa = funcionario.CD_EMPRESA;
 
-                codEntid = recebedorBeneficio.COD_ENTID.ToString();
-                funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
-                seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
+                    var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
+                    dataNascimentCorreta = dadosPessoais.DT_NASCIMENTO;
+                    emails = dadosPessoais.EMAIL_AUX;
+                    celular = dadosPessoais.FONE_CELULAR;
+                }
+                else
+                {
+                    funcionarioNP = new FuncionarioNPProxy().BuscarPorCpf(cpf).FirstOrDefault();
+
+                    if (funcionarioNP == null)
+                        throw ExceptionDadosInvalidos;
+
+                    codEntid = "0";
+                    cdEmpresa = funcionarioNP.CD_EMPRESA;
+                    seqRecebedor = 0;
+
+                    if (!funcionarioNP.DT_NASCIMENTO.HasValue)
+                        throw ExceptionDadosInvalidos;
+
+                    dataNascimentCorreta = funcionarioNP.DT_NASCIMENTO.Value;
+                    emails = funcionarioNP.E_MAIL;
+                    celular = funcionarioNP.FONE_CELULAR;
+                }
             }
 
             if (codEntid != null)
             {
-                var usarSenhaComplexa = AppSettings.Get().SenhaComplexa || false;
-                var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
-
-                if (dadosPessoais.DT_NASCIMENTO != dataNascimento)
+                if (dataNascimentCorreta != dataNascimento)
                     throw ExceptionDadosInvalidos;
+
+                var usarSenhaComplexa = AppSettings.Get().SenhaComplexa || false;
 
                 var senha = GerarSenha(usarSenhaComplexa);
 
@@ -175,7 +232,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     {
                         NOM_LOGIN = cpf,
                         PWD_USUARIO = senhaEncriptada,
-                        CD_EMPRESA = funcionario.CD_EMPRESA,
+                        CD_EMPRESA = cdEmpresa,
                         DES_LOTACAO = null,
                         DTA_ATUALIZACAO = DateTime.Now,
                         DTA_CRIACAO = DateTime.Now,
@@ -186,7 +243,8 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         NOM_USUARIO_CRIACAO = null,
                         NUM_TENTATIVA = 0,
                         SEQ_RECEBEDOR = seqRecebedor,
-                        IND_PRIMEIRO_ACESSO = "S"
+                        IND_PRIMEIRO_ACESSO = "S",
+                        IND_NAO_PARTICIPANTE = funcionarioNP != null ? "S" : "N"
                     };
 
                     Insert(novoUsuario);
@@ -199,10 +257,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 if (enviarEmail)
                 {
-                    if (string.IsNullOrEmpty(dadosPessoais.EMAIL_AUX))
+                    if (string.IsNullOrEmpty(emails))
                         throw new Exception($"Você não possúi um e-mail cadastrado. Por favor, entre em contato com a {cliente}.");
 
-                    var email = dadosPessoais.EMAIL_AUX.Split(';')[0];
+                    var email = emails.Split(';')[0];
 
                     var showBegin = 1;
 
@@ -234,17 +292,17 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                     var showBegin = 1;
 
-                    for (var i = 0; i < dadosPessoais.FONE_CELULAR.Length; i++)
+                    for (var i = 0; i < celular.Length; i++)
                     {
-                        if (i > showBegin && i < dadosPessoais.FONE_CELULAR.Length - 3)
+                        if (i > showBegin && i < celular.Length - 3)
                             celularEscondido += "*";
                         else
-                            celularEscondido += dadosPessoais.FONE_CELULAR[i];
+                            celularEscondido += celular[i];
                     }
 
                     var mensagem = $"Esta e sua nova senha da Area Restrita da {cliente}: {senha}";
                     var retorno = new SMS()
-                        .Enviar(provedor, dadosPessoais.FONE_CELULAR, config.SMS.Usuario, config.SMS.Senha, cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
+                        .Enviar(provedor, celular, config.SMS.Usuario, config.SMS.Senha, cliente, mensagem, funcionario.NUM_MATRICULA, funcionario.NUM_INSCRICAO,
                             new EventHandler<SMSEventArgs>(delegate (object sender, SMSEventArgs args)
                             {
                                 try

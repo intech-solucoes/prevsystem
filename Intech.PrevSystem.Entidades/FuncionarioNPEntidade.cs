@@ -59,6 +59,5 @@ namespace Intech.PrevSystem.Entidades
 		public string FONE_TRAB { get; set; }
 		public string FAX_TRAB { get; set; }
 		public string RAMAL_TRAB { get; set; }
-		public DateTime? DT_SOLICITACAO { get; set; }
 	}
 }

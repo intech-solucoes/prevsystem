@@ -1,0 +1,54 @@
+﻿/*Config
+    Retorno
+        -void
+    Parametros
+        -NOM_LOGIN:string
+        -PWD_USUARIO:string
+        -IND_BLOQUEADO:string
+        -NUM_TENTATIVA:decimal
+        -DES_LOTACAO:string
+        -IND_ADMINISTRADOR:string
+        -IND_ATIVO:string
+        -NOM_USUARIO_CRIACAO:string
+        -DTA_CRIACAO:DateTime?
+        -NOM_USUARIO_ATUALIZACAO:string
+        -DTA_ATUALIZACAO:DateTime?
+        -CD_EMPRESA:string
+        -IND_PRIMEIRO_ACESSO:string
+        -SEQ_RECEBEDOR:decimal?
+		-IND_NAO_PARTICIPANTE:string
+*/
+
+INSERT INTO WEB_USUARIO (
+    NOM_LOGIN,
+    PWD_USUARIO,
+    IND_BLOQUEADO,
+    NUM_TENTATIVA,
+    DES_LOTACAO,
+    IND_ADMINISTRADOR,
+    IND_ATIVO,
+    NOM_USUARIO_CRIACAO,
+    DTA_CRIACAO,
+    NOM_USUARIO_ATUALIZACAO,
+    DTA_ATUALIZACAO,
+    CD_EMPRESA,
+    SEQ_RECEBEDOR,
+    IND_PRIMEIRO_ACESSO,
+	IND_NAO_PARTICIPANTE
+) VALUES (
+    @NOM_LOGIN,
+    @PWD_USUARIO,
+    @IND_BLOQUEADO,
+    @NUM_TENTATIVA,
+    @DES_LOTACAO,
+    @IND_ADMINISTRADOR,
+    @IND_ATIVO,
+    @NOM_USUARIO_CRIACAO,
+    @DTA_CRIACAO,
+    @NOM_USUARIO_ATUALIZACAO,
+    @DTA_ATUALIZACAO,
+    @CD_EMPRESA,
+    @SEQ_RECEBEDOR,
+    @IND_PRIMEIRO_ACESSO,
+	@IND_NAO_PARTICIPANTE
+)

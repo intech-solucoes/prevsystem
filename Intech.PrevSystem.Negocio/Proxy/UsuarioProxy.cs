@@ -144,7 +144,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             }
         }
 
-        public string CriarAcesso(string cpf, DateTime dataNascimento, bool enviarEmail = true, bool enviarSms = false, Provedor provedor = Provedor.Zenvia)
+        public string CriarAcesso(string cpf, DateTime dataNascimento, bool enviarEmail = true, bool enviarSms = false, Provedor provedor = Provedor.Zenvia, bool buscaNP = false)
         {
             var cliente = AppSettings.Get().Cliente;
             cpf = cpf.LimparMascara();
@@ -163,6 +163,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             if (funcionario != null)
             {
+                #region Funcionario Normal
                 codEntid = funcionario.COD_ENTID.ToString();
                 seqRecebedor = 0;
                 cdEmpresa = funcionario.CD_EMPRESA;
@@ -171,6 +172,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 dataNascimentCorreta = dadosPessoais.DT_NASCIMENTO;
                 emails = dadosPessoais.EMAIL_AUX;
                 celular = dadosPessoais.FONE_CELULAR;
+                #endregion
             }
             else
             {
@@ -178,6 +180,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
                 if (recebedorBeneficio != null)
                 {
+                    #region Pensionista
                     codEntid = recebedorBeneficio.COD_ENTID.ToString();
                     funcionario = funcionarioProxy.BuscarPorMatricula(recebedorBeneficio.NUM_MATRICULA);
                     seqRecebedor = recebedorBeneficio.SEQ_RECEBEDOR;
@@ -187,9 +190,14 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     dataNascimentCorreta = dadosPessoais.DT_NASCIMENTO;
                     emails = dadosPessoais.EMAIL_AUX;
                     celular = dadosPessoais.FONE_CELULAR;
+                    #endregion
                 }
                 else
                 {
+                    #region Nao Participante
+                    if (!buscaNP)
+                        throw ExceptionDadosInvalidos;
+
                     funcionarioNP = new FuncionarioNPProxy().BuscarPorCpf(cpf).FirstOrDefault();
 
                     if (funcionarioNP == null)
@@ -205,6 +213,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     dataNascimentCorreta = funcionarioNP.DT_NASCIMENTO.Value;
                     emails = funcionarioNP.E_MAIL;
                     celular = funcionarioNP.FONE_CELULAR;
+                    #endregion
                 }
             }
 
@@ -247,7 +256,10 @@ namespace Intech.PrevSystem.Negocio.Proxy
                         IND_NAO_PARTICIPANTE = funcionarioNP != null ? "S" : "N"
                     };
 
-                    Insert(novoUsuario);
+                    if(!buscaNP)
+                        Insert(novoUsuario);
+                    else
+                        FSF_InsertNaoParticipante(novoUsuario);
                 }
 
                 // Envia e-mail com nova senha de acesso

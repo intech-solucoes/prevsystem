@@ -1,0 +1,19 @@
+﻿/*Config
+    Retorno
+        -long
+    Parametros
+		-OID_REQ_BENEFICIO:decimal
+		-OID_DOC_EXIGIDO:decimal
+		-TXT_NOME_FISICO:string
+*/
+
+INSERT INTO WEB_REQ_BENEFICIO_DOC(
+	OID_REQ_BENEFICIO,
+	OID_DOC_EXIGIDO,
+	TXT_NOME_FISICO
+)
+VALUES(
+	@OID_REQ_BENEFICIO,
+	@OID_DOC_EXIGIDO,
+	@TXT_NOME_FISICO
+)

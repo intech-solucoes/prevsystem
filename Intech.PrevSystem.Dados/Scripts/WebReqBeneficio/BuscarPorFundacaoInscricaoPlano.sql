@@ -1,4 +1,5 @@
 ﻿/*Config
+    RetornaLista
     Retorno
         -WebReqBeneficioEntidade
     Parametros
@@ -12,3 +13,4 @@ FROM WEB_REQ_BENEFICIO
 WHERE CD_FUNDACAO = @CD_FUNDACAO
 AND NUM_INSCRICAO = @NUM_INSCRICAO
 AND CD_PLANO = @CD_PLANO
+ORDER BY DTA_SOLICITACAO DESC

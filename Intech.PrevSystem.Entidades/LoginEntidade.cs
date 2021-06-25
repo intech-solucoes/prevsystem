@@ -8,6 +8,7 @@ namespace Intech.PrevSystem.Entidades
         public string Inscricao { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
+        public string ReCAPTCHAToken { get; set; }
         public DateTime DataNascimento { get; set; }
         public string CdEmpresa { get; set; }
         public string Chave { get; set; }

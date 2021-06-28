@@ -13,5 +13,6 @@ namespace Intech.PrevSystem.Entidades
 		public string COD_CPF { get; set; }
 		public decimal VAL_CAP_SEG_MORTE { get; set; }
 		public decimal VAL_CAP_SEG_INVALIDEZ { get; set; }
+		public string ANO { get; set; }
 	}
 }

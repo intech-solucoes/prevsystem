@@ -15,9 +15,9 @@ namespace Intech.PrevSystem.Dados.DAO
 			try
 			{
 				if (AppSettings.IS_SQL_SERVER_PROVIDER)
-					return Conexao.Query<WebCapitalSeguradoEntidade>("SELECT * FROM WEB_CAPITAL_SEGURADO WHERE COD_CPF = @COD_CPF", new { COD_CPF }).ToList();
+					return Conexao.Query<WebCapitalSeguradoEntidade>("SELECT * FROM WEB_CAPITAL_SEGURADO WHERE COD_CPF = @COD_CPF  ORDER BY ANO DESC", new { COD_CPF }).ToList();
 				else if (AppSettings.IS_ORACLE_PROVIDER)
-					return Conexao.Query<WebCapitalSeguradoEntidade>("SELECT * FROM WEB_CAPITAL_SEGURADO WHERE COD_CPF=:COD_CPF", new { COD_CPF }).ToList();
+					return Conexao.Query<WebCapitalSeguradoEntidade>("SELECT * FROM WEB_CAPITAL_SEGURADO WHERE COD_CPF=:COD_CPF  ORDER BY ANO DESC", new { COD_CPF }).ToList();
 				else
 					throw new Exception("Provider não suportado!");
 			}

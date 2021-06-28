@@ -47,6 +47,17 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return retorno;
         }
 
+        public override List<ContratoEntidade> BuscarPorFundacaoInscricaoNotSituacao(string CD_FUNDACAO, string NUM_INSCRICAO)
+        {
+            var listaContratos = base.BuscarPorFundacaoInscricaoNotSituacao(CD_FUNDACAO, NUM_INSCRICAO);
+            var retorno = new List<ContratoEntidade>();
+
+            foreach (var contrato in listaContratos)
+                retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
+
+            return retorno;
+        }
+
         public override ContratoEntidade BuscarDetalhePorFundacaoInscricaoAnoNumeroSeqFamilia(string CD_FUNDACAO, string NUM_INSCRICAO, string ANO_CONTRATO, string NUM_CONTRATO, string NUM_SEQ_GR_FAMIL)
         {
             var contrato = base.BuscarDetalhePorFundacaoInscricaoAnoNumeroSeqFamilia(CD_FUNDACAO, NUM_INSCRICAO, ANO_CONTRATO, NUM_CONTRATO, NUM_SEQ_GR_FAMIL);

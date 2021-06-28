@@ -102,6 +102,23 @@ namespace Intech.PrevSystem.Dados.DAO
 					Conexao.Close();
 			}
 		}
+		public virtual List<ContratoEntidade> BuscarPorFundacaoInscricaoNotSituacao(string CD_FUNDACAO, string NUM_INSCRICAO)
+		{
+			try
+			{
+				if (AppSettings.IS_SQL_SERVER_PROVIDER)
+					return Conexao.Query<ContratoEntidade>("SELECT ST.DS_SITUACAO,        CE.* FROM CE_CONTRATOS CE     INNER JOIN CE_SITUACAO_CONTRATO ST ON ST.CD_SITUACAO = CE.CD_SITUACAO WHERE CE.CD_FUNDACAO = @CD_FUNDACAO   AND CE.NUM_INSCRICAO = @NUM_INSCRICAO   AND CE.CD_SITUACAO NOT IN ('4', '6')    ORDER BY CE.DT_CREDITO DESC", new { CD_FUNDACAO, NUM_INSCRICAO }, Transaction).ToList();
+				else if (AppSettings.IS_ORACLE_PROVIDER)
+					return Conexao.Query<ContratoEntidade>("SELECT ST.DS_SITUACAO, CE.* FROM CE_CONTRATOS  CE  INNER  JOIN CE_SITUACAO_CONTRATO   ST  ON ST.CD_SITUACAO=CE.CD_SITUACAO WHERE CE.CD_FUNDACAO=:CD_FUNDACAO AND CE.NUM_INSCRICAO=:NUM_INSCRICAO AND CE.CD_SITUACAO NOT  IN ('4', '6')  ORDER BY CE.DT_CREDITO DESC", new { CD_FUNDACAO, NUM_INSCRICAO }, Transaction).ToList();
+				else
+					throw new Exception("Provider não suportado!");
+			}
+			finally
+			{
+				if(Transaction == null)
+					Conexao.Close();
+			}
+		}
 
 		public virtual List<ContratoEntidade> BuscarPorFundacaoInscricaoSituacao(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_SITUACAO)
 		{

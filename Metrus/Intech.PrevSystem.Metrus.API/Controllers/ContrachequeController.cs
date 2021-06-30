@@ -1,4 +1,6 @@
 ﻿#region Usings
+using Intech.Lib.Log.Core;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,10 +15,13 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     public class ContrachequeController : Controller
     {
         [HttpGet("datasPorCodEntidPlano/{codEntid}/{cdPlano}")]
-        public ActionResult GetDatasPorCodEntidPlano(string codEntid, string cdPlano)
+        public ActionResult GetDatasPorCodEntidPlano(int oidAcesso, string codEntid, string cdPlano)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.CONTRACHEQUE_DATAS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var quantidadeMesesContraCheque = 18;
                 var dtReferencia = DateTime.Today.PrimeiroDiaDoMes().AddMonths(-quantidadeMesesContraCheque);
 
@@ -42,11 +47,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlanoReferencia/{codEntid}/{cdPlano}/{referencia}")]
-        public ActionResult GetPorCodEntidPlanoReferencia(string codEntid, string cdPlano, string referencia)
+        [HttpGet("porCodEntidPlanoReferencia/{oidAcesso}/{codEntid}/{cdPlano}/{referencia}")]
+        public ActionResult GetPorCodEntidPlanoReferencia(int oidAcesso, string codEntid, string cdPlano, string referencia)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.CONTRACHEQUE_POR_PLANO_REFERENCIA);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
 
                 // Soma um mês da data de referência
@@ -65,11 +73,13 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlanoReferenciaTipoFolha/{codEntid}/{cdPlano}/{referencia}/{cdTipoFolha}")]
-        public ActionResult GetPorCodEntidPlanoReferenciaTipoFolha(string codEntid, string cdPlano, string referencia, string cdTipoFolha)
+        [HttpGet("porCodEntidPlanoReferenciaTipoFolha/{oidAcesso}/{codEntid}/{cdPlano}/{referencia}/{cdTipoFolha}")]
+        public ActionResult GetPorCodEntidPlanoReferenciaTipoFolha(int oidAcesso, string codEntid, string cdPlano, string referencia, string cdTipoFolha)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.CONTRACHEQUE_POR_REFERENCIA_TIPO_FOLHA);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
                 var dataReferencia = DateTime.ParseExact(referencia, "dd.MM.yyyy", new CultureInfo("pt-BR"));
 
                 // Soma um mês da data de referência

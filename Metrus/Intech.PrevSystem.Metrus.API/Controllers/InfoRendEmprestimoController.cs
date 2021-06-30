@@ -1,4 +1,6 @@
 ﻿#region Usings
+using Intech.Lib.Log.Core;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,11 +13,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class InfoRendEmprestimoController : Controller
     {
-        [HttpGet("anosPorCodEntid/{codEntid}")]
-        public IActionResult GetAnosPorFundacaoInscricao(string codEntid)
+        [HttpGet("anosPorCodEntid/{oidAcesso}/{codEntid}")]
+        public IActionResult GetAnosPorFundacaoInscricao(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.INFO_REND_EMPRESTIMO_ANOS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var dtInformes = new RelIRRFProxy().BuscarAnosPorFundacaoInscricao(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO);
 
@@ -32,9 +37,12 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidAnoCalendario/{codEntid}/{ano}")]
-        public IActionResult GetPorFundacaoInscricaoAno(string codEntid, int ano)
+        [HttpGet("porCodEntidAnoCalendario/{oidAcesso}/{codEntid}/{ano}")]
+        public IActionResult GetPorFundacaoInscricaoAno(int oidAcesso, string codEntid, int ano)
         {
+            var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.INFO_REND_EMPRESTIMO_POR_ANO);
+            new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
             var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
 
             var dtInformes = new RelIRRFProxy().BuscarPorFundacaoInscricaoReferencia(funcionario.CD_FUNDACAO, funcionario.NUM_INSCRICAO, new DateTime(ano, 12, 31));

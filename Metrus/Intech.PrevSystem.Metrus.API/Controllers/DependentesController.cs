@@ -1,4 +1,6 @@
-﻿using Intech.PrevSystem.Negocio.Proxy;
+﻿using Intech.Lib.Log.Core;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
+using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -9,11 +11,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class DependentesController : ControllerBase
     {
-        [HttpGet("porInscricao/{numInscricao}")]
-        public ActionResult BuscarPorCodEntid(string numInscricao)
+        [HttpGet("porInscricao/{oidAcesso}/{numInscricao}")]
+        public ActionResult BuscarPorinscricao(int oidAcesso, string numInscricao)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DEPENDENTES_POR_INSCRICAO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var deps = new DependenteProxy().BuscarPorFundacaoInscricao("01", numInscricao)
                     .Where(x => 
                         x.PLANO_PREVIDENCIAL == "S" ||
@@ -28,11 +33,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porInscricaoCpf/{numInscricao}/{cpf}")]
-        public ActionResult BuscarPorCodEntid(string numInscricao, string cpf)
+        [HttpGet("porInscricaoCpf/{oidAcesso}/{numInscricao}/{cpf}")]
+        public ActionResult BuscarPorInscricaoCpf(int oidAcesso, string numInscricao, string cpf)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DEPENDENTES_POR_INSCRICAO_CPF);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 cpf = cpf.LimparMascara();
 
                 var func = new DependenteProxy()

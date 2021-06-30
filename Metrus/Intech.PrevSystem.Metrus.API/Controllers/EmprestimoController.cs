@@ -1,7 +1,9 @@
 ﻿#region Usings
+using Intech.Lib.Log.Core;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Extensoes;
 using Intech.PrevSystem.Metrus.Negocio;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +21,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     {
         #region Situacoes
 
-        [HttpGet("situacoes")]
-        public IActionResult BuscarSituacoes()
+        [HttpGet("situacoes/{oidAcesso}")]
+        public IActionResult BuscarSituacoes(int oidAcesso)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_SITUACOES);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 return Json(new SitContratoProxy().Buscar());
             }
             catch (Exception ex)
@@ -36,11 +41,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
         #region Contratos
 
-        [HttpGet("porCodEntid/{codEntid}")]
-        public IActionResult BuscarPorCodEntid(string codEntid)
+        [HttpGet("porCodEntid/{oidAcesso}/{codEntid}")]
+        public IActionResult BuscarPorCodEntid(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_POR_CODENTID);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -52,11 +60,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlano/{codEntid}/{cdPlano}")]
-        public IActionResult BuscarPorCodEntidPlano(string codEntid, string cdPlano)
+        [HttpGet("porCodEntidPlano/{oidAcesso}/{codEntid}/{cdPlano}")]
+        public IActionResult BuscarPorCodEntidPlano(int oidAcesso, string codEntid, string cdPlano)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_POR_CODENTID_PLANO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -68,11 +79,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidSituacao/{codEntid}/{situacao}")]
-        public IActionResult BuscarPorCodEntidSituacao(string codEntid, string situacao)
+        [HttpGet("porCodEntidSituacao/{oidAcesso}/{codEntid}/{situacao}")]
+        public IActionResult BuscarPorCodEntidSituacao(int oidAcesso, string codEntid, string situacao)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_POR_CODENTID_SITUACAO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -84,11 +98,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidPlanoSituacao/{codEntid}/{cdPlano}/{situacao}")]
-        public IActionResult BuscarPorCodEntidPlanoSituacao(string codEntid, string cdPlano, string situacao)
+        [HttpGet("porCodEntidPlanoSituacao/{oidAcesso}/{codEntid}/{cdPlano}/{situacao}")]
+        public IActionResult BuscarPorCodEntidPlanoSituacao(int oidAcesso, string codEntid, string cdPlano, string situacao)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_POR_CODENTID_PLANO_SITUACAO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -104,11 +121,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
         #region Prestações
 
-        [HttpGet("prestacoesPorCodEntidNumContratoAnoContrato/{codEntid}/{numContrato}/{anoContrato}")]
-        public IActionResult BuscarPrestacoesPorCodEntidNumContratoAnoContrato(string codEntid, decimal numContrato, decimal anoContrato)
+        [HttpGet("prestacoesPorCodEntidNumContratoAnoContrato/{oidAcesso}/{codEntid}/{numContrato}/{anoContrato}")]
+        public IActionResult BuscarPrestacoesPorCodEntidNumContratoAnoContrato(int oidAcesso, string codEntid, decimal numContrato, decimal anoContrato)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_PRESTACOES);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -124,11 +144,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
 
         #region Parâmetros
 
-        [HttpGet("parametrosPorCodEntid/{codEntid}")]
-        public IActionResult BuscarParametros(string codEntid)
+        [HttpGet("parametrosPorCodEntid/{oidAcesso}/{codEntid}")]
+        public IActionResult BuscarParametros(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_PARAMETROS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
 
@@ -178,9 +201,12 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("calcularDataDesconto/{dataCredito}/{carencia}")]
-        public IActionResult CalularDataDesconto(string dataCredito, int carencia)
+        [HttpGet("calcularDataDesconto/{oidAcesso}/{dataCredito}/{carencia}")]
+        public IActionResult CalularDataDesconto(int oidAcesso, string dataCredito, int carencia)
         {
+            var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_CALCULAR_DATA_DESCONTO);
+            new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
             DateTime dataAux = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
 
             var listaFeriados = new FeriadoProxy().Buscar().ToList();
@@ -191,11 +217,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             return Json(new { data = dataFinal });
         }
 
-        [HttpGet("buscarConcessao/{codEntid}/{cdPlano}/{cdNatur}/{dataCredito}")]
-        public IActionResult BuscarConcessao(string codEntid, string cdPlano, decimal cdNatur, string dataCredito)
+        [HttpGet("buscarConcessao/{oidAcesso}/{codEntid}/{cdPlano}/{cdNatur}/{dataCredito}")]
+        public IActionResult BuscarConcessao(int oidAcesso, string codEntid, string cdPlano, decimal cdNatur, string dataCredito)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_BUSCAR_CONCESSAO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 DateTime dtCredito = DateTime.ParseExact(dataCredito, "dd.MM.yyyy", new CultureInfo("pt-BR"));
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(codEntid).Funcionario;
@@ -210,11 +239,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpPost("parametrosParcelas")]
-        public IActionResult ParametrosParcelas([FromBody] ParametrosSimulacaoEmprestimo dados)
+        [HttpPost("parametrosParcelas/{oidAcesso}")]
+        public IActionResult ParametrosParcelas([FromBody] ParametrosSimulacaoEmprestimo dados, int oidAcesso)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_PARAMETROS_PARCELAS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(dados.CodEntid).Funcionario;
                 var contratosDisponiveis = new ContratoDisponivel().BuscarContratosDisponiveis(funcionario, dados.Concessao, dados.CdPlano, dados.CD_MODAL, dados.CD_NATUR, dados.DataCredito, dados.ValorSolicitado, dados.Carencia);
@@ -232,11 +264,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpPost("contratar")]
-        public IActionResult Contratar([FromBody] ParametrosContrato dados)
+        [HttpPost("contratar/{oidAcesso}")]
+        public IActionResult Contratar([FromBody] ParametrosContrato dados, int oidAcesso)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EMPRESTIMO_CONTRATAR);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 throw new Exception("No momento a cotratação de empréstimos está inabilitada!");
                 //var funcionario = new FuncionarioProxy().BuscarPorCodEntid(dados.CodEntid);
                 var funcionario = new DadosMetrusProxy().BuscarPorCodEntid(dados.CodEntid).Funcionario;

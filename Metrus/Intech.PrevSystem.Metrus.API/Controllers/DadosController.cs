@@ -1,8 +1,10 @@
 ﻿#region Usings
 using Dapper;
 using Intech.Lib.Dapper;
+using Intech.Lib.Log.Core;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Metrus.Negocio;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -21,11 +23,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class DadosController : Controller
     {
-        [HttpGet("buscarCodEntidPorCpf/{cpf}")]
-        public ActionResult BuscarPorCpf(string cpf)
+        [HttpGet("buscarCodEntidPorCpf/{oidAcesso}/{cpf}")]
+        public ActionResult BuscarCodEntidPorCpf(int oidAcesso, string cpf)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DADOS_CODENTID_POR_CPF);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var dados = new FuncionarioProxy().BuscarPorCpf(cpf);
                 var dadosRetorno = new List<dynamic>();
 
@@ -75,11 +80,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("buscarCodEntidPorEmpresaMatricula/{empresa}/{matricula}")]
-        public ActionResult BuscarPorCpf(string empresa, string matricula)
+        [HttpGet("buscarCodEntidPorEmpresaMatricula/{oidAcesso}/{empresa}/{matricula}")]
+        public ActionResult BuscarCodEntidPorEmpresaMatricula(int oidAcesso, string empresa, string matricula)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DADOS_CODENTID_POR_EMPRESA_MATRICULA);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var dados = new FuncionarioProxy().BuscarPorMatriculaEmpresa(matricula, empresa);
 
                 return Ok(new
@@ -97,11 +105,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntid/{codEntid}")]
-        public ActionResult GetPorCodEntid(string codEntid)
+        [HttpGet("porCodEntid/{oidAcesso}/{codEntid}")]
+        public ActionResult GetPorCodEntid(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DADOS_POR_CODENTID);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var func = new DadosMetrusProxy().BuscarPorCodEntid(codEntid);
 
                 if (func == null)
@@ -115,13 +126,16 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpPost("porCpf/{cpf}")]
-        public async Task<ActionResult> GetPorCpf(string cpf, [FromBody] dynamic dados)
+        [HttpPost("porCpf/{oidAcesso}/{cpf}")]
+        public async Task<ActionResult> GetPorCpf(int oidAcesso, string cpf, [FromBody] dynamic dados)
         {
             try
             {
                 try
                 {
+                    var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DADOS_POR_CPF);
+                    new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                     var config = AppSettings.Get();
 
                     var client = new HttpClient();
@@ -177,11 +191,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpPost("[action]")]
-        public ActionResult BuscaAmpliada(Pesquisa pesquisa)
+        [HttpPost("[action]/{oidAcesso}")]
+        public ActionResult BuscaAmpliada([FromBody] Pesquisa pesquisa, int oidAcesso)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.DADOS_BUSCA_AMPLIADA);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var conexao = BaseDAO.CriarConexao();
 
                 string empresa = null;

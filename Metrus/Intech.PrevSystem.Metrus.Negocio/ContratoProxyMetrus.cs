@@ -65,7 +65,7 @@ namespace Intech.PrevSystem.Metrus.Negocio
                 if (contrato.CD_SITUACAO == 3)
                     contrato.BuscarSaldoDevedor(CD_FUNDACAO, CD_EMPRESA, DateTime.Now);
 
-                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now))
+                if (contrato.Prestacoes.Any(x => x.DT_PAGTO == null && x.DT_VENC < DateTime.Now && x.TIPO != "S"))
                     contrato.SITUACAO_PGTO = "I";
                 else
                     contrato.SITUACAO_PGTO = "A";

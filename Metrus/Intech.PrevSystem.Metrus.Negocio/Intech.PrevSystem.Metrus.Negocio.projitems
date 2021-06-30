@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ConcessaoMetrus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constantes\DMN_FUNCIONALIDADE.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoDisponivel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContratoProxyMetrus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DadosMetrusProxy.cs" />

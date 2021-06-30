@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Intech.Lib.Log.Core;
 using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class ContribuicoesController : Controller
     {
-        [HttpGet("porCodEntid/{codEntid}")]
-        public ActionResult GetPorCodEntid(string codEntid)
+        [HttpGet("porCodEntid/{oidAcesso}/{codEntid}")]
+        public ActionResult GetPorCodEntid(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.CONTRIBUICOES);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
 
                 if (funcionario == null)

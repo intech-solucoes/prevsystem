@@ -1,4 +1,6 @@
-﻿using Intech.PrevSystem.Entidades;
+﻿using Intech.Lib.Log.Core;
+using Intech.PrevSystem.Entidades;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,11 +13,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class ExtratoController : Controller
     {
-        [HttpGet("porCodEntidPlano/{codEntid}/{cdPlano}")]
-        public virtual IActionResult GetTiposPorFundacaoPlanoPeriodo(string codEntid, string cdPlano)
+        [HttpGet("porCodEntidPlano/{oidAcesso}/{codEntid}/{cdPlano}")]
+        public virtual IActionResult GetTiposPorFundacaoPlanoPeriodo(int oidAcesso, string codEntid, string cdPlano)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.EXTRATO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var fichaFinanceiraProxy = new FichaFinanceiraProxy();
 

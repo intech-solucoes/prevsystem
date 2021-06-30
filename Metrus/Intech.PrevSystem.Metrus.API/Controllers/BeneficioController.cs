@@ -1,7 +1,9 @@
-﻿using Intech.Lib.Util.Date;
+﻿using Intech.Lib.Log.Core;
+using Intech.Lib.Util.Date;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
 using Intech.PrevSystem.Metrus.Negocio;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,11 +23,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         private IEnumerable<FaixaValorContribEntidade> ContribuicoesEspeciaisParticipante;
         private IEnumerable<FaixaValorContribEntidade> ContribuicoesEspeciaisPatrocinadora;
 
-        [HttpGet("parametros/{codEntid}")]
-        public IActionResult BuscarParametros(string codEntid)
+        [HttpGet("parametros/{oidAcesso}/{codEntid}")]
+        public IActionResult BuscarParametros(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.BENEFICIO_PARAMETROS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(codEntid);
                 var plano = new PlanoVinculadoProxyMetrus().BuscarPorFundacaoEmpresaMatriculaComModalidades(funcionario, false).First();
                 var suc = new IndiceValoresProxy().BuscarUltimoPorCodigo("SUC").First();
@@ -46,11 +51,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpPost("simular")]
-        public IActionResult Simular(ParametrosSimulacaoBeneficio parametros)
+        [HttpPost("simular/{oidAcesso}")]
+        public IActionResult Simular([FromBody] ParametrosSimulacaoBeneficio parametros, int oidAcesso)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.BENEFICIO_SIMULAR);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var funcionario = new FuncionarioProxy().BuscarPorCodEntid(parametros.CodEntid);
                 var plano = new PlanoVinculadoProxyMetrus().BuscarPorFundacaoEmpresaMatriculaComModalidades(funcionario, false).First();
                 var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(parametros.CodEntid);

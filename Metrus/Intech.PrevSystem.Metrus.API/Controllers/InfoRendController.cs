@@ -1,4 +1,6 @@
 ﻿#region Usings
+using Intech.Lib.Log.Core;
+using Intech.PrevSystem.Metrus.Negocio.Constantes;
 using Intech.PrevSystem.Negocio.Proxy;
 using Microsoft.AspNetCore.Mvc;
 using System; 
@@ -10,11 +12,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     [ApiController]
     public class InfoRendController : Controller
     {
-        [HttpGet("datasPorCodEntid/{codEntid}")]
-        public IActionResult BuscarDatas(string codEntid)
+        [HttpGet("datasPorCodEntid/{oidAcesso}/{codEntid}")]
+        public IActionResult BuscarDatas(int oidAcesso, string codEntid)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.INFO_REND_DATAS);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
 
                 return Json(new HeaderInfoRendProxy().BuscarReferenciasPorCPF(dadosPessoais.CPF_CGC));
@@ -25,11 +30,14 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
             }
         }
 
-        [HttpGet("porCodEntidAnoReferencia/{codEntid}/{referencia}")]
-        public IActionResult BuscarPorReferencia(string codEntid, decimal referencia)
+        [HttpGet("porCodEntidAnoReferencia/{oidAcesso}/{codEntid}/{referencia}")]
+        public IActionResult BuscarPorReferencia(int oidAcesso, string codEntid, decimal referencia)
         {
             try
             {
+                var funcionalidade = new FuncionalidadeProxy().BuscarPorNumFuncionalidade(DMN_FUNCIONALIDADE.INFO_REND_POR_ANO);
+                new Logger().CriarLog(oidAcesso, funcionalidade.OID_FUNCIONALIDADE);
+
                 var dadosPessoais = new DadosPessoaisProxy().BuscarPorCodEntid(codEntid);
                 return Json(new HeaderInfoRendProxy().BuscarPorCpfReferencia(dadosPessoais.CPF_CGC, referencia));
             }

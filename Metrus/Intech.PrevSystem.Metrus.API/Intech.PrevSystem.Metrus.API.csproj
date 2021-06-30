@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>1.5.3</Version>
+    <Version>1.5.4</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\lib\Intech.Lib.Log\Intech.Lib.Log.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj" />

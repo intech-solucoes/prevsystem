@@ -1,3 +1,9 @@
-﻿{
-    "nomeTabela": "CS_TEMPO_SERVICO"
+{
+  "nomeTabela": "CS_TEMPO_SERVICO",
+  "colunasExtras": [
+    {
+      "nome": "DS_EMPREGADOR",
+      "tipo": "string"
+    }
+  ]
 }

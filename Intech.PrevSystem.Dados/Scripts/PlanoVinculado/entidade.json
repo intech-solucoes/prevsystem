@@ -1,80 +1,88 @@
-﻿{
-    "nomeTabela": "CS_PLANOS_VINC",
-    "colunasExtras": [
-        {
-            "nome": "DS_PERFIL_INVEST",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "CD_CATEGORIA",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_CATEGORIA",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_PLANO",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DS_SIT_PLANO",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "COD_CNPB",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "SalarioContribuicao",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "PercentualContribuicao",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "ProcessoBeneficio",
-            "tipo": "ProcessoBeneficioEntidade",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "Modalidades",
-            "tipo": "List<ModalidadeEntidade>",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "UltimoSalario",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-            "nome": "CD_EMPRESA",
-            "tipo": "string",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "DT_INIC_VALIDADE",
-            "tipo": "DateTime",
-            "aceitaNulo": true
-        },
-        {
-            "nome": "VL_BENEF_SALDADO_ATUAL",
-            "tipo": "decimal",
-            "aceitaNulo": false
-        },
-        {
-          "nome": "VL_BENEF_SALDADO_INICIAL",
-          "tipo": "decimal",
-          "aceitaNulo": false
-        }
-    ]
+{
+  "nomeTabela": "CS_PLANOS_VINC",
+  "colunasExtras": [
+    {
+      "nome": "DS_PERFIL_INVEST",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "CD_CATEGORIA",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_CATEGORIA",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_PLANO",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DS_SIT_PLANO",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "COD_CNPB",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "SalarioContribuicao",
+      "tipo": "decimal",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "PercentualContribuicao",
+      "tipo": "decimal",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "ProcessoBeneficio",
+      "tipo": "ProcessoBeneficioEntidade",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "Modalidades",
+      "tipo": "List<ModalidadeEntidade>",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "UltimoSalario",
+      "tipo": "decimal",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "CD_EMPRESA",
+      "tipo": "string",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "DT_INIC_VALIDADE",
+      "tipo": "DateTime",
+      "aceitaNulo": true
+    },
+    {
+      "nome": "VL_BENEF_SALDADO_ATUAL",
+      "tipo": "decimal",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "VL_BENEF_SALDADO_INICIAL",
+      "tipo": "decimal",
+      "aceitaNulo": false
+    },
+    {
+      "nome": "DS_TEMPO_PLANO",
+      "tipo": "string"
+    },
+    {
+      "nome": "DataUltimoSalario",
+      "tipo": "DateTime"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
 {
     public class RotasApi
     {
+        public const string Adesao = "api/adesao";
         public const string DadosPessoais = "api/dadosPessoais";
         public const string FichaFinanceira = "api/fichaFinanceira";
         public const string FichaFinanceiraAssistido = "api/fichaFinanceiraAssistido";

@@ -58,5 +58,7 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public DateTime? DT_INIC_VALIDADE { get; set; }
 		[Write(false)] public decimal VL_BENEF_SALDADO_ATUAL { get; set; }
 		[Write(false)] public decimal VL_BENEF_SALDADO_INICIAL { get; set; }
+		[Write(false)] public string DS_TEMPO_PLANO { get; set; }
+		[Write(false)] public DateTime DataUltimoSalario { get; set; }
 	}
 }

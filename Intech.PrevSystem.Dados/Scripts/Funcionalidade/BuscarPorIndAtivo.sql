@@ -3,7 +3,7 @@
     Retorno
         -FuncionalidadeEntidade
 	Parametros
-        -@IND_ATIVO:string
+        -IND_ATIVO:string
 */
 
 SELECT *   

@@ -45,7 +45,7 @@ namespace Intech.PrevSystem.Entidades
 		public decimal? TEMPO_TIPO_CONTRIBUICAO { get; set; }
 		public decimal? LIMITE_TIPO_CONTRIBUICAO { get; set; }
 		public decimal? MAX_CONTR_REFORMADOS { get; set; }
-		public string CATEGORIA_DIFERIDO { get; set; }
+        public string CATEGORIA_DIFERIDO { get; set; }
 		public decimal? CARENCIA_MIN { get; set; }
 		public decimal? CARENCIA_MAX { get; set; }
 		public string CONSIDERAR_CARENCIA_CONCESSAO { get; set; }

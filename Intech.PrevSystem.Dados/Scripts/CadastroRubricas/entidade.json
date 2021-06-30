@@ -1,3 +1,25 @@
-﻿{
-    "nomeTabela": "CC_CADASTRO_RUBRICAS"
+{
+  "nomeTabela": "CC_CADASTRO_RUBRICAS",
+  "colunasExtras": [
+    {
+      "nome": "COD_IND_CONC",
+      "tipo": "string"
+    },
+    {
+      "nome": "DS_RUBRICA",
+      "tipo": "string"
+    },
+    {
+      "nome": "VariacaoAcumuladaIndice",
+      "tipo": "decimal"
+    },
+    {
+      "nome": "ValorIndiceMes",
+      "tipo": "decimal"
+    },
+    {
+      "nome": "ValorCorrigido",
+      "tipo": "decimal"
+    }
+  ]
 }

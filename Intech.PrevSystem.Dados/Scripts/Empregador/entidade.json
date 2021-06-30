@@ -1,3 +1,4 @@
-﻿{
-    "nomeTabela": "CS_EMPREGADOR"
+{
+  "nomeTabela": "CS_EMPREGADOR",
+  "colunasExtras": []
 }

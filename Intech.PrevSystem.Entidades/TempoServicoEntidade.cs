@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("CS_TEMPO_SERVICO")]
@@ -18,5 +18,6 @@ namespace Intech.PrevSystem.Entidades
 		public decimal QTDE_ANOS { get; set; }
 		public decimal QTDE_MESES { get; set; }
 		public decimal QTDE_DIAS { get; set; }
+		[Write(false)] public string DS_EMPREGADOR { get; set; }
 	}
 }

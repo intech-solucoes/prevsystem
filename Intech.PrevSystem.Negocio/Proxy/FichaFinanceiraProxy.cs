@@ -350,7 +350,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
             foreach(var contrib in contribs)
             {
-                ParseDatas(contrib);
+                try
+                {
+                    ParseDatas(contrib);
+                } catch
+                {
+
+                }
             }
 
             return contribs;
@@ -392,8 +398,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
             {
                 contrib.DataCompetencia = new DateTime(Convert.ToInt32(contrib.ANO_COMP), Convert.ToInt32(contrib.MES_COMP), 1);
             }
-
-            contrib.DataReferencia = new DateTime(Convert.ToInt32(contrib.ANO_REF), Convert.ToInt32(contrib.MES_REF), 1);
         }
 
         #endregion

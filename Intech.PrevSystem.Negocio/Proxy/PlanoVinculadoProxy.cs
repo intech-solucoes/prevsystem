@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Intech.Lib.Util.Date;
 using Intech.PrevSystem.Dados.DAO;
 using Intech.PrevSystem.Entidades;
 using Intech.PrevSystem.Entidades.Constantes;
@@ -13,6 +14,18 @@ namespace Intech.PrevSystem.Negocio.Proxy
     public class PlanoVinculadoProxy : PlanoVinculadoDAO
     {
         public PlanoVinculadoProxy(IDbTransaction tx = null) : base(tx) { }
+
+        public override List<PlanoVinculadoEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
+        {
+            var planos = base.BuscarPorFundacaoInscricao(CD_FUNDACAO, NUM_INSCRICAO);
+
+            planos.ForEach(plano =>
+            {
+                plano.DS_TEMPO_PLANO = new Intervalo(DateTime.Now, plano.DT_INSC_PLANO, new CalculoAnosMesesDiasAlgoritmo2()).ToShortString();
+            });
+
+            return planos;
+        }
 
         public override List<PlanoVinculadoEntidade> BuscarPorFundacaoEmpresaMatricula(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA)
         {

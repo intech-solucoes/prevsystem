@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Intech.Lib.Dapper;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Entidades;

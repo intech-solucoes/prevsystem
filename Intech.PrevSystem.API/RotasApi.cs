@@ -1,4 +1,4 @@
-﻿namespace Intech.PrevSystem.API
+namespace Intech.PrevSystem.API
 {
     public class RotasApi
     {

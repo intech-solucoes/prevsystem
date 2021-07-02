@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Dapper.Contrib.Extensions;
-
+using Intech.PrevSystem.Entidades.Outros;
 namespace Intech.PrevSystem.Entidades
 {
 	[Table("CE_TAXAS_ENCARGOS_PLANO")]
-	public class TaxaEncargoPlanoEntidade
+	public class TaxasEncargosPlanoEntidade
 	{
 		public string CD_FUNDACAO { get; set; }
 		public string CD_EMPRESA { get; set; }

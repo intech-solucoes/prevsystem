@@ -1,7 +1,7 @@
 ﻿/*Config
     RetornaLista
     Retorno
-        -TaxaEncargoPlanoEntidade
+        -TaxasEncargosPlanoEntidade
     Parametros
         -CD_FUNDACAO:string
         -CD_EMPRESA:string

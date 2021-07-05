@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Intech.PrevSystem.Entidades
 {
-    public class Faelce_ExtratoAssistidoCDEntidade
+    public class ExtratoAssistidoCDEntidade
     {
         public string CD_EMPRESA { get; set; }
         public string CD_PLANO { get; set; }

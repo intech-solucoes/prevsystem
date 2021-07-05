@@ -1,7 +1,7 @@
 ﻿/*Config
     RetornaLista
     Retorno
-        -Faelce_ExtratoAssistidoCDEntidade
+        -ExtratoAssistidoCDEntidade
     Parametros
         -CD_FUNDACAO:string
         -CD_EMPRESA:string

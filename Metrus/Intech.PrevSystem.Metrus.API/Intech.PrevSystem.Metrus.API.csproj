@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <Version>1.5.4</Version>
+    <Version>1.6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Reporting.Core" Version="18.1.6" />
     <PackageReference Include="FinancialFormulas" Version="1.2.2" />
     <PackageReference Include="Intech.Lib.JWT" Version="1.1.2" />
+    <PackageReference Include="Intech.Lib.Log" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="System.Private.ServiceModel" Version="4.5.3" />
@@ -19,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\lib\Intech.Lib.Log\Intech.Lib.Log.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Dados\Intech.PrevSystem.Dados.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Entidades\Intech.PrevSystem.Entidades.csproj" />
     <ProjectReference Include="..\..\Intech.PrevSystem.Negocio\Intech.PrevSystem.Negocio.csproj" />

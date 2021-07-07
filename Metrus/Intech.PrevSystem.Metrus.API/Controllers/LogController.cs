@@ -2,6 +2,7 @@
 using Intech.Lib.Log.Entidades;
 using Intech.Lib.Web;
 using Intech.PrevSystem.Negocio.Proxy;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -12,6 +13,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
     public class LogController : ControllerBase
     {
         [HttpPost("[action]")]
+        [Authorize("Bearer")]
         public IActionResult CriarAcesso([FromBody] LogAcessoEntidade logAcesso)
         {
             try
@@ -29,6 +31,7 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
         }
 
         [HttpGet("[action]/{oidAcesso}/{numFuncionalidade}")]
+        [Authorize("Bearer")]
         public IActionResult CriarLog(decimal oidAcesso, decimal numFuncionalidade)
         {
             try
@@ -45,5 +48,47 @@ namespace Intech.PrevSystem.Metrus.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("[action]/{cpf}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarPorCPF(string cpf)
+        {
+            try
+            {
+                var config = AppSettings.Get();
+                var logger = new Logger(config.ConnectionString, config.ConnectionProvider);
+                var logs = logger.BuscarPorCpf(cpf);
+
+                return Ok(logs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("[action]/{numFuncionalidade}")]
+        [Authorize("Bearer")]
+        public IActionResult BuscarPorNumFuncionalidade(int numFuncionalidade)
+        {
+            try
+            {
+                var config = AppSettings.Get();
+                var logger = new Logger(config.ConnectionString, config.ConnectionProvider);
+                var logs = logger.BuscarPorNumFuncionalidade(numFuncionalidade);
+
+                return Ok(logs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+
+    public class AutenticacaoLogEntidade
+    {
+        public string Usuario { get; set; }
+        public string Senha { get; set; }
     }
 }

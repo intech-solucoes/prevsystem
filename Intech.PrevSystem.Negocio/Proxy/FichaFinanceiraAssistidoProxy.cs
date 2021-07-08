@@ -43,6 +43,38 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return datas;
         }
 
+        public override List<FichaFinanceiraAssistidoEntidade> BuscarDatasUltimas12(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO)
+        {
+            var datas = base.BuscarDatasUltimas12(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO).ToList();
+
+            foreach (var data in datas)
+            {
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, data.DT_REFERENCIA, data.CD_TIPO_FOLHA);
+
+                data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
+                data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);
+                data.VAL_LIQUIDO = data.VAL_BRUTO - Math.Abs(data.VAL_DESCONTOS.Value);
+            }
+
+            return datas;
+        }
+
+        public override List<FichaFinanceiraAssistidoEntidade> BuscarDatasPorRecebedorUltimas12(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, int SEQ_RECEBEDOR, string CD_PLANO)
+        {
+            var datas = base.BuscarDatasPorRecebedorUltimas12(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO).ToList();
+
+            datas.ForEach(data =>
+            {
+                var rubricasData = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SEQ_RECEBEDOR, CD_PLANO, data.DT_REFERENCIA, data.CD_TIPO_FOLHA);
+
+                data.VAL_BRUTO = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "P").Sum(x => x.VALOR_MC);
+                data.VAL_DESCONTOS = rubricasData.Where(x => x.RUBRICA_PROV_DESC == "D").Sum(x => x.VALOR_MC);
+                data.VAL_LIQUIDO = data.VAL_BRUTO - Math.Abs(data.VAL_DESCONTOS.Value);
+            });
+
+            return datas;
+        }
+
         public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetencia(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_COMPETENCIA, string CD_TIPO_FOLHA, int? SeqRecebedor = null)
             => BuscarRubricasPorFundacaoEmpresaMatriculaPlanoCompetenciaEspecie(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_COMPETENCIA, CD_TIPO_FOLHA, null, SeqRecebedor);
 
@@ -131,38 +163,13 @@ namespace Intech.PrevSystem.Negocio.Proxy
         public ContrachequeEntidade BuscarRubricasPorFundacaoEmpresaMatriculaPlanoReferenciaEspecie(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, DateTime DT_REFERENCIA, string CD_TIPO_FOLHA, string CD_ESPECIE, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas;
-                
-            if(SeqRecebedor.HasValue)
+
+            if (SeqRecebedor.HasValue)
                 rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolhaRecebedor(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, SeqRecebedor.Value, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
             else
                 rubricas = base.BuscarPorFundacaoEmpresaMatriculaPlanoReferenciaTipoFolha(CD_FUNDACAO, CD_EMPRESA, NUM_MATRICULA, CD_PLANO, DT_REFERENCIA, CD_TIPO_FOLHA).ToList();
-
-            if(!string.IsNullOrEmpty(CD_ESPECIE))
-                rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();
-
-            var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
-            var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
-
-            foreach (var rubrica in descontos)
-                rubrica.VALOR_MC *= -1;
-
-            var bruto = proventos.Sum(x => x.VALOR_MC);
-            var valDescontos = descontos.Sum(x => x.VALOR_MC);
-            var liquido = bruto - Math.Abs(valDescontos.Value);
             
-            return new ContrachequeEntidade
-            {
-                Proventos = proventos,
-                Descontos = descontos,
-                Resumo = new ContrachequeResumo {
-                    Referencia = DT_REFERENCIA,
-                    Bruto = bruto,
-                    Descontos = valDescontos,
-                    Liquido = liquido,
-                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
-                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
-                }
-            };
+            return MontarContracheque(DT_REFERENCIA, CD_ESPECIE, rubricas);
         }
 
         public ContrachequeEntidade BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlanoProcesso(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, string CD_ESPECIE, string ANO_PROCESSO, string NUM_PROCESSO, int? SeqRecebedor = null)
@@ -266,6 +273,37 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     TipoFolha = rubricas.First().CD_TIPO_FOLHA,
                     DesTipoFolha = rubricas.First().DS_TIPO_FOLHA,
                     Indice = indice
+                }
+            };
+        }
+
+        private ContrachequeEntidade MontarContracheque(DateTime DT_REFERENCIA, string CD_ESPECIE, List<FichaFinanceiraAssistidoEntidade> rubricas)
+        {
+            if (!string.IsNullOrEmpty(CD_ESPECIE))
+                rubricas = rubricas.Where(x => x.CD_ESPECIE == CD_ESPECIE).ToList();
+
+            var proventos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "P").ToList();
+            var descontos = rubricas.Where(x => x.RUBRICA_PROV_DESC == "D").ToList();
+
+            foreach (var rubrica in descontos)
+                rubrica.VALOR_MC *= -1;
+
+            var bruto = proventos.Sum(x => x.VALOR_MC);
+            var valDescontos = descontos.Sum(x => x.VALOR_MC);
+            var liquido = bruto - Math.Abs(valDescontos.Value);
+
+            return new ContrachequeEntidade
+            {
+                Proventos = proventos,
+                Descontos = descontos,
+                Resumo = new ContrachequeResumo
+                {
+                    Referencia = DT_REFERENCIA,
+                    Bruto = bruto,
+                    Descontos = valDescontos,
+                    Liquido = liquido,
+                    TipoFolha = rubricas.First().CD_TIPO_FOLHA,
+                    DesTipoFolha = rubricas.First().DS_TIPO_FOLHA
                 }
             };
         }

@@ -165,7 +165,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             };
         }
 
-        public dynamic BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlanoProcesso(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, string CD_ESPECIE, string ANO_PROCESSO, string NUM_PROCESSO, int? SeqRecebedor = null)
+        public ContrachequeEntidade BuscarUltimaFolhaPorFundacaoEmpresaMatriculaPlanoProcesso(string CD_FUNDACAO, string CD_EMPRESA, string NUM_MATRICULA, string CD_PLANO, string CD_ESPECIE, string ANO_PROCESSO, string NUM_PROCESSO, int? SeqRecebedor = null)
         {
             List<FichaFinanceiraAssistidoEntidade> rubricas = new List<FichaFinanceiraAssistidoEntidade>();
 
@@ -210,11 +210,11 @@ namespace Intech.PrevSystem.Negocio.Proxy
                 dtReferencia = rubricas.First().DT_REFERENCIA;
             }
 
-            return new
+            return new ContrachequeEntidade
             {
                 Proventos = proventos,
                 Descontos = descontos,
-                Resumo = new
+                Resumo = new ContrachequeResumo
                 {
                     Referencia = dtReferencia,
                     Bruto = bruto,

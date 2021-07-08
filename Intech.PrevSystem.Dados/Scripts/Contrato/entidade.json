@@ -79,6 +79,14 @@
     {
       "nome": "ListaSaldosDevedores",
       "tipo": "List<SaldoDevedorEntidade>"
+    },
+    {
+      "nome": "Natureza",
+      "tipo": "NaturezaEntidade"
+    },
+    {
+      "nome": "NUM_MATRICULA",
+      "tipo": "string"
     }
   ]
 }

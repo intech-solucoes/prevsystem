@@ -17,6 +17,9 @@ namespace Intech.PrevSystem.Negocio.Emprestimo
         public string CdPlano { get; }
         public DateTime DataReferencia { get; }
 
+        public string ControleContratosAtivos => string.IsNullOrEmpty(Parametros.CONTROLE_CONTR_ATIVOS) ? "P" : Parametros.CONTROLE_CONTR_ATIVOS;
+        public decimal QuantidadeContratosAtivos => Parametros.MAX_CONTR_ATIVOS ?? 0;
+
         public EmprestimoHelper(string cdFundacao, string cdEmpresa, decimal cdModal, decimal cdNatur, string cdPlano, DateTime dataReferencia)
         {
             Parametros = new ParametrosProxy().Buscar();
@@ -32,7 +35,7 @@ namespace Intech.PrevSystem.Negocio.Emprestimo
         {
             List<TaxaEncargo> taxasEncargos;
 
-            if (!string.IsNullOrEmpty(Parametros.TAXA_EMPR_PLANO) && Parametros.TAXA_EMPR_PLANO == DMN_SIM_NAO.SIM)
+            if (!string.IsNullOrEmpty(Parametros.TAXA_EMPR_PLANO) && Parametros.TAXA_EMPR_PLANO == DMN_SN.SIM)
             {
                 var taxaEncargoPlano = new TaxasEncargosPlanoProxy().BuscarPorFundacaoEmpresaModalidadeNaturezaPlanoDtInicioVigencia(CdFundacao, CdEmpresa, CdModal, CdNatur, CdPlano, DataReferencia);
                 taxasEncargos = TaxaEncargo.Criar(taxaEncargoPlano).ToList();
@@ -43,14 +46,14 @@ namespace Intech.PrevSystem.Negocio.Emprestimo
                 taxasEncargos = TaxaEncargo.Criar(taxaEncargo).ToList();
             }
 
-            return taxasEncargos;
+            return taxasEncargos.OrderBy(x => x.DT_INIC_VIGENCIA).ToList();
         }
 
         public List<TaxaConcessao> BuscarTaxaConcessao()
         {
             List<TaxaConcessao> taxasConcessao;
 
-            if (!string.IsNullOrEmpty(Parametros.TAXA_EMPR_PLANO) && Parametros.TAXA_EMPR_PLANO == DMN_SIM_NAO.SIM)
+            if (!string.IsNullOrEmpty(Parametros.TAXA_EMPR_PLANO) && Parametros.TAXA_EMPR_PLANO == DMN_SN.SIM)
             {
                 var taxaConcessaoPlano = new TaxasConcessaoPlanoProxy().BuscarPorFundacaoEmpresaModalidadeNaturezaPlano(CdFundacao, CdEmpresa, CdModal, CdNatur, CdPlano);
                 taxasConcessao = TaxaConcessao.Criar(taxaConcessaoPlano).ToList();

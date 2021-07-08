@@ -137,10 +137,11 @@ namespace Intech.PrevSystem.Entidades
 		[Write(false)] public string NOME_PENSIONISTA { get; set; }
 		[Write(false)] public string CPF_PENSIONISTA { get; set; }
 		[Write(false)] public string DS_PLANO { get; set; }
-		[Write(false)] public string NUM_MATRICULA { get; set; }
 		[Write(false)] public string DS_NATUR { get; set; }
 		[Write(false)] public string DS_MODAL { get; set; }
 		[Write(false)] public string SITUACAO_PGTO { get; set; }
 		[Write(false)] public List<SaldoDevedorEntidade> ListaSaldosDevedores { get; set; }
+		[Write(false)] public NaturezaEntidade Natureza { get; set; }
+		[Write(false)] public string NUM_MATRICULA { get; set; }
 	}
 }

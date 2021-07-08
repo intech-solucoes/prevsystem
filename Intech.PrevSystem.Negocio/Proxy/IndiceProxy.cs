@@ -33,7 +33,6 @@ namespace Intech.PrevSystem.Negocio.Proxy
 
         public IndiceValoresEntidade BuscarUltimoPorCodigoData(string COD_IND)
         {
-
             var valorindice = new IndiceValoresProxy().BuscarUltimoPorCodigo(COD_IND).FirstOrDefault();
 
             return valorindice;
@@ -57,8 +56,26 @@ namespace Intech.PrevSystem.Negocio.Proxy
                     .OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND <= data)
                     .VALOR_IND;
             }
+        }
 
-            return 0;
+        public decimal BuscarVariacaoEm(string codigo, DateTime data)
+        {
+            var indice = BuscarPorCodigo(codigo);
+
+            if (indice.PERIODIC == "MEN")
+            {
+                return indice.VALORES
+                    .OrderBy(x => x.DT_IND)
+                    .LastOrDefault(x => x.DT_IND.MenorOuIgualQueMesAno(data))
+                    .VARIACAO_IND;
+            }
+            else
+            {
+                return indice
+                    .VALORES
+                    .OrderBy(x => x.DT_IND).LastOrDefault(x => x.DT_IND <= data)
+                    .VARIACAO_IND;
+            }
         }
     }
 }

@@ -21,5 +21,6 @@ namespace Intech.PrevSystem.Entidades.Outros
         public decimal? Liquido { get; set; }
         public string TipoFolha { get; set; }
         public string DesTipoFolha { get; set; }
+        public IndiceValoresEntidade Indice { get; set; }
     }
 }

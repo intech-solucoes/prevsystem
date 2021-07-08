@@ -72,10 +72,12 @@ namespace Intech.PrevSystem.Entidades.Outros
         public DateTime DataInscricao { get; set; }
         public string FormaCredito { get; set; }
         public decimal Carencia { get; set; }
-        public TaxaConcessaoPlanoEntidade TaxasConcessaoPlano { get; set; }
+        public TaxasConcessaoPlanoEntidade TaxasConcessaoPlano { get; set; }
         public TaxasConcessaoEntidade TaxaConcessao { get; set; }
-        public TaxaEncargoPlanoEntidade TaxasEncargoPlano { get; set; }
+        public TaxasEncargosPlanoEntidade TaxasEncargoPlano { get; set; }
         public TaxasEncargosEntidade TaxaEncargo { get; set; }
+        public string CarenciaDescricao { get; set; }
+        public ConcessaoEntidade Concessao { get; set; }
 
         public ContratoDisponivelEntidade() { }
 

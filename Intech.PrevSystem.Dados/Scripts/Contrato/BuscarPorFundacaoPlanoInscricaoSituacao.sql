@@ -6,7 +6,7 @@
         -CD_FUNDACAO:string
         -CD_PLANO:string
         -NUM_INSCRICAO:string
-        -CD_SITUACAO:string
+        -CD_SITUACAO:decimal
 */
 
 SELECT * 

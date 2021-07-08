@@ -1,0 +1,159 @@
+﻿using Intech.PrevSystem.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Intech.PrevSystem.Negocio.Emprestimo
+{
+    public class TaxaEncargo
+    {
+        public decimal SEQUENCIA { get; set; }
+        public string CORRIGIR_SALDO_DEV { get; set; }
+        public string CORRIGE_SALDO_RENOVACAO { get; set; }
+        public string CORRIGE_SALDO_QUITACAO_MANUAL { get; set; }
+        public string COD_IND_JU_MORA { get; set; }
+        public string CONSIDERAR_JUROS_CONC { get; set; }
+        public string DIA_PRO_RATA_SALDO { get; set; }
+        public string CARENCIA_DIA_UTIL { get; set; }
+        public string CARENCIA_VENCIMENTO { get; set; }
+        public string CORRIGIR_PREST_ATRASO { get; set; }
+        public string CONSIDERAR_CORR_PREST { get; set; }
+        public string CONSIDERAR_MULTA { get; set; }
+        public string ConsiderarIofComplInad { get; set; }
+        public decimal? PERIODO_CARENCIA { get; set; }
+        public decimal? TX_MULTA { get; set; }
+        public decimal? TX_IOF { get; set; }
+        public decimal? TX_IOF_FIXA { get; set; }
+        public decimal? TX_JUROS_MORA { get; set; }
+        public decimal TX_ADM { get; set; }
+        public decimal TX_INAD { get; set; }
+        public decimal TxSeguro { get; set; }
+        public DateTime DT_INIC_VIGENCIA { get; set; }
+
+        public string CobrarJurosNaReforma { get; set; }
+        public DateTime? DT_TERM_VIGENCIA { get; set; }
+        public string TP_COBRANCA_IOF { get; set; }
+
+        public string TP_COBRANCA_TX { get; set; }
+        public string CONSIDERAR_RENOVACOES_ADM { get; set; }
+
+        public string TP_COBRANCA_SEGURO { get; set; }
+        public string CONSIDERAR_RENOVACOES_SEGUROS { get; set; }
+
+        public string TP_COBRANCA_INAD { get; set; }
+        public string CONSIDERAR_RENOVACOES_INAD { get; set; }
+
+        public string TipoCalculoAdministracao { get; set; }
+
+        public string SeguroTabelado { get; set; }
+
+        public string IOFIn1609 { get; set; }
+
+        #region Métodos Publicos
+
+        public static IEnumerable<TaxaEncargo> Criar(List<TaxasEncargosEntidade> dtEncargos)
+        {
+            foreach (var encargo in dtEncargos)
+            {
+                yield return Criar(encargo);
+            }
+        }
+
+        public static IEnumerable<TaxaEncargo> Criar(TaxaEncargoPlanoEntidade dtEncargos)
+        {
+            foreach (var encargo in dtEncargos)
+            {
+                yield return Criar(encargo);
+            }
+        }
+
+        public static TaxaEncargo Criar(TaxasEncargosEntidade row)
+        {
+            return new TaxaEncargo
+            {
+                COD_IND_JU_MORA = row.COD_IND_JU_MORA,
+                CONSIDERAR_JUROS_CONC = row.CONSIDERAR_JUROS_CONC,
+                CORRIGE_SALDO_QUITACAO_MANUAL = row.CORRIGE_SALDO_QUITACAO_MANUAL,
+                CORRIGE_SALDO_RENOVACAO = row.CORRIGE_SALDO_RENOVACAO,
+                CORRIGIR_SALDO_DEV = row.CORRIGIR_SALDO_DEV,
+                DIA_PRO_RATA_SALDO = row.DIA_PRO_RATA_SALDO,
+                SEQUENCIA = row.SEQUENCIA,
+                CARENCIA_DIA_UTIL = row.CARENCIA_DIA_UTIL,
+                CARENCIA_VENCIMENTO = row.CARENCIA_VENCIMENTO,
+                CONSIDERAR_CORR_PREST = row.CONSIDERAR_CORR_PREST,
+                CONSIDERAR_MULTA = row.CONSIDERAR_MULTA,
+                CORRIGIR_PREST_ATRASO = row.CORRIGIR_PREST_ATRASO,
+                PERIODO_CARENCIA = row.PERIODO_CARENCIA,
+                TX_JUROS_MORA = row.TX_JUROS_MORA,
+                TX_MULTA = row.TX_MULTA,
+                DT_INIC_VIGENCIA = row.DT_INIC_VIGENCIA,
+                DT_TERM_VIGENCIA = row.DT_TERM_VIGENCIA,
+                TP_COBRANCA_IOF = row.TP_COBRANCA_IOF,
+                TX_IOF = row.TX_IOF,
+                TX_IOF_FIXA = row.TX_IOF_FIXA,
+                TP_COBRANCA_TX = row.TP_COBRANCA_TX,
+                TP_COBRANCA_SEGURO = row.TP_COBRANCA_SEGURO,
+                CONSIDERAR_RENOVACOES_ADM = row.CONSIDERAR_RENOVACOES_ADM,
+                CONSIDERAR_RENOVACOES_SEGUROS = row.CONSIDERAR_RENOVACOES_SEGUROS,
+                CONSIDERAR_RENOVACOES_INAD = row.CONSIDERAR_RENOVACOES_INAD,
+                TP_COBRANCA_INAD = row.TP_COBRANCA_INAD,
+                TX_ADM = row.TX_ADM,
+                TX_INAD = row.IsTX_INADNull() ? 0 : (decimal)row.TX_INAD,
+                TxSeguro = row.IsTX_SEGURONull() ? 0 : (decimal)row.TX_SEGURO,
+                CobrarJurosNaReforma = row.IsCOBRAR_JUROS_NA_REFORMANull() ? "" : row.COBRAR_JUROS_NA_REFORMA,
+                ConsiderarIofComplInad = row.IsCONSIDERAR_IOF_COMPL_INADNull() ? "N" : row.CONSIDERAR_IOF_COMPL_INAD,
+                TipoCalculoAdministracao = row.IsTIPO_CALC_ADMNull() ? "" : row.TIPO_CALC_ADM,
+                SeguroTabelado = row.IsSEGURO_TABELADONull() ? string.Empty : row.SEGURO_TABELADO,
+                IOFIn1609 = row.IsIOF_IN1609Null() ? "N" : row.IOF_IN1609,
+            };
+        }
+
+        public static TaxaEncargoEntidade Criar(DataSetPRS.CE_TAXAS_ENCARGOS_PLANORow row)
+        {
+            return new TaxaEncargoEntidade
+            {
+                CodIndJuMora = row.IsCOD_IND_JU_MORANull() ? "" : row.COD_IND_JU_MORA,
+                ConsiderarJurosConc = row.IsCONSIDERAR_JUROS_CONCNull() ? "" : row.CONSIDERAR_JUROS_CONC,
+                CorrigeSaldoQuitacaoManual =
+                    row.IsCORRIGE_SALDO_QUITACAO_MANUALNull() ? "" : row.CORRIGE_SALDO_QUITACAO_MANUAL,
+                CorrigeSaldoRenovacao =
+                    row.IsCORRIGE_SALDO_RENOVACAONull() ? "" : row.CORRIGE_SALDO_RENOVACAO,
+                CorrigirSaldoDevedor = row.IsCORRIGIR_SALDO_DEVNull() ? "" : row.CORRIGIR_SALDO_DEV,
+                DiaProRataSaldo = row.IsDIA_PRO_RATA_SALDONull() ? "" : row.DIA_PRO_RATA_SALDO,
+                //Sequencia = row.IsSEQUENCIANull() ? 0 : row.SEQUENCIA,
+                Sequencia = row.SEQUENCIA,
+                CarenciaDiaUtil = row.CARENCIA_DIA_UTIL,
+                CarenciaVencimento = row.CARENCIA_VENCIMENTO,
+                ConsiderarCorrPrest = row.IsCONSIDERAR_CORR_PRESTNull() ? "" : row.CONSIDERAR_CORR_PREST,
+                ConsiderarMulta = row.CONSIDERAR_MULTA,
+                CorrigirPrestAtraso = row.IsCORRIGIR_PREST_ATRASONull() ? "" : row.CORRIGIR_PREST_ATRASO,
+                PeriodoCarencia = row.IsPERIODO_CARENCIANull() ? 0 : row.PERIODO_CARENCIA,
+                TxJurosMora = row.IsTX_JUROS_MORANull() ? 0 : (decimal)row.TX_JUROS_MORA,
+                TxMulta = row.IsTX_MULTANull() ? 0 : (decimal)row.TX_MULTA,
+                DataInicioVigencia = row.DT_INIC_VIGENCIA,
+                DataTerminoVigencia = row.IsDT_TERM_VIGENCIANull() ? (DateTime?)null : row.DT_TERM_VIGENCIA,
+                TipoCobrancaIOF = row.IsTP_COBRANCA_IOFNull() ? "" : row.TP_COBRANCA_IOF,
+                TxIof = row.IsTX_IOFNull() ? 0 : (decimal)row.TX_IOF,
+                TxIofFixa = row.IsTX_IOF_FIXANull() ? 0 : (decimal)row.TX_IOF_FIXA,
+                TipoCobrancaTaxa = row.TP_COBRANCA_TX,
+                TipoCobrancaSeguro = row.IsTP_COBRANCA_SEGURONull() ? "" : row.TP_COBRANCA_SEGURO,
+                ConsiderarRenovacoesAdm =
+                    row.IsCONSIDERAR_RENOVACOES_ADMNull() ? "" : row.CONSIDERAR_RENOVACOES_ADM,
+                ConsiderarRenovacoesSeguro =
+                    row.IsCONSIDERAR_RENOVACOES_SEGUROSNull() ? "" : row.CONSIDERAR_RENOVACOES_SEGUROS,
+                ConsiderarRenovacoesInadimplencia =
+                    row.IsCONSIDERAR_RENOVACOES_INADNull() ? "" : row.CONSIDERAR_RENOVACOES_INAD,
+                TipoCobrancaInadimplencia = row.IsTP_COBRANCA_INADNull() ? "" : row.TP_COBRANCA_INAD,
+                TxAdm = row.IsTX_ADMNull() ? 0 : (decimal)row.TX_ADM,
+                TxInad = row.IsTX_INADNull() ? 0 : (decimal)row.TX_INAD,
+                TxSeguro = row.IsTX_SEGURONull() ? 0 : (decimal)row.TX_SEGURO,
+                CobrarJurosNaReforma = row.IsCOBRAR_JUROS_NA_REFORMANull() ? "" : row.COBRAR_JUROS_NA_REFORMA,
+                ConsiderarIofComplInad = row.IsCONSIDERAR_IOF_COMPL_INADNull() ? "N" : row.CONSIDERAR_IOF_COMPL_INAD,
+                TipoCalculoAdministracao = row.IsTIPO_CALC_ADMNull() ? "" : row.TIPO_CALC_ADM,
+                IOFIn1609 = row.IsIOF_IN1609Null() ? "N" : row.IOF_IN1609,
+            };
+        }
+
+        #endregion
+    }
+}

@@ -104,5 +104,78 @@ namespace Intech.PrevSystem.Entidades
 
         public DadosEConsig DadosEConsig { get; set; }
 
+        public static ConcessaoEntidade Criar(MargensPlanoEntidade margens, decimal origem, decimal valorMargemCalculada)
+        {
+            var concessao = new ConcessaoEntidade();
+            decimal taxaRedutoraPrest;
+            decimal txRedutoraReservaPoup = 100;
+
+            if (origem == 1) //ativo, patrocinado
+            {
+                concessao.TetoMaximo = margens.TETO_MAXIMO_ATIVO ?? 9999999;
+                concessao.TetoMinimo = margens.TETO_MINIMO_ATIVO ?? 0;
+                concessao.SSCA = margens.SSCA_ATIVO ?? "";
+                taxaRedutoraPrest = margens.TX_ATIVO_PREST_SP ?? 100;
+                txRedutoraReservaPoup = margens.TX_ATIVO_RP ?? 100;
+            }
+            else //assistido
+            {
+                concessao.TetoMaximo = margens.TETO_MAXIMO_ASSIST ?? 9999999;
+                concessao.TetoMinimo = margens.TETO_MINIMO_ASSISTIDO ?? 0;
+                concessao.SSCA = margens.SSCA_ASSIST ?? "";
+                taxaRedutoraPrest = margens.TX_ASSIST_MC ?? 100;
+            }
+
+            //silvio 10/12: parametro zerado nao permitindo emprestimo
+            taxaRedutoraPrest = taxaRedutoraPrest == 0 ? 100 : taxaRedutoraPrest;
+
+            concessao.TaxaMargemConsignavel = taxaRedutoraPrest;
+            concessao.MargemConsignavel = valorMargemCalculada;
+
+            concessao.MargemConsignavelCalculada = valorMargemCalculada * (taxaRedutoraPrest / 100);
+            concessao.FlagDataConversaoRP = margens.DT_CONVERSAO_RP ?? "";
+            concessao.TipoDataConversaoRP = margens.TP_DT_CONV_RP ?? "";
+            concessao.TaxaRedutoraReservaPoupanca = txRedutoraReservaPoup;
+            concessao.TipoDataConversaoRpAp = margens.TP_DT_CONV_RP_AP ?? "";
+            concessao.TipoDataConversaoRpDf = margens.TP_DT_CONV_RP_DF ?? "";
+
+            return concessao;
+        }
+
+        public static ConcessaoEntidade Criar(MargensEntidade margens, decimal origem, decimal valorMargemCalculada)
+        {
+            var concessao = new ConcessaoEntidade();
+            decimal taxaRedutoraPrest;
+            decimal txRedutoraReservaPoup = 100;
+
+            if (origem == 1) //ativo, patrocinado
+            {
+                concessao.TetoMaximo = margens.TETO_MAXIMO_ATIVO ?? 9999999;
+                concessao.TetoMinimo = margens.TETO_MINIMO_ATIVO ?? 0;
+                concessao.SSCA = margens.SSCA_ATIVO ?? "";
+                taxaRedutoraPrest = margens.TX_ATIVO_PREST_SP ?? 100;
+                txRedutoraReservaPoup = margens.TX_ATIVO_RP ?? 100;
+            }
+            else //assistido
+            {
+                concessao.TetoMaximo = margens.TETO_MAXIMO_ASSIST ?? 9999999;
+                concessao.TetoMinimo = margens.TETO_MINIMO_ASSISTIDO ?? 0;
+                concessao.SSCA = margens.SSCA_ASSIST ?? "";
+                taxaRedutoraPrest = margens.TX_ASSIST_MC ?? 100;
+            }
+
+            //silvio 10/12: parametro zerado nao permitindo emprestimo
+            taxaRedutoraPrest = taxaRedutoraPrest == 0 ? 100 : taxaRedutoraPrest;
+
+            concessao.TaxaMargemConsignavel = taxaRedutoraPrest;
+            concessao.MargemConsignavel = valorMargemCalculada;
+
+            concessao.MargemConsignavelCalculada = valorMargemCalculada * (taxaRedutoraPrest / 100);
+            concessao.FlagDataConversaoRP = margens.DT_CONVERSAO_RP ?? "";
+            concessao.TipoDataConversaoRP = margens.TP_DT_CONV_RP ?? "";
+            concessao.TaxaRedutoraReservaPoupanca = txRedutoraReservaPoup;
+
+            return concessao;
+        }
     }
 }

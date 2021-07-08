@@ -4,6 +4,7 @@ using Intech.PrevSystem.Entidades.Outros;
 using Intech.PrevSystem.Negocio.Proxy;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text; 
 #endregion
 
@@ -17,9 +18,9 @@ namespace Intech.PrevSystem.Negocio
         }
 
         public static string Criar(decimal OID_FUNCIONALIDADE, string CD_FUNDACAO, string CD_EMPRESA, string CD_PLANO, string NUM_MATRICULA, decimal? SEQ_RECEBEDOR, string conteudo,
-                                   string TXT_USUARIO_SOLICITACAO, string TXT_USUARIO_EFETIVACAO, string TXT_IPV4, string TXT_IPV4_EXTERNO, string TXT_IPV6, string TXT_DISPOSITIVO, string TXT_ORIGEM, string COD_IDENTIFICADOR=null)
+                                   string TXT_USUARIO_SOLICITACAO, string TXT_USUARIO_EFETIVACAO, string TXT_IPV4, string TXT_IPV4_EXTERNO, string TXT_IPV6, string TXT_DISPOSITIVO, string TXT_ORIGEM, string COD_IDENTIFICADOR=null, IDbTransaction transaction = null)
         {
-            var proxyProtocolo = new ProtocoloProxy();
+            var proxyProtocolo = new ProtocoloProxy(transaction);
 
             var conteudo1 = conteudo;
             var conteudo2 = string.Empty;

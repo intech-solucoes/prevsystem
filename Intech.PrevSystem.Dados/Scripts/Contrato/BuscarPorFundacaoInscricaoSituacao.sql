@@ -5,7 +5,7 @@
     Parametros
         -CD_FUNDACAO:string
         -NUM_INSCRICAO:string
-        -CD_SITUACAO:string
+        -CD_SITUACAO:decimal
 */
 
 SELECT * 

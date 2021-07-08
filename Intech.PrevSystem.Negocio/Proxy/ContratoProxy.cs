@@ -14,7 +14,18 @@ namespace Intech.PrevSystem.Negocio.Proxy
     {
         public ContratoProxy(IDbTransaction tx = null) : base(tx) { }
 
-        public override List<ContratoEntidade> BuscarPorFundacaoInscricaoSituacao(string CD_FUNDACAO, string NUM_INSCRICAO, string CD_SITUACAO)
+        public override List<ContratoEntidade> BuscarPorFundacaoInscricao(string CD_FUNDACAO, string NUM_INSCRICAO)
+        {
+            var listaContratos = base.BuscarPorFundacaoInscricao(CD_FUNDACAO, NUM_INSCRICAO);
+            var retorno = new List<ContratoEntidade>();
+
+            foreach (var contrato in listaContratos)
+                retorno.Add(BuscarDetalhesContratos(CD_FUNDACAO, contrato));
+
+            return retorno;
+        }
+
+        public override List<ContratoEntidade> BuscarPorFundacaoInscricaoSituacao(string CD_FUNDACAO, string NUM_INSCRICAO, decimal CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoInscricaoSituacao(CD_FUNDACAO, NUM_INSCRICAO, CD_SITUACAO);
             var retorno = new List<ContratoEntidade>();
@@ -25,7 +36,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return retorno;
         }
 
-        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string CD_SITUACAO)
+        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, decimal CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoPlanoInscricaoSituacao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, CD_SITUACAO).ToList();
             var retorno = new List<ContratoEntidade>();
@@ -98,6 +109,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
         private static ContratoEntidade BuscarDetalhesContratos(string CD_FUNDACAO, ContratoEntidade contrato)
         {
             contrato.Modalidade = new ModalidadeProxy().BuscarPorCodigo(contrato.CD_MODAL);
+            contrato.Natureza = new NaturezaProxy().BuscarPorCdNatur(contrato.CD_NATUR);
             contrato.Prestacoes = new PrestacaoProxy().BuscarPorFundacaoContrato(CD_FUNDACAO, contrato.ANO_CONTRATO, contrato.NUM_CONTRATO).ToList();
 
             contrato.Prestacoes.ForEach(prestacao =>

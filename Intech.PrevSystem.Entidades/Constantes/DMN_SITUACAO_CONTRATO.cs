@@ -20,7 +20,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public const string ATIVO = "3";
+        public const decimal ATIVO = 3;
 
         /// <summary>
         /// 

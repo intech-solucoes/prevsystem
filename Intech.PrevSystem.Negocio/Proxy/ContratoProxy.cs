@@ -47,7 +47,7 @@ namespace Intech.PrevSystem.Negocio.Proxy
             return retorno;
         }
 
-        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string grupoFamilia, string CD_SITUACAO)
+        public override List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string grupoFamilia, decimal CD_SITUACAO)
         {
             var listaContratos = base.BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(CD_FUNDACAO, CD_PLANO, NUM_INSCRICAO, grupoFamilia, CD_SITUACAO).ToList();
             var retorno = new List<ContratoEntidade>();

@@ -7,7 +7,7 @@
         -CD_PLANO:string
         -NUM_INSCRICAO:string
         -NUM_SEQ_GR_FAMIL:string
-        -CD_SITUACAO:string
+        -CD_SITUACAO:decimal
 */
 
 SELECT * 

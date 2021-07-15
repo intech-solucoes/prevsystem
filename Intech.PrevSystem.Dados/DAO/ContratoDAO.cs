@@ -175,7 +175,7 @@ namespace Intech.PrevSystem.Dados.DAO
 			}
 		}
 
-		public virtual List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string NUM_SEQ_GR_FAMIL, string CD_SITUACAO)
+		public virtual List<ContratoEntidade> BuscarPorFundacaoPlanoInscricaoGrupoFamiliaSituacao(string CD_FUNDACAO, string CD_PLANO, string NUM_INSCRICAO, string NUM_SEQ_GR_FAMIL, decimal CD_SITUACAO)
 		{
 			try
 			{
